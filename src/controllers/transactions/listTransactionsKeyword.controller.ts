@@ -1,22 +1,33 @@
 import { Request, Response } from "express"
 import { AppDataSource } from "../../data-source"
 import { User } from "../../entities/users"
+import { AppError, handleError } from "../../errors"
 import { listTransactionsKeywordService } from "../../services/transactions/listTransactionsKeyword.service"
 
 
 const listTransactionsKeywordController = async (req: Request, res: Response) => {
 
-    const value: string = req.params.value
+    try {
 
-    const username = req.username
+        const value: string = req.params.value
 
-    const userRepository = AppDataSource.getRepository(User)
+        const username = req.username
 
-    const user = await userRepository.findOneBy({ username })
+        const userRepository = AppDataSource.getRepository(User)
 
-    const listKeyword = await listTransactionsKeywordService(user!.id, value)
+        const user = await userRepository.findOneBy({ username })
 
-    return res.json(listKeyword)
+        const listKeyword = await listTransactionsKeywordService(user!.id, value)
+
+        return res.json(listKeyword)
+
+    } catch(err) {
+
+        if(err instanceof AppError) {
+
+            handleError(err, res)
+        }
+    }
 }
 
 export { listTransactionsKeywordController }

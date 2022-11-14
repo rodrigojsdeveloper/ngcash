@@ -1,15 +1,26 @@
 import { Request, Response } from "express"
+import { AppError, handleError } from "../../errors"
 import { IUserRequest } from "../../interfaces/users"
 import { createUserService } from "../../services/users/createUser.service"
 
 
 const createUserController = async (req: Request, res: Response) => {
 
-    const user: IUserRequest = req.body
+    try {
 
-    const newUser = await createUserService(user)
+        const user: IUserRequest = req.body
 
-    return res.status(201).json(newUser)
+        const newUser = await createUserService(user)
+
+        return res.status(201).json(newUser)
+    
+    } catch(err) {
+
+        if(err instanceof AppError) {
+
+            handleError(err, res)
+        }
+    }
 }
 
 export { createUserController }

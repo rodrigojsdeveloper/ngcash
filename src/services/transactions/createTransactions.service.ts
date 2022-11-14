@@ -1,6 +1,7 @@
 import { AppDataSource } from "../../data-source"
 import { Account } from "../../entities/accounts"
 import { Transaction } from "../../entities/transactions"
+import { AppError } from "../../errors"
 import { ITransactionRequest } from "../../interfaces/transactions"
 
 
@@ -16,7 +17,7 @@ const createTransactionsService = async (debited_id: string, { value, credited_i
 
     if(Number(accountDebited?.balance) < value) {
 
-        throw new Error('insufficient debt')
+        throw new AppError('insufficient debt')
     }
 
     Number(accountDebited?.balance) - value

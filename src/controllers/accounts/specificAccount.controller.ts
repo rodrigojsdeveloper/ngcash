@@ -2,24 +2,35 @@ import { Request, Response } from "express"
 import { AppDataSource } from "../../data-source"
 import { Account } from "../../entities/accounts"
 import { User } from "../../entities/users"
+import { AppError, handleError } from "../../errors"
 import { specificAccountService } from "../../services/accounts/specificAccount.service"
 
 
 const specificAccountController = async (req: Request, res: Response) => {
 
-    const username = req.username
+    try {
 
-    const userRepository = AppDataSource.getRepository(User)
+        const username = req.username
 
-    const accountRepository = AppDataSource.getRepository(Account)
+        const userRepository = AppDataSource.getRepository(User)
 
-    const user = await userRepository.findOneBy({ username })
+        const accountRepository = AppDataSource.getRepository(Account)
 
-    const account = await accountRepository.findOneBy({ id: user!.accountId })
+        const user = await userRepository.findOneBy({ username })
 
-    const balanceAccount = await specificAccountService(account?.id)
+        const account = await accountRepository.findOneBy({ id: user!.accountId })
 
-    return res.json(balanceAccount)
+        const balanceAccount = await specificAccountService(account?.id)
+
+        return res.json(balanceAccount)
+    
+    } catch(err) {
+
+        if(err instanceof AppError) {
+
+            handleError(err, res)
+        }
+    }
 }
 
 export { specificAccountController }

@@ -3,6 +3,7 @@ import { Account } from "../../entities/accounts"
 import { User } from "../../entities/users"
 import { IUserRequest } from "../../interfaces/users"
 import { hash } from "bcrypt"
+import { AppError } from "../../errors"
 
 
 const createUserService = async ({ username, password }: IUserRequest): Promise<User> => {
@@ -19,22 +20,22 @@ const createUserService = async ({ username, password }: IUserRequest): Promise<
 
     if(username.length < 3) {
 
-        throw new Error('Username must contain at least 3 characters')
+        throw new AppError('Username must contain at least 3 characters')
     }
 
     if(password.length < 8) {
 
-        throw new Error('Password must contain at least 8 characters')
+        throw new AppError('Password must contain at least 8 characters')
     }
 
     if(!password.includes("/^[0-9]+$/")) {
 
-        throw new Error('Password must contain 1 number')
+        throw new AppError('Password must contain 1 number')
     }
 
     if(!password.includes("/[A-Z]/")) {
 
-        throw new Error('Password must contain 1 uppercase letter')
+        throw new AppError('Password must contain 1 uppercase letter')
     }
 
     const passwordHashed = await hash(password, 10)
