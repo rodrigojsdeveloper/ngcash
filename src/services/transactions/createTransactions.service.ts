@@ -1,11 +1,26 @@
 import { AppDataSource } from "../../data-source"
+import { Account } from "../../entities/accounts"
 import { Transaction } from "../../entities/transactions"
 import { ITransactionRequest } from "../../interfaces/transactions"
 
 
-const createTransactionsService = async (credited_id: string, debited_id: string, { value }: ITransactionRequest): Promise<Transaction> => {
+const createTransactionsService = async (debited_id: string, { value, credited_id }: ITransactionRequest): Promise<Transaction> => {
 
     const transactionsRepository = AppDataSource.getRepository(Transaction)
+
+    const accountRepository = AppDataSource.getRepository(Account)
+
+    const accountDebited = await accountRepository.findOneBy({ id: debited_id })
+
+    const accountCredited_id = await accountRepository.findOneBy({ id: credited_id })
+
+    if(Number(accountDebited?.balance) < value) {
+
+        throw new Error('insufficient debt')
+    }
+
+    Number(accountDebited?.balance) - value
+    Number(accountCredited_id?.balance) + value
 
     const transaction = new Transaction()
     transaction.creditedAccountId = credited_id
