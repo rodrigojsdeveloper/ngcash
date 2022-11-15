@@ -23,14 +23,6 @@ Estruturar uma aplicação web fullstack, dockerizada, cujo objetivo seja possib
 
 ---
 
-## Documentação:
-
-[Documentação do projeto e endpoints](https://codandom5.herokuapp.com/api/docs/)
-
-## Endpoint da aplicação:
-
-[https://codandom5.herokuapp.com](https://codandom5.herokuapp.com/)
-
 ## Diagrama de Entidade Relacional
 
 <img src="./front-end/src/assets/digrama.png">
@@ -63,5 +55,9 @@ e abra o projeto no seu navegador.
 
 ## Desenvolvedor
 
-<a href="https://github.com/Rodrigodeveloperjr">Git hub</a>
-<a href="https://www.linkedin.com/in/rodrigo-de-jesus-silva">Linkedin</a>
+<a href="https://github.com/Rodrigodeveloperjr">
+    <img src="front-end/src/assets/icons8-github-64.png" />
+</a>
+<a href="https://www.linkedin.com/in/rodrigo-de-jesus-silva">
+    <img src="front-end/src/assets/icons8-linkedin-96.png" />
+</a>
