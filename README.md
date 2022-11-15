@@ -56,8 +56,8 @@ e abra o projeto no seu navegador.
 ## Desenvolvedor
 
 <a href="https://github.com/Rodrigodeveloperjr">
-    <img src="front-end/src/assets/icons8-github-64.png" />
+    <img src="front-end/src/assets/icons8-github-48.png" />
 </a>
 <a href="https://www.linkedin.com/in/rodrigo-de-jesus-silva">
-    <img src="front-end/src/assets/icons8-linkedin-96.png" />
+    <img src="front-end/src/assets/icons8-linkedin-48.png" />
 </a>
