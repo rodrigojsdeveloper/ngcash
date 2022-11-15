@@ -5,16 +5,14 @@ import * as yup from 'yup'
 import { useForm } from "react-hook-form"
 import { yupResolver } from '@hookform/resolvers/yup'
 import { api } from "../../services/api"
+import { useHistory } from "react-router-dom"
 
 
-interface IFormProps {
-    apiProp: string
-    buttonProp: string
-}
+const Form = (apiProp: string, buttonProp: string, historyProp: string, setAuthentication: boolean) => {
 
-const Form = ({ apiProp, buttonProp }: IFormProps) => {
+    const history = useHistory()
 
-    const formSchema = yup.object().shape({
+    const schema = yup.object().shape({
         username: yup
             .string()
             .required('username required')
@@ -29,16 +27,22 @@ const Form = ({ apiProp, buttonProp }: IFormProps) => {
             )
     })
 
-    const { register, handleSubmit, formState: { errors } } = useForm({
-        resolver: yupResolver(formSchema)
-    })
+    const { register, handleSubmit, formState: { errors } } = useForm({ resolver: yupResolver(schema) })
 
     const onSumbitFunction = (data: object) => {
-    
-        console.log(data)
         
         api.post(`/${ apiProp }`, data)
-        .then(res => console.log(res))
+        .then(res => {
+
+            if(apiProp == 'session') {
+
+                localStorage.setItem('Project NG.CASH: token', res.data)
+
+                setAuthentication(true)
+            }
+
+            history.push(`/${ historyProp }`)
+        })
         .catch(err => console.error(err))
     }
 

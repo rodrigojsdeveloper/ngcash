@@ -33,14 +33,13 @@ const InputContainer = styled.div`
         border-radius: 4px;
         border: 1.2182px solid;
 
-        ${props => props.isErrored && css`
+        ${ (props: any) => props.isErrored && css`
 
             :focus {}
             `
         }
         
         &::placeholder {
-            color: var(--botao-secundario);
             font-size: 16.2426px;
         }
         

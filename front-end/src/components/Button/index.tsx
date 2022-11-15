@@ -2,12 +2,7 @@ import { Container } from "./style"
 import { ReactNode } from "react"
 
 
-interface IButton { 
-    lenButton: string
-    children: ReactNode
-}
-
-const Button = ({ ...rest }, { lenButton, children }: IButton) => {
+const Button = ({ ...rest }, lenButton: string, children: ReactNode) => {
 
     return (
         <Container lenButton={ lenButton } { ...rest }>

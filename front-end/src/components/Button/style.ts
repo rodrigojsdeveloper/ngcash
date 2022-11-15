@@ -1,10 +1,6 @@
 import styled, { css } from "styled-components"
 
 
-interface IButton { 
-    lenButton: string
-}
-
 const Container = styled.button`
 
     border-radius: 4px;
@@ -21,7 +17,7 @@ const Container = styled.button`
         cursor: not-allowed;
     }
 
-    ${ props => {
+    ${ (props: any) => {
 
         switch(props.lenButton) {
 
