@@ -1,7 +1,7 @@
-import { Request, Response } from "express"
-import { AppError, handleError } from "../../errors"
-import { IUserRequest } from "../../interfaces/users"
-import { createUserService } from "../../services/users/createUser.service"
+import { createUserService } from '../../services/users/createUser.service'
+import { IUserRequest } from '../../interfaces/users'
+import { AppError, handleError } from '../../errors'
+import { Request, Response } from 'express'
 
 
 const createUserController = async (req: Request, res: Response) => {

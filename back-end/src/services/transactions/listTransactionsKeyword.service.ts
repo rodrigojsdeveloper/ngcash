@@ -1,6 +1,6 @@
-import { AppDataSource } from "../../data-source"
-import { Account } from "../../entities/accounts"
-import { Transaction } from "../../entities/transactions"
+import { Transaction } from '../../entities/transactions'
+import { AppDataSource } from '../../data-source'
+import { Account } from '../../entities/accounts'
 
 
 const listTransactionsKeywordService = async (id: string, value: string) => {

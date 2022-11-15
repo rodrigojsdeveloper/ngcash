@@ -1,9 +1,10 @@
-import { Router } from "express"
+import { Router } from 'express'
 
-import { createTransactionController } from "../../controllers/transactions/createTransactions.controller"
-import { listTransactionsController } from "../../controllers/transactions/listTransactions.controller"
-import { listTransactionsKeywordController } from "../../controllers/transactions/listTransactionsKeyword.controller"
-import { tokenMiddleware } from "../../middlewares/token.middleware"
+import { listTransactionsKeywordController } from '../../controllers/transactions/listTransactionsKeyword.controller'
+import { createTransactionController } from '../../controllers/transactions/createTransaction.controller'
+import { listTransactionsController } from '../../controllers/transactions/listTransactions.controller'
+
+import { tokenMiddleware } from '../../middlewares/token.middleware'
 
 
 const routes = Router()

@@ -1,5 +1,5 @@
-import { Request, Response, NextFunction } from "express"
-import jwt from "jsonwebtoken"
+import { Request, Response, NextFunction } from 'express'
+import jwt from 'jsonwebtoken'
 
 
 const tokenMiddleware = async (req: Request, res: Response, next: NextFunction) => {

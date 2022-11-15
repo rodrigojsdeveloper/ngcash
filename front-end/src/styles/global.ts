@@ -12,9 +12,17 @@ export default createGlobalStyle`
         font-family: "Inter", sans-serif;
     }
 
-    :root {}
+    :root {
+        --background: rgba(255, 255, 255, 9);
+        --background-form: rgb(38, 50, 56);
+        --background-modal: rgba(0, 0, 0, 0.5);
+        --color: rgba(0, 0, 0, 1)
+    }
 
-    body {}
+    body {
+        background: var(--background);
+        color: var(--color);
+    }
 
     button {
         cursor: pointer;

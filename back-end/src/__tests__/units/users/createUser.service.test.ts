@@ -1,7 +1,7 @@
-import { DataSource } from "typeorm"
-import { AppDataSource } from "../../../data-source"
-import { createUserService } from "../../../services/users/createUser.service"
-import { user } from "../../mocks"
+import { createUserService } from '../../../services/users/createUser.service'
+import { AppDataSource } from '../../../data-source'
+import { DataSource } from 'typeorm'
+import { user } from '../../mocks'
 
 
 describe('', () => {

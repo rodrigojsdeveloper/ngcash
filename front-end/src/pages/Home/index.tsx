@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react"
 import { useHistory } from "react-router-dom"
 import { Button } from "../../components/Button"
+import { Modal } from "../../components/Modal"
+import { Transaction } from "../../components/Transaction"
 import { api } from "../../services/api"
 import { Container } from "./style"
 
@@ -17,9 +19,29 @@ const Home = (setAuthetication: boolean) => {
 
     const [ transactionsKeyword, setTransactionsKeyword ] = useState<any>()
 
+    const [ openModel, setOpenModel ] = useState<any>(false)
+
+    const [ transaction, setTransaction ] = useState<any>()
+
+    const [ user, setUser ] = useState<any>()
+
+    const addTransactions = (transaction: object) => setTransactions([ ...transactions, transaction ])
+
     useEffect(() => {
 
-        api.post('/account', {
+        api.get('/users/profile',  {
+
+            headers: {
+                Authorization: `Bearer ${ localStorage.getItem('Project NG.CASH: token') }`
+            }
+        })
+        .then(res => setUser(res))
+        .catch(err => console.error(err))
+    }, [])
+
+    useEffect(() => {
+
+        api.post(`/accounts/${ user.accountId }`, {
 
             headers: {
                 Authorization: `Bearer ${ localStorage.getItem('Project NG.CASH: token') }`
@@ -38,7 +60,7 @@ const Home = (setAuthetication: boolean) => {
                 Authorization: `Bearer ${ localStorage.getItem('Project NG.CASH: token') }`
             }
         })
-        .then(res => setTransactions(res))
+        .then(res => addTransactions(res))
         .catch(err => console.error(err))
 
     }, [])
@@ -56,38 +78,54 @@ const Home = (setAuthetication: boolean) => {
     })
 
     return (
-        <Container>
-            <header>
-                <h2>{ balance }</h2>
+        <>
+            {
+                openModel &&
+                <Modal
+                setOpenModel={ setOpenModel }
+                addTransactions={ addTransactions }
+                setTransaction={ setTransaction }
+                />
+            }   
+            <Container>
+                <header>
+                    <h2>{ balance }</h2>
 
-                <Button onClick={ () => { 
+                    <Button onClick={ () => { 
 
-                    history.push('/session')
+                        history.push('/session')
 
-                    setAuthetication(false)
-                    
-                    localStorage.removeItem('Project NG.CASH: token')
+                        setAuthetication(false)
+                        
+                        localStorage.removeItem('Project NG.CASH: token')
 
-                } }>Log out</Button>
-            </header>
-
-            <div>
-                <div></div>
-
-                <div>
-                    <div>{ transactions }</div>
-                </div>
+                    } }>Log out</Button>
+                </header>
 
                 <div>
                     <div>
-                        <input />
-                        <Button>submit</Button>
+                        <Button onClick={ () => setOpenModel(true) }>entrar</Button>
+
+                        <div>
+                            <Transaction transaction={ transaction } />
+                        </div>
                     </div>
 
-                    <div>{ transactionsKeyword }</div>
+                    <div>
+                        <div>{ transactions }</div>
+                    </div>
+
+                    <div>
+                        <div>
+                            <input />
+                            <Button>submit</Button>
+                        </div>
+
+                        <div>{ transactionsKeyword }</div>
+                    </div>
                 </div>
-            </div>
-        </Container>
+            </Container>
+        </>
     )
 }
 

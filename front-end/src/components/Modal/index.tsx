@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import { useForm } from "react-hook-form"
 import { api } from "../../services/api"
 import { Button } from "../Button"
@@ -8,9 +8,7 @@ import * as yup from "yup"
 import { yupResolver } from "@hookform/resolvers/yup"
 
 
-const Modal = () => {
-
-    const [ transactions, setTransaction ] = useState<any>()
+const Modal = (setOpenModel: Function, addTransactions: Function, setTransaction: Function) => {
 
     const schema = yup.object().shape({
         username: yup
@@ -34,7 +32,14 @@ const Modal = () => {
                     Authorization: `Bearer ${ localStorage.getItem('Project NG.CASH: token') }`
                 }
             })
-            .then(res => setTransaction(res))
+            .then(res => {
+
+                setTransaction(res)
+                
+                setOpenModel(false)
+
+                addTransactions(res)
+            })
             .catch(err => console.error(err))
 
         }, [])
@@ -43,6 +48,9 @@ const Modal = () => {
     return (
         <Container>
             <Content onSubmit={ handleSubmit(onSubmitFunc) }>
+                <div>
+                    <Button onClick={ setOpenModel(false) }>X</Button>
+                </div>
                 <Input
                 name="username"
                 placeholder="username"

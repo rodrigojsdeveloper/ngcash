@@ -1,9 +1,9 @@
-import { AppDataSource } from "../../data-source"
-import { Account } from "../../entities/accounts"
-import { User } from "../../entities/users"
-import { IUserRequest } from "../../interfaces/users"
-import { hash } from "bcrypt"
-import { AppError } from "../../errors"
+import { IUserRequest } from '../../interfaces/users'
+import { AppDataSource } from '../../data-source'
+import { Account } from '../../entities/accounts'
+import { User } from '../../entities/users'
+import { AppError } from '../../errors'
+import { hash } from 'bcrypt'
 
 
 const createUserService = async ({ username, password }: IUserRequest): Promise<User> => {
@@ -28,12 +28,12 @@ const createUserService = async ({ username, password }: IUserRequest): Promise<
         throw new AppError('Password must contain at least 8 characters')
     }
 
-    if(!password.includes("/^[0-9]+$/")) {
+    if(!password.includes('/^[0-9]+$/')) {
 
         throw new AppError('Password must contain 1 number')
     }
 
-    if(!password.includes("/[A-Z]/")) {
+    if(!password.includes('/[A-Z]/')) {
 
         throw new AppError('Password must contain 1 uppercase letter')
     }

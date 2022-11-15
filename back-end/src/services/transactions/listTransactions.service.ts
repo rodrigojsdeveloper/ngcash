@@ -1,5 +1,5 @@
-import { AppDataSource } from "../../data-source";
-import { Account } from "../../entities/accounts";
+import { AppDataSource } from '../../data-source'
+import { Account } from '../../entities/accounts'
 
 
 const listTransactionsService = async (id: string) => {

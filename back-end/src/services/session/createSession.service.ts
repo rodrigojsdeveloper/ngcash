@@ -1,9 +1,9 @@
-import { compare } from "bcrypt"
-import { AppDataSource } from "../../data-source"
-import { User } from "../../entities/users"
-import { ISessionRequest } from "../../interfaces/session"
-import jwt from "jsonwebtoken"
-import { AppError } from "../../errors"
+import { ISessionRequest } from '../../interfaces/session'
+import { AppDataSource } from '../../data-source'
+import { User } from '../../entities/users'
+import { AppError } from '../../errors'
+import { compare } from 'bcrypt'
+import jwt from 'jsonwebtoken'
 
 
 const createSessionService = async ({ username, password }: ISessionRequest): Promise<object> => {

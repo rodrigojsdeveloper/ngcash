@@ -1,6 +1,6 @@
 interface ITransactionRequest {
     value: number
-    credited_id: string
+    username: string
 }
 
 export { ITransactionRequest }

@@ -1,7 +1,8 @@
-import { Request, Response, NextFunction } from "express"
-import { AppDataSource } from "../data-source"
-import { Account } from "../entities/accounts"
-import { User } from "../entities/users"
+import { Request, Response, NextFunction } from 'express'
+import { AppDataSource } from '../data-source'
+import { Account } from '../entities/accounts'
+import { User } from '../entities/users'
+import { AppError } from '../errors'
 
 
 const itsYourOwnBalanceMiddleware = async (req: Request, res: Response, next: NextFunction) => {
@@ -22,7 +23,7 @@ const itsYourOwnBalanceMiddleware = async (req: Request, res: Response, next: Ne
 
     if(account_token != account_id) {
 
-        throw new Error('Only the user can see the balance')
+        throw new AppError('Only the user can see the balance', 403)
     }
 
     next()
