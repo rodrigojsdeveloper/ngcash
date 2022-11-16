@@ -24,6 +24,12 @@ const Container = styled.form`
         width: 100%;
         max-width: 250px;
         padding-top: 40px;
+
+        label {
+
+            color: var(--red);
+            font-size: 12px;
+        }
     }
 `
 

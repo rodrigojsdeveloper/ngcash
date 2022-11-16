@@ -1,0 +1,30 @@
+version: "3.9"
+
+services:
+  app:
+    container_name: docker_project_ngcash
+    build: .
+    ports:
+      - $PORT:$PORT
+    env_file:
+      - .env
+    depends_on:
+      postgres:
+        condition: service_healthy
+    command: bash -c "yarn typeorm migration:run -d src/data-source && yarn dev"
+    volumes:
+      - .:/app
+
+  postgres:
+    container_name: project_ngcash
+    image: postgres:latest
+    ports:
+      - 5432:5432
+    env_file:
+      - .env
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U $USER -d $DB" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 5s
