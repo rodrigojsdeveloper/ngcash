@@ -16,7 +16,10 @@ export default createGlobalStyle`
         --background: rgba(255, 255, 255, 9);
         --background-form: rgb(38, 50, 56);
         --background-modal: rgba(0, 0, 0, 0.5);
-        --color: rgba(0, 0, 0, 1)
+        --color: rgba(0, 0, 0, 1);
+        --color-box-shadow-header: rgba(0, 0, 0, 0.25);
+        --red: #c53030;
+        --green: green;
     }
 
     body {

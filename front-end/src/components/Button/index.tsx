@@ -9,7 +9,7 @@ interface IButton {
 const Button = ({ ...rest }, { children }: IButton) => {
 
     return (
-        <Container buttonStyle='register' { ...rest }>
+        <Container buttonStyle="register" { ...rest }>
             { children }
         </Container>
     )

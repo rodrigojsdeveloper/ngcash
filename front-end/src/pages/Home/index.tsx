@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { useHistory } from "react-router-dom"
 import { Button } from "../../components/Button"
+import { Input } from "../../components/Input"
 import { Modal } from "../../components/Modal"
 import { Transaction } from "../../components/Transaction"
 import { api } from "../../services/api"
@@ -32,8 +33,12 @@ const Home = (setAuthetication: any) => {
 
     const [ user, setUser ] = useState<IUser | any>()
 
-    const addTransactions = (transaction: object) => setTransactions([ ...transactions, transaction ])
+    const [ filteredKeyword, setFilteredKeyword ] = useState<any>()
 
+    const [ valueInput, setValueInput ] = useState("")
+
+    const addTransactions = (transaction: object) => setTransactions([ ...transactions, transaction ])
+    /* 
     useEffect(() => {
 
         api.get('/users/profile',  {
@@ -83,7 +88,7 @@ const Home = (setAuthetication: any) => {
         .then(res => setTransactionsKeyword(res))
         .catch(err => console.error(err))
     })
-
+    */
     return (
         <>
             {
@@ -98,7 +103,7 @@ const Home = (setAuthetication: any) => {
                 <header>
                     <h2>{ balance }</h2>
 
-                    <Button onClick={ () => { 
+                    <Button buttonStyle="home" onClick={ () => { 
 
                         history.push('/session')
 
@@ -108,10 +113,10 @@ const Home = (setAuthetication: any) => {
 
                     } }>Log out</Button>
                 </header>
-
+                
                 <div>
-                    <div>
-                        <Button onClick={ () => setOpenModel(true) }>entrar</Button>
+                    <div className="divTransaction">
+                        <Button buttonStyle="home" onClick={ () => setOpenModel(true) }>entrar</Button>
 
                         <div>
                             <Transaction transaction={ transaction } />
@@ -122,13 +127,35 @@ const Home = (setAuthetication: any) => {
                         <div>{ transactions }</div>
                     </div>
 
-                    <div>
-                        <div>
-                            <input />
-                            <Button>submit</Button>
+                    <div className="divKeyword">
+                        <div className="divInputButtonKeyword">
+                            <Input
+                            placeholder="Pesquisar"
+                            value={ valueInput }
+                            onChange={ (e: any) => setValueInput(e.target.value) }
+                            />
+
+                            <Button
+                            buttonStyle="home"
+                            onClick={ () => {
+
+                                if(valueInput == 'cash-in') {
+
+                                    setFilteredKeyword(transactions.filter((transaction: any) => transaction.creditedTransaction.toLowerCase().includes(valueInput.toLowerCase())))
+                                }
+
+                                if(valueInput == 'cash-out') {
+
+                                    setFilteredKeyword(transactions.filter((transaction: any) => transaction.debitedTransaction.toLowerCase().includes(valueInput.toLowerCase())))
+                                }
+
+                                setFilteredKeyword(transactions.filter((transaction: any) => transaction.createdAt.toLowerCase().includes(valueInput.toLowerCase())))
+                                
+                            } }
+                            >submit</Button>    
                         </div>
 
-                        <div>{ transactionsKeyword }</div>
+                        <div className="divDivKeyword">{ transactionsKeyword }</div>
                     </div>
                 </div>
             </Container>

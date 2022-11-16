@@ -41,8 +41,11 @@ const Container = styled.button<IStyledButtonProps>`
             case 'home':
                 return css`
                     width: 100%;
-                    max-width: 324px;
+                    max-width: 225px;
                     height: 48px;
+
+                    background: #F8F8FF;
+                    color: var(--color);
                 `
             default:
                 return false

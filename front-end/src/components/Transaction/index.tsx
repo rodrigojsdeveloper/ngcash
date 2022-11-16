@@ -38,13 +38,13 @@ const Transaction = (transaction: any) => {
     return (
         <Container>
             <div>
-                <p>{ balanceCredit }</p>
-                <p>{ balanceDebt }</p>
+                <p>{ balanceCredit } R$ 900.00</p>
+                <p>{ balanceDebt } R$ 900.00</p>
             </div>
 
             <div>
-                <p>{ transaction.value }</p>
-                <p> - { transaction.value }</p>
+                <p className="credit">+ { transaction.value } R$ 100.00</p>
+                <p className="debt">- { transaction.value } R$ 100.00</p>
             </div>
         </Container>
     )
