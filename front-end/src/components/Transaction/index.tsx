@@ -8,7 +8,7 @@ const Transaction = (transaction: any) => {
     const [ balanceCredit, setBalanceCreadit ] = useState<any>()
 
     const [ balanceDebt, setBalanceDebt ] = useState<any>()
-
+    /*
     useEffect(() => {
 
         api.post(`/accounts/${ transaction.creditedAccountId }`, {
@@ -34,7 +34,7 @@ const Transaction = (transaction: any) => {
         .catch(err => console.error(err))
 
     }, [])
-
+    */
     return (
         <Container>
             <div>

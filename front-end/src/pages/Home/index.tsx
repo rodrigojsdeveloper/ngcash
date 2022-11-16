@@ -27,7 +27,7 @@ const Home = (setAuthetication: any) => {
 
     const [ transactionsKeyword, setTransactionsKeyword ] = useState<any>()
 
-    const [ openModel, setOpenModel ] = useState<any>(false)
+    const [ openModel, setOpenModel ] = useState(false)
 
     const [ transaction, setTransaction ] = useState<any>()
 
@@ -92,13 +92,13 @@ const Home = (setAuthetication: any) => {
     return (
         <>
             {
-                openModel &&
+                openModel && 
                 <Modal
                 setOpenModel={ setOpenModel }
                 addTransactions={ addTransactions }
                 setTransaction={ setTransaction }
                 />
-            }   
+            }
             <Container>
                 <header>
                     <h2>{ balance }</h2>
@@ -116,7 +116,7 @@ const Home = (setAuthetication: any) => {
                 
                 <div>
                     <div className="divTransaction">
-                        <Button buttonStyle="home" onClick={ () => setOpenModel(true) }>entrar</Button>
+                        <button onClick={ () => setOpenModel(true) }>entrar</button>
 
                         <div>
                             <Transaction transaction={ transaction } />

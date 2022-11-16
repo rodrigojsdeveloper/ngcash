@@ -8,7 +8,13 @@ import * as yup from "yup"
 import { yupResolver } from "@hookform/resolvers/yup"
 
 
-const Modal = (setOpenModel: any, addTransactions: any, setTransaction: any) => {
+interface IModal {
+    setOpenModel: any
+    addTransactions: any
+    setTransaction: any
+}
+
+const Modal = ({ setOpenModel, addTransactions, setTransaction }: IModal) => {
 
     const schema = yup.object().shape({
         username: yup
@@ -49,23 +55,29 @@ const Modal = (setOpenModel: any, addTransactions: any, setTransaction: any) => 
         <Container>
             <Content onSubmit={ handleSubmit(onSubmitFunc) }>
                 <div>
-                    <Button onClick={ setOpenModel(false) }>X</Button>
+                    <button onClick={ setOpenModel(false) }>X</button>
                 </div>
-                <Input
-                name="username"
-                placeholder="username"
-                register={ register }
-                error={ errors.username?.message as string }
-                />
 
-                <Input
-                name="value"
-                placeholder="value"
-                register={ register }
-                error={ errors.value?.message as string }
-                />
+                <h1>Transaction</h1>
 
-                <Button type="submit">Submit</Button>
+                <main>
+                    <Input
+                    name="value"
+                    placeholder="Value"
+                    register={ register }
+                    error={ errors.username?.message as string }
+                    />
+
+                    <Input
+                    name="username"
+                    placeholder="Username"
+                    register={ register }
+                    error={ errors.value?.message as string }
+                    />
+
+                    <Button type="submit">Submit</Button>
+                </main>
+
             </Content>
         </Container>
     )
