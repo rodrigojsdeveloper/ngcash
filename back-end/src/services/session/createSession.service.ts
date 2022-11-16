@@ -24,7 +24,7 @@ const createSessionService = async ({ username, password }: ISessionRequest): Pr
         throw new AppError('Invalid credentials', 401)
     }
 
-    const token = jwt.sign({ username }, process.env.SECRET_KEY as string, { expiresIn: '24h', subject: user.id })
+    const token = jwt.sign({ username: username }, process.env.SECRET_KEY as string, { expiresIn: '24h', subject: user.id })
 
     return { token }
 }

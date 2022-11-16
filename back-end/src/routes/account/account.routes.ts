@@ -10,7 +10,7 @@ const routes = Router()
 
 const accountRoutes = () => {
 
-    routes.post('/:id', tokenMiddleware, itsYourOwnBalanceMiddleware, specificAccountController)
+    routes.get('/:id', tokenMiddleware, itsYourOwnBalanceMiddleware, specificAccountController)
 
     return routes
 }

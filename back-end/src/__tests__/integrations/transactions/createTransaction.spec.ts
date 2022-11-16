@@ -1,4 +1,4 @@
-import { session, transaction, user } from '../../mocks'
+import { session, transaction, user, user2 } from '../../mocks'
 import { AppDataSource } from '../../../data-source'
 import { DataSource } from 'typeorm'
 import { app } from '../../../app'
@@ -16,6 +16,7 @@ describe('Tests for transaction routes', () => {
         .catch(err => console.error('Error during Data Source initialization', err))
 
         await request(app).post('/users').send(user)
+        await request(app).post('/users').send(user2)
     })
 
     afterAll(async () => await connection.destroy())

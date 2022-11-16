@@ -18,7 +18,7 @@ describe('Tests for account routes', () => {
 
     afterAll(async () => await connection.destroy())
 
-    test('Must be able to create a account', async () => {
+    test('Must be able to view a account', async () => {
 
         const newUser = await request(app).post('/users').send(user)
 
@@ -26,21 +26,17 @@ describe('Tests for account routes', () => {
 
         const token: string = login.body.token
 
-        const response = await request(app).post(`/accounts/${ newUser.body.accountId }`).set('Authorization', `Bearer ${ token }`)
+        const response = await request(app).get(`/accounts/${ newUser.body.accountId }`).set('Authorization', `Bearer ${ token }`)
 
         expect(response.status).toBe(200)
-
-        expect(response.body).toHaveProperty('id')
         expect(response.body).toHaveProperty('balance')
-        expect(response.body).toHaveProperty('creditedTransaction')
-        expect(response.body).toHaveProperty('debitedTransaction')
     })
 
     test('Must be able to prevent create tokenless account', async () => {
 
         const newUser = await request(app).post('/users').send(user)
 
-        const response = await request(app).post(`/accounts/${ newUser.body.accountId }`)
+        const response = await request(app).get(`/accounts/${ newUser.body.accountId }`)
 
         expect(response.status).toBe(401)
         expect(response.body).toHaveProperty('message')

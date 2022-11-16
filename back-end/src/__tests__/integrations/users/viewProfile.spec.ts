@@ -26,7 +26,7 @@ describe('Tests for account routes', () => {
 
         const token: string = login.body.token
 
-        const response = await request(app).post('/users').set('Authorization', `Bearer ${ token }`)
+        const response = await request(app).get('/users/profile').set('Authorization', `Bearer ${ token }`)
 
         expect(response.status).toBe(200)
 
@@ -38,7 +38,7 @@ describe('Tests for account routes', () => {
 
     test('Must be able to prevent viewing a profile without a token', async () => {
 
-        const response = await request(app).post('/users')
+        const response = await request(app).get('/users/profile')
 
         expect(response.status).toBe(401)
         expect(response.body).toHaveProperty('message')

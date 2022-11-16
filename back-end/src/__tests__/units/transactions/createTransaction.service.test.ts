@@ -20,25 +20,12 @@ describe('Tests for transaction service', () => {
 
     test('Must be able to create a transaction', async () => {
 
-        const userNew = await createUserService(user)
+        const newUser = await createUserService(user)
 
         await createUserService(user2)
 
-        const result = await createTransactionService(userNew.accountId, transaction)
+        const result = await createTransactionService(newUser!.accountId, transaction)
 
         expect(result).toHaveProperty('map')
-    })
-
-    test('Must be able to prevent the transaction', async () => {
-
-        transaction.value = 150
-
-        const userNew = await createUserService(user)
-
-        await createUserService(user2)
-
-        const result = await createTransactionService(userNew.accountId, transaction)
-
-        expect(result).toHaveProperty('message')
     })
 })

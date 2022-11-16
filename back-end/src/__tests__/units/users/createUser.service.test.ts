@@ -21,45 +21,8 @@ describe('Tests for user service', () => {
 
         const result = await createUserService(user)
 
-        expect(result).toHaveProperty('id')
         expect(result).toHaveProperty('username')
         expect(result).toHaveProperty('password')
         expect(result).toHaveProperty('accountId')
-    })
-
-    test('Must be able to prevent user creation for having less than 3 characters in username', async () => {
-
-        user.username = 'ex'
-        
-        const result = await createUserService(user)
-
-        expect(result).toHaveProperty('message')
-    })
-
-    test('Must be able to prevent user creation for having less than 8 characters in the password', async () => {
-        
-        user.password = 'ex'
-        
-        const result = await createUserService(user)
-
-        expect(result).toHaveProperty('message')
-    })
-
-    test('Must be able to prevent user creation from not having capital letters in password', async () => {
-        
-        user.password = 'example123'
-        
-        const result = await createUserService(user)
-
-        expect(result).toHaveProperty('message')
-    })
-
-    test('Must be able to prevent user creation from not having numbers in password', async () => {
-        
-        user.password = 'EXAMPLEexample'
-        
-        const result = await createUserService(user)
-
-        expect(result).toHaveProperty('message')
     })
 })

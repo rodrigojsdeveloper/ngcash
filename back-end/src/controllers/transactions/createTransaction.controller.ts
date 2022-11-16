@@ -20,13 +20,9 @@ const createTransactionController = async (req: Request, res: Response) => {
 
         const user_debited_id = await userRepository.findOneBy({ username: usernameDebt })
 
-        const user_credited_id = await userRepository.findOneBy({ username })
+        const debited_id = await accountRepository.findOneBy({ id: user_debited_id!.accountId.id })
 
-        const debited_id = await accountRepository.findOneBy({ id: user_debited_id?.accountId })
-
-        const credited_id = await accountRepository.findOneBy({ id: user_credited_id?.accountId })
-
-        const newTransaction = await createTransactionService(debited_id.id, { value, credited_id.id })
+        const newTransaction = await createTransactionService(debited_id!.id, { value, username })
 
         return res.status(201).json(newTransaction)
     

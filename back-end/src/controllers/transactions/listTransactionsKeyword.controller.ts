@@ -17,7 +17,7 @@ const listTransactionsKeywordController = async (req: Request, res: Response) =>
 
         const user = await userRepository.findOneBy({ username })
 
-        const listKeyword = await listTransactionsKeywordService(user!.id, value)
+        const listKeyword = await listTransactionsKeywordService(user!.accountId.id, value)
 
         return res.json(listKeyword)
 

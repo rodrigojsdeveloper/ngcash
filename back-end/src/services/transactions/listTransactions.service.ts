@@ -8,7 +8,7 @@ const listTransactionsService = async (id: string) => {
 
     const account = await accountRepository.findOneBy({ id })
 
-    return [ account!.creditedTransaction, account!.debitedTransaction ]
+    return [ ...account!.creditedTransaction, ...account!.debitedTransaction ]
 }
 
 export { listTransactionsService }

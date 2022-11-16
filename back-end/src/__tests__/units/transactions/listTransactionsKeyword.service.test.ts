@@ -20,9 +20,9 @@ describe('Tests for transaction service', () => {
 
     test('Must be able to list transactions keyword', async () => {
 
-        const userNew = await createUserService(user)
+        const newUser = await createUserService(user)
 
-        const result = await listTransactionsKeywordService(userNew.accountId, 'cash-in')
+        const result = await listTransactionsKeywordService(newUser!.accountId, 'cash-in')
 
         expect(result).toHaveProperty('map')
     })

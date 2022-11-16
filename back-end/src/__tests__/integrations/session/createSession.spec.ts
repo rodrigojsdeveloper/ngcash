@@ -30,11 +30,11 @@ describe('Tests for session routes', () => {
 
     test('Must be able to prevent the creation of a session with invalid credentials', async () => {
 
-        user.username = 'username'
+        session.password = 'username'
 
         await request(app).post('/users').send(user)
 
-        const response = await request(app).post('/session').send(user)
+        const response = await request(app).post('/session').send(session)
 
         expect(response.status).toBe(401)
         expect(response.body).toHaveProperty('message')

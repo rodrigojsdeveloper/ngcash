@@ -6,7 +6,7 @@ import { AppError } from '../../errors'
 import { hash } from 'bcrypt'
 
 
-const createUserService = async ({ username, password }: IUserRequest): Promise<User> => {
+const createUserService = async ({ username, password }: IUserRequest): Promise<object> => {
 
     const userRepository = AppDataSource.getRepository(User)
 
@@ -18,6 +18,11 @@ const createUserService = async ({ username, password }: IUserRequest): Promise<
     const newAccount = accountRepository.create(account)
     await accountRepository.save(newAccount)
 
+    if(await userRepository.findOneBy({ username })) {
+
+        throw new AppError('Username already exists')
+    }
+
     if(username.length < 3) {
 
         throw new AppError('Username must contain at least 3 characters')
@@ -27,13 +32,17 @@ const createUserService = async ({ username, password }: IUserRequest): Promise<
 
         throw new AppError('Password must contain at least 8 characters')
     }
+    /*
+    const regexNumber = /^[0-9]+$/
 
-    if(!password.includes('/^[0-9]+$/')) {
+    if(!regexNumber.exec(password)) {
 
         throw new AppError('Password must contain 1 number')
     }
+    */
+    const regexUpperCase = /[A-Z]/
 
-    if(!password.includes('/[A-Z]/')) {
+    if(!regexUpperCase.test(password)) {
 
         throw new AppError('Password must contain 1 uppercase letter')
     }
@@ -48,7 +57,13 @@ const createUserService = async ({ username, password }: IUserRequest): Promise<
     userRepository.create(user)
     await userRepository.save(user)
 
-    return user
+    const newUser = {
+        username: user.username,
+        password: user.password,
+        accountId: newAccount.id
+    }
+
+    return newUser
 }
 
 export { createUserService }

@@ -20,11 +20,10 @@ describe('Tests for user service', () => {
 
     test('Must be able to view a profile', async () => {
 
-        const userNew = await createUserService(user)
+        await createUserService(user)
 
-        const result = await viewProfileService(userNew.username)
+        const result = await viewProfileService(user.username)
 
-        expect(result).toHaveProperty('id')
         expect(result).toHaveProperty('username')
         expect(result).toHaveProperty('password')
         expect(result).toHaveProperty('accountId')

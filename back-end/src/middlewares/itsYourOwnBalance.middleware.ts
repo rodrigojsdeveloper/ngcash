@@ -17,13 +17,13 @@ const itsYourOwnBalanceMiddleware = async (req: Request, res: Response, next: Ne
 
     const user = await userRepository.findOneBy({ username })
 
-    const account_token = await accountRepository.findOneBy({ id: user!.accountId })
+    const account_token = await accountRepository.findOneBy({ id: user!.accountId.id })
 
     const account_id = await accountRepository.findOneBy({ id })
 
-    if(account_token != account_id) {
+    if(account_token?.id != account_id?.id) {
 
-        throw new AppError('Only the user can see the balance', 403)
+        return res.status(403).json({ message: 'Only the user can see the balance' })
     }
 
     next()

@@ -24,7 +24,6 @@ describe('Tests for user routes', () => {
 
         expect(response.status).toBe(201)
 
-        expect(response.body).toHaveProperty('id')
         expect(response.body).toHaveProperty('username')
         expect(response.body).toHaveProperty('password')
         expect(response.body).toHaveProperty('accountId')

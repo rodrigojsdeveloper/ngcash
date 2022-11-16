@@ -1,5 +1,5 @@
-import { ISessionRequest } from '../../interfaces/session'
 import { ITransactionRequest } from '../../interfaces/transactions'
+import { ISessionRequest } from '../../interfaces/session'
 import { IUserRequest } from '../../interfaces/users'
 
 

@@ -26,15 +26,4 @@ describe('Tests for session service', () => {
 
         expect(result).toHaveProperty('token')
     })
-
-    test('Must be able to prevent session', async () => {
-
-        user.username = 'username'
-        
-        await createUserService(user)
-
-        const result = await createSessionService(session)
-
-        expect(result).toHaveProperty('message')
-    })
 })

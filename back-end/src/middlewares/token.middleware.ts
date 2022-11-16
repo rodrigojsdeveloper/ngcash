@@ -6,7 +6,7 @@ const tokenMiddleware = async (req: Request, res: Response, next: NextFunction) 
 
     let token = req.headers.authorization
 
-    if(token) {
+    if(!token) {
 
         return res.status(401).json({ message: 'Invalid token' })
     }
