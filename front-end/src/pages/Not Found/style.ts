@@ -10,6 +10,10 @@ const Container = styled.div`
     min-height: 100vh;
     padding: 10px;
 
+    img {
+        width: 45%;
+    }
+
     div {
     
         h1 {
@@ -26,18 +30,12 @@ const Container = styled.div`
         }
     }
     
-    @media (max-width: 850px) {
+    @media (max-width: 1000px) {
+
         flex-direction: column;
-    
+
         img {
-            padding-top: 50px;
-        }
-    }
-    
-    @media (max-width: 470px) {
-    
-        img {
-            width: 100%;
+            display: none;
         }
     }
 `

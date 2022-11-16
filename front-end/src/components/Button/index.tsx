@@ -1,11 +1,15 @@
 import { Container } from "./style"
-import { ReactNode } from "react"
+import React from "react"
 
 
-const Button = ({ ...rest }, lenButton: string, children: ReactNode) => {
+interface IButton {
+    children: React.ReactNode
+}
+
+const Button = ({ ...rest }, { children }: IButton) => {
 
     return (
-        <Container lenButton={ lenButton } { ...rest }>
+        <Container buttonStyle='register' { ...rest }>
             { children }
         </Container>
     )

@@ -3,7 +3,7 @@ import { api } from "../../services/api"
 import { Container } from "./style"
 
 
-const Transaction = (transaction: object) => {
+const Transaction = (transaction: any) => {
 
     const [ balanceCredit, setBalanceCreadit ] = useState<any>()
 

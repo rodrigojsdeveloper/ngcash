@@ -7,7 +7,14 @@ import { api } from "../../services/api"
 import { Container } from "./style"
 
 
-const Home = (setAuthetication: boolean) => {
+interface IUser {
+    id: string
+    username: string
+    password: string
+    accountId: string
+}
+
+const Home = (setAuthetication: any) => {
 
     const history = useHistory()
 
@@ -23,7 +30,7 @@ const Home = (setAuthetication: boolean) => {
 
     const [ transaction, setTransaction ] = useState<any>()
 
-    const [ user, setUser ] = useState<any>()
+    const [ user, setUser ] = useState<IUser | any>()
 
     const addTransactions = (transaction: object) => setTransactions([ ...transactions, transaction ])
 

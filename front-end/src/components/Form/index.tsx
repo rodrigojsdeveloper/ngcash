@@ -8,7 +8,14 @@ import { api } from "../../services/api"
 import { useHistory } from "react-router-dom"
 
 
-const Form = (apiProp: string, buttonProp: string, historyProp: string, setAuthentication: boolean) => {
+interface IForm {
+    apiProp: string,
+    buttonProp: string
+    historyProp: string
+    titleProp: string
+}
+
+const Form = ({ apiProp, buttonProp, historyProp, titleProp }: IForm, setAuthentication: any) => {
 
     const history = useHistory()
 
@@ -37,8 +44,6 @@ const Form = (apiProp: string, buttonProp: string, historyProp: string, setAuthe
             if(apiProp == 'session') {
 
                 localStorage.setItem('Project NG.CASH: token', res.data)
-
-                setAuthentication(true)
             }
 
             history.push(`/${ historyProp }`)
@@ -49,21 +54,25 @@ const Form = (apiProp: string, buttonProp: string, historyProp: string, setAuthe
     return (
         <Container onSubmit={ handleSubmit(onSumbitFunction) }>
 
-            <Input
-            placeholder="username"
-            name="username"
-            register={ register }
-            error={ errors.username?.message as string }
-            />
+            <h1>{ titleProp }</h1>
 
-            <Input
-            placeholder="password"
-            name="password"
-            register={ register }
-            error={ errors.password?.message as string }
-            />
+            <main>
+                <label>{ errors.username?.message as string }</label>
+                <Input
+                placeholder="username"
+                register={ register }
+                {...register("username")}
+                />
 
-            <Button type="submit">{ buttonProp }</Button>
+                <label>{ errors.password?.message as string }</label>
+                <Input
+                placeholder="password"
+                register={ register }
+                {...register("password")}
+                />
+
+                <Button type="submit">{ buttonProp }</Button>
+            </main>
 
         </Container>
     )

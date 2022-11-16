@@ -1,7 +1,11 @@
 import styled, { css } from "styled-components"
 
 
-const Container = styled.button`
+interface IStyledButtonProps {
+    buttonStyle: 'register' | 'home'
+}
+
+const Container = styled.button<IStyledButtonProps>`
 
     border-radius: 4px;
     transition: .5s;
@@ -17,16 +21,31 @@ const Container = styled.button`
         cursor: not-allowed;
     }
 
-    ${ (props: any) => {
+    ${ ({ buttonStyle }) => {
 
-        switch(props.lenButton) {
+        switch(buttonStyle) {
 
-            case 'registe':
+            case 'register':
+                return css`
+                    margin-top: 20px;
+
+                    width: 100%;
+                    max-width: 250px;
+                    height: 50px;
+
+                    background: var(--color);
+                    color: var(--background);
+
+                    border-radius: 8px;
+                `
+            case 'home':
                 return css`
                     width: 100%;
                     max-width: 324px;
                     height: 48px;
                 `
+            default:
+                return false
         }
     }}
 `

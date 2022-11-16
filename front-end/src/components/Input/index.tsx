@@ -1,27 +1,10 @@
-import { InputHTMLAttributes } from "react"
-import { Container, InputContainer } from "./style"
+import { Container } from "./style"
 
 
-interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
-    placeholder: string
-    label?: string
-    error: string
-    register: Function
-    name: string
-}
-
-const Input = ({ placeholder, label, error = "", register, name, ...rest }: InputProps) => {
+const Input = ({ ...rest }) => {
 
     return (
-        <Container>
-            <div>
-                { label } { !!error && <span> - { error }</span> }
-            </div>
-
-            <InputContainer isErrored={ !!error }>
-                <input { ...register(name) } { ...rest } />
-            </InputContainer>
-        </Container>
+        <Container { ...rest } />
     )
 }
 

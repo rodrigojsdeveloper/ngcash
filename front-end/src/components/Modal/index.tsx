@@ -8,7 +8,7 @@ import * as yup from "yup"
 import { yupResolver } from "@hookform/resolvers/yup"
 
 
-const Modal = (setOpenModel: Function, addTransactions: Function, setTransaction: Function) => {
+const Modal = (setOpenModel: any, addTransactions: any, setTransaction: any) => {
 
     const schema = yup.object().shape({
         username: yup

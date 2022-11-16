@@ -8,7 +8,7 @@ import { Session } from "../pages/Session"
 
 const Routes = () => {
 
-    const [ authetication, setAuthetication ] = useState<boolean>(false)
+    const [ authetication, setAuthetication ] = useState<any>(false)
 
     useEffect(() => {
 
@@ -23,7 +23,7 @@ const Routes = () => {
     return (
 
         <Switch>
-            <Route path='/register'>
+            <Route exact path='/'>
                 <Register
                 authetication={ authetication }
                 />

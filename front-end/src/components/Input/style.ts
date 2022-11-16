@@ -1,54 +1,31 @@
-import styled, { css } from "styled-components"
+import styled from "styled-components"
 
 
-const Container = styled.div`
+const Container = styled.input`
 
-    text-align: left;
-    
-    div {
-
-        margin-bottom: 20px;
-        font-weight: 400;
-        font-size: 12.182px;
-
-        span {
-        }
-    }
-`
-
-const InputContainer = styled.div`
-    
-    max-width: 329.93px;
-    width: 100%;
-    height: 48px;
-    display: flex;
     transition: 0.4s;
-
-    input {
-
-        background: transparent;
-        align-items: center;
-        flex: 1;
-        padding: 0 10px;
-        border-radius: 4px;
-        border: 1.2182px solid;
-
-        ${ (props: any) => props.isErrored && css`
-
-            :focus {}
-            `
-        }
-        
-        &::placeholder {
-            font-size: 16.2426px;
-        }
-        
-        &:disabled {
-            opacity: .5;
-            cursor: not-allowed;
-        }
+    
+    &:focus::-webkit-input-placeholder {
+        color: transparent;
+    }
+    
+    &::placeholder {
+        color: gray;
     }
 
+    width: 100%;
+    max-width: 250px;
+    height: 48px;
+    padding: 10px 1rem;
+    border-radius: 8px;
+    border: 1.5px solid black;
+
+    margin: 10px 0;
+    
+    background: var(--background);
+    align-items: center;
+    flex: 1;
+    color: var(--color);
 `
 
-export { Container, InputContainer }
+export { Container }

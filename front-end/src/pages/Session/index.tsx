@@ -1,10 +1,10 @@
 import { Redirect } from "react-router-dom"
-import session from "../../assets/Mobile login-bro.svg"
+import session from "../../assets/Tablet login-bro.svg"
 import { Form } from "../../components/Form"
-import { Container } from "./style"
+import { Container } from "../Register/style"
 
 
-const Session = (authetication: boolean, setAuthentication: boolean) => {
+const Session = (authetication: any, setAuthentication: any) => {
 
     if(authetication) {
 
@@ -13,11 +13,11 @@ const Session = (authetication: boolean, setAuthentication: boolean) => {
 
     return (
         <Container>
-            <img src={ session } alt="session" title="session" />
-
             <div>
-                <Form apiProp="session" buttonProp="submit" historyProp="home" setAuthentication={ setAuthentication } />
+                <Form apiProp="session" buttonProp="submit" historyProp="home" titleProp="Login" />
             </div>
+
+            <img src={ session } alt="session" title="session" />
         </Container>
     )
 }

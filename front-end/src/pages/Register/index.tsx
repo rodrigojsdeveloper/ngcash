@@ -1,10 +1,10 @@
 import { Redirect } from "react-router-dom"
-import register from "../../assets/Tablet login-bro.svg"
+import register from "../../assets/Mobile login-bro.svg"
 import { Form } from "../../components/Form"
 import { Container } from "./style"
 
 
-const Register = (authetication: boolean, setAuthentication: boolean) => {
+const Register = (authetication: any, setAuthentication: any) => {
 
     if(authetication) {
 
@@ -16,7 +16,7 @@ const Register = (authetication: boolean, setAuthentication: boolean) => {
             <img src={ register } alt="register" title="register" />
 
             <div>
-                <Form apiProp="users" buttonProp="submit" historyProp="session" setAuthentication={ setAuthentication } />
+                <Form apiProp="users" buttonProp="register" historyProp="session" titleProp="Register" />
             </div>
         </Container>
     )
