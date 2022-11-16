@@ -5,7 +5,7 @@ import { DataSource } from 'typeorm'
 import { user } from '../../mocks'
 
 
-describe('', () => {
+describe('Tests for account service', () => {
 
     let connection: DataSource
 
@@ -13,12 +13,12 @@ describe('', () => {
 
         await AppDataSource.initialize()
         .then(res => connection = res)
-        .catch(err => console.error('', err))
+        .catch(err => console.error('Error during Data Source initialization', err))
     })
 
     afterAll(async () => await connection.destroy())
 
-    test('', async () => {
+    test('Must be able to create a account', async () => {
 
         const newUser = await createUserService(user)
 

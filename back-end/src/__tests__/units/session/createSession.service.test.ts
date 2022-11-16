@@ -5,7 +5,7 @@ import { user, session } from '../../mocks'
 import { DataSource } from 'typeorm'
 
 
-describe('', () => {
+describe('Tests for session service', () => {
 
     let connection: DataSource
 
@@ -13,12 +13,12 @@ describe('', () => {
 
         await AppDataSource.initialize()
         .then(res => connection = res)
-        .catch(err => console.error('', err))
+        .catch(err => console.error('Error during Data Source initialization', err))
     })
 
     afterAll(async () => await connection.destroy())
 
-    test('', async () => {
+    test('Must be able to create a session', async () => {
 
         await createUserService(user)
 
@@ -27,7 +27,7 @@ describe('', () => {
         expect(result).toHaveProperty('token')
     })
 
-    test('', async () => {
+    test('Must be able to prevent session', async () => {
 
         user.username = 'username'
         

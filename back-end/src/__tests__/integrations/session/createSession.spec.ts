@@ -5,7 +5,7 @@ import { app } from '../../../app'
 import request from 'supertest'
 
 
-describe('', () => {
+describe('Tests for session routes', () => {
 
     let connection: DataSource
 
@@ -13,12 +13,12 @@ describe('', () => {
 
         await AppDataSource.initialize()
         .then(res => connection = res)
-        .catch(err => console.error('', err))
+        .catch(err => console.error('Error during Data Source initialization', err))
     })
 
     afterAll(async () => await connection.destroy())
 
-    test('', async () => {
+    test('Must be able to create a session', async () => {
 
         await request(app).post('/users').send(user)
 
@@ -28,7 +28,7 @@ describe('', () => {
         expect(response.body).toHaveProperty('token')
     })
 
-    test('', async () => {
+    test('Must be able to prevent the creation of a session with invalid credentials', async () => {
 
         user.username = 'username'
 

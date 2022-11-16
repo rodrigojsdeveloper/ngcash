@@ -4,7 +4,7 @@ import { DataSource } from 'typeorm'
 import { user } from '../../mocks'
 
 
-describe('', () => {
+describe('Tests for user service', () => {
 
     let connection: DataSource
 
@@ -12,12 +12,12 @@ describe('', () => {
 
         await AppDataSource.initialize()
         .then(res => connection = res)
-        .catch(err => console.error('', err))
+        .catch(err => console.error('Error during Data Source initialization', err))
     })
 
     afterAll(async () => await connection.destroy())
 
-    test('', async () => {
+    test('Must be able to create a user', async () => {
 
         const result = await createUserService(user)
 
@@ -27,7 +27,7 @@ describe('', () => {
         expect(result).toHaveProperty('accountId')
     })
 
-    test('', async () => {
+    test('Must be able to prevent user creation for having less than 3 characters in username', async () => {
 
         user.username = 'ex'
         
@@ -36,7 +36,7 @@ describe('', () => {
         expect(result).toHaveProperty('message')
     })
 
-    test('', async () => {
+    test('Must be able to prevent user creation for having less than 8 characters in the password', async () => {
         
         user.password = 'ex'
         
@@ -45,7 +45,7 @@ describe('', () => {
         expect(result).toHaveProperty('message')
     })
 
-    test('', async () => {
+    test('Must be able to prevent user creation from not having capital letters in password', async () => {
         
         user.password = 'example123'
         
@@ -54,7 +54,7 @@ describe('', () => {
         expect(result).toHaveProperty('message')
     })
 
-    test('', async () => {
+    test('Must be able to prevent user creation from not having numbers in password', async () => {
         
         user.password = 'EXAMPLEexample'
         

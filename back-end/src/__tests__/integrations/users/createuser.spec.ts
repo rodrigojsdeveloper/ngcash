@@ -5,7 +5,7 @@ import { app } from '../../../app'
 import request from 'supertest'
 
 
-describe('', () => {
+describe('Tests for user routes', () => {
 
     let connection: DataSource
 
@@ -13,12 +13,12 @@ describe('', () => {
 
         await AppDataSource.initialize()
         .then(res => connection = res)
-        .catch(err => console.error('', err))
+        .catch(err => console.error('Error during Data Source initialization', err))
     })
 
     afterAll(async () => await connection.destroy())
 
-    test('', async () => {
+    test('Must be able to create a user', async () => {
 
         const response = await request(app).post('/users').send(user)
 
@@ -30,7 +30,7 @@ describe('', () => {
         expect(response.body).toHaveProperty('accountId')
     })
 
-    test('', async () => {
+    test('Must be able to prevent user creation for having less than 3 characters in username', async () => {
 
         user.username = 'ex'
         
@@ -40,7 +40,7 @@ describe('', () => {
         expect(response.body).toHaveProperty('message')
     })
 
-    test('', async () => {
+    test('Must be able to prevent user creation for having less than 8 characters in the password', async () => {
         
         user.password = 'ex'
         
@@ -50,7 +50,7 @@ describe('', () => {
         expect(response.body).toHaveProperty('message')
     })
 
-    test('', async () => {
+    test('Must be able to prevent user creation from not having capital letters in password', async () => {
         
         user.password = 'example123'
         
@@ -60,7 +60,7 @@ describe('', () => {
         expect(response.body).toHaveProperty('message')
     })
 
-    test('', async () => {
+    test('Must be able to prevent user creation from not having numbers in password', async () => {
         
         user.password = 'EXAMPLEexample'
         

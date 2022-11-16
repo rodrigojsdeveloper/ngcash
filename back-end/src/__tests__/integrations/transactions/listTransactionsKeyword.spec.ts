@@ -5,7 +5,7 @@ import { app } from '../../../app'
 import request from 'supertest'
 
 
-describe('', () => {
+describe('Tests for transaction routes', () => {
 
     let connection: DataSource
 
@@ -13,14 +13,14 @@ describe('', () => {
 
         await AppDataSource.initialize()
         .then(res => connection = res)
-        .catch(err => console.error('', err))
+        .catch(err => console.error('Error during Data Source initialization', err))
 
         await request(app).post('/users').send(user)
     })
 
     afterAll(async () => await connection.destroy())
 
-    test('', async () => {
+    test('Must be able to list transactions keyword', async () => {
 
         const login = await request(app).post('/session').send(session)
 
@@ -33,7 +33,7 @@ describe('', () => {
         expect(response.body).toHaveProperty('map')
     })
 
-    test('', async () => {
+    test('Must be able to prevent listing transactions keyword without token', async () => {
 
         const response = await request(app).post('/transactions').send(transaction)
 

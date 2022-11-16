@@ -8,9 +8,9 @@ import { Express } from 'express'
 const appRoutes = (app: Express) => {
 
     app.use('/users', usersRoutes())
-    app.use('/transactions', transactionsRoutes())
     app.use('/session', sessionRoutes())
     app.use('/accounts', accountRoutes())
+    app.use('/transactions', transactionsRoutes())
 }
 
 export { appRoutes }

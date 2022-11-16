@@ -1,7 +1,7 @@
 import express from 'express'
-import 'dotenv/config'
 import { appRoutes } from './routes'
 import 'reflect-metadata'
+import 'dotenv/config'
 
 
 const app = express()

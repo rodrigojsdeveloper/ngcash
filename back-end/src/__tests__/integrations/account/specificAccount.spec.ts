@@ -5,7 +5,7 @@ import { app } from '../../../app'
 import request from 'supertest'
 
 
-describe('', () => {
+describe('Tests for account routes', () => {
 
     let connection: DataSource
 
@@ -13,12 +13,12 @@ describe('', () => {
 
         await AppDataSource.initialize()
         .then(res => connection = res)
-        .catch(err => console.error('', err))
+        .catch(err => console.error('Error during Data Source initialization', err))
     })
 
     afterAll(async () => await connection.destroy())
 
-    test('', async () => {
+    test('Must be able to create a account', async () => {
 
         const newUser = await request(app).post('/users').send(user)
 
@@ -36,7 +36,7 @@ describe('', () => {
         expect(response.body).toHaveProperty('debitedTransaction')
     })
 
-    test('', async () => {
+    test('Must be able to prevent create tokenless account', async () => {
 
         const newUser = await request(app).post('/users').send(user)
 
