@@ -6,6 +6,6 @@ COPY package.json ./
 
 COPY ./ ./
 
-RUN yarn 
+RUN yarn
 
-CMD ["yarn", "start"]
+CMD ["yarn", "dev"]
