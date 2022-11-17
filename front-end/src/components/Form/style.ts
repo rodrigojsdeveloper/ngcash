@@ -1,9 +1,21 @@
-import styled from "styled-components"
+import styled, { keyframes } from "styled-components"
 
+
+const animacaoForm = keyframes`
+    from {
+        opacity: 0;
+        transform: translatey(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0px);
+}
+`
 
 const Container = styled.form`
 
     background: var(--background);
+    animation: ${animacaoForm} 1s;
 
     max-width: 400px;
     width: 100%;
@@ -19,6 +31,11 @@ const Container = styled.form`
     border-radius: 10px;
     padding: 20px;
 
+    p {
+        margin-top: 10px;
+        font-size: 13.5px;
+    }
+
     & > main {
 
         width: 100%;
@@ -30,7 +47,33 @@ const Container = styled.form`
             color: var(--red);
             font-size: 12px;
         }
+
+        input {
+            transition: 0.4s;
+            
+            &:focus::-webkit-input-placeholder {
+                color: transparent;
+            }
+            
+            &::placeholder {
+                color: gray;
+            }
+
+            width: 100%;
+            max-width: 250px;
+            height: 48px;
+            padding: 10px 1rem;
+            border-radius: 8px;
+            border: 1.5px solid black;
+
+            margin: 10px 0;
+            
+            background: var(--background);
+            align-items: center;
+            flex: 1;
+            color: var(--color);
+        }
     }
 `
 
-export { Container }
+export { Container, animacaoForm }

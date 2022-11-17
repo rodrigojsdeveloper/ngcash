@@ -14,7 +14,7 @@ const Session = (authetication: any, setAuthentication: any) => {
     return (
         <Container>
             <div>
-                <Form apiProp="session" buttonProp="Log in" buttonRequestProp="Connecting..." historyProp="home" titleProp="Login" />
+                <Form apiProp="session" buttonProp="Log in" buttonRequestProp="Connecting..." historyProp="home" titleProp="Login" textProp="Don't have an account yet? " linkProp="" />
             </div>
 
             <img src={ session } alt="session" title="session" />

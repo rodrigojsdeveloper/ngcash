@@ -16,7 +16,8 @@ const Register = (authetication: any, setAuthentication: any) => {
             <img src={ register } alt="register" title="register" />
 
             <div>
-                <Form apiProp="users" buttonProp="Register" buttonRequestProp="Registering..." historyProp="session" titleProp="Register" />
+                <Form apiProp="users" buttonProp="Register" buttonRequestProp="Registering..." historyProp="session" titleProp="Register" textProp="Already have an account? " linkProp="session" />
+
             </div>
         </Container>
     )

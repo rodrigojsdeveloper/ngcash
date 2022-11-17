@@ -116,7 +116,7 @@ const Home = (setAuthetication: any) => {
                 
                 <div>
                     <div className="divTransaction">
-                        <button onClick={ () => setOpenModel(true) }>entrar</button>
+                        <Button buttonStyle="home" onClick={ () => setOpenModel(true) }>entrar</Button>
 
                         <div>
                             <Transaction transaction={ transaction } />

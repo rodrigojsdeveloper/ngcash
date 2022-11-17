@@ -1,4 +1,5 @@
 import styled from "styled-components"
+import { animacaoForm } from "../../components/Form/style"
 
 
 const Container = styled.div`
@@ -8,6 +9,7 @@ const Container = styled.div`
     img {
         width: 60%;
         height: 100vh;
+        animation: ${animacaoForm} 1s;
     }
 
     div {

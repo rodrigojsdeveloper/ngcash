@@ -1,9 +1,12 @@
 import { Container } from "./style"
 import notFound from "../../assets/Oops! 404 Error with a broken robot-rafiki.svg"
 import { Button } from "../../components/Button"
+import { useHistory } from "react-router-dom"
 
 
 const NotFound = () => {
+
+    const history = useHistory()
 
     return (
         <Container>
@@ -12,7 +15,7 @@ const NotFound = () => {
 
                 <p>We couldn't find the page you were looking for, <b>let's try again</b>.</p>
 
-                <Button>Go to home</Button>
+                <Button onClick={ () => history.push('/') }>Go to home</Button>
             </div>
 
             <img src={ notFound } alt="error" title="error" />

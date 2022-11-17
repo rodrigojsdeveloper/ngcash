@@ -5,7 +5,7 @@ import * as yup from 'yup'
 import { useForm } from "react-hook-form"
 import { yupResolver } from '@hookform/resolvers/yup'
 import { api } from "../../services/api"
-import { useHistory } from "react-router-dom"
+import { Link, useHistory } from "react-router-dom"
 import { useState } from "react"
 
 
@@ -15,9 +15,11 @@ interface IForm {
     buttonRequestProp: string
     historyProp: string
     titleProp: string
+    textProp: string
+    linkProp: string
 }
 
-const Form = ({ apiProp, buttonProp, historyProp, titleProp, buttonRequestProp }: IForm, setAuthentication: any) => {
+const Form = ({ apiProp, buttonProp, historyProp, titleProp, buttonRequestProp, textProp, linkProp }: IForm, setAuthentication: any) => {
 
     const [ load, setLoad ] = useState(false)
 
@@ -27,15 +29,15 @@ const Form = ({ apiProp, buttonProp, historyProp, titleProp, buttonRequestProp }
         
         username: yup
                 .string()
-                .required('username required')
-                .min(3, 'username must contain at least 3 characters'),
+                .required('Username required')
+                .min(3, 'Username must contain at least 3 characters'),
         password: yup
                 .string()
-                .required('password required')
-                .min(8, 'password must contain at least 8 characters')
+                .required('Password required')
+                .min(8, 'Password must contain at least 8 characters')
                 .matches(
                     /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/,
-                    'A senha deve conter letras maiúsculas e minúsculas, números e caracteres especiais!'
+                    'The password must contain capital letters, numbers and special characters!'
                 )
     })
 
@@ -70,24 +72,26 @@ const Form = ({ apiProp, buttonProp, historyProp, titleProp, buttonRequestProp }
             <h1>{ titleProp }</h1>
 
             <main>
-                <Input
-                placeholder="username"
+                <label>{ errors.username?.message as string }</label>
+                <input
+                placeholder="Username"
                 type="text"
                 { ...register("username") }
                 />
-                <label>{ errors.username?.message as string }</label>
 
-                <Input
-                placeholder="password"
+                <label>{ errors.password?.message as string }</label>
+                <input
+                placeholder="Password"
                 type="password"
                 { ...register("password") }
                 />
-                <label>{ errors.password?.message as string }</label>
 
                 <Button type="submit" disabled={ load }>{
                     load ? { buttonRequestProp } : { buttonProp }
                 }</Button>
             </main>
+
+            <p>{ textProp }<Link to={ `/${ linkProp }` }>click here</Link>.</p>
 
         </Container>
     )
