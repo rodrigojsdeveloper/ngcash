@@ -4,6 +4,7 @@ import React from "react"
 
 interface IButton {
     children: React.ReactNode
+    rest: any
 }
 
 const Button = ({ ...rest }, { children }: IButton) => {

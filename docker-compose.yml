@@ -1,30 +1,38 @@
 version: "3.9"
 
 services:
-  app:
+  backend:
     container_name: docker_project_ngcash
-    build: .
+    build: 
+      dockerfile: Dockerfile
+      context: "./back-end"
     ports:
-      - $PORT:$PORT
-    env_file:
-      - .env
+      - 3000:3000
     depends_on:
-      postgres:
-        condition: service_healthy
+      - postgres
     command: bash -c "yarn typeorm migration:run -d src/data-source && yarn dev"
     volumes:
-      - .:/app
+      - /app/node_modules
+      - ./back-end:/app
+
+  frontend:
+    container_name: docker_project_ngcash
+    stdin_open: true
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    build:
+      dockerfile: Dockerfile
+      context: "./front-end"
+    volumes:
+      - /app/node_modules
+      - ./front-end:/app
+    ports:
+      - 5173:5173
 
   postgres:
-    container_name: project_ngcash
+    container_name: db_project_ngcash
     image: postgres:latest
     ports:
-      - 5432:5432
+      - 5434:5432
     env_file:
-      - .env
-    healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -U $USER -d $DB" ]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-      start_period: 5s
+      - ./back-end/.env

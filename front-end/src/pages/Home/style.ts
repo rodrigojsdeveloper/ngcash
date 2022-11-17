@@ -19,6 +19,8 @@ const Container = styled.div`
 
     & > div {
 
+        padding: 20px;
+
         padding-top: 72px;
 
         display: flex;
@@ -30,7 +32,7 @@ const Container = styled.div`
             max-width: 500px;
             background: var(--color);
             border-radius: 10px;
-            margin: 25px 0;
+            margin: 25px 15px;
 
             height: 100vh;
 
@@ -65,6 +67,12 @@ const Container = styled.div`
                 margin-top: 30px;
                 height: 100vh;
             }
+        }
+
+        @media (max-width: 1000px) {
+
+            flex-direction: column;
+            align-items: center;
         }
     }
 `

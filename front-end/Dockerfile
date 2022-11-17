@@ -1,14 +1,11 @@
-
-FROM node:13-alpine
+FROM node
 
 WORKDIR /app
 
-ENV PATH /app/node_modules/.bin:$PATH
+COPY package.json ./
 
-COPY package.json /app/package.json
+COPY ./ ./
 
-RUN yarn add --silent
+RUN yarn 
 
-RUN yarn add react-scripts@3.3.1 -g --silent
-
-CMD ["yarn", "dev"]
+CMD ["yarn", "start"]

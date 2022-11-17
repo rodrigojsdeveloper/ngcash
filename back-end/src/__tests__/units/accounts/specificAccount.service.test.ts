@@ -18,15 +18,12 @@ describe('Tests for account service', () => {
 
     afterAll(async () => await connection.destroy())
 
-    test('Must be able to create a account', async () => {
+    test('Must be able to view a account', async () => {
 
         const newUser = await createUserService(user)
 
         const result = await specificAccountService(newUser.accountId)
 
-        expect(result).toHaveProperty('id')
         expect(result).toHaveProperty('balance')
-        expect(result).toHaveProperty('creditedTransaction')
-        expect(result).toHaveProperty('debitedTransaction')
     })
 })
