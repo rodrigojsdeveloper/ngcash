@@ -2,7 +2,7 @@ import { specificAccountService } from '../../../services/accounts/specificAccou
 import { createUserService } from '../../../services/users/createUser.service'
 import { AppDataSource } from '../../../data-source'
 import { DataSource } from 'typeorm'
-import { user } from '../../mocks'
+import { user } from '../../../mocks'
 
 
 describe('Tests for account service', () => {

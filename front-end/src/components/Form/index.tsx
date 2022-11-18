@@ -11,15 +11,13 @@ import { useState } from "react"
 
 interface IForm {
     apiProp: string,
-    buttonProp: string
-    buttonRequestProp: string
     historyProp: string
     titleProp: string
     textProp: string
     linkProp: string
 }
 
-const Form = ({ apiProp, buttonProp, historyProp, titleProp, buttonRequestProp, textProp, linkProp }: IForm, setAuthentication: any) => {
+const Form = ({ apiProp, historyProp, titleProp, textProp, linkProp }: IForm) => {
 
     const [ load, setLoad ] = useState(false)
 
@@ -50,8 +48,8 @@ const Form = ({ apiProp, buttonProp, historyProp, titleProp, buttonRequestProp, 
         api.post(`/${ apiProp }`, data, {
         
             headers: {
-            "Content-Type": "application/json",
-        }
+                "Content-Type": "application/json",
+            }
         })
         .then(res => {
 
@@ -86,8 +84,8 @@ const Form = ({ apiProp, buttonProp, historyProp, titleProp, buttonRequestProp, 
                 { ...register("password") }
                 />
 
-                <Button type="submit" disabled={ load }>{
-                    load ? { buttonRequestProp } : { buttonProp }
+                <Button buttonStyle="register" type="submit" disabled={ load }>{
+                    load ? 'Sending...' : 'Submit'
                 }</Button>
             </main>
 

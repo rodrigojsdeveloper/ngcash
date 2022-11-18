@@ -11,7 +11,9 @@ interface ITransaction {
     id: string
 }
 
-const Transaction = (transaction: any) => {
+const Transaction = ({ transaction }: any) => {
+
+    console.log(transaction)
 
     const [ balanceCredit, setBalanceCreadit ] = useState<any>()
 
@@ -19,10 +21,11 @@ const Transaction = (transaction: any) => {
     
     useEffect(() => {
 
-        api.post(`/accounts/${ transaction.creditedAccountId }`, {
+        api.post(`/accounts/${ transaction.id }`, {
 
             headers: {
-                Authorization: `Bearer ${ localStorage.getItem('Project NG.CASH: token') }`
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${ localStorage.getItem('Project NG.CASH: token') }`,
             }
         })
         .then(res => setBalanceCreadit(res.data.balance))
@@ -32,10 +35,11 @@ const Transaction = (transaction: any) => {
 
     useEffect(() => {
 
-        api.post(`/accounts/${ transaction.debitedAccountId }`, {
+        api.post(`/accounts/${ transaction.id }`, {
 
             headers: {
-                Authorization: `Bearer ${ localStorage.getItem('Project NG.CASH: token') }`
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${ localStorage.getItem('Project NG.CASH: token') }`,
             }
         })
         .then(res => setBalanceDebt(res.data.balance))

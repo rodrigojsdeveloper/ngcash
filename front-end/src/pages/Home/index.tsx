@@ -15,15 +15,13 @@ import iconKeyword from "../../assets/symbol-keyword.svg"
 import iconTransactions from "../../assets/transactions.svg"
 
 
-interface ITransaction {
-    creditedAccountId: string
-    debitedAccountId: string
+export interface ITransaction {
     value: number
     createdAt: string
     id: string
 }
 
-const Home = (setAuthetication: any) => {
+const Home = () => {
 
     const history = useHistory()
 
@@ -39,14 +37,15 @@ const Home = (setAuthetication: any) => {
 
     const [ transactions, setTransactions ] = useState<any>()
 
-    const addTransactions = (transaction: object) => setTransactions([ ...transactions, transaction ])
+    const addTransactions = (transaction: any) => setTransactions([ ...transactions, transaction ])
     
     useEffect(() => {
 
         api.get('/users/profile', {
 
             headers: {
-                Authorization: `Bearer ${ localStorage.getItem('Project NG.CASH: token') }`
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${ localStorage.getItem('Project NG.CASH: token') }`,
             }
         })
         .then(res => {
@@ -54,7 +53,8 @@ const Home = (setAuthetication: any) => {
             api.get(`/accounts/${ res.data.accountId.id }`, {
 
                 headers: {
-                    Authorization: `Bearer ${ localStorage.getItem('Project NG.CASH: token') }`
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${ localStorage.getItem('Project NG.CASH: token') }`,
                 }
             })
             .then(res => setBalance(res.data.balance))
@@ -68,7 +68,8 @@ const Home = (setAuthetication: any) => {
         api.get('/transactions', {
             
             headers: {
-                Authorization: `Bearer ${ localStorage.getItem('Project NG.CASH: token') }`
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${ localStorage.getItem('Project NG.CASH: token') }`,
             }
         })
         .then(res => setTransactions(res.data))
@@ -82,8 +83,6 @@ const Home = (setAuthetication: any) => {
                 <Button buttonStyle="home" onClick={ () => { 
 
                     history.push('/session')
-
-                    setAuthetication(false)
                     
                     localStorage.removeItem('Project NG.CASH: token')
 
@@ -136,7 +135,7 @@ const Home = (setAuthetication: any) => {
                 <div>
                     {
                         openTransaction && 
-                        <Modal addTransactions={ addTransactions } setOpenTransaction={ setOpenTransaction } />
+                        <Modal addTransactions={ addTransactions } />
                     }
                     {
                         openTransactions &&

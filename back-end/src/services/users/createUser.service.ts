@@ -6,7 +6,7 @@ import { AppError } from '../../errors'
 import { hash } from 'bcrypt'
 
 
-const createUserService = async ({ username, password }: IUserRequest): Promise<object> => {
+const createUserService = async ({ username, password }: IUserRequest) => {
 
     const userRepository = AppDataSource.getRepository(User)
 

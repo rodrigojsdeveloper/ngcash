@@ -2,7 +2,7 @@ import { listTransactionsService } from '../../../services/transactions/listTran
 import { createUserService } from '../../../services/users/createUser.service'
 import { AppDataSource } from '../../../data-source'
 import { DataSource } from 'typeorm'
-import { user } from '../../mocks'
+import { user } from '../../../mocks'
 
 
 describe('Tests for transaction service', () => {

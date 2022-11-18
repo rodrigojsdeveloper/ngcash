@@ -1,11 +1,6 @@
 import { Routes } from "./routes"
 
 
-const App = () =>  {
-
-	return (
-		<Routes />
-	)
-}
+const App = () =>  <Routes />
 
 export { App }

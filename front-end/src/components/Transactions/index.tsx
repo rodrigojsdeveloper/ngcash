@@ -1,9 +1,10 @@
 import { Transaction } from "../Transaction"
 import { Container } from "./style"
 import noTransaction from "../../assets/noTransaction.png"
+import { ITransaction } from "../../pages/Home"
 
 
-const Transactions = (transactions: any) => {
+const Transactions = ({ transactions }: any) => {
 
     return (
         <Container>
@@ -15,7 +16,7 @@ const Transactions = (transactions: any) => {
                 {
                     transactions.length > 0 ? (
                     
-                        transactions.filter((transaction: any) => <Transaction transaction={ transaction } />)
+                        transactions.filter((transaction: object) => <Transaction transaction={ transaction } />)
                     
                     ) : (
 

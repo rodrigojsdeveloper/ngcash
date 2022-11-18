@@ -1,22 +1,6 @@
 import styled from "styled-components"
-import { animacaoForm } from "../Form/style"
 
-/*
-const Container = styled.div`
 
-    display: flex;
-    align-items: center;
-    position: fixed;
-    z-index: 2000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100vh;
-    background: var(--background-modal);
-
-    padding: 15px;
-`
-*/
 const Container = styled.form`
 
     width: 100%;
@@ -50,6 +34,38 @@ const Container = styled.form`
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            
+            label {
+
+                color: var(--red);
+                font-size: 12px;
+            }
+
+            input {
+                transition: 0.4s;
+                
+                &:focus::-webkit-input-placeholder {
+                    color: transparent;
+                }
+                
+                &::placeholder {
+                    color: gray;
+                }
+
+                width: 100%;
+                max-width: 250px;
+                height: 48px;
+                padding: 10px 1rem;
+                border-radius: 8px;
+                border: 1.5px solid black;
+
+                margin: 10px 0;
+                
+                background: var(--background);
+                align-items: center;
+                flex: 1;
+                color: var(--color);
+            }
         }
     }
 `

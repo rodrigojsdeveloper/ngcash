@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react"
 import { api } from "../../services/api"
 import { Button } from "../Button"
-import { Input } from "../Input"
 import { Transaction } from "../Transaction"
 import { Container } from "./style"
 import noTransaction from "../../assets/noTransaction.png"
@@ -35,7 +34,8 @@ const TransactionsKeyword = () => {
                         api.get(`/transactions/${ prop }`, {
 
                             headers: {
-                                Authorization: `Bearer ${ localStorage.getItem('Project NG.CASH: token') }`
+                                "Content-Type": "application/json",
+                                "Authorization": `Bearer ${ localStorage.getItem('Project NG.CASH: token') }`,
                             }
                         })
                         .then(res => setTransactionsKeyword(res.data))

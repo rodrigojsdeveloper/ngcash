@@ -1,6 +1,6 @@
 import { AppDataSource } from '../../../data-source'
 import { DataSource } from 'typeorm'
-import { user } from '../../mocks'
+import { user } from '../../../mocks'
 import { app } from '../../../app'
 import request from 'supertest'
 

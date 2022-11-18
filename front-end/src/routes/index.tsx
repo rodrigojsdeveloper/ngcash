@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react"
 import { Switch, Route } from "react-router-dom"
 import { Home } from "../pages/Home"
 import { NotFound } from "../pages/Not Found"
@@ -8,38 +7,19 @@ import { Session } from "../pages/Session"
 
 const Routes = () => {
 
-    const [ authetication, setAuthetication ] = useState<any>(false)
-
-    useEffect(() => {
-
-        const token = localStorage.getItem('Project NG.CASH: token')
-
-        if(token) {
-
-            setAuthetication(true)
-        }
-    }, [])
-
     return (
 
         <Switch>
             <Route exact path='/'>
-                <Register
-                authetication={ authetication }
-                />
+                <Register />
             </Route>
 
             <Route path='/session'>
-                <Session
-                authetication={ authetication }
-                setAuthetication={ setAuthetication }
-                />
+                <Session />
             </Route>
 
             <Route path='/home'>
-                <Home
-                setAuthetication={ setAuthetication }
-                />
+                <Home />
             </Route>
 
             <Route component={ NotFound } />

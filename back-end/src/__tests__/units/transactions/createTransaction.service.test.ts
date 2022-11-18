@@ -1,6 +1,6 @@
 import { createTransactionService } from '../../../services/transactions/createTransaction.service'
 import { createUserService } from '../../../services/users/createUser.service'
-import { user, user2, transaction } from '../../mocks'
+import { user, user2, transaction } from '../../../mocks'
 import { AppDataSource } from '../../../data-source'
 import { DataSource } from 'typeorm'
 
@@ -24,8 +24,12 @@ describe('Tests for transaction service', () => {
 
         await createUserService(user2)
 
-        const result = await createTransactionService(newUser!.accountId, transaction)
+        const result = await createTransactionService(newUser.accountId, transaction)
 
-        expect(result).toHaveProperty('map')
+        expect(result).toHaveProperty('id')
+        expect(result).toHaveProperty('creditedAccountId')
+        expect(result).toHaveProperty('debitedAccountId')
+        expect(result).toHaveProperty('createdAt')
+        expect(result).toHaveProperty('value')
     })
 })

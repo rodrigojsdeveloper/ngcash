@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
 import { api } from "../../services/api"
 import { Button } from "../Button"
@@ -8,68 +8,74 @@ import * as yup from "yup"
 import { yupResolver } from "@hookform/resolvers/yup"
 
 
-interface IModal {
-    setOpenTransaction: any
-    addTransactions: any
-}
+const Modal = ({ addTransactions }: any) => {
 
-const Modal = ({ setOpenTransaction, addTransactions }: IModal) => {
+    const [ load, setLoad ] = useState(false)
 
     const schema = yup.object().shape({
+
         username: yup
             .string()
-            .required('username required')
-            .min(3, 'username must contain at least 3 characters'),
+            .required('Username required')
+            .min(3, 'Username must contain at least 3 characters'),
 
         value: yup
             .number()
+            .required('Value required')
+            .typeError('Amount must be a number')
     })
 
     const { register, handleSubmit, formState: { errors } } = useForm({ resolver: yupResolver(schema) })
 
-    const onSubmitFunc = (data: object) => {
+    const onSumbitFunction = (data: object) => {
+
+        setLoad(true)
 
         useEffect(() => {
 
             api.post('/transactions', data, {
 
                 headers: {
-                    Authorization: `Bearer ${ localStorage.getItem('Project NG.CASH: token') }`
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${ localStorage.getItem('Project NG.CASH: token') }`,
                 }
             })
             .then(res => {
-                
-                setOpenTransaction(false)
 
                 addTransactions(res.data)
+
+                console.log(res)
             })
             .catch(err => console.error(err))
+            .finally(() => setLoad(false))
 
         }, [])
     }
 
     return (
-        <Container onSubmit={ handleSubmit(onSubmitFunc) }>
+        <Container onSubmit={ handleSubmit(onSumbitFunction) }>
 
             <div>
                 <h1>Transaction</h1>
 
                 <main>
-                    <Input
-                    name="value"
+                    <label>{ errors.value?.message as string }</label>
+                    <input
                     placeholder="Value"
-                    register={ register }
-                    error={ errors.username?.message as string }
+                    type="text"
+                    { ...register("value") }
                     />
 
-                    <Input
-                    name="username"
+                    <label>{ errors.username?.message as string }</label>
+                    <input
                     placeholder="Username"
-                    register={ register }
-                    error={ errors.value?.message as string }
+                    type="text"
+                    { ...register("username") }
                     />
 
-                    <Button type="submit">Submit</Button>
+                    <Button buttonStyle='register' type="submit" disabled={ load }>{
+                        load ? 'Sending...' : 'Submit'
+                    }</Button>
                 </main>
             </div>
             

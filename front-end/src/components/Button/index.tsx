@@ -1,16 +1,19 @@
 import { Container } from "./style"
-import React from "react"
+import React, { MouseEventHandler } from "react"
 
 
 interface IButton {
     children: React.ReactNode
-    rest: any
+    onClick?: MouseEventHandler
+    disabled?: boolean | undefined
+    type?: "button" | "submit" | "reset" | undefined
+    buttonStyle: 'register' | 'home'
 }
 
-const Button = ({ ...rest }, { children }: IButton) => {
+const Button = ({ children, onClick, type, disabled, buttonStyle }: IButton) => {
 
     return (
-        <Container buttonStyle="register" { ...rest }>
+        <Container buttonStyle={ buttonStyle } onClick={ onClick } type={ type } disabled={ disabled }>
             { children }
         </Container>
     )
