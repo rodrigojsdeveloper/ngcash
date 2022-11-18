@@ -14,10 +14,12 @@ const Container = styled.div`
 
     margin: 10px 0;
 
-    & div {
-        
+    .divValue {
         text-align: end;
+    }
 
+    & div {
+    
         p {
 
             padding: 10px 0;

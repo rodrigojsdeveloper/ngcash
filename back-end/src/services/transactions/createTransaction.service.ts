@@ -20,16 +20,16 @@ const createTransactionService = async (debited_id: string, { value, username }:
 
     const accountCredited = await accountRepository.findOneBy({ id: user!.accountId.id })
 
-    if(Number(accountDebited?.balance) < value) {
+    if(value > Number(accountDebited?.balance)) {
 
         throw new AppError('insufficient debt')
     }
 
-    const credit = accountCredited?.balance.split(' ')[1]
-    const debt = accountDebited?.balance.split(' ')[1]
+    accountCredited!.balance = accountCredited!.balance + value
+    accountDebited!.balance = accountDebited!.balance - value
 
-    Number(debt) - value
-    Number(credit) + value
+    await accountRepository.save(accountCredited!)
+    await accountRepository.save(accountDebited!)
 
     const transaction = new Transaction()
     transaction.creditedAccountId = accountCredited!.id

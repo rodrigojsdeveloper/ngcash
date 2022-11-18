@@ -10,7 +10,7 @@ class Account {
     id: string
 
     @Column()
-    balance: string
+    balance: number
 
     @OneToMany(() => Transaction, transaction => transaction.creditedAccountId, {
         eager: true

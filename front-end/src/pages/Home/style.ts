@@ -1,5 +1,27 @@
-import styled from "styled-components"
+import styled, { keyframes } from "styled-components"
 
+
+const animateMenuOpen = keyframes`
+    
+    from {
+
+        width: 4em;
+    }
+    to {
+
+        width: 18%;
+    }
+`
+const animateMenuClose = keyframes`
+    
+    from {
+        width: 18%;
+    } 
+    to {
+    
+        width: 4em;
+    }
+`
 
 const Container = styled.div`
 
@@ -13,10 +35,19 @@ const Container = styled.div`
         z-index: 2;
         display: flex;
         align-items: center;
-        justify-content: flex-end;
+        justify-content: space-between;
         padding: 0 20px;
 
         color: var(--background);
+
+        button.b-menu {
+            border: 0;
+            background: transparent;
+
+            img{
+                width: 2em;
+            }
+        }
     }
 `
 
@@ -27,11 +58,12 @@ const Content = styled.main`
     display: flex;
     height: 100vh;
 
-    nav {
-        width: 20%;
-
+    nav.open {
+        height: 100%;
+        width: 18%;
         background: #0d0d0d;
-
+        animation: ${ animateMenuOpen } 1s ease-out;
+        
         & > div {
             padding: 20px 0;
             cursor: pointer;
@@ -51,9 +83,37 @@ const Content = styled.main`
             }
         }
     }
+    
+    nav.close {
+        height: 100%;
+        min-width: 4em;
+        background: #0d0d0d;
+        animation: ${ animateMenuClose } 1s ease-out;
+    
+        & > div {
+            display: flex;
+            padding: 20px 0;
+            cursor: pointer;
+
+            padding-left: 20px;
+            font-size: 20px;
+            
+            p{
+                display: none;
+            }
+
+            :hover {
+                background: var(--color);
+            }
+
+            img {
+                height: 1.2em;
+            }
+        }
+    }
 
     & > div {
-        width: 80%;
+        width: 100%;
     }
 `
 

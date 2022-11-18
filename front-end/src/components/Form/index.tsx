@@ -1,5 +1,4 @@
 import { Button } from "../Button"
-import { Input } from "../Input"
 import { Container } from "./style"
 import * as yup from 'yup'
 import { useForm } from "react-hook-form"
@@ -9,7 +8,7 @@ import { Link, useHistory } from "react-router-dom"
 import { useState } from "react"
 
 
-interface IForm {
+interface IFormProps {
     apiProp: string,
     historyProp: string
     titleProp: string
@@ -17,7 +16,7 @@ interface IForm {
     linkProp: string
 }
 
-const Form = ({ apiProp, historyProp, titleProp, textProp, linkProp }: IForm) => {
+const Form = ({ apiProp, historyProp, titleProp, textProp, linkProp }: IFormProps) => {
 
     const [ load, setLoad ] = useState(false)
 

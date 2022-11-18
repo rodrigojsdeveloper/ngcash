@@ -7,7 +7,7 @@ const Container = styled.div`
     justify-content: center;
     align-items: center;
     flex-direction: column;
-
+    
     .headerTransactions {
 
         padding: 40px 0;

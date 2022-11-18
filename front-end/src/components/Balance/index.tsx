@@ -1,17 +1,17 @@
 import { Container } from "./style"
 
 
-interface IBalance {
-    balance: any
+interface IBalanceProps {
+    balance: number
 }
 
-const Balance = ({ balance }: IBalance) => {
+const Balance = ({ balance }: IBalanceProps) => {
 
     return (
         <Container>
             <h1>Your Balance is</h1>
 
-            <p>{ balance }</p>
+            <p>R$ { balance }</p>
         </Container>
     )
 }

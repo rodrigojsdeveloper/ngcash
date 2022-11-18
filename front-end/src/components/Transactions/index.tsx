@@ -1,10 +1,12 @@
 import { Transaction } from "../Transaction"
 import { Container } from "./style"
 import noTransaction from "../../assets/noTransaction.png"
-import { ITransaction } from "../../pages/Home"
+import { ITransactionProps } from "../Transaction"
 
 
 const Transactions = ({ transactions }: any) => {
+
+    console.log(transactions)
 
     return (
         <Container>
@@ -16,7 +18,7 @@ const Transactions = ({ transactions }: any) => {
                 {
                     transactions.length > 0 ? (
                     
-                        transactions.filter((transaction: object) => <Transaction transaction={ transaction } />)
+                        transactions.map((transaction: any) => <Transaction transaction={ transaction } />)
                     
                     ) : (
 

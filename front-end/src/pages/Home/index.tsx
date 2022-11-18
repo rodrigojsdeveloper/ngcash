@@ -2,9 +2,7 @@ import { useEffect, useState } from "react"
 import { useHistory } from "react-router-dom"
 import { Balance } from "../../components/Balance"
 import { Button } from "../../components/Button"
-import { Input } from "../../components/Input"
 import { Modal } from "../../components/Modal"
-import { Transaction } from "../../components/Transaction"
 import { Transactions } from "../../components/Transactions"
 import { TransactionsKeyword } from "../../components/TransactionsKeyword"
 import { api } from "../../services/api"
@@ -13,31 +11,29 @@ import iconBalance from "../../assets/account-balance.svg"
 import iconTransaction from "../../assets/transaction.svg"
 import iconKeyword from "../../assets/symbol-keyword.svg"
 import iconTransactions from "../../assets/transactions.svg"
+import iconMenu from "../../assets/close-to-menu-transition.svg"
+import { ITransactionProps } from "../../components/Transaction"
 
-
-export interface ITransaction {
-    value: number
-    createdAt: string
-    id: string
-}
 
 const Home = () => {
 
     const history = useHistory()
 
-    const [ openTransactions, setOpenTransactions ] = useState(false)
+    const [ openTransactions, setOpenTransactions ] = useState<boolean>(false)
 
-    const [ openTransactionsKeyword, setOpenTransactionsKeyword ] = useState(false)
+    const [ openTransactionsKeyword, setOpenTransactionsKeyword ] = useState<boolean>(false)
 
-    const [ openBalance, setOpenBalance ] = useState(false)
+    const [ openBalance, setOpenBalance ] = useState<boolean>(false)
 
-    const [ openTransaction, setOpenTransaction ] = useState(false)
+    const [ openTransaction, setOpenTransaction ] = useState<boolean>(false)
 
-    const [ balance, setBalance ] = useState<any>()
+    const [ balance, setBalance ] = useState<number>(0)
 
     const [ transactions, setTransactions ] = useState<any>()
 
-    const addTransactions = (transaction: any) => setTransactions([ ...transactions, transaction ])
+    const [ style, setStyle ] = useState<boolean>(false)
+
+    const addTransactions = (transaction: ITransactionProps) => setTransactions([ ...transactions, transaction ])
     
     useEffect(() => {
 
@@ -79,6 +75,20 @@ const Home = () => {
     return (
         <Container>
             <header className="headerStyle">
+                <div>
+                    <button id="button" className='b-menu' onClick={ () => {
+
+                        if(style) {
+                            setStyle(false)
+                        
+                        } else {
+
+                            setStyle(true)
+                        }
+                    } }>
+                        <img src={ iconMenu } alt="" />
+                    </button>
+                </div>
 
                 <Button buttonStyle="home" onClick={ () => { 
 
@@ -90,7 +100,7 @@ const Home = () => {
             </header>
 
             <Content>
-                <nav>
+                <nav className={ style ? "close" : "open" }>
                     <div onClick={ () => {
                             setOpenTransaction(true)
                             setOpenTransactions(false)

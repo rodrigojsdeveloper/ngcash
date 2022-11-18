@@ -5,7 +5,7 @@ interface IStyledButtonProps {
     buttonStyle: 'register' | 'home'
 }
 
-const Container = styled.button<IStyledButtonProps>`
+const Container = styled.button`
 
     border-radius: 4px;
     transition: .5s;
@@ -21,7 +21,7 @@ const Container = styled.button<IStyledButtonProps>`
         cursor: not-allowed;
     }
 
-    ${ ({ buttonStyle }) => {
+    ${ ({ buttonStyle }: IStyledButtonProps) => {
 
         switch(buttonStyle) {
 

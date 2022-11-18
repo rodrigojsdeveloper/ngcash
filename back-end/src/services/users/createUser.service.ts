@@ -13,7 +13,7 @@ const createUserService = async ({ username, password }: IUserRequest) => {
     const accountRepository = AppDataSource.getRepository(Account)
 
     const account = new Account()
-    account.balance = 'R$ 100,00'
+    account.balance = 100
 
     const newAccount = accountRepository.create(account)
     await accountRepository.save(newAccount)
@@ -32,14 +32,7 @@ const createUserService = async ({ username, password }: IUserRequest) => {
 
         throw new AppError('Password must contain at least 8 characters')
     }
-    /*
-    const regexNumber = /^[0-9]+$/
-
-    if(!regexNumber.exec(password)) {
-
-        throw new AppError('Password must contain 1 number')
-    }
-    */
+    
     const regexUpperCase = /[A-Z]/
 
     if(!regexUpperCase.test(password)) {

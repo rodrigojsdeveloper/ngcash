@@ -1,10 +1,16 @@
 import { Container } from "./style"
 
 
-const Input = ({ ...rest }) => {
+interface InputProps {
+    placeholder?: string
+    type?: string
+    name: string | undefined
+}
+
+const Input = ({ placeholder, type }: InputProps) => {
 
     return (
-        <Container { ...rest } />
+        <Container placeholder={ placeholder } type={ type } />
     )
 }
 

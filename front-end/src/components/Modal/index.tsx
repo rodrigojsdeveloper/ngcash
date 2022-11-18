@@ -2,7 +2,6 @@ import { useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
 import { api } from "../../services/api"
 import { Button } from "../Button"
-import { Input } from "../Input"
 import { Container } from "./style"
 import * as yup from "yup"
 import { yupResolver } from "@hookform/resolvers/yup"
@@ -10,19 +9,19 @@ import { yupResolver } from "@hookform/resolvers/yup"
 
 const Modal = ({ addTransactions }: any) => {
 
-    const [ load, setLoad ] = useState(false)
+    const [ load, setLoad ] = useState<boolean>(false)
 
     const schema = yup.object().shape({
-
-        username: yup
-            .string()
-            .required('Username required')
-            .min(3, 'Username must contain at least 3 characters'),
 
         value: yup
             .number()
             .required('Value required')
-            .typeError('Amount must be a number')
+            .typeError('Amount must be a number'),
+
+        username: yup
+            .string()
+            .required('Username required')
+            .min(3, 'Username must contain at least 3 characters')
     })
 
     const { register, handleSubmit, formState: { errors } } = useForm({ resolver: yupResolver(schema) })
@@ -31,25 +30,16 @@ const Modal = ({ addTransactions }: any) => {
 
         setLoad(true)
 
-        useEffect(() => {
+        api.post('/transactions', data, {
 
-            api.post('/transactions', data, {
-
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${ localStorage.getItem('Project NG.CASH: token') }`,
-                }
-            })
-            .then(res => {
-
-                addTransactions(res.data)
-
-                console.log(res)
-            })
-            .catch(err => console.error(err))
-            .finally(() => setLoad(false))
-
-        }, [])
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${ localStorage.getItem('Project NG.CASH: token') }`,
+            }
+        })
+        .then(res => addTransactions(res.data))
+        .catch(err => console.error(err))
+        .finally(() => setLoad(false))
     }
 
     return (
