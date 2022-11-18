@@ -20,6 +20,7 @@ export default createGlobalStyle`
         --color-box-shadow-header: rgba(0, 0, 0, 0.25);
         --red: #c53030;
         --green: green;
+        --dark-white-background: #F8F8FF
     }
 
     body {

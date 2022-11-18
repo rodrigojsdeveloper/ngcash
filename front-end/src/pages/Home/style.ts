@@ -3,7 +3,7 @@ import styled from "styled-components"
 
 const Container = styled.div`
 
-    header {
+    .headerStyle {
 
         position: fixed;
         height: 72px;
@@ -13,68 +13,48 @@ const Container = styled.div`
         z-index: 2;
         display: flex;
         align-items: center;
-        justify-content: space-between;
+        justify-content: flex-end;
         padding: 0 20px;
-    }
 
-    & > div {
-
-        padding: 20px;
-
-        padding-top: 72px;
-
-        display: flex;
-        justify-content: space-around;
-
-        & > div {
-
-            width: 100%;
-            max-width: 500px;
-            background: var(--color);
-            border-radius: 10px;
-            margin: 25px 15px;
-
-            height: 100vh;
-
-            padding: 20px;
-        }
-
-        .divTransaction {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-
-            & > div {
-                background: purple;
-                width: 100%;
-                
-                margin-top: 30px;
-            }
-        }
-
-        .divKeyword {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-
-            .divInputButtonKeyword {
-            }
-
-            .divDivKeyword {
-                width: 100%;
-                background: red;
-
-                margin-top: 30px;
-                height: 100vh;
-            }
-        }
-
-        @media (max-width: 1000px) {
-
-            flex-direction: column;
-            align-items: center;
-        }
+        color: var(--background);
     }
 `
 
-export { Container }
+const Content = styled.main`
+
+    padding-top: 72px;
+
+    display: flex;
+    height: 100vh;
+
+    nav {
+        width: 20%;
+
+        background: #0d0d0d;
+
+        & > div {
+            padding: 20px 0;
+            cursor: pointer;
+
+            padding-left: 25px;
+            font-size: 20px;
+            color: var(--background);
+
+            display: flex;
+
+            :hover {
+                background: var(--color);
+            }
+
+            img {
+                padding-right: 15px;
+            }
+        }
+    }
+
+    & > div {
+        width: 80%;
+    }
+`
+
+export { Container, Content }

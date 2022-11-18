@@ -57,7 +57,7 @@ const Form = ({ apiProp, buttonProp, historyProp, titleProp, buttonRequestProp, 
 
             if(apiProp == 'session') {
 
-                localStorage.setItem('Project NG.CASH: token', res.data)
+                localStorage.setItem('Project NG.CASH: token', res.data.token)
             }
 
             history.push(`/${ historyProp }`)

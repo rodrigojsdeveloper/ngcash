@@ -3,18 +3,17 @@ import { useForm } from "react-hook-form"
 import { api } from "../../services/api"
 import { Button } from "../Button"
 import { Input } from "../Input"
-import { Container, Content } from "./style"
+import { Container } from "./style"
 import * as yup from "yup"
 import { yupResolver } from "@hookform/resolvers/yup"
 
 
 interface IModal {
-    setOpenModel: any
+    setOpenTransaction: any
     addTransactions: any
-    setTransaction: any
 }
 
-const Modal = ({ setOpenModel, addTransactions, setTransaction }: IModal) => {
+const Modal = ({ setOpenTransaction, addTransactions }: IModal) => {
 
     const schema = yup.object().shape({
         username: yup
@@ -39,12 +38,10 @@ const Modal = ({ setOpenModel, addTransactions, setTransaction }: IModal) => {
                 }
             })
             .then(res => {
-
-                setTransaction(res)
                 
-                setOpenModel(false)
+                setOpenTransaction(false)
 
-                addTransactions(res)
+                addTransactions(res.data)
             })
             .catch(err => console.error(err))
 
@@ -52,12 +49,9 @@ const Modal = ({ setOpenModel, addTransactions, setTransaction }: IModal) => {
     }
 
     return (
-        <Container>
-            <Content onSubmit={ handleSubmit(onSubmitFunc) }>
-                <div>
-                    <button onClick={ setOpenModel(false) }>X</button>
-                </div>
+        <Container onSubmit={ handleSubmit(onSubmitFunc) }>
 
+            <div>
                 <h1>Transaction</h1>
 
                 <main>
@@ -77,8 +71,8 @@ const Modal = ({ setOpenModel, addTransactions, setTransaction }: IModal) => {
 
                     <Button type="submit">Submit</Button>
                 </main>
-
-            </Content>
+            </div>
+            
         </Container>
     )
 }

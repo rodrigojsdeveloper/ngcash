@@ -1,67 +1,66 @@
 import { useEffect, useState } from "react"
 import { useHistory } from "react-router-dom"
+import { Balance } from "../../components/Balance"
 import { Button } from "../../components/Button"
 import { Input } from "../../components/Input"
 import { Modal } from "../../components/Modal"
 import { Transaction } from "../../components/Transaction"
+import { Transactions } from "../../components/Transactions"
+import { TransactionsKeyword } from "../../components/TransactionsKeyword"
 import { api } from "../../services/api"
-import { Container } from "./style"
+import { Container, Content } from "./style"
+import iconBalance from "../../assets/account-balance.svg"
+import iconTransaction from "../../assets/transaction.svg"
+import iconKeyword from "../../assets/symbol-keyword.svg"
+import iconTransactions from "../../assets/transactions.svg"
 
 
-interface IUser {
+interface ITransaction {
+    creditedAccountId: string
+    debitedAccountId: string
+    value: number
+    createdAt: string
     id: string
-    username: string
-    password: string
-    accountId: string
 }
 
 const Home = (setAuthetication: any) => {
 
     const history = useHistory()
 
+    const [ openTransactions, setOpenTransactions ] = useState(false)
+
+    const [ openTransactionsKeyword, setOpenTransactionsKeyword ] = useState(false)
+
+    const [ openBalance, setOpenBalance ] = useState(false)
+
+    const [ openTransaction, setOpenTransaction ] = useState(false)
+
     const [ balance, setBalance ] = useState<any>()
 
     const [ transactions, setTransactions ] = useState<any>()
 
-    const [ value, setValue ] = useState<string>('')
-
-    const [ transactionsKeyword, setTransactionsKeyword ] = useState<any>()
-
-    const [ openModel, setOpenModel ] = useState(false)
-
-    const [ transaction, setTransaction ] = useState<any>()
-
-    const [ user, setUser ] = useState<IUser | any>()
-
-    const [ filteredKeyword, setFilteredKeyword ] = useState<any>()
-
-    const [ valueInput, setValueInput ] = useState("")
-
     const addTransactions = (transaction: object) => setTransactions([ ...transactions, transaction ])
-    /* 
+    
     useEffect(() => {
 
-        api.get('/users/profile',  {
+        api.get('/users/profile', {
 
             headers: {
                 Authorization: `Bearer ${ localStorage.getItem('Project NG.CASH: token') }`
             }
         })
-        .then(res => setUser(res))
-        .catch(err => console.error(err))
-    }, [])
+        .then(res => {
 
-    useEffect(() => {
+            api.get(`/accounts/${ res.data.accountId.id }`, {
 
-        api.post(`/accounts/${ user.accountId }`, {
-
-            headers: {
-                Authorization: `Bearer ${ localStorage.getItem('Project NG.CASH: token') }`
-            }
+                headers: {
+                    Authorization: `Bearer ${ localStorage.getItem('Project NG.CASH: token') }`
+                }
+            })
+            .then(res => setBalance(res.data.balance))
+            .catch(err => console.error(err))
         })
-        .then(res => setBalance(res))
         .catch(err => console.error(err))
-
     }, [])
 
     useEffect(() => {
@@ -72,94 +71,88 @@ const Home = (setAuthetication: any) => {
                 Authorization: `Bearer ${ localStorage.getItem('Project NG.CASH: token') }`
             }
         })
-        .then(res => addTransactions(res))
+        .then(res => setTransactions(res.data))
         .catch(err => console.error(err))
-
     }, [])
-
-    useEffect(() => {
-
-        api.get(`/transactions/${ value }`, {
-
-            headers: {
-                Authorization: `Bearer ${ localStorage.getItem('Project NG.CASH: token') }`
-            }
-        })
-        .then(res => setTransactionsKeyword(res))
-        .catch(err => console.error(err))
-    })
-    */
+    
     return (
-        <>
-            {
-                openModel && 
-                <Modal
-                setOpenModel={ setOpenModel }
-                addTransactions={ addTransactions }
-                setTransaction={ setTransaction }
-                />
-            }
-            <Container>
-                <header>
-                    <h2>{ balance }</h2>
+        <Container>
+            <header className="headerStyle">
 
-                    <Button buttonStyle="home" onClick={ () => { 
+                <Button buttonStyle="home" onClick={ () => { 
 
-                        history.push('/session')
+                    history.push('/session')
 
-                        setAuthetication(false)
-                        
-                        localStorage.removeItem('Project NG.CASH: token')
+                    setAuthetication(false)
+                    
+                    localStorage.removeItem('Project NG.CASH: token')
 
-                    } }>Log out</Button>
-                </header>
-                
+                } }>Log out</Button>
+            </header>
+
+            <Content>
+                <nav>
+                    <div onClick={ () => {
+                            setOpenTransaction(true)
+                            setOpenTransactions(false)
+                            setOpenTransactionsKeyword(false)
+                            setOpenBalance(false)
+                            } }>
+                        <img src={ iconTransaction } />
+                        <p>Transaction</p>
+                    </div>
+
+                    <div onClick={ () => {
+                            setOpenTransactions(true)
+                            setOpenTransaction(false)
+                            setOpenTransactionsKeyword(false)
+                            setOpenBalance(false)
+                        } }>
+                        <img src={ iconTransactions } />
+                        <p>Transactions</p>
+                    </div>
+
+                    <div onClick={ () => {
+                            setOpenTransactionsKeyword(true)
+                            setOpenTransaction(false)
+                            setOpenTransactions(false)
+                            setOpenBalance(false)
+                        } }>
+                        <img src={ iconKeyword } />
+                        <p>Transactions Keyword</p>
+                    </div>
+                    
+                    <div onClick={ () => {
+                            setOpenBalance(true)
+                            setOpenTransaction(false)
+                            setOpenTransactions(false)
+                            setOpenTransactionsKeyword(false)
+                            } }>
+                        <img src={ iconBalance } />
+                        <p>Balance</p>
+                    </div>
+                </nav>
+
                 <div>
-                    <div className="divTransaction">
-                        <Button buttonStyle="home" onClick={ () => setOpenModel(true) }>entrar</Button>
-
-                        <div>
-                            <Transaction transaction={ transaction } />
-                        </div>
-                    </div>
-
-                    <div>
-                        <div>{ transactions }</div>
-                    </div>
-
-                    <div className="divKeyword">
-                        <div className="divInputButtonKeyword">
-                            <Input
-                            placeholder="Pesquisar"
-                            value={ valueInput }
-                            onChange={ (e: any) => setValueInput(e.target.value) }
-                            />
-
-                            <Button
-                            buttonStyle="home"
-                            onClick={ () => {
-
-                                if(valueInput == 'cash-in') {
-
-                                    setFilteredKeyword(transactions.filter((transaction: any) => transaction.creditedTransaction.toLowerCase().includes(valueInput.toLowerCase())))
-                                }
-
-                                if(valueInput == 'cash-out') {
-
-                                    setFilteredKeyword(transactions.filter((transaction: any) => transaction.debitedTransaction.toLowerCase().includes(valueInput.toLowerCase())))
-                                }
-
-                                setFilteredKeyword(transactions.filter((transaction: any) => transaction.createdAt.toLowerCase().includes(valueInput.toLowerCase())))
-                                
-                            } }
-                            >submit</Button>    
-                        </div>
-
-                        <div className="divDivKeyword">{ transactionsKeyword }</div>
-                    </div>
+                    {
+                        openTransaction && 
+                        <Modal addTransactions={ addTransactions } setOpenTransaction={ setOpenTransaction } />
+                    }
+                    {
+                        openTransactions &&
+                        <Transactions transactions={ transactions } />
+                    }
+                    {
+                        openTransactionsKeyword &&
+                        <TransactionsKeyword />
+                    }
+                    {
+                        openBalance &&
+                        <Balance balance={ balance } />
+                    }
                 </div>
-            </Container>
-        </>
+            </Content>
+        </Container>
     )
 }
 

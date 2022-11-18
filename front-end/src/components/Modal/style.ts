@@ -1,7 +1,7 @@
 import styled from "styled-components"
 import { animacaoForm } from "../Form/style"
 
-
+/*
 const Container = styled.div`
 
     display: flex;
@@ -16,49 +16,42 @@ const Container = styled.div`
 
     padding: 15px;
 `
+*/
+const Container = styled.form`
 
-const Content = styled.form`
-
-    background: var(--background);
     width: 100%;
-    max-width: 400px;
-    height: 400px;
-
-    animation: ${animacaoForm} 1s;
+    max-width: 500px;
+    height: 100%;
 
     border-radius: 8px;
     padding: 10px;
 
     text-align: center;
 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin: 0 auto;
+    
     & > div {
+        margin: 0 auto;
 
         display: flex;
-        justify-content: flex-end;
-        align-items: center;
-
-        padding: 10px;
-
-        button {
-
-            padding: 8px;
-            background: var(--color);
-            color: var(--background);
-            border: none;
-            
-            border-radius: 5px;
-        }
-    }
-
-    & > main {
-
-        padding-top: 40px;
-
-        display: flex;
-        flex-direction: column;
-        align-items: center;
         justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        
+        main {
+
+            padding-top: 40px;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
     }
 `
 
-export { Container, Content }
+export { Container }

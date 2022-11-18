@@ -41,10 +41,10 @@ const Container = styled.button<IStyledButtonProps>`
             case 'home':
                 return css`
                     width: 100%;
-                    max-width: 225px;
+                    max-width: 125px;
                     height: 48px;
 
-                    background: #F8F8FF;
+                    background: var(--dark-white-background);
                     color: var(--color);
                 `
             default:

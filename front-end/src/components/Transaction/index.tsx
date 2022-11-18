@@ -3,12 +3,20 @@ import { api } from "../../services/api"
 import { Container } from "./style"
 
 
+interface ITransaction {
+    creditedAccountId: string
+    debitedAccountId: string
+    value: number
+    createdAt: string
+    id: string
+}
+
 const Transaction = (transaction: any) => {
 
     const [ balanceCredit, setBalanceCreadit ] = useState<any>()
 
     const [ balanceDebt, setBalanceDebt ] = useState<any>()
-    /*
+    
     useEffect(() => {
 
         api.post(`/accounts/${ transaction.creditedAccountId }`, {
@@ -17,7 +25,7 @@ const Transaction = (transaction: any) => {
                 Authorization: `Bearer ${ localStorage.getItem('Project NG.CASH: token') }`
             }
         })
-        .then(res => setBalanceCreadit(res))
+        .then(res => setBalanceCreadit(res.data.balance))
         .catch(err => console.error(err))
 
     }, [])
@@ -30,11 +38,11 @@ const Transaction = (transaction: any) => {
                 Authorization: `Bearer ${ localStorage.getItem('Project NG.CASH: token') }`
             }
         })
-        .then(res => setBalanceDebt(res))
+        .then(res => setBalanceDebt(res.data.balance))
         .catch(err => console.error(err))
 
     }, [])
-    */
+    
     return (
         <Container>
             <div>
