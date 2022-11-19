@@ -1,7 +1,7 @@
-import { Container } from "./style"
-import notFound from "../../assets/Oops! 404 Error with a broken robot-rafiki.svg"
-import { Button } from "../../components/Button"
-import { useHistory } from "react-router-dom"
+import notFound from '../../assets/Oops! 404 Error with a broken robot-rafiki.svg'
+import { Button } from '../../components/Button'
+import { useHistory } from 'react-router-dom'
+import { Container } from './style'
 
 
 const NotFound = () => {

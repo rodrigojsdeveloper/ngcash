@@ -1,6 +1,6 @@
-import session from "../../assets/Tablet login-bro.svg"
-import { Form } from "../../components/Form"
-import { Container } from "../Register/style"
+import session from '../../assets/Tablet login-bro.svg'
+import { Container } from '../Register/style'
+import { Form } from '../../components/Form'
 
 
 const Session = () => {

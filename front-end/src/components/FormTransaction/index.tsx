@@ -1,13 +1,13 @@
-import { useEffect, useState } from "react"
-import { useForm } from "react-hook-form"
-import { api } from "../../services/api"
-import { Button } from "../Button"
-import { Container } from "./style"
-import * as yup from "yup"
-import { yupResolver } from "@hookform/resolvers/yup"
+import { yupResolver } from '@hookform/resolvers/yup'
+import { useForm } from 'react-hook-form'
+import { api } from '../../services/api'
+import { Container } from './style'
+import { Button } from '../Button'
+import { useState } from 'react'
+import * as yup from 'yup'
 
 
-const Modal = ({ addTransactions }: any) => {
+const FormTransaction = ({ addTransactions }: any) => {
 
     const [ load, setLoad ] = useState<boolean>(false)
 
@@ -73,4 +73,4 @@ const Modal = ({ addTransactions }: any) => {
     )
 }
 
-export { Modal }
+export { FormTransaction }

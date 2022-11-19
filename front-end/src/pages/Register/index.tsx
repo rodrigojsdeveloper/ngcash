@@ -1,6 +1,6 @@
-import register from "../../assets/Mobile login-bro.svg"
-import { Form } from "../../components/Form"
-import { Container } from "./style"
+import register from '../../assets/Mobile login-bro.svg'
+import { Form } from '../../components/Form'
+import { Container } from './style'
 
 
 const Register = () => {

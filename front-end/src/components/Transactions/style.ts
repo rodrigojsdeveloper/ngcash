@@ -1,4 +1,4 @@
-import styled from "styled-components"
+import styled from 'styled-components'
 
 
 const Container = styled.div`
@@ -35,6 +35,13 @@ const Container = styled.div`
 
         img {
             width: 100%;
+        }
+
+        @media (min-width: 768px) {
+
+            img {
+                width: unset;
+            }
         }
     }
 `

@@ -1,11 +1,11 @@
-import { Button } from "../Button"
-import { Container } from "./style"
-import * as yup from 'yup'
-import { useForm } from "react-hook-form"
 import { yupResolver } from '@hookform/resolvers/yup'
-import { api } from "../../services/api"
-import { Link, useHistory } from "react-router-dom"
-import { useState } from "react"
+import { Link, useHistory } from 'react-router-dom'
+import { useForm } from 'react-hook-form'
+import { api } from '../../services/api'
+import { Container } from './style'
+import { Button } from '../Button'
+import { useState } from 'react'
+import * as yup from 'yup'
 
 
 interface IFormProps {

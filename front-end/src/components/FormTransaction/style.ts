@@ -1,4 +1,4 @@
-import styled from "styled-components"
+import styled from 'styled-components'
 
 
 const Container = styled.form`
@@ -45,11 +45,11 @@ const Container = styled.form`
                 transition: 0.4s;
                 
                 &:focus::-webkit-input-placeholder {
-                    color: transparent;
+                    color: var(--transparent);
                 }
                 
                 &::placeholder {
-                    color: gray;
+                    color: var(--gray);
                 }
 
                 width: 100%;
@@ -57,7 +57,7 @@ const Container = styled.form`
                 height: 48px;
                 padding: 10px 1rem;
                 border-radius: 8px;
-                border: 1.5px solid black;
+                border: 1.5px solid var(--color);
 
                 margin: 10px 0;
                 

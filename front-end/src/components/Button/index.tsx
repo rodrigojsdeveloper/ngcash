@@ -1,12 +1,12 @@
-import { Container } from "./style"
-import React, { MouseEventHandler } from "react"
+import React, { MouseEventHandler } from 'react'
+import { Container } from './style'
 
 
 interface IButtonProps {
     children: React.ReactNode
     onClick?: MouseEventHandler
     disabled?: boolean | undefined
-    type?: "button" | "submit" | "reset" | undefined
+    type?: 'button' | 'submit' | 'reset' | undefined
     buttonStyle: 'register' | 'home'
 }
 

@@ -1,4 +1,4 @@
-import styled, { keyframes } from "styled-components"
+import styled, { keyframes } from 'styled-components'
 
 
 const animateMenuOpen = keyframes`
@@ -42,7 +42,7 @@ const Container = styled.div`
 
         button.b-menu {
             border: 0;
-            background: transparent;
+            background: var(--transparent);
 
             img{
                 width: 2em;
@@ -61,7 +61,7 @@ const Content = styled.main`
     nav.open {
         height: 100%;
         width: 18%;
-        background: #0d0d0d;
+        background: var(--background-side-menu);
         animation: ${ animateMenuOpen } 1s ease-out;
         
         & > div {
@@ -87,7 +87,7 @@ const Content = styled.main`
     nav.close {
         height: 100%;
         min-width: 4em;
-        background: #0d0d0d;
+        background: var(--background-side-menu);
         animation: ${ animateMenuClose } 1s ease-out;
     
         & > div {

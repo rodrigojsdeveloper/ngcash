@@ -1,9 +1,9 @@
-import { useState } from "react"
-import { api } from "../../services/api"
-import { Button } from "../Button"
-import { Transaction } from "../Transaction"
-import { Container } from "./style"
-import noTransaction from "../../assets/noTransaction.png"
+import noTransaction from '../../assets/noTransaction.png'
+import { Transaction } from '../Transaction'
+import { api } from '../../services/api'
+import { Container } from './style'
+import { Button } from '../Button'
+import { useState } from 'react'
 
 
 const TransactionsKeyword = () => {
@@ -40,7 +40,7 @@ const TransactionsKeyword = () => {
                     .catch(err => console.error(err))
                     
                     } 
-                }>submit</Button>  
+                }>Submit</Button>  
             </header>
             
             <div>

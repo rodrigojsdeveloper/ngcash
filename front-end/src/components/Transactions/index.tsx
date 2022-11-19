@@ -1,6 +1,6 @@
-import { Transaction } from "../Transaction"
-import { Container } from "./style"
-import noTransaction from "../../assets/noTransaction.png"
+import noTransaction from '../../assets/noTransaction.png'
+import { Transaction } from '../Transaction'
+import { Container } from './style'
 
 
 const Transactions = ({ transactions }: any) => {

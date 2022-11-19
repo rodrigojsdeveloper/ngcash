@@ -1,17 +1,17 @@
-import { useEffect, useState } from "react"
-import { useHistory } from "react-router-dom"
-import { Balance } from "../../components/Balance"
-import { Button } from "../../components/Button"
-import { Modal } from "../../components/Modal"
-import { Transactions } from "../../components/Transactions"
-import { TransactionsKeyword } from "../../components/TransactionsKeyword"
-import { api } from "../../services/api"
-import { Container, Content } from "./style"
-import iconBalance from "../../assets/account-balance.svg"
-import iconTransaction from "../../assets/transaction.svg"
-import iconKeyword from "../../assets/symbol-keyword.svg"
-import iconTransactions from "../../assets/transactions.svg"
-import iconMenu from "../../assets/close-to-menu-transition.svg"
+import { TransactionsKeyword } from '../../components/TransactionsKeyword'
+import { FormTransaction } from '../../components/FormTransaction'
+import iconMenu from '../../assets/close-to-menu-transition.svg'
+import iconTransactions from '../../assets/transactions.svg'
+import { Transactions } from '../../components/Transactions'
+import iconBalance from '../../assets/account-balance.svg'
+import iconTransaction from '../../assets/transaction.svg'
+import iconKeyword from '../../assets/symbol-keyword.svg'
+import { Balance } from '../../components/Balance'
+import { Button } from '../../components/Button'
+import { useHistory } from 'react-router-dom'
+import { Container, Content } from './style'
+import { useEffect, useState } from 'react'
+import { api } from '../../services/api'
 
 
 const Home = () => {
@@ -118,7 +118,7 @@ const Home = () => {
                 <div>
                     {
                         openTransaction && 
-                        <Modal addTransactions={ addTransactions } />
+                        <FormTransaction addTransactions={ addTransactions } />
                     }
                     {
                         openTransactions &&

@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react"
-import { api } from "../../services/api"
-import { Container } from "./style"
+import { useEffect, useState } from 'react'
+import { api } from '../../services/api'
+import { Container } from './style'
 
 
 const Balance = () => {
@@ -35,7 +35,7 @@ const Balance = () => {
         <Container>
             <h1>Your Balance is</h1>
 
-            <p>R$ { balance }</p>
+            <p>R$ { balance.toFixed(2) }</p>
         </Container>
     )
 }

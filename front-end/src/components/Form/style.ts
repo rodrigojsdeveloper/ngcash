@@ -1,7 +1,8 @@
-import styled, { keyframes } from "styled-components"
+import styled, { keyframes } from 'styled-components'
 
 
 const animacaoForm = keyframes`
+    
     from {
         opacity: 0;
         transform: translatey(-50px);
@@ -15,7 +16,7 @@ const animacaoForm = keyframes`
 const Container = styled.form`
 
     background: var(--background);
-    animation: ${animacaoForm} 1s;
+    animation: ${ animacaoForm}  1s;
 
     max-width: 400px;
     width: 100%;
@@ -52,11 +53,11 @@ const Container = styled.form`
             transition: 0.4s;
             
             &:focus::-webkit-input-placeholder {
-                color: transparent;
+                color: var(--transparent);
             }
             
             &::placeholder {
-                color: gray;
+                color: var(--gray);
             }
 
             width: 100%;
@@ -64,7 +65,7 @@ const Container = styled.form`
             height: 48px;
             padding: 10px 1rem;
             border-radius: 8px;
-            border: 1.5px solid black;
+            border: 1.5px solid var(--color);
 
             margin: 10px 0;
             
