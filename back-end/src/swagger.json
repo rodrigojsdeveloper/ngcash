@@ -224,8 +224,17 @@
             "Account": {
                 "type": "object",
                 "properties": {
+                    "id": {
+                        "type": "string"
+                    },
                     "balance": {
                         "type": "string"
+                    },
+                    "creditedTransaction": {
+                        "type": "array"
+                    },
+                    "debitedTransaction": {
+                        "type": "array"
                     }
                 }
             }
