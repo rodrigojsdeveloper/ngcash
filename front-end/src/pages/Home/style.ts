@@ -87,8 +87,8 @@ const Content = styled.main`
     nav.close {
         height: 100%;
         min-width: 4em;
-        background: var(--background-side-menu);
-        animation: ${ animateMenuClose } 1s ease-out;
+        background: var(--color);
+        animation: ${ animateMenuClose } .5s ease-out;
     
         & > div {
             display: flex;
@@ -114,6 +114,15 @@ const Content = styled.main`
 
     & > div {
         width: 100%;
+        overflow: auto;
+
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--transparent);
+        }
     }
 
     @media (max-width: 1024px) {

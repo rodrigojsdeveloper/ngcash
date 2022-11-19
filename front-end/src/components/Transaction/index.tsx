@@ -1,20 +1,70 @@
+import { ITransactionProp, IUserProp } from '../../interfaces'
+import { useEffect, useState } from 'react'
+import { api } from '../../services/api'
 import { Container } from './style'
 
 
-const Transaction = ({ transaction }: any) => {
+const Transaction = () => {
+
+    const [ user, setUser ] = useState<IUserProp>()
+
+    useEffect(() => {
+
+        api.get('/users/profile', {
+
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${ localStorage.getItem('Project NG.CASH: token') }`,
+            }
+        })
+        .then(res => setUser(res.data))
+        .catch(err => console.error(err))
+    }, [])
 
     return (
-        <Container>
-            <div>
-                <p>Cash in</p>
-                <p>Cash out</p>
-            </div>
+        <>
+            {
+                user?.accountId.debitedTransaction.map((debt: ITransactionProp) => {
 
-            <div className="divValue">
-                <p className="credit">+ R$ { transaction.value }</p>
-                <p className="debt">- R$ { transaction.value }</p>
-            </div>
-        </Container>
+                    const newDate = debt.createdAt.split('T')[0]
+                    
+                    return (
+                    <Container>
+                        <div>
+                            <p>Cash out</p>
+                            <p>Date</p>
+                        </div>
+
+                        <div className="divValue">
+                            <p className="debt">- R$ { debt.value }</p>
+                            <p>{ newDate }</p>
+                        </div>
+                    </Container>
+                )
+                })
+            
+            }
+            {
+                user?.accountId.creditedTransaction.map((credit: ITransactionProp) => {
+
+                    const newDate = credit.createdAt.split('T')[0]
+
+                    return (
+                        <Container>
+                            <div>
+                                <p>Cash in</p>
+                                <p>Date</p>
+                            </div>
+    
+                            <div className="divValue">
+                                <p className="credit">+ R$ { credit.value }</p>
+                                <p>{ newDate }</p>
+                            </div>
+                        </Container>
+                    )
+                })
+            }
+        </>
     )
 }
 

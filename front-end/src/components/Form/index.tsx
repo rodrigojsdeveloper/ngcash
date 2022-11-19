@@ -1,5 +1,6 @@
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Link, useHistory } from 'react-router-dom'
+import { IFormProps } from '../../interfaces'
 import { useForm } from 'react-hook-form'
 import { api } from '../../services/api'
 import { Container } from './style'
@@ -8,17 +9,9 @@ import { useState } from 'react'
 import * as yup from 'yup'
 
 
-interface IFormProps {
-    apiProp: string,
-    historyProp: string
-    titleProp: string
-    textProp: string
-    linkProp: string
-}
-
 const Form = ({ apiProp, historyProp, titleProp, textProp, linkProp }: IFormProps) => {
 
-    const [ load, setLoad ] = useState(false)
+    const [ load, setLoad ] = useState<boolean>(false)
 
     const history = useHistory()
 

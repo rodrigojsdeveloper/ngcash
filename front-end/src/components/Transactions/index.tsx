@@ -1,4 +1,5 @@
 import noTransaction from '../../assets/noTransaction.png'
+import { ITransactionProp } from '../../interfaces'
 import { Transaction } from '../Transaction'
 import { Container } from './style'
 
@@ -15,7 +16,7 @@ const Transactions = ({ transactions }: any) => {
                 {
                     transactions.length > 0 ? (
                     
-                        transactions.map((transaction: any) => <Transaction transaction={ transaction } />)
+                        <Transaction />
                     
                     ) : (
 

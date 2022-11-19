@@ -1,14 +1,6 @@
-import React, { MouseEventHandler } from 'react'
+import { IButtonProps } from '../../interfaces'
 import { Container } from './style'
 
-
-interface IButtonProps {
-    children: React.ReactNode
-    onClick?: MouseEventHandler
-    disabled?: boolean | undefined
-    type?: 'button' | 'submit' | 'reset' | undefined
-    buttonStyle: 'register' | 'home'
-}
 
 const Button = ({ children, onClick, type, disabled, buttonStyle }: IButtonProps) => {
 

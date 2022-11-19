@@ -3,7 +3,8 @@ import styled from 'styled-components'
 
 const Container = styled.div`
 
-    background: var(--dark-white-background);
+    background: var(--background-side-menu);
+    color: var(--background);
     width: 100%;
     max-width: 700px;
 
@@ -22,6 +23,7 @@ const Container = styled.div`
     
         p {
             padding: 10px 0;
+            font-weight: bold;
         }
 
         .credit {

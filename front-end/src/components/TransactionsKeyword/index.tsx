@@ -1,16 +1,16 @@
 import noTransaction from '../../assets/noTransaction.png'
-import { Transaction } from '../Transaction'
+import { ITransactionProp } from '../../interfaces'
+import { Container, Content } from './style'
 import { api } from '../../services/api'
-import { Container } from './style'
 import { Button } from '../Button'
 import { useState } from 'react'
 
 
 const TransactionsKeyword = () => {
 
-    const [ transactionsKeyword, setTransactionsKeyword ] = useState([])
+    const [ transactionsKeyword, setTransactionsKeyword ] = useState<ITransactionProp[]>([])
 
-    const [ value, setValue ] = useState(['cash-in', 'cash-out'])
+    const [ value, setValue ] = useState<string[]>(['cash-in', 'cash-out'])
 
     const [ valueInput, setValueInput ] = useState<string>('')
 
@@ -47,7 +47,46 @@ const TransactionsKeyword = () => {
                 {
                     transactionsKeyword.length > 0 ? (
                     
-                        transactionsKeyword.map((transaction: any) => <Transaction transaction={ transaction } />)
+                        transactionsKeyword.map((transaction: ITransactionProp) => {
+
+                            const newDate = transaction.createdAt.split('T')[0]
+
+                            return (
+                                <>
+                                    {
+                                        valueInput == 'cash-in' ? (
+
+                                            <Content>
+                                                <div>
+                                                    <p>Cash in</p>
+                                                    <p>Date</p>
+                                                </div>
+
+                                                <div className="divValue">
+                                                    <p className="credit">+ R$ { transaction.value }</p>
+                                                    <p>{ newDate }</p>
+                                                </div>
+                                            </Content>
+
+                                        ) : (
+
+                                            <Content>
+                                                <div>
+                                                    <p>Cash out</p>
+                                                    <p>Date</p>
+                                                </div>
+
+                                                <div className="divValue">
+                                                    <p className="debt">- R$ { transaction.value }</p>
+                                                    <p>{ newDate }</p>
+                                                </div>
+                                            </Content>
+
+                                        )
+                                    }
+                                </>
+                            )
+                        })
                     
                     ) : (
 

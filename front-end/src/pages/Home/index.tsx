@@ -6,6 +6,7 @@ import { Transactions } from '../../components/Transactions'
 import iconBalance from '../../assets/account-balance.svg'
 import iconTransaction from '../../assets/transaction.svg'
 import iconKeyword from '../../assets/symbol-keyword.svg'
+import { ITransactionProp } from '../../interfaces'
 import { Balance } from '../../components/Balance'
 import { Button } from '../../components/Button'
 import { useHistory } from 'react-router-dom'
@@ -22,7 +23,7 @@ const Home = () => {
 
     const [ openTransactionsKeyword, setOpenTransactionsKeyword ] = useState<boolean>(false)
 
-    const [ openBalance, setOpenBalance ] = useState<boolean>(false)
+    const [ openBalance, setOpenBalance ] = useState<boolean>(true)
 
     const [ openTransaction, setOpenTransaction ] = useState<boolean>(false)
 
@@ -30,7 +31,7 @@ const Home = () => {
 
     const [ style, setStyle ] = useState<boolean>(false)
 
-    const addTransactions = (transaction: any) => setTransactions([ ...transactions, transaction ])
+    const addTransactions = (transaction: ITransactionProp) => setTransactions([ ...transactions!, transaction ])
 
     useEffect(() => {
 
