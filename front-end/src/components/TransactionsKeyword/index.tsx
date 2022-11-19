@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { api } from "../../services/api"
 import { Button } from "../Button"
-import { ITransactionProps, Transaction } from "../Transaction"
+import { Transaction } from "../Transaction"
 import { Container } from "./style"
 import noTransaction from "../../assets/noTransaction.png"
 

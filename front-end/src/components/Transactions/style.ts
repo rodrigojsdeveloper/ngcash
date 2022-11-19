@@ -27,8 +27,14 @@ const Container = styled.div`
         flex-direction: column;
         align-items: center;
 
+        padding: 15px;
+
         h2 {
             padding-bottom: 30px;
+        }
+
+        img {
+            width: 100%;
         }
     }
 `

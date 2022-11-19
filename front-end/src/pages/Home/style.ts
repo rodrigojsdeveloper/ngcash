@@ -65,7 +65,7 @@ const Content = styled.main`
         animation: ${ animateMenuOpen } 1s ease-out;
         
         & > div {
-            padding: 20px 0;
+            padding: 20px 10px;
             cursor: pointer;
 
             padding-left: 25px;
@@ -98,7 +98,7 @@ const Content = styled.main`
             padding-left: 20px;
             font-size: 20px;
             
-            p{
+            p {
                 display: none;
             }
 
@@ -114,6 +114,13 @@ const Content = styled.main`
 
     & > div {
         width: 100%;
+    }
+
+    @media (max-width: 1024px) {
+
+        nav.open {
+            display: none;
+        }
     }
 `
 

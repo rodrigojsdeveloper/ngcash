@@ -29,6 +29,13 @@ const Container = styled.div`
             transform: scale(1.1);
         }
     }
+
+    @media (max-width: 375px) {
+
+        h1 {
+            font-size: 18px;
+        }
+    }
 `
 
 export { Container }

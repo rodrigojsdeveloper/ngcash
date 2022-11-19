@@ -1,12 +1,9 @@
 import { Transaction } from "../Transaction"
 import { Container } from "./style"
 import noTransaction from "../../assets/noTransaction.png"
-import { ITransactionProps } from "../Transaction"
 
 
 const Transactions = ({ transactions }: any) => {
-
-    console.log(transactions)
 
     return (
         <Container>

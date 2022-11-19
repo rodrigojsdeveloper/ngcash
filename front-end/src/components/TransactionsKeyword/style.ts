@@ -8,7 +8,7 @@ const Container = styled.div`
     .headerStyled {
 
         display: flex;
-        padding: 20px;
+        padding: 20px 10px;
         justify-content: center;
 
         input {
@@ -24,13 +24,26 @@ const Container = styled.div`
 
     & > div {
 
+        padding: 15px;
+        
         display: flex;
         flex-direction: column;
         align-items: center;
-        padding: 40px 0;
+        padding-top: 40px;
 
         h2 {
             padding-bottom: 30px;
+        }
+
+        img {
+            width: 100%;
+        }
+
+        @media (min-width: 768px) {
+
+            img {
+                width: unset;
+            }
         }
     }
 `

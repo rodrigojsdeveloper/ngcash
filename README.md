@@ -7,7 +7,7 @@
 
 Desafio:
 
-Estruturar uma aplicação web fullstack, dockerizada, cujo objetivo seja possibilitar que usuários da NG consigam realizar transferências internas entre si.
+O ojetivo desse desafio é possibilitar que usuários da NG consigam realizar transferências internas entre si.
 
 ## Features:
 
@@ -18,6 +18,8 @@ Estruturar uma aplicação web fullstack, dockerizada, cujo objetivo seja possib
 - Autenticação
 
 - Transações entre usuários
+
+- Filtro de todas as transações do própio usuário
 
 - Filtros de cash-in, cash-out ou pela data da transação
 
@@ -39,7 +41,7 @@ Efetue a criação das dependências com `yarn` nas pastas back-end e front-end.
 
 Crie o arquivo `.env` com base no arquivo `.env.example` na pasta back-end.
 
-### 3. Iniciando Projeto
+### 3. Iniciando apenas back ou front do projeto no navegador ou insomnia
 
 #### Powershell ou Bash
 
@@ -52,6 +54,20 @@ Após isso entre na pasta front-end e rode o comando:
 `yarn dev`
 
 e abra o projeto no seu navegador.
+
+### 3. Iniciando todo o projeto no docker-compose
+
+Na raiz do projeto rode o comando:
+
+## Windows
+
+`docker-compose up -d`
+
+## Linux
+
+`sudo docker-compose up -d`
+
+a flag `-d` é para rodar o projeto em 'background' deixando o terminal livre para usar
 
 ## Desenvolvedor
 

@@ -1,15 +1,7 @@
 import { Container } from "./style"
 
 
-export interface ITransactionProps {
-    id: string
-    value: number
-    createdAt: string
-    creditedAccountId: string
-    debitedAccountId: string
-}
-
-const Transaction = ({ id, value, createdAt }: any) => {
+const Transaction = ({ transaction }: any) => {
 
     return (
         <Container>
@@ -19,8 +11,8 @@ const Transaction = ({ id, value, createdAt }: any) => {
             </div>
 
             <div className="divValue">
-                <p className="credit">+ R$ { value }</p>
-                <p className="debt">- R$ { value }</p>
+                <p className="credit">+ R$ { transaction.value }</p>
+                <p className="debt">- R$ { transaction.value }</p>
             </div>
         </Container>
     )

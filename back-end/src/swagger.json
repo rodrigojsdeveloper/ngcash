@@ -1,0 +1,241 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "NG.CASH API",
+        "description": "This API was created to use in the selection process of NG.CASH",
+        "termsOfService": "http://localhost:3000/terms",
+        "contact": {
+            "email": "rodrigojsdeveloper@gmail.com"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:3000",
+            "description": "NG.CASH API"
+        }
+    ],
+    "paths": {
+        "/users": {
+            "post": {
+                "summary": "User registration",
+                "description": "This route will be responsible for registering the user",
+                "tags": [ "Users" ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Users"
+                            },
+                            "examples": {
+                                "users": {
+                                    "value": {
+                                        "username": "example",
+                                        "password": "Example@123"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "201": {
+                        "description": "Create",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Users"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/users/profile": {
+            "get": {
+                "summary": "View a profile",
+                "description": "This route will be responsible for view profile",
+                "tags": [ "Users" ],
+                "security": [
+                    { "bearerAuth": [] }
+                ],
+                "responses": {
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/transactions": {
+            "post": {
+                "summary": "Transaction registration",
+                "description": "This route will be responsible for making transactions",
+                "tags": [ "Transactions" ],
+                "security": [
+                    { "bearerAuth": [] }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Transaction"
+                            },
+                            "examples": {
+                                "book": {
+                                    "value": {
+                                        "value": 50,
+                                        "username": "example"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "201": {
+                        "description": "Create",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Transaction"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get": {
+                "summary": "Transactions listing",
+                "description": "This route will be responsible for listing the user's own transactions",
+                "tags": [ "Transactions" ],
+                "security": [
+                    { "bearerAuth": [] }
+                ],
+                "responses": {
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/transactions/{value}": {
+            "get": {
+                "summary": "list transactions by cash-in or cash-out",
+                "description": "This route will be responsible for list transactions by cash-in or cash-out",
+                "tags": [ "Transactions" ],
+                "security": [
+                    { "bearerAuth": [] }
+                ],
+                "parameters": [{
+                    "name": "value",
+                    "in": "get",
+                    "description": "Transactions by cash-in or cash-out",
+                    "required": true
+                }],
+                "responses": {
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/accounts/{id}": {
+            "get": {
+                "summary": "Specific account",
+                "description": "This route will be responsible for showing a specific account",
+                "tags": [ "Account" ],
+                "security": [
+                    { "bearerAuth": [] }
+                ],
+                "parameters": [{
+                    "name": "ID",
+                    "in": "get",
+                    "description": "View specific account",
+                    "required": true
+                }],
+                "responses": {
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Users": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "username": {
+                        "type": "string"
+                    },
+                    "password": {
+                        "type": "string"
+                    },
+                    "accountId": {
+                        "type": "string"
+                    }
+                }
+            },
+            "Transaction": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "creditedAccountId": {
+                        "type":"string"
+                    },
+                    "debitedAccountId": {
+                        "type": "string"
+                    },
+                    "value": {
+                        "type": "number"
+                    },
+                    "createdAt": {
+                        "type": "Date"
+                    }
+                }
+            },
+            "Account": {
+                "type": "object",
+                "properties": {
+                    "balance": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT"
+            }
+        }
+    }
+}

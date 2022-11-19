@@ -12,7 +12,6 @@ import iconTransaction from "../../assets/transaction.svg"
 import iconKeyword from "../../assets/symbol-keyword.svg"
 import iconTransactions from "../../assets/transactions.svg"
 import iconMenu from "../../assets/close-to-menu-transition.svg"
-import { ITransactionProps } from "../../components/Transaction"
 
 
 const Home = () => {
@@ -27,37 +26,11 @@ const Home = () => {
 
     const [ openTransaction, setOpenTransaction ] = useState<boolean>(false)
 
-    const [ balance, setBalance ] = useState<number>(0)
-
     const [ transactions, setTransactions ] = useState<any>()
 
     const [ style, setStyle ] = useState<boolean>(false)
 
-    const addTransactions = (transaction: ITransactionProps) => setTransactions([ ...transactions, transaction ])
-    
-    useEffect(() => {
-
-        api.get('/users/profile', {
-
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${ localStorage.getItem('Project NG.CASH: token') }`,
-            }
-        })
-        .then(res => {
-
-            api.get(`/accounts/${ res.data.accountId.id }`, {
-
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${ localStorage.getItem('Project NG.CASH: token') }`,
-                }
-            })
-            .then(res => setBalance(res.data.balance))
-            .catch(err => console.error(err))
-        })
-        .catch(err => console.error(err))
-    }, [])
+    const addTransactions = (transaction: any) => setTransactions([ ...transactions, transaction ])
 
     useEffect(() => {
 
@@ -157,7 +130,7 @@ const Home = () => {
                     }
                     {
                         openBalance &&
-                        <Balance balance={ balance } />
+                        <Balance />
                     }
                 </div>
             </Content>
