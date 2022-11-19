@@ -6,7 +6,7 @@ import { compare } from 'bcrypt'
 import jwt from 'jsonwebtoken'
 
 
-const createSessionService = async ({ username, password }: ISessionRequest): Promise<object> => {
+const createSessionService = async ({ username, password }: ISessionRequest) => {
 
     const userRepository = AppDataSource.getRepository(User)
 

@@ -6,7 +6,7 @@ import { User } from '../../entities/users'
 import { AppError } from '../../errors'
 
 
-const createTransactionService = async (debited_id: string, { value, username }: ITransactionRequest): Promise<Transaction> => {
+const createTransactionService = async (debited_id: string, { value, username }: ITransactionRequest) => {
 
     const transactionsRepository = AppDataSource.getRepository(Transaction)
 

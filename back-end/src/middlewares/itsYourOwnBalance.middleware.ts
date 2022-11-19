@@ -2,7 +2,6 @@ import { Request, Response, NextFunction } from 'express'
 import { AppDataSource } from '../data-source'
 import { Account } from '../entities/accounts'
 import { User } from '../entities/users'
-import { AppError } from '../errors'
 
 
 const itsYourOwnBalanceMiddleware = async (req: Request, res: Response, next: NextFunction) => {
