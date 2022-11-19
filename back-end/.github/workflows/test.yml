@@ -2,9 +2,9 @@ name: Execution of integration and unit tests
 
 on:
   push:
-    branches: [ main ]
+    branches: [ master ]
   pull_request:
-    branches: [ main ]
+    branches: [ master ]
 
 jobs:
   integration_tests:
