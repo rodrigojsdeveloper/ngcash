@@ -1,10 +1,10 @@
-name: Execution of integration and unit tests
+name: Project_NG.CASH
 
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
   pull_request:
-    branches: [ master ]
+    branches: [ main ]
 
 jobs:
   integration_tests:
