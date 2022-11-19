@@ -5,6 +5,7 @@ import { Container } from './style'
 import { Button } from '../Button'
 import { useState } from 'react'
 import * as yup from 'yup'
+import { toast } from 'react-toastify'
 
 
 const FormTransaction = ({ addTransactions }: any) => {
@@ -37,8 +38,12 @@ const FormTransaction = ({ addTransactions }: any) => {
                 "Authorization": `Bearer ${ localStorage.getItem('Project NG.CASH: token') }`,
             }
         })
-        .then(res => addTransactions(res.data))
-        .catch(err => console.error(err))
+        .then(res => {
+            addTransactions(res.data)
+            
+            toast.success('Completed transaction')
+        })
+        .catch(_ => toast.error('Transaction error'))
         .finally(() => setLoad(false))
     }
 

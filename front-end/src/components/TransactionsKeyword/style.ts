@@ -19,6 +19,9 @@ const Container = styled.div`
             border-radius: 5px;
             border: 1.5px solid var(--color);
 
+            &:focus::-webkit-input-placeholder {
+                color: var(--transparent);
+            }
         }
     }
 

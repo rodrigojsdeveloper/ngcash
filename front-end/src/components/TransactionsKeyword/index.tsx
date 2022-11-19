@@ -63,7 +63,7 @@ const TransactionsKeyword = () => {
                                                 </div>
 
                                                 <div className="divValue">
-                                                    <p className="credit">+ R$ { transaction.value }</p>
+                                                    <p className="credit">+ R$ { transaction.value.toFixed(2) }</p>
                                                     <p>{ newDate }</p>
                                                 </div>
                                             </Content>
@@ -77,7 +77,7 @@ const TransactionsKeyword = () => {
                                                 </div>
 
                                                 <div className="divValue">
-                                                    <p className="debt">- R$ { transaction.value }</p>
+                                                    <p className="debt">- R$ { transaction.value.toFixed(2) }</p>
                                                     <p>{ newDate }</p>
                                                 </div>
                                             </Content>

@@ -13,6 +13,7 @@ import { useHistory } from 'react-router-dom'
 import { Container, Content } from './style'
 import { useEffect, useState } from 'react'
 import { api } from '../../services/api'
+import { toast } from 'react-toastify'
 
 
 const Home = () => {
@@ -65,6 +66,8 @@ const Home = () => {
                 </div>
 
                 <Button buttonStyle="home" onClick={ () => { 
+
+                    toast.success('Check back often!')
 
                     history.push('/session')
                     

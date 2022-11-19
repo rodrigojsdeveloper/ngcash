@@ -41,6 +41,8 @@ Efetue a criação das dependências com `yarn` nas pastas back-end e front-end.
 
 Crie o arquivo `.env` com base no arquivo `.env.example` na pasta back-end.
 
+* Se for rodar o projeto no docker-compose, crie o arquivo `.env` e na variável de amibiente `DB_HOST` coloque `postgres` caso contrário `localhost`
+
 ### 3. Iniciando apenas back ou front do projeto no navegador ou insomnia
 
 #### Powershell ou Bash

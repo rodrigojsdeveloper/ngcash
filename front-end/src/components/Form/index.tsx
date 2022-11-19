@@ -7,6 +7,7 @@ import { Container } from './style'
 import { Button } from '../Button'
 import { useState } from 'react'
 import * as yup from 'yup'
+import { toast } from 'react-toastify'
 
 
 const Form = ({ apiProp, historyProp, titleProp, textProp, linkProp }: IFormProps) => {
@@ -48,11 +49,18 @@ const Form = ({ apiProp, historyProp, titleProp, textProp, linkProp }: IFormProp
             if(apiProp == 'session') {
 
                 localStorage.setItem('Project NG.CASH: token', res.data.token)
+
+                toast.success('Login completed')
+            }
+
+            if(apiProp == 'users') {
+
+                toast.success('Register completed')
             }
 
             history.push(`/${ historyProp }`)
         })
-        .catch(err => console.error(err))
+        .catch(_ => toast.error('Oops! An error occured'))
         .finally(() => setLoad(false))
     }
 
