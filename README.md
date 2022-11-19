@@ -41,19 +41,40 @@ Efetue a criação das dependências com `yarn` nas pastas back-end e front-end.
 
 Crie o arquivo `.env` com base no arquivo `.env.example` na pasta back-end.
 
-### 3. Iniciando apenas back ou front do projeto no navegador ou insomnia
+### 3. Iniciando apenas frontend ou backend do projeto no navegador ou insomnia
 
 #### Powershell ou Bash
 
 Acesse a pasta back-end e rode o comando:
 
-`yarn dev`
+```
+yarn dev
+```
 
-Após isso entre na pasta front-end e rode o comando:
+e rode uma requisição no insomnia
 
-`yarn dev`
+# Exemplo de requisição - POST
 
-e abra o projeto no seu navegador.
+```
+{
+	"username": "example",
+    "password": "Example@123"
+}
+```
+
+Acesse a pasta front-end e rode o comando:
+
+```
+yarn dev
+```
+
+e abra o projeto no seu navegador
+
+# Link do projeto
+
+```
+http://localhost:5173
+```
 
 ### 3. Iniciando todo o projeto no docker-compose
 
@@ -61,11 +82,15 @@ Na raiz do projeto rode o comando:
 
 ## Windows
 
-`docker-compose up -d`
+```
+docker-compose up -d
+```
 
 ## Linux
 
-`sudo docker-compose up -d`
+```
+sudo docker-compose up -d
+```
 
 a flag `-d` é para rodar o projeto em 'background' deixando o terminal livre para usar
 
