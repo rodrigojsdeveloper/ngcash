@@ -1,5 +1,4 @@
 import noTransaction from '../../assets/noTransaction.png'
-import { ITransactionProp } from '../../interfaces'
 import { Transaction } from '../Transaction'
 import { Container } from './style'
 
@@ -21,7 +20,7 @@ const Transactions = ({ transactions }: any) => {
                     ) : (
 
                         <>
-                            <h2>Você ainda não tem nenhuma transação</h2>
+                            <h2>You don't have any transactions yet</h2>
 
                             <img src={ noTransaction } />
                         </>

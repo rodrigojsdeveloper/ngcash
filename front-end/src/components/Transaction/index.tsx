@@ -13,8 +13,8 @@ const Transaction = () => {
         api.get('/users/profile', {
 
             headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${ localStorage.getItem('Project NG.CASH: token') }`,
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${ localStorage.getItem('Project NG.CASH: token') }`,
             }
         })
         .then(res => setUser(res.data))

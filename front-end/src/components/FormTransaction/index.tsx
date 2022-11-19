@@ -1,11 +1,11 @@
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm } from 'react-hook-form'
 import { api } from '../../services/api'
+import { toast } from 'react-toastify'
 import { Container } from './style'
 import { Button } from '../Button'
 import { useState } from 'react'
 import * as yup from 'yup'
-import { toast } from 'react-toastify'
 
 
 const FormTransaction = ({ addTransactions }: any) => {
@@ -34,8 +34,8 @@ const FormTransaction = ({ addTransactions }: any) => {
         api.post('/transactions', data, {
 
             headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${ localStorage.getItem('Project NG.CASH: token') }`,
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${ localStorage.getItem('Project NG.CASH: token') }`,
             }
         })
         .then(res => {
@@ -58,17 +58,17 @@ const FormTransaction = ({ addTransactions }: any) => {
                     <input
                     placeholder="Value"
                     type="text"
-                    { ...register("value") }
+                    { ...register('value') }
                     />
 
                     <label>{ errors.username?.message as string }</label>
                     <input
                     placeholder="Username"
                     type="text"
-                    { ...register("username") }
+                    { ...register('username') }
                     />
 
-                    <Button buttonStyle='register' type="submit" disabled={ load }>{
+                    <Button buttonStyle="register" type="submit" disabled={ load }>{
                         load ? 'Sending...' : 'Submit'
                     }</Button>
                 </main>

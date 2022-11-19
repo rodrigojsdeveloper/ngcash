@@ -39,8 +39,8 @@ const Home = () => {
         api.get('/transactions', {
             
             headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${ localStorage.getItem('Project NG.CASH: token') }`,
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${ localStorage.getItem('Project NG.CASH: token') }`,
             }
         })
         .then(res => setTransactions(res.data))
@@ -51,7 +51,7 @@ const Home = () => {
         <Container>
             <header className="headerStyle">
                 <div>
-                    <button id="button" className='b-menu' onClick={ () => {
+                    <button id="button" className="b-menu" onClick={ () => {
 
                         if(style) {
                             setStyle(false)

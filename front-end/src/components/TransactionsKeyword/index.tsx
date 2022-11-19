@@ -18,7 +18,7 @@ const TransactionsKeyword = () => {
         <Container>
             <header className="headerStyled">
                 <input
-                placeholder="Pesquisar"
+                placeholder="Search"
                 value={ valueInput }
                 onChange={ (e: any) => setValueInput(e.target.value) }
                 />
@@ -32,8 +32,8 @@ const TransactionsKeyword = () => {
                     api.get(`/transactions/${ prop }`, {
 
                         headers: {
-                            "Content-Type": "application/json",
-                            "Authorization": `Bearer ${ localStorage.getItem('Project NG.CASH: token') }`,
+                            'Content-Type': 'application/json',
+                            'Authorization': `Bearer ${ localStorage.getItem('Project NG.CASH: token') }`,
                         }
                     })
                     .then(res => setTransactionsKeyword(res.data))
@@ -91,7 +91,7 @@ const TransactionsKeyword = () => {
                     ) : (
 
                         <>
-                            <h2>Você ainda não tem nenhuma transação</h2>
+                            <h2>You haven't searched for any transactions yet</h2>
     
                             <img src={ noTransaction } />
                         </>

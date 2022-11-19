@@ -16,7 +16,7 @@ const animacaoForm = keyframes`
 const Container = styled.form`
 
     background: var(--background);
-    animation: ${ animacaoForm}  1s;
+    animation: ${ animacaoForm }  1s;
 
     max-width: 400px;
     width: 100%;

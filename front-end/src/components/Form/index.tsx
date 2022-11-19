@@ -3,11 +3,11 @@ import { Link, useHistory } from 'react-router-dom'
 import { IFormProps } from '../../interfaces'
 import { useForm } from 'react-hook-form'
 import { api } from '../../services/api'
+import { toast } from 'react-toastify'
 import { Container } from './style'
 import { Button } from '../Button'
 import { useState } from 'react'
 import * as yup from 'yup'
-import { toast } from 'react-toastify'
 
 
 const Form = ({ apiProp, historyProp, titleProp, textProp, linkProp }: IFormProps) => {
@@ -41,7 +41,7 @@ const Form = ({ apiProp, historyProp, titleProp, textProp, linkProp }: IFormProp
         api.post(`/${ apiProp }`, data, {
         
             headers: {
-                "Content-Type": "application/json",
+                'Content-Type': 'application/json',
             }
         })
         .then(res => {
@@ -74,14 +74,14 @@ const Form = ({ apiProp, historyProp, titleProp, textProp, linkProp }: IFormProp
                 <input
                 placeholder="Username"
                 type="text"
-                { ...register("username") }
+                { ...register('username') }
                 />
 
                 <label>{ errors.password?.message as string }</label>
                 <input
                 placeholder="Password"
                 type="password"
-                { ...register("password") }
+                { ...register('password') }
                 />
 
                 <Button buttonStyle="register" type="submit" disabled={ load }>{

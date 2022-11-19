@@ -10,15 +10,15 @@ const Routes = () => {
     return (
 
         <Switch>
-            <Route path='/session'>
+            <Route path="/session">
                 <Session />
             </Route>
 
-            <Route path='/home'>
+            <Route path="/home">
                 <Home />
             </Route>
 
-            <Route exact path='/'>
+            <Route exact path="/">
                 <Register />
             </Route>
 
