@@ -82,6 +82,11 @@ const Content = styled.main`
                 padding-right: 15px;
             }
         }
+
+        @media (max-width: 1024px) {
+
+            display: none;
+        }
     }
     
     nav.close {
@@ -110,6 +115,11 @@ const Content = styled.main`
                 height: 1.2em;
             }
         }
+
+        @media (max-width: 1024px) {
+
+            animation: unset;
+        }
     }
 
     & > div {
@@ -122,13 +132,6 @@ const Content = styled.main`
 
         ::-webkit-scrollbar-thumb {
             background: var(--transparent);
-        }
-    }
-
-    @media (max-width: 1024px) {
-
-        nav.open {
-            display: none;
         }
     }
 `

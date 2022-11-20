@@ -1,5 +1,5 @@
 import { transactionsRoutes } from './transactions/transactions.routes'
-import { accountRoutes } from './account/account.routes'
+import { accountRoutes } from './accounts/account.routes'
 import { sessionRoutes } from './session/session.routes'
 import { usersRoutes } from './users/users.routes'
 import { Express } from 'express'

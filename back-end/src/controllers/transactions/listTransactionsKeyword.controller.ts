@@ -9,9 +9,9 @@ const listTransactionsKeywordController = async (req: Request, res: Response) =>
 
     try {
 
+        const username: string = req.username
+        
         const value: string = req.params.value
-
-        const username = req.username
 
         const userRepository = AppDataSource.getRepository(User)
 

@@ -14,13 +14,13 @@ describe('Tests for session routes', () => {
         await AppDataSource.initialize()
         .then(res => connection = res)
         .catch(err => console.error('Error during Data Source initialization', err))
+
+        await request(app).post('/users').send(user)
     })
 
     afterAll(async () => await connection.destroy())
 
     test('Must be able to create a session', async () => {
-
-        await request(app).post('/users').send(user)
 
         const response = await request(app).post('/session').send(session)
 
@@ -31,8 +31,6 @@ describe('Tests for session routes', () => {
     test('Must be able to prevent the creation of a session with invalid credentials', async () => {
 
         session.password = 'username'
-
-        await request(app).post('/users').send(user)
 
         const response = await request(app).post('/session').send(session)
 

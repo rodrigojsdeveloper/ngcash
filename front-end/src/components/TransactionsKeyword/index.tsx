@@ -10,7 +10,7 @@ const TransactionsKeyword = () => {
 
     const [ transactionsKeyword, setTransactionsKeyword ] = useState<ITransactionProp[]>([])
 
-    const [ value, setValue ] = useState<string[]>(['cash-in', 'cash-out'])
+    const [ valueKeyword, setValueKeyword ] = useState<string[]>(['cash-in', 'cash-out'])
 
     const [ valueInput, setValueInput ] = useState<string>('')
 
@@ -27,7 +27,7 @@ const TransactionsKeyword = () => {
                 buttonStyle="home"
                 onClick={ () => {
 
-                    const prop = value.filter(v => v == valueInput)
+                    const prop = valueKeyword.filter(v => v == valueInput)
 
                     api.get(`/transactions/${ prop }`, {
 

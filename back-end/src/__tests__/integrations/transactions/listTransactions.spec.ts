@@ -29,7 +29,6 @@ describe('Tests for transaction routes', () => {
         const response = await request(app).get('/transactions').set('Authorization', `Bearer ${ token }`)
 
         expect(response.status).toBe(200)
-
         expect(response.body).toHaveProperty('map')
     })
 

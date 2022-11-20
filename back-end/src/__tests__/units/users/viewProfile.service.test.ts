@@ -1,8 +1,8 @@
 import { viewProfileService } from '../../../services/users/viewProfile.service'
 import { createUserService } from '../../../services/users/createUser.service'
 import { AppDataSource } from '../../../data-source'
-import { DataSource } from 'typeorm'
 import { user } from '../../../mocks'
+import { DataSource } from 'typeorm'
 
 
 describe('Tests for user service', () => {

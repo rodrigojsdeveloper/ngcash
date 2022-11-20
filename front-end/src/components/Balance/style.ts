@@ -12,6 +12,7 @@ const Container = styled.div`
 
     h1 {
         padding-bottom: 30px;
+        transition: 1s;
     }
 
     p {

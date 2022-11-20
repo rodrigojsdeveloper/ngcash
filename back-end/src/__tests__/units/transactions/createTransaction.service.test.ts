@@ -14,6 +14,8 @@ describe('Tests for transaction service', () => {
         await AppDataSource.initialize()
         .then(res => connection = res)
         .catch(err => console.error('Error during Data Source initialization', err))
+
+        await createUserService(user2)
     })
 
     afterAll(async () => await connection.destroy())
@@ -21,8 +23,6 @@ describe('Tests for transaction service', () => {
     test('Must be able to create a transaction', async () => {
 
         const newUser = await createUserService(user)
-
-        await createUserService(user2)
 
         const result = await createTransactionService(newUser.accountId, transaction)
 

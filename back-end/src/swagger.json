@@ -176,7 +176,56 @@
                         "description": "Bad Request"
                     },
                     "200": {
-                        "description": "OK"
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Account"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/session": {
+            "post": {
+                "summary": "Created session",
+                "description": "This route will be responsible for created session",
+                "tags": [ "Session" ],
+                
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Users"
+                            },
+                            "examples": {
+                                "user": {
+                                    "value": {
+                                        "username": "example",
+                                        "password": "Example@123"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Session"
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -224,17 +273,16 @@
             "Account": {
                 "type": "object",
                 "properties": {
-                    "id": {
-                        "type": "string"
-                    },
                     "balance": {
                         "type": "string"
-                    },
-                    "creditedTransaction": {
-                        "type": "array"
-                    },
-                    "debitedTransaction": {
-                        "type": "array"
+                    }
+                }
+            },
+            "Session": {
+                "type": "object",
+                "properties": {
+                    "token": {
+                        "type": "string"
                     }
                 }
             }

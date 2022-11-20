@@ -9,9 +9,9 @@ const specificAccountController = async (req: Request, res: Response) => {
 
         const id: string = req.params.id
 
-        const balanceAccount = await specificAccountService(id)
+        const specificAccount = await specificAccountService(id)
 
-        return res.json(balanceAccount)
+        return res.json(specificAccount)
     
     } catch(err) {
 

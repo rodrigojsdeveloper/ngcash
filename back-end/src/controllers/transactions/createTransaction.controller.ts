@@ -10,7 +10,7 @@ const createTransactionController = async (req: Request, res: Response) => {
 
     try {
 
-        const usernameDebt = req.username
+        const usernameDebt: string = req.username
 
         const { value, username } = req.body
 

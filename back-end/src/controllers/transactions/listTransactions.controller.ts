@@ -9,7 +9,7 @@ const listTransactionsController = async (req: Request, res: Response) => {
 
     try {
 
-        const username = req.username
+        const username: string = req.username
 
         const userRepository = AppDataSource.getRepository(User)
 

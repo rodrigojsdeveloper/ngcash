@@ -6,9 +6,9 @@ import { User } from '../entities/users'
 
 const itsYourOwnBalanceMiddleware = async (req: Request, res: Response, next: NextFunction) => {
 
-    const id = req.params.id
+    const id: string = req.params.id
 
-    const username = req.username
+    const username: string = req.username
 
     const userRepository = AppDataSource.getRepository(User)
 
