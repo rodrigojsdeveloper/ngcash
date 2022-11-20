@@ -35,11 +35,17 @@ Projeto desenvolvido no back-end com Nodejs e no front-end com React.
 
 ### 1. Instalação das dependencias
 
-Efetue a criação das dependências com `yarn` nas pastas back-end e front-end.
+Efetue a criação das dependências com `yarn` ou `npm install` nas pastas back-end e front-end.
 
 ### 2. Configuração do .env
 
 Crie o arquivo `.env` com base no arquivo `.env.example` na pasta back-end.
+
+#### Se estiver no Linux, rode esse comando na pasta back-end
+
+```
+cp .env.example .env
+```
 
 ### 3. Iniciando apenas frontend ou backend do projeto no navegador ou insomnia
 
@@ -49,6 +55,12 @@ Acesse a pasta back-end e rode o comando:
 
 ```
 yarn dev
+```
+
+ou
+
+```
+npm run dev
 ```
 
 e rode uma requisição no insomnia
@@ -66,6 +78,12 @@ Acesse a pasta front-end e rode o comando:
 
 ```
 yarn dev
+```
+
+ou
+
+```
+npm run dev
 ```
 
 e abra o projeto no seu navegador
