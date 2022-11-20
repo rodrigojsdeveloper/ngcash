@@ -1,5 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup'
-import { Link, useHistory } from 'react-router-dom'
+import { Link, Redirect, useHistory } from 'react-router-dom'
 import { IFormProps } from '../../interfaces'
 import { useForm } from 'react-hook-form'
 import { api } from '../../services/api'
@@ -10,7 +10,7 @@ import { useState } from 'react'
 import * as yup from 'yup'
 
 
-const Form = ({ apiProp, historyProp, titleProp, textProp, linkProp }: IFormProps) => {
+const Form = ({ apiProp, historyProp, titleProp, textProp, linkProp, setAuthentication, authentication }: IFormProps) => {
 
     const [ load, setLoad ] = useState<boolean>(false)
 
@@ -50,6 +50,8 @@ const Form = ({ apiProp, historyProp, titleProp, textProp, linkProp }: IFormProp
 
                 localStorage.setItem('Project NG.CASH: token', res.data.token)
 
+                setAuthentication(true)
+
                 toast.success('Login completed')
             }
 
@@ -62,6 +64,11 @@ const Form = ({ apiProp, historyProp, titleProp, textProp, linkProp }: IFormProp
         })
         .catch(_ => toast.error('Oops! An error occured'))
         .finally(() => setLoad(false))
+    }
+
+    if(authentication) {
+
+        return <Redirect to="/home" />
     }
 
     return (

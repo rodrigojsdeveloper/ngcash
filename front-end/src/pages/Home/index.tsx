@@ -5,8 +5,8 @@ import iconTransactions from '../../assets/transactions.svg'
 import { Transactions } from '../../components/Transactions'
 import iconBalance from '../../assets/account-balance.svg'
 import iconTransaction from '../../assets/transaction.svg'
+import { IHome, ITransactionProp } from '../../interfaces'
 import iconKeyword from '../../assets/symbol-keyword.svg'
-import { ITransactionProp } from '../../interfaces'
 import { Balance } from '../../components/Balance'
 import { Button } from '../../components/Button'
 import { useHistory } from 'react-router-dom'
@@ -16,7 +16,7 @@ import { api } from '../../services/api'
 import { toast } from 'react-toastify'
 
 
-const Home = () => {
+const Home = ({ setAuthentication }: IHome) => {
 
     const history = useHistory()
 
@@ -72,6 +72,8 @@ const Home = () => {
                     history.push('/session')
                     
                     localStorage.removeItem('Project NG.CASH: token')
+
+                    setAuthentication(false)
 
                 } }>Log out</Button>
             </header>

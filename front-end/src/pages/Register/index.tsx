@@ -1,16 +1,25 @@
 import register from '../../assets/Mobile login-bro.svg'
 import { Form } from '../../components/Form'
+import { ISingup } from '../../interfaces'
 import { Container } from './style'
 
 
-const Register = () => {
+const Register = ({ authentication, setAuthentication }: ISingup) => {
 
     return (
         <Container>
             <img src={ register } alt="register" title="register" />
 
             <div>
-                <Form apiProp="users" historyProp="session" titleProp="Register" textProp="Already have an account? " linkProp="session" />
+                <Form 
+                apiProp="users" 
+                historyProp="session" 
+                titleProp="Register" 
+                textProp="Already have an account? " 
+                linkProp="session" 
+                authentication={ authentication } 
+                setAuthentication={ setAuthentication } 
+                />
             </div>
         </Container>
     )

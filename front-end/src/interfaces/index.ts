@@ -1,4 +1,4 @@
-import { MouseEventHandler } from 'react'
+import { Dispatch, MouseEventHandler, SetStateAction } from 'react'
 
 
 export interface ITransactionProp {
@@ -28,6 +28,8 @@ export interface IFormProps {
     titleProp: string
     textProp: string
     linkProp: string
+    authentication: boolean
+    setAuthentication: Dispatch<SetStateAction<boolean>>
 }
 
 export interface IButtonProps {
@@ -36,4 +38,13 @@ export interface IButtonProps {
     disabled?: boolean | undefined
     type?: 'button' | 'submit' | 'reset' | undefined
     buttonStyle: 'register' | 'home'
+}
+
+export interface ISingup {
+    authentication: boolean
+    setAuthentication: Dispatch<SetStateAction<boolean>>
+}
+
+export interface IHome {
+    setAuthentication: Dispatch<SetStateAction<boolean>>
 }
