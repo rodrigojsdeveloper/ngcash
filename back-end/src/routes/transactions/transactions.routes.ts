@@ -5,13 +5,14 @@ import { createTransactionController } from '../../controllers/transactions/crea
 import { listTransactionsController } from '../../controllers/transactions/listTransactions.controller'
 
 import { tokenMiddleware } from '../../middlewares/token.middleware'
+import { userNotFoundMiddleware } from '../../middlewares/userNotFound.middleware'
 
 
 const routes = Router()
 
 const transactionsRoutes = () => {
 
-    routes.post('',  tokenMiddleware, createTransactionController)
+    routes.post('',  tokenMiddleware, userNotFoundMiddleware, createTransactionController)
     routes.get('', tokenMiddleware, listTransactionsController)
     routes.get('/:value', tokenMiddleware, listTransactionsKeywordController)
 
