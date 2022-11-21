@@ -1,9 +1,6 @@
+import { IStyledButtonProps } from '../../interfaces'
 import styled, { css } from 'styled-components'
 
-
-interface IStyledButtonProps {
-    buttonStyle: 'register' | 'home'
-}
 
 const Container = styled.button`
 

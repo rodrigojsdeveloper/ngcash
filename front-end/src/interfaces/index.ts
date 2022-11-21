@@ -1,4 +1,4 @@
-import { Dispatch, MouseEventHandler, SetStateAction } from 'react'
+import React, { Dispatch, MouseEventHandler, SetStateAction } from 'react'
 
 
 export interface ITransactionProp {
@@ -40,11 +40,23 @@ export interface IButtonProps {
     buttonStyle: 'register' | 'home'
 }
 
-export interface ISingup {
+export interface IStyledButtonProps {
+    buttonStyle: 'register' | 'home'
+}
+
+export interface ISession {
     authentication: boolean
     setAuthentication: Dispatch<SetStateAction<boolean>>
 }
 
 export interface IHome {
     setAuthentication: Dispatch<SetStateAction<boolean>>
+}
+
+export interface ITransactions {
+    transactions: ITransactionProp[]
+}
+
+export interface IFormTransaction {
+    addTransactions: (e: ITransactionProp) => void
 }

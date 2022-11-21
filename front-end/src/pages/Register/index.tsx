@@ -1,10 +1,10 @@
 import register from '../../assets/Mobile login-bro.svg'
 import { Form } from '../../components/Form'
-import { ISingup } from '../../interfaces'
+import { ISession } from '../../interfaces'
 import { Container } from './style'
 
 
-const Register = ({ authentication, setAuthentication }: ISingup) => {
+const Register = ({ authentication, setAuthentication }: ISession) => {
 
     return (
         <Container>

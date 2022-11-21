@@ -1,10 +1,10 @@
 import session from '../../assets/Tablet login-bro.svg'
 import { Container } from '../Register/style'
 import { Form } from '../../components/Form'
-import { ISingup } from '../../interfaces'
+import { ISession } from '../../interfaces'
 
 
-const Session = ({ authentication, setAuthentication }: ISingup) => {
+const Session = ({ authentication, setAuthentication }: ISession) => {
     
     return (
         <Container>

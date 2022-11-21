@@ -2,8 +2,8 @@ import noTransaction from '../../assets/noTransaction.png'
 import { ITransactionProp } from '../../interfaces'
 import { Container, Content } from './style'
 import { api } from '../../services/api'
+import React, { useState } from 'react'
 import { Button } from '../Button'
-import { useState } from 'react'
 
 
 const TransactionsKeyword = () => {
@@ -20,14 +20,14 @@ const TransactionsKeyword = () => {
                 <input
                 placeholder="Search"
                 value={ valueInput }
-                onChange={ (e: any) => setValueInput(e.target.value) }
+                onChange={ (e: React.ChangeEvent<HTMLInputElement>) => setValueInput(e.target.value) }
                 />
 
                 <Button
                 buttonStyle="home"
                 onClick={ () => {
 
-                    const prop = valueKeyword.filter(v => v == valueInput)
+                    const prop = valueKeyword.filter((v: string) => v == valueInput)
 
                     api.get(`/transactions/${ prop }`, {
 

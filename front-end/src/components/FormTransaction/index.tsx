@@ -1,4 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup'
+import { IFormTransaction } from '../../interfaces'
 import { useForm } from 'react-hook-form'
 import { api } from '../../services/api'
 import { toast } from 'react-toastify'
@@ -8,7 +9,7 @@ import { useState } from 'react'
 import * as yup from 'yup'
 
 
-const FormTransaction = ({ addTransactions }: any) => {
+const FormTransaction = ({ addTransactions }: IFormTransaction) => {
 
     const [ load, setLoad ] = useState<boolean>(false)
 

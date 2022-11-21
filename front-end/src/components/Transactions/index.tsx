@@ -1,9 +1,10 @@
 import noTransaction from '../../assets/noTransaction.png'
+import { ITransactions } from '../../interfaces'
 import { Transaction } from '../Transaction'
 import { Container } from './style'
 
 
-const Transactions = ({ transactions }: any) => {
+const Transactions = ({ transactions }: ITransactions) => {
 
     return (
         <Container>

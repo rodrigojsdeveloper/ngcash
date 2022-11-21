@@ -28,7 +28,7 @@ const Home = ({ setAuthentication }: IHome) => {
 
     const [ openTransaction, setOpenTransaction ] = useState<boolean>(false)
 
-    const [ transactions, setTransactions ] = useState<any>()
+    const [ transactions, setTransactions ] = useState<ITransactionProp[]>([])
 
     const [ style, setStyle ] = useState<boolean>(false)
 

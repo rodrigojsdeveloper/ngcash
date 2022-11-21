@@ -1,5 +1,5 @@
-import { yupResolver } from '@hookform/resolvers/yup'
 import { Link, Redirect, useHistory } from 'react-router-dom'
+import { yupResolver } from '@hookform/resolvers/yup'
 import { IFormProps } from '../../interfaces'
 import { useForm } from 'react-hook-form'
 import { api } from '../../services/api'
