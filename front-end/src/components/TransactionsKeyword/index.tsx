@@ -3,14 +3,13 @@ import { ITransactionProp } from '../../interfaces'
 import { Container, Content } from './style'
 import { api } from '../../services/api'
 import React, { useState } from 'react'
+import { toast } from 'react-toastify'
 import { Button } from '../Button'
 
 
 const TransactionsKeyword = () => {
 
     const [ transactionsKeyword, setTransactionsKeyword ] = useState<ITransactionProp[]>([])
-
-    const [ valueKeyword, setValueKeyword ] = useState<string[]>(['cash-in', 'cash-out'])
 
     const [ valueInput, setValueInput ] = useState<string>('')
 
@@ -27,9 +26,7 @@ const TransactionsKeyword = () => {
                 buttonStyle="home"
                 onClick={ () => {
 
-                    const prop = valueKeyword.filter((v: string) => v == valueInput)
-
-                    api.get(`/transactions/${ prop }`, {
+                    api.get(`/transactions/${ valueInput }`, {
 
                         headers: {
                             'Content-Type': 'application/json',
@@ -37,7 +34,7 @@ const TransactionsKeyword = () => {
                         }
                     })
                     .then(res => setTransactionsKeyword(res.data))
-                    .catch(err => console.error(err))
+                    .catch(_ => toast.error('transaction does not exist or not found'))
                     
                     } 
                 }>Submit</Button>  
@@ -49,14 +46,14 @@ const TransactionsKeyword = () => {
                     
                         transactionsKeyword.map((transaction: ITransactionProp) => {
 
-                            const newDate = transaction.createdAt.split('T')[0]
+                            const formattedDate = transaction.createdAt.split('T')[0]
 
                             return (
                                 <>
                                     {
                                         valueInput == 'cash-in' ? (
 
-                                            <Content>
+                                            <Content key={ transaction.id }>
                                                 <div>
                                                     <p>Cash in</p>
                                                     <p>Date</p>
@@ -64,13 +61,13 @@ const TransactionsKeyword = () => {
 
                                                 <div className="divValue">
                                                     <p className="credit">+ R$ { transaction.value.toFixed(2) }</p>
-                                                    <p>{ newDate }</p>
+                                                    <p>{ formattedDate }</p>
                                                 </div>
                                             </Content>
 
                                         ) : (
 
-                                            <Content>
+                                            <Content key={ transaction.id }>
                                                 <div>
                                                     <p>Cash out</p>
                                                     <p>Date</p>
@@ -78,7 +75,7 @@ const TransactionsKeyword = () => {
 
                                                 <div className="divValue">
                                                     <p className="debt">- R$ { transaction.value.toFixed(2) }</p>
-                                                    <p>{ newDate }</p>
+                                                    <p>{ formattedDate }</p>
                                                 </div>
                                             </Content>
 

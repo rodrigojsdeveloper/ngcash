@@ -1,4 +1,3 @@
-import { Transaction } from '../../entities/transactions'
 import { AppDataSource } from '../../data-source'
 import { Account } from '../../entities/accounts'
 
@@ -6,8 +5,6 @@ import { Account } from '../../entities/accounts'
 const listTransactionsKeywordService = async (id: string, value: string) => {
 
     const accountRepository = AppDataSource.getRepository(Account)
-
-    const transactionsRepository = AppDataSource.getRepository(Transaction)
 
     const account = await accountRepository.findOneBy({ id })
 
@@ -19,11 +16,6 @@ const listTransactionsKeywordService = async (id: string, value: string) => {
     if(value === 'cash-in') {
 
         return account!.creditedTransaction
-    }
-
-    if(await transactionsRepository.findBy({ createdAt: new Date(value) })) {
-
-        return await transactionsRepository.findBy({ createdAt: new Date(value) })
     }
 }
 

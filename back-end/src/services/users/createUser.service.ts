@@ -40,6 +40,13 @@ const createUserService = async ({ username, password }: IUserRequest) => {
         throw new AppError('Password must contain 1 uppercase letter')
     }
 
+    const regexNumber = /[0-9]/
+
+    if(!regexNumber.test(password)) {
+
+        throw new AppError('Password must contain 1 number')
+    }
+
     const passwordHashed = await hash(password, 10)
 
     const user = new User()
