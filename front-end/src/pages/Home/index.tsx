@@ -7,6 +7,7 @@ import iconBalance from '../../assets/account-balance.svg'
 import iconTransaction from '../../assets/transaction.svg'
 import { IHome, ITransactionProp } from '../../interfaces'
 import iconKeyword from '../../assets/symbol-keyword.svg'
+import logout from '../../assets/outline-logout.svg'
 import { Balance } from '../../components/Balance'
 import { Button } from '../../components/Button'
 import { useHistory } from 'react-router-dom'
@@ -64,60 +65,66 @@ const Home = ({ setAuthentication }: IHome) => {
                         <img src={ iconMenu } alt="" />
                     </button>
                 </div>
-
-                <Button buttonStyle="home" onClick={ () => { 
-
-                    toast.success('Check back often!')
-
-                    history.push('/session')
-                    
-                    localStorage.removeItem('Project NG.CASH: token')
-
-                    setAuthentication(false)
-
-                } }>Log out</Button>
             </header>
 
             <Content>
                 <nav className={ style ? "close" : "open" }>
-                    <div onClick={ () => {
-                            setOpenTransaction(true)
-                            setOpenTransactions(false)
-                            setOpenTransactionsKeyword(false)
-                            setOpenBalance(false)
+
+                    <div className="divNav">
+                        <div onClick={ () => {
+                                setOpenTransaction(true)
+                                setOpenTransactions(false)
+                                setOpenTransactionsKeyword(false)
+                                setOpenBalance(false)
+                                } }>
+                            <img src={ iconTransaction } />
+                            <p>Transaction</p>
+                        </div>
+
+                        <div onClick={ () => {
+                                setOpenTransactions(true)
+                                setOpenTransaction(false)
+                                setOpenTransactionsKeyword(false)
+                                setOpenBalance(false)
                             } }>
-                        <img src={ iconTransaction } />
-                        <p>Transaction</p>
+                            <img src={ iconTransactions } />
+                            <p>Transactions</p>
+                        </div>
+
+                        <div onClick={ () => {
+                                setOpenTransactionsKeyword(true)
+                                setOpenTransaction(false)
+                                setOpenTransactions(false)
+                                setOpenBalance(false)
+                            } }>
+                            <img src={ iconKeyword } />
+                            <p>Transactions Keyword</p>
+                        </div>
+                        
+                        <div onClick={ () => {
+                                setOpenBalance(true)
+                                setOpenTransaction(false)
+                                setOpenTransactions(false)
+                                setOpenTransactionsKeyword(false)
+                                } }>
+                            <img src={ iconBalance } />
+                            <p>Balance</p>
+                        </div>
                     </div>
 
-                    <div onClick={ () => {
-                            setOpenTransactions(true)
-                            setOpenTransaction(false)
-                            setOpenTransactionsKeyword(false)
-                            setOpenBalance(false)
-                        } }>
-                        <img src={ iconTransactions } />
-                        <p>Transactions</p>
-                    </div>
+                    <div className="divLogOut" onClick={ () => {
 
-                    <div onClick={ () => {
-                            setOpenTransactionsKeyword(true)
-                            setOpenTransaction(false)
-                            setOpenTransactions(false)
-                            setOpenBalance(false)
-                        } }>
-                        <img src={ iconKeyword } />
-                        <p>Transactions Keyword</p>
-                    </div>
-                    
-                    <div onClick={ () => {
-                            setOpenBalance(true)
-                            setOpenTransaction(false)
-                            setOpenTransactions(false)
-                            setOpenTransactionsKeyword(false)
-                            } }>
-                        <img src={ iconBalance } />
-                        <p>Balance</p>
+                        toast.success('Check back often!')
+
+                        history.push('/session')
+
+                        localStorage.removeItem('Project NG.CASH: token')
+
+                        setAuthentication(false)
+
+                    } }>
+                        <p>Log out</p>
+                        <img src={ logout } />
                     </div>
                 </nav>
 

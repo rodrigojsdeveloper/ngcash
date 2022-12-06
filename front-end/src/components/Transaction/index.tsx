@@ -31,7 +31,7 @@ const Transaction = () => {
                     return (
                     <Container>
                         <div>
-                            <p>Cash out</p>
+                            <p>Cash-out</p>
                             <p>Date</p>
                         </div>
 
@@ -52,7 +52,7 @@ const Transaction = () => {
                     return (
                         <Container>
                             <div>
-                                <p>Cash in</p>
+                                <p>Cash-in</p>
                                 <p>Date</p>
                             </div>
     

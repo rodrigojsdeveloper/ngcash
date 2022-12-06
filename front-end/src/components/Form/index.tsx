@@ -8,7 +8,6 @@ import { Container } from './style'
 import { Button } from '../Button'
 import { useState } from 'react'
 import * as yup from 'yup'
-import { Input } from '../Input'
 
 
 const Form = ({ apiProp, historyProp, titleProp, textProp, linkProp, setAuthentication, authentication }: IFormProps) => {
@@ -76,22 +75,20 @@ const Form = ({ apiProp, historyProp, titleProp, textProp, linkProp, setAuthenti
             <h1>{ titleProp }</h1>
 
             <main>
-                <Input
+                <label>{ errors.username?.message as string }</label>
+                <input
                 placeholder="Username"
                 type="text"
-                name="username"
-                register={ register }
+                { ...register('username') }
                 required={ true }
-                error={ errors.username?.message as string }
                 />
 
-                <Input
+                <label>{ errors.password?.message as string }</label>
+                <input
                 placeholder="Password"
-                type="text"
-                name="password"
-                register={ register }
+                type="password"
+                { ...register('password') }
                 required={ true }
-                error={ errors.password?.message as string }
                 />
 
                 <Button buttonStyle="register" type="submit" disabled={ load }>{

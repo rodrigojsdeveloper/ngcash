@@ -7,7 +7,6 @@ import { Container } from './style'
 import { Button } from '../Button'
 import { useState } from 'react'
 import * as yup from 'yup'
-import { Input } from '../Input'
 
 
 const FormTransaction = ({ addTransactions }: IFormTransaction) => {
@@ -40,7 +39,7 @@ const FormTransaction = ({ addTransactions }: IFormTransaction) => {
         })
         .then(res => {
             addTransactions(res.data)
-            
+
             toast.success('Completed transaction')
         })
         .catch(_ => toast.error('Transaction error'))
@@ -54,22 +53,20 @@ const FormTransaction = ({ addTransactions }: IFormTransaction) => {
                 <h1>Transaction</h1>
 
                 <main>
-                    <Input
+                    <label>{ errors.value?.message as string }</label>
+                    <input
                     placeholder="Value"
-                    type="number"
-                    name="value"
-                    register={ register }
+                    type="text"
+                    { ...register('value') }
                     required={ true }
-                    error={ errors.value?.message as string }
                     />
 
-                    <Input
+                    <label>{ errors.username?.message as string }</label>
+                    <input
                     placeholder="Username"
                     type="text"
-                    name="username"
-                    register={ register }
+                    { ...register('username') }
                     required={ true }
-                    error={ errors.username?.message as string }
                     />
 
                     <Button buttonStyle="register" type="submit" disabled={ load }>{

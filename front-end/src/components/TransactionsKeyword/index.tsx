@@ -24,7 +24,9 @@ const TransactionsKeyword = () => {
                     buttonStyle="home"
                     onClick={ () => {
 
-                        api.get(`/transactions/${ valueInput }`, {
+                        setValueInput('cash-in')
+
+                        api.get('/transactions/cash-in', {
 
                             headers: {
                                 'Content-Type': 'application/json',
@@ -41,7 +43,9 @@ const TransactionsKeyword = () => {
                     buttonStyle="home"
                     onClick={ () => {
 
-                        api.get(`/transactions/${ valueInput }`, {
+                        setValueInput('cash-out')
+
+                        api.get('/transactions/cash-out', {
 
                             headers: {
                                 'Content-Type': 'application/json',
@@ -71,12 +75,12 @@ const TransactionsKeyword = () => {
 
                                             <Content key={ transaction.id }>
                                                 <div>
-                                                    <p>Cash in</p>
+                                                    <p>Cash-in</p>
                                                     <p>Date</p>
                                                 </div>
 
                                                 <div className="divValue">
-                                                    <p className="credit">+ R$ { transaction.value.toFixed(2) }</p>
+                                                    <p className="credit">+ US$ { transaction.value.toFixed(2) }</p>
                                                     <p>{ formattedDate }</p>
                                                 </div>
                                             </Content>
@@ -85,12 +89,12 @@ const TransactionsKeyword = () => {
 
                                             <Content key={ transaction.id }>
                                                 <div>
-                                                    <p>Cash out</p>
+                                                    <p>Cash-out</p>
                                                     <p>Date</p>
                                                 </div>
 
                                                 <div className="divValue">
-                                                    <p className="debt">- R$ { transaction.value.toFixed(2) }</p>
+                                                    <p className="debt">- US$ { transaction.value.toFixed(2) }</p>
                                                     <p>{ formattedDate }</p>
                                                 </div>
                                             </Content>

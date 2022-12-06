@@ -12,6 +12,10 @@ const Container = styled.div`
         align-items: center;
         flex-direction: column;
 
+        h1 {
+            font-size: 29px;
+        }
+
         & > div {
             
             padding-top: 20px;
