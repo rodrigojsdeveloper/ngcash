@@ -29,6 +29,7 @@ export default createGlobalStyle`
         --shadow-button: rgba(0, 0, 0, 0.1);
         --shadow-button-2: rgba(0, 0, 0, 0.65);
         --shadow-button-3: rgba(0, 0, 0, 0.06);
+        --border-input: #dcdcdc;
     }
 
     body {
@@ -42,5 +43,15 @@ export default createGlobalStyle`
 
     a {
         text-decoration: none;
+    }
+
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+    
+    input[type=number] {
+        -moz-appearance:textfield;
     }
 `

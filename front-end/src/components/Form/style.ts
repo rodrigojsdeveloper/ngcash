@@ -7,6 +7,7 @@ const animacaoForm = keyframes`
         opacity: 0;
         transform: translatey(-50px);
     }
+    
     to {
         opacity: 1;
         transform: translateX(0px);
@@ -42,38 +43,6 @@ const Container = styled.form`
         width: 100%;
         max-width: 250px;
         padding-top: 40px;
-
-        label {
-
-            color: var(--red);
-            font-size: 12px;
-        }
-
-        input {
-            transition: 0.4s;
-            
-            &:focus::-webkit-input-placeholder {
-                color: var(--transparent);
-            }
-            
-            &::placeholder {
-                color: var(--gray);
-            }
-
-            width: 100%;
-            max-width: 250px;
-            height: 48px;
-            padding: 10px 1rem;
-            border-radius: 8px;
-            border: 1.5px solid var(--color);
-
-            margin: 10px 0;
-            
-            background: var(--background);
-            align-items: center;
-            flex: 1;
-            color: var(--color);
-        }
     }
 `
 

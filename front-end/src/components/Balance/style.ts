@@ -19,7 +19,7 @@ const Container = styled.div`
         padding: 20px 50px;
         background: var(--color);
         color: var(--background);
-        border-radius: 10px;
+        border-radius: 5px;
         font-weight: bold;
 
         :hover {

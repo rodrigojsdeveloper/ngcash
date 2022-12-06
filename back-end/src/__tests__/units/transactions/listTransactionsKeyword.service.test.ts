@@ -1,4 +1,4 @@
-import { listTransactionsKeywordService } from '../../../services/transactions/listTransactionsKeyword.service'
+import { listTransactionsKeywordService } from '../../../services/transactions/listTransactionsCashIn.service'
 import { createUserService } from '../../../services/users/createUser.service'
 import { AppDataSource } from '../../../data-source'
 import { DataSource } from 'typeorm'

@@ -28,7 +28,6 @@ const Container = styled.button`
                     height: 50px;
                     background: var(--color);
                     color: var(--background);
-                    border-radius: 8px;
                     border-color: var(--color);
 
                     :hover {

@@ -8,6 +8,7 @@ import { Container } from './style'
 import { Button } from '../Button'
 import { useState } from 'react'
 import * as yup from 'yup'
+import { Input } from '../Input'
 
 
 const Form = ({ apiProp, historyProp, titleProp, textProp, linkProp, setAuthentication, authentication }: IFormProps) => {
@@ -20,15 +21,13 @@ const Form = ({ apiProp, historyProp, titleProp, textProp, linkProp, setAuthenti
         
         username: yup
                 .string()
-                .required('Username required')
                 .min(3, 'Username must contain at least 3 characters'),
         password: yup
                 .string()
-                .required('Password required')
                 .min(8, 'Password must contain at least 8 characters')
                 .matches(
-                    /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/,
-                    'The password must contain capital letters, numbers and special characters!'
+                    /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$/,
+                    'The password must contain capital letters and numbers!'
                 )
     })
 
@@ -77,18 +76,22 @@ const Form = ({ apiProp, historyProp, titleProp, textProp, linkProp, setAuthenti
             <h1>{ titleProp }</h1>
 
             <main>
-                <label>{ errors.username?.message as string }</label>
-                <input
+                <Input
                 placeholder="Username"
                 type="text"
-                { ...register('username') }
+                name="username"
+                register={ register }
+                required={ true }
+                error={ errors.username?.message as string }
                 />
 
-                <label>{ errors.password?.message as string }</label>
-                <input
+                <Input
                 placeholder="Password"
-                type="password"
-                { ...register('password') }
+                type="text"
+                name="password"
+                register={ register }
+                required={ true }
+                error={ errors.password?.message as string }
                 />
 
                 <Button buttonStyle="register" type="submit" disabled={ load }>{

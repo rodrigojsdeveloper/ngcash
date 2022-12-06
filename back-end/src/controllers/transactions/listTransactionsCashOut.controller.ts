@@ -1,25 +1,23 @@
-import { listTransactionsKeywordService } from '../../services/transactions/listTransactionsKeyword.service'
+import { listTransactionsCashOutService } from '../../services/transactions/listTransactionsCashOut.service'
 import { AppError, handleError } from '../../errors'
 import { AppDataSource } from '../../data-source'
 import { Request, Response } from 'express'
 import { User } from '../../entities/users'
 
 
-const listTransactionsKeywordController = async (req: Request, res: Response) => {
+const listTransactionsCashOutController = async (req: Request, res: Response) => {
 
     try {
 
         const username: string = req.username
         
-        const value: string = req.params.value
-
         const userRepository = AppDataSource.getRepository(User)
 
         const user = await userRepository.findOneBy({ username })
 
-        const listKeyword = await listTransactionsKeywordService(user!.accountId.id, value)
+        const listCashOut = await listTransactionsCashOutService(user!.accountId.id)
 
-        return res.json(listKeyword)
+        return res.json(listCashOut)
 
     } catch(err) {
 
@@ -30,4 +28,4 @@ const listTransactionsKeywordController = async (req: Request, res: Response) =>
     }
 }
 
-export { listTransactionsKeywordController }
+export { listTransactionsCashOutController }

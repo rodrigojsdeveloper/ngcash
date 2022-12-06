@@ -16,28 +16,44 @@ const TransactionsKeyword = () => {
     return (
         <Container>
             <header className="headerStyled">
-                <input
-                placeholder="Search"
-                value={ valueInput }
-                onChange={ (e: React.ChangeEvent<HTMLInputElement>) => setValueInput(e.target.value) }
-                />
+                
+                <h1>Transactions Keyword</h1>
 
-                <Button
-                buttonStyle="home"
-                onClick={ () => {
+                <div>
+                    <Button
+                    buttonStyle="home"
+                    onClick={ () => {
 
-                    api.get(`/transactions/${ valueInput }`, {
+                        api.get(`/transactions/${ valueInput }`, {
 
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'Authorization': `Bearer ${ localStorage.getItem('Project NG.CASH: token') }`,
-                        }
-                    })
-                    .then(res => setTransactionsKeyword(res.data))
-                    .catch(_ => toast.error('transaction does not exist or not found'))
-                    
-                    } 
-                }>Submit</Button>  
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Authorization': `Bearer ${ localStorage.getItem('Project NG.CASH: token') }`,
+                            }
+                        })
+                        .then(res => setTransactionsKeyword(res.data))
+                        .catch(_ => toast.error('transaction does not exist or not found'))
+                        
+                        } 
+                    }>Cash-in</Button>
+
+                    <Button
+                    buttonStyle="home"
+                    onClick={ () => {
+
+                        api.get(`/transactions/${ valueInput }`, {
+
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Authorization': `Bearer ${ localStorage.getItem('Project NG.CASH: token') }`,
+                            }
+                        })
+                        .then(res => setTransactionsKeyword(res.data))
+                        .catch(_ => toast.error('transaction does not exist or not found'))
+                        
+                        } 
+                    }>Cash-out</Button>  
+                </div>
             </header>
             
             <div>

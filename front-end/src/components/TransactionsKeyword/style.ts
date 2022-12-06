@@ -8,19 +8,21 @@ const Container = styled.div`
     .headerStyled {
 
         display: flex;
-        padding: 20px 10px;
-        justify-content: center;
+        padding: 50px 10px 20px 10px;
+        align-items: center;
+        flex-direction: column;
 
-        input {
+        & > div {
+            
+            padding-top: 20px;
+
+            display: flex;
+            justify-content: center;
+
             width: 100%;
-            max-width: 550px;
-            padding: 10px;
-            margin: 0 10px;
-            border-radius: 5px;
-            border: 1.5px solid var(--color);
 
-            &:focus::-webkit-input-placeholder {
-                color: var(--transparent);
+            & > button {
+                margin: 0 10px;
             }
         }
     }

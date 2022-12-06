@@ -5,6 +5,8 @@ import { Container } from './style'
 
 const Balance = () => {
 
+    const [ username, setUsername ] = useState<string>('')
+
     const [ balance, setBalance ] = useState<number>(0)
 
     useEffect(() => {
@@ -17,6 +19,8 @@ const Balance = () => {
             }
         })
         .then(res => {
+
+            setUsername(res.data.username)
 
             api.get(`/accounts/${ res.data.accountId.id }`, {
 
@@ -33,7 +37,7 @@ const Balance = () => {
 
     return (
         <Container>
-            <h1>Your balance is</h1>
+            <h1>Hi { username }, your balance is</h1>
 
             <p>R$ { balance.toFixed(2) }</p>
         </Container>

@@ -7,6 +7,7 @@ import { Container } from './style'
 import { Button } from '../Button'
 import { useState } from 'react'
 import * as yup from 'yup'
+import { Input } from '../Input'
 
 
 const FormTransaction = ({ addTransactions }: IFormTransaction) => {
@@ -15,15 +16,13 @@ const FormTransaction = ({ addTransactions }: IFormTransaction) => {
 
     const schema = yup.object().shape({
 
-        value: yup
-            .number()
-            .required('Value required')
-            .typeError('Amount must be a number'),
-
         username: yup
             .string()
-            .required('Username required')
-            .min(3, 'Username must contain at least 3 characters')
+            .min(3, 'Username must contain at least 3 characters'),
+
+        value: yup
+            .number()
+            .typeError('Amount must be a number'),
     })
 
     const { register, handleSubmit, formState: { errors } } = useForm({ resolver: yupResolver(schema) })
@@ -55,18 +54,22 @@ const FormTransaction = ({ addTransactions }: IFormTransaction) => {
                 <h1>Transaction</h1>
 
                 <main>
-                    <label>{ errors.value?.message as string }</label>
-                    <input
+                    <Input
                     placeholder="Value"
-                    type="text"
-                    { ...register('value') }
+                    type="number"
+                    name="value"
+                    register={ register }
+                    required={ true }
+                    error={ errors.value?.message as string }
                     />
 
-                    <label>{ errors.username?.message as string }</label>
-                    <input
+                    <Input
                     placeholder="Username"
                     type="text"
-                    { ...register('username') }
+                    name="username"
+                    register={ register }
+                    required={ true }
+                    error={ errors.username?.message as string }
                     />
 
                     <Button buttonStyle="register" type="submit" disabled={ load }>{

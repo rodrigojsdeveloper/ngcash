@@ -1,4 +1,5 @@
 import React, { Dispatch, MouseEventHandler, SetStateAction } from 'react'
+import { FieldValues, UseFormRegister } from 'react-hook-form'
 
 
 export interface ITransactionProp {
@@ -38,6 +39,17 @@ export interface IButtonProps {
     disabled?: boolean | undefined
     type?: 'button' | 'submit' | 'reset' | undefined
     buttonStyle: 'register' | 'home'
+}
+
+export interface InputProps {
+    type?: string
+    name: string
+    autoComplete?: string
+    placeholder?: string
+    register: UseFormRegister<FieldValues>
+    label?: string
+    error?: any
+    required?: boolean | undefined
 }
 
 export interface IStyledButtonProps {
