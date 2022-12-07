@@ -28,6 +28,13 @@ const Container = styled.div`
             & > button {
                 margin: 0 10px;
             }
+
+            input {
+                border-radius: 4px;
+                border: 1px solid var(--border-input);
+                padding: 10px;
+                background: var(--dark-white-background);
+            }
         }
     }
 

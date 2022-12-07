@@ -23,6 +23,7 @@ const Container = styled.div`
         font-weight: bold;
 
         :hover {
+            transition: .5s;
             box-shadow: 0 0.5em 0.5em -0.4em var(--color);
         }
     }

@@ -11,7 +11,11 @@ const TransactionsKeyword = () => {
 
     const [ transactionsKeyword, setTransactionsKeyword ] = useState<ITransactionProp[]>([])
 
+    const [ transactionsKeywordDate, setTransactionsKeywordDate ] = useState<ITransactionProp[]>([])
+
     const [ valueInput, setValueInput ] = useState<string>('')
+
+    const [ date, setDate ] = useState<string>('')
 
     return (
         <Container>
@@ -56,62 +60,104 @@ const TransactionsKeyword = () => {
                         .catch(_ => toast.error('transaction does not exist or not found'))
                         
                         } 
-                    }>Cash-out</Button>  
+                    }>Cash-out</Button>
+
+                    <input 
+                    type="date"
+                    onChange={ (e: any) => {
+                       
+                        console.log(e.target.value)
+
+                        api.get(`/transactions/${ e.target.value }`, {
+
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Authorization': `Bearer ${ localStorage.getItem('Project NG.CASH: token') }`,
+                            }
+                        })
+                        .then(res => setTransactionsKeywordDate(res.data))
+                        .catch(_ => toast.error('transaction does not exist or not found'))
+                    } }
+                    />
                 </div>
             </header>
             
             <div>
                 {
-                    transactionsKeyword.length > 0 ? (
-                    
-                        transactionsKeyword.map((transaction: ITransactionProp) => {
+                    transactionsKeywordDate.length > 0 ? (
+
+                        transactionsKeywordDate.map(transaction => {
 
                             const formattedDate = transaction.createdAt.split('T')[0]
 
                             return (
-                                <>
-                                    {
-                                        valueInput == 'cash-in' ? (
+                                    <Content key={ transaction.id }>
+                                        <div>
+                                            <p>Cash</p>
+                                            <p>Date</p>
+                                        </div>
 
-                                            <Content key={ transaction.id }>
-                                                <div>
-                                                    <p>Cash-in</p>
-                                                    <p>Date</p>
-                                                </div>
-
-                                                <div className="divValue">
-                                                    <p className="credit">+ US$ { transaction.value.toFixed(2) }</p>
-                                                    <p>{ formattedDate }</p>
-                                                </div>
-                                            </Content>
-
-                                        ) : (
-
-                                            <Content key={ transaction.id }>
-                                                <div>
-                                                    <p>Cash-out</p>
-                                                    <p>Date</p>
-                                                </div>
-
-                                                <div className="divValue">
-                                                    <p className="debt">- US$ { transaction.value.toFixed(2) }</p>
-                                                    <p>{ formattedDate }</p>
-                                                </div>
-                                            </Content>
-
-                                        )
-                                    }
-                                </>
+                                        <div className="divValue">
+                                            <p>US$ { transaction.value.toFixed(2) }</p>
+                                            <p>{ formattedDate }</p>
+                                        </div>
+                                    </Content>
                             )
                         })
-                    
-                    ) : (
 
-                        <>
-                            <h2>You haven't searched for any transactions yet</h2>
+                    ) : (
+                    
+                        transactionsKeyword.length > 0 ? (
+                    
+                            transactionsKeyword.map((transaction: ITransactionProp) => {
     
-                            <img src={ noTransaction } />
-                        </>
+                                const formattedDate = transaction.createdAt.split('T')[0]
+    
+                                return (
+                                    <>
+                                        {
+                                            valueInput == 'cash-in' ? (
+    
+                                                <Content key={ transaction.id }>
+                                                    <div>
+                                                        <p>Cash-in</p>
+                                                        <p>Date</p>
+                                                    </div>
+    
+                                                    <div className="divValue">
+                                                        <p className="credit">+ US$ { transaction.value.toFixed(2) }</p>
+                                                        <p>{ formattedDate }</p>
+                                                    </div>
+                                                </Content>
+    
+                                            ) : (
+    
+                                                <Content key={ transaction.id }>
+                                                    <div>
+                                                        <p>Cash-out</p>
+                                                        <p>Date</p>
+                                                    </div>
+    
+                                                    <div className="divValue">
+                                                        <p className="debt">- US$ { transaction.value.toFixed(2) }</p>
+                                                        <p>{ formattedDate }</p>
+                                                    </div>
+                                                </Content>
+    
+                                            )
+                                        }
+                                    </>
+                                )
+                            })
+                        
+                        ) : (
+    
+                            <>
+                                <h2>You haven't searched for any transactions yet</h2>
+        
+                                <img src={ noTransaction } />
+                            </>
+                        )
                     )
                 }
             </div>

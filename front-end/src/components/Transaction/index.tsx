@@ -36,7 +36,7 @@ const Transaction = () => {
                         </div>
 
                         <div className="divValue">
-                            <p className="debt">- R$ { debt.value.toFixed(2) }</p>
+                            <p className="debt">- US$ { debt.value.toFixed(2) }</p>
                             <p>{ newDate }</p>
                         </div>
                     </Container>
@@ -57,7 +57,7 @@ const Transaction = () => {
                             </div>
     
                             <div className="divValue">
-                                <p className="credit">+ R$ { credit.value }</p>
+                                <p className="credit">+ US$ { credit.value }</p>
                                 <p>{ newDate }</p>
                             </div>
                         </Container>
