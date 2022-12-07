@@ -6,15 +6,17 @@ import { listTransactionsCashInController } from '../../controllers/transactions
 import { createTransactionController } from '../../controllers/transactions/createTransaction.controller'
 import { listTransactionsController } from '../../controllers/transactions/listTransactions.controller'
 
-import { userNotFoundMiddleware } from '../../middlewares/userNotFound.middleware'
 import { tokenMiddleware } from '../../middlewares/token.middleware'
+
+import { schemaValidationMiddleware } from '../../middlewares/schemaValidation.middleware'
+import { transactionSchema } from '../../schemas/transaction.schema'
 
 
 const routes = Router()
 
 const transactionsRoutes = () => {
 
-    routes.post('',  tokenMiddleware, userNotFoundMiddleware, createTransactionController)
+    routes.post('', schemaValidationMiddleware(transactionSchema), tokenMiddleware, createTransactionController)
 
     routes.get('', tokenMiddleware, listTransactionsController)
     

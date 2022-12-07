@@ -5,12 +5,16 @@ import { createUserController } from '../../controllers/users/createUser.control
 
 import { tokenMiddleware } from '../../middlewares/token.middleware'
 
+import { schemaValidationMiddleware } from '../../middlewares/schemaValidation.middleware'
+import { userSchema } from '../../schemas/user.schema'
+
 
 const routes = Router()
 
 const usersRoutes = () => {
 
-    routes.post('', createUserController)
+    routes.post('', schemaValidationMiddleware(userSchema), createUserController)
+
     routes.get('/profile', tokenMiddleware, viewProfileController)
 
     return routes
