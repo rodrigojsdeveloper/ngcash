@@ -1,4 +1,4 @@
-import notFound from '../../assets/Oops! 404 Error with a broken robot-rafiki.svg'
+import notFound from '../../assets/404 Error Page not Found with people connecting a plug-rafiki.svg'
 import { Button } from '../../components/Button'
 import { useHistory } from 'react-router-dom'
 import { Container } from './style'
@@ -15,10 +15,10 @@ const NotFound = () => {
 
                 <p>We couldn't find the page you were looking for, <b>let's try again</b>.</p>
 
-                <Button buttonStyle="register" onClick={ () => history.push('/') }>Go to home</Button>
+                <Button buttonStyle="register" onClick={ () => history.push('/') }>Go to registration page</Button>
             </div>
 
-            <img src={ notFound } alt="error" title="error" />
+            <img src={ notFound } alt="SVG - Page not found" title="Page not found" />
         </Container>
     )
 }

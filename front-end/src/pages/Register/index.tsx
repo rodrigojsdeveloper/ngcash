@@ -8,7 +8,7 @@ const Register = ({ authentication, setAuthentication }: ISession) => {
 
     return (
         <Container>
-            <img src={ register } alt="register" title="register" />
+            <img src={ register } alt="SVG - Register" title="Register" />
 
             <div>
                 <Form 

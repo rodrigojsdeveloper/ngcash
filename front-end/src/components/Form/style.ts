@@ -36,6 +36,10 @@ const Container = styled.form`
     p {
         margin-top: 10px;
         font-size: 13.5px;
+
+        a {
+            color: var(--shadow-button-2);
+        }
     }
 
     & > main {

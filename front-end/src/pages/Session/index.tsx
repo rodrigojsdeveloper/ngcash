@@ -1,4 +1,4 @@
-import session from '../../assets/Tablet login-bro.svg'
+import session from '../../assets/Computer login-bro.svg'
 import { Container } from '../Register/style'
 import { Form } from '../../components/Form'
 import { ISession } from '../../interfaces'
@@ -20,7 +20,7 @@ const Session = ({ authentication, setAuthentication }: ISession) => {
                 />
             </div>
 
-            <img src={ session } alt="session" title="session" />
+            <img src={ session } alt="SVG - Login" title="Login" />
         </Container>
     )
 }
