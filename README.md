@@ -119,8 +119,8 @@ Com o projeto rodando acesse `http://localhost:3000/docs` para ver a documentaç
 ## Desenvolvedor
 
 <a href="https://github.com/Rodrigodeveloperjr">
-    <img src="front-end/src/assets/icons8-github-48.png" />
+    <img src="frontend/src/assets/icons8-github-48.png" />
 </a>
 <a href="https://www.linkedin.com/in/rodrigo-de-jesus-silva">
-    <img src="front-end/src/assets/icons8-linkedin-48.png" />
+    <img src="frontend/src/assets/icons8-linkedin-48.png" />
 </a>
