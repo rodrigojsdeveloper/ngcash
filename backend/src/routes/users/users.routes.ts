@@ -3,9 +3,9 @@ import { Router } from 'express'
 import { viewProfileController } from '../../controllers/users/viewProfile.controller'
 import { createUserController } from '../../controllers/users/createUser.controller'
 
+import { schemaValidationMiddleware } from '../../middlewares/schemaValidation.middleware'
 import { tokenMiddleware } from '../../middlewares/token.middleware'
 
-import { schemaValidationMiddleware } from '../../middlewares/schemaValidation.middleware'
 import { userSchema } from '../../schemas/user.schema'
 
 

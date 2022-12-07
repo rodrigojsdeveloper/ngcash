@@ -69,8 +69,8 @@ e rode uma requisição no insomnia
 
 ```
 {
-"username": "example",
-"password": "Example@123"
+    "username": "example",
+    "password": "Example@123"
 }
 ```
 

@@ -40,7 +40,6 @@ const createTransactionService = async (debitedId: string, { value, username }: 
     transaction.creditedAccountId = accountCredited!.id
     transaction.debitedAccountId = debitedId
     transaction.value = value
-    transaction.createdAt = new Date()
 
     transactionsRepository.create(transaction)
     await transactionsRepository.save(transaction)

@@ -5,7 +5,7 @@ services:
     container_name: ngcash_back
     build: 
       dockerfile: Dockerfile
-      context: "./back-end"
+      context: "./backend"
     ports:
       - 3000:3000
     depends_on:
@@ -13,17 +13,17 @@ services:
     command: bash -c "yarn typeorm migration:run -d src/data-source && yarn dev"
     volumes:
       - /app/node_modules
-      - ./back-end:/app
+      - ./backend:/app
 
   frontend:
     stdin_open: true
     container_name: ngcash_front
     build:
       dockerfile: Dockerfile
-      context: "./front-end"
+      context: "./frontend"
     volumes:
       - /app/node_modules
-      - ./front-end:/app
+      - ./frontend:/app
     ports:
       - 5173:5173
 
@@ -33,4 +33,4 @@ services:
     ports:
       - 5434:5432
     env_file:
-      - ./back-end/.env
+      - ./backend/.env

@@ -6,9 +6,9 @@ import { listTransactionsCashInController } from '../../controllers/transactions
 import { createTransactionController } from '../../controllers/transactions/createTransaction.controller'
 import { listTransactionsController } from '../../controllers/transactions/listTransactions.controller'
 
+import { schemaValidationMiddleware } from '../../middlewares/schemaValidation.middleware'
 import { tokenMiddleware } from '../../middlewares/token.middleware'
 
-import { schemaValidationMiddleware } from '../../middlewares/schemaValidation.middleware'
 import { transactionSchema } from '../../schemas/transaction.schema'
 
 
