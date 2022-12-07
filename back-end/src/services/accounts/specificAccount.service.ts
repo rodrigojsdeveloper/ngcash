@@ -2,7 +2,7 @@ import { AppDataSource } from '../../data-source'
 import { Account } from '../../entities/accounts'
 
 
-const specificAccountService = async (id: string) => {
+const specificAccountService = async (id: string): Promise<object> => {
 
     const accountRepository = AppDataSource.getRepository(Account)
 

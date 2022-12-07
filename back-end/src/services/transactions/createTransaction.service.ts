@@ -6,7 +6,7 @@ import { User } from '../../entities/users'
 import { AppError } from '../../errors'
 
 
-const createTransactionService = async (debited_id: string, { value, username }: ITransactionRequest) => {
+const createTransactionService = async (debitedId: string, { value, username }: ITransactionRequest): Promise<Transaction> => {
 
     const transactionsRepository = AppDataSource.getRepository(Transaction)
 
@@ -16,7 +16,7 @@ const createTransactionService = async (debited_id: string, { value, username }:
 
     const user = await userRepository.findOneBy({ username })
 
-    const accountDebited = await accountRepository.findOneBy({ id: debited_id })
+    const accountDebited = await accountRepository.findOneBy({ id: debitedId })
 
     const accountCredited = await accountRepository.findOneBy({ id: user!.accountId.id })
 
@@ -33,7 +33,7 @@ const createTransactionService = async (debited_id: string, { value, username }:
 
     const transaction = new Transaction()
     transaction.creditedAccountId = accountCredited!.id
-    transaction.debitedAccountId = debited_id
+    transaction.debitedAccountId = debitedId
     transaction.value = value
     transaction.createdAt = new Date()
 

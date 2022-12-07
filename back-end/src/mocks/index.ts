@@ -9,8 +9,8 @@ const user: IUserRequest = {
 }
 
 const user2: IUserRequest = {
-    username: 'example2',
-    password: 'Example@123'
+    username: 'johndoe',
+    password: 'Johndoe@123'
 }
 
 const session: ISessionRequest = {
@@ -20,7 +20,7 @@ const session: ISessionRequest = {
 
 const transaction: ITransactionRequest = {
     value: 50,
-    username: 'example2'
+    username: 'johndoe'
 }
 
 export { user, user2, session, transaction }

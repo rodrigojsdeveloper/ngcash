@@ -2,7 +2,7 @@ import { AppDataSource } from '../../data-source'
 import { User } from '../../entities/users'
 
 
-const viewProfileService = async (username: string) => {
+const viewProfileService = async (username: string): Promise<User> => {
 
     const userRepository = AppDataSource.getRepository(User)
 
