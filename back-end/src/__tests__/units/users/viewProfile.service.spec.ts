@@ -1,11 +1,11 @@
-import { listTransactionsService } from '../../../services/transactions/listTransactions.service'
+import { viewProfileService } from '../../../services/users/viewProfile.service'
 import { createUserService } from '../../../services/users/createUser.service'
 import { AppDataSource } from '../../../data-source'
-import { DataSource } from 'typeorm'
 import { user } from '../../../mocks'
+import { DataSource } from 'typeorm'
 
 
-describe('Tests for transaction service', () => {
+describe('Tests for user service', () => {
 
     let connection: DataSource
 
@@ -18,12 +18,14 @@ describe('Tests for transaction service', () => {
 
     afterAll(async () => await connection.destroy())
 
-    test('Must be able to list transactions', async () => {
+    it('Must be able to view a profile', async () => {
 
-        const newUser = await createUserService(user)
+        await createUserService(user)
 
-        const result = await listTransactionsService(newUser!.accountId)
+        const result = await viewProfileService(user.username)
 
-        expect(result).toHaveProperty('map')
+        expect(result).toHaveProperty('username')
+        expect(result).toHaveProperty('password')
+        expect(result).toHaveProperty('accountId')
     })
 })

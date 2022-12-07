@@ -20,7 +20,7 @@ describe('Tests for transaction service', () => {
 
     afterAll(async () => await connection.destroy())
 
-    test('Must be able to create a transaction', async () => {
+    it('Must be able to create a transaction', async () => {
 
         const newUser = await createUserService(user)
 

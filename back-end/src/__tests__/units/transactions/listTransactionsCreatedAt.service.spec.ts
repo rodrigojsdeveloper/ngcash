@@ -1,4 +1,4 @@
-import { listTransactionsKeywordService } from '../../../services/transactions/listTransactionsCashIn.service'
+import { listTransactionsCreatedAtService } from '../../../services/transactions/listTransactionsCreatedAt.service'
 import { createUserService } from '../../../services/users/createUser.service'
 import { AppDataSource } from '../../../data-source'
 import { DataSource } from 'typeorm'
@@ -18,11 +18,22 @@ describe('Tests for transaction service', () => {
 
     afterAll(async () => await connection.destroy())
 
-    test('Must be able to list transactions keyword', async () => {
+    it('Must be able to list transactions date', async () => {
+
+        const date = new Date()
+
+        const day = String(date.getDate() - 1).padStart(2, '0')
+
+        const month = String(date.getMonth() + 1).padStart(2, '0')
+
+        const year = date.getFullYear()
+
+        const formattedDate = `${ year }-${ month }-${ day }`
+
 
         const newUser = await createUserService(user)
 
-        const result = await listTransactionsKeywordService(newUser!.accountId, 'cash-in')
+        const result = await listTransactionsCreatedAtService(newUser!.accountId, formattedDate)
 
         expect(result).toHaveProperty('map')
     })

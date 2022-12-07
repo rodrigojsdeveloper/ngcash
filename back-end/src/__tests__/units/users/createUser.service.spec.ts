@@ -1,11 +1,10 @@
-import { specificAccountService } from '../../../services/accounts/specificAccount.service'
 import { createUserService } from '../../../services/users/createUser.service'
 import { AppDataSource } from '../../../data-source'
-import { DataSource } from 'typeorm'
 import { user } from '../../../mocks'
+import { DataSource } from 'typeorm'
 
 
-describe('Tests for account service', () => {
+describe('Tests for user service', () => {
 
     let connection: DataSource
 
@@ -18,12 +17,12 @@ describe('Tests for account service', () => {
 
     afterAll(async () => await connection.destroy())
 
-    test('Must be able to view a account', async () => {
+    it('Must be able to create a user', async () => {
 
-        const newUser = await createUserService(user)
+        const result = await createUserService(user)
 
-        const result = await specificAccountService(newUser.accountId)
-
-        expect(result).toHaveProperty('balance')
+        expect(result).toHaveProperty('username')
+        expect(result).toHaveProperty('password')
+        expect(result).toHaveProperty('accountId')
     })
 })

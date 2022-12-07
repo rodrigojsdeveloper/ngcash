@@ -1,11 +1,11 @@
-import { createSessionService } from '../../../services/session/createSession.service'
+import { specificAccountService } from '../../../services/accounts/specificAccount.service'
 import { createUserService } from '../../../services/users/createUser.service'
 import { AppDataSource } from '../../../data-source'
-import { user, session } from '../../../mocks'
 import { DataSource } from 'typeorm'
+import { user } from '../../../mocks'
 
 
-describe('Tests for session service', () => {
+describe('Tests for account service', () => {
 
     let connection: DataSource
 
@@ -18,12 +18,12 @@ describe('Tests for session service', () => {
 
     afterAll(async () => await connection.destroy())
 
-    test('Must be able to create a session', async () => {
+    it('Must be able to view a account', async () => {
 
-        await createUserService(user)
+        const newUser = await createUserService(user)
 
-        const result = await createSessionService(session)
+        const result = await specificAccountService(newUser.accountId)
 
-        expect(result).toHaveProperty('token')
+        expect(result).toHaveProperty('balance')
     })
 })

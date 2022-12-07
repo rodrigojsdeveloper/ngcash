@@ -16,9 +16,14 @@ const createTransactionService = async (debitedId: string, { value, username }: 
 
     const user = await userRepository.findOneBy({ username })
 
+    if(!user) {
+
+        throw new AppError('User not found', 404)
+    }
+
     const accountDebited = await accountRepository.findOneBy({ id: debitedId })
 
-    const accountCredited = await accountRepository.findOneBy({ id: user!.accountId.id })
+    const accountCredited = await accountRepository.findOneBy({ id: user.accountId.id })
 
     if(value > Number(accountDebited?.balance)) {
 

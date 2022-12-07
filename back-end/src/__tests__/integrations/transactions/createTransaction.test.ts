@@ -38,11 +38,39 @@ describe('Tests for transaction routes', () => {
         expect(response.body).toHaveProperty('createdAt')
     })
 
+    test('Must be able to prevent the creation of underbalanced transactions', async () => {
+
+        const login = await request(app).post('/session').send(session)
+
+        const token: string = login.body.token
+
+        await request(app).post('/transactions').send(transaction).set('Authorization', `Bearer ${ token }`)
+        
+        const response = await request(app).post('/transactions').send(transaction).set('Authorization', `Bearer ${ token }`)
+
+        expect(response.status).toBe(400)
+        expect(response.body).toHaveProperty('message')
+    })
+
     test('Must be able to prevent create tokenless transaction', async () => {
 
         const response = await request(app).post('/transactions').send(transaction)
 
         expect(response.status).toBe(401)
+        expect(response.body).toHaveProperty('message')
+    })
+
+    test('Must be able to prevent creation of transactions with non-existent user', async () => {
+
+        transaction.username = 'username'
+
+        const login = await request(app).post('/session').send(session)
+
+        const token: string = login.body.token
+
+        const response = await request(app).post('/transactions').send(transaction).set('Authorization', `Bearer ${ token }`)
+
+        expect(response.status).toBe(404)
         expect(response.body).toHaveProperty('message')
     })
 })

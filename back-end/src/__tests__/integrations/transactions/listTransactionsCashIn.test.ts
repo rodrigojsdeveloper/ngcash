@@ -20,7 +20,7 @@ describe('Tests for transaction routes', () => {
 
     afterAll(async () => await connection.destroy())
 
-    test('Must be able to list transactions keyword', async () => {
+    test('Must be able to list transactions cash-in', async () => {
 
         const login = await request(app).post('/session').send(session)
 
@@ -32,9 +32,9 @@ describe('Tests for transaction routes', () => {
         expect(response.body).toHaveProperty('map')
     })
 
-    test('Must be able to prevent listing transactions keyword without token', async () => {
+    test('Must be able to prevent listing transactions cash-in without token', async () => {
 
-        const response = await request(app).post('/transactions').send(transaction)
+        const response = await request(app).get('/transactions/cash-in').send(transaction)
 
         expect(response.status).toBe(401)
         expect(response.body).toHaveProperty('message')
