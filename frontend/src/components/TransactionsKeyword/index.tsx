@@ -2,9 +2,9 @@ import noTransaction from '../../assets/noTransaction.png'
 import { ITransactionProp } from '../../interfaces'
 import { Container, Content } from './style'
 import { api } from '../../services/api'
-import React, { useState } from 'react'
 import { toast } from 'react-toastify'
 import { Button } from '../Button'
+import { useState } from 'react'
 
 
 const TransactionsKeyword = () => {
@@ -14,8 +14,6 @@ const TransactionsKeyword = () => {
     const [ transactionsKeywordDate, setTransactionsKeywordDate ] = useState<ITransactionProp[]>([])
 
     const [ valueInput, setValueInput ] = useState<string>('')
-
-    const [ date, setDate ] = useState<string>('')
 
     return (
         <Container>
@@ -64,10 +62,8 @@ const TransactionsKeyword = () => {
 
                     <input 
                     type="date"
-                    onChange={ (e: any) => {
+                    onChange={ (e: React.ChangeEvent<HTMLInputElement>) => {
                        
-                        console.log(e.target.value)
-
                         api.get(`/transactions/${ e.target.value }`, {
 
                             headers: {
@@ -86,7 +82,7 @@ const TransactionsKeyword = () => {
                 {
                     transactionsKeywordDate.length > 0 ? (
 
-                        transactionsKeywordDate.map(transaction => {
+                        transactionsKeywordDate.map((transaction: ITransactionProp) => {
 
                             const formattedDate = transaction.createdAt.split('T')[0]
 

@@ -1,5 +1,5 @@
 import React, { Dispatch, MouseEventHandler, SetStateAction } from 'react'
-import { FieldValues, UseFormRegister } from 'react-hook-form'
+import { UseFormRegister, FieldValues } from 'react-hook-form'
 
 
 export interface ITransactionProp {

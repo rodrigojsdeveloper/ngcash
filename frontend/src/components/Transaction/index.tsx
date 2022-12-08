@@ -29,18 +29,18 @@ const Transaction = () => {
                     const newDate = debt.createdAt.split('T')[0]
                     
                     return (
-                    <Container>
-                        <div>
-                            <p>Cash-out</p>
-                            <p>Date</p>
-                        </div>
+                        <Container key={ debt.id }>
+                            <div>
+                                <p>Cash-out</p>
+                                <p>Date</p>
+                            </div>
 
-                        <div className="divValue">
-                            <p className="debt">- US$ { debt.value.toFixed(2) }</p>
-                            <p>{ newDate }</p>
-                        </div>
-                    </Container>
-                )
+                            <div className="divValue">
+                                <p className="debt">- US$ { debt.value.toFixed(2) }</p>
+                                <p>{ newDate }</p>
+                            </div>
+                        </Container>
+                    )
                 })
             
             }
@@ -50,7 +50,7 @@ const Transaction = () => {
                     const newDate = credit.createdAt.split('T')[0]
 
                     return (
-                        <Container>
+                        <Container key={ credit.id }>
                             <div>
                                 <p>Cash-in</p>
                                 <p>Date</p>

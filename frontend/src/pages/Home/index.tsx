@@ -9,7 +9,6 @@ import { IHome, ITransactionProp } from '../../interfaces'
 import iconKeyword from '../../assets/symbol-keyword.svg'
 import logout from '../../assets/outline-logout.svg'
 import { Balance } from '../../components/Balance'
-import { Button } from '../../components/Button'
 import { useHistory } from 'react-router-dom'
 import { Container, Content } from './style'
 import { useEffect, useState } from 'react'
@@ -62,7 +61,7 @@ const Home = ({ setAuthentication }: IHome) => {
                             setStyle(true)
                         }
                     } }>
-                        <img src={ iconMenu } alt="" />
+                        <img src={ iconMenu } alt="Menu" />
                     </button>
                 </div>
             </header>

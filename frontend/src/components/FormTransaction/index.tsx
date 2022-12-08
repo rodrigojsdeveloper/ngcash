@@ -57,7 +57,7 @@ const FormTransaction = ({ addTransactions }: IFormTransaction) => {
                     <input
                     placeholder="Value"
                     type="text"
-                    { ...register('value') }
+                    { ...register("value") }
                     required={ true }
                     />
 
@@ -65,7 +65,7 @@ const FormTransaction = ({ addTransactions }: IFormTransaction) => {
                     <input
                     placeholder="Username"
                     type="text"
-                    { ...register('username') }
+                    { ...register("username") }
                     required={ true }
                     />
 

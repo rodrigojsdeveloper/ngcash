@@ -79,7 +79,7 @@ const Form = ({ apiProp, historyProp, titleProp, textProp, linkProp, setAuthenti
                 <input
                 placeholder="Username"
                 type="text"
-                { ...register('username') }
+                { ...register("username") }
                 required={ true }
                 />
 
@@ -87,7 +87,7 @@ const Form = ({ apiProp, historyProp, titleProp, textProp, linkProp, setAuthenti
                 <input
                 placeholder="Password"
                 type="password"
-                { ...register('password') }
+                { ...register("password") }
                 required={ true }
                 />
 
