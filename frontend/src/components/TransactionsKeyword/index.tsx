@@ -1,5 +1,5 @@
 import noTransaction from '../../assets/noTransaction.png'
-import { ITransactionProp } from '../../interfaces'
+import { ITransactionProps } from '../../interfaces'
 import { Container, Content } from './style'
 import { api } from '../../services/api'
 import { toast } from 'react-toastify'
@@ -9,11 +9,13 @@ import { useState } from 'react'
 
 const TransactionsKeyword = () => {
 
-    const [ transactionsKeyword, setTransactionsKeyword ] = useState<ITransactionProp[]>([])
+    const [ transactionsKeyword, setTransactionsKeyword ] = useState<ITransactionProps[]>([])
 
-    const [ transactionsKeywordDate, setTransactionsKeywordDate ] = useState<ITransactionProp[]>([])
+    const [ transactionsKeywordDate, setTransactionsKeywordDate ] = useState<ITransactionProps[]>([])
 
     const [ valueInput, setValueInput ] = useState<string>('')
+
+    const token = localStorage.getItem('Project NG.CASH: token')
 
     return (
         <Container>
@@ -32,7 +34,7 @@ const TransactionsKeyword = () => {
 
                             headers: {
                                 'Content-Type': 'application/json',
-                                'Authorization': `Bearer ${ localStorage.getItem('Project NG.CASH: token') }`,
+                                'Authorization': `Bearer ${ token }`,
                             }
                         })
                         .then(res => setTransactionsKeyword(res.data))
@@ -51,7 +53,7 @@ const TransactionsKeyword = () => {
 
                             headers: {
                                 'Content-Type': 'application/json',
-                                'Authorization': `Bearer ${ localStorage.getItem('Project NG.CASH: token') }`,
+                                'Authorization': `Bearer ${ token }`,
                             }
                         })
                         .then(res => setTransactionsKeyword(res.data))
@@ -68,7 +70,7 @@ const TransactionsKeyword = () => {
 
                             headers: {
                                 'Content-Type': 'application/json',
-                                'Authorization': `Bearer ${ localStorage.getItem('Project NG.CASH: token') }`,
+                                'Authorization': `Bearer ${ token }`,
                             }
                         })
                         .then(res => setTransactionsKeywordDate(res.data))
@@ -82,7 +84,7 @@ const TransactionsKeyword = () => {
                 {
                     transactionsKeywordDate.length > 0 ? (
 
-                        transactionsKeywordDate.map((transaction: ITransactionProp) => {
+                        transactionsKeywordDate.map((transaction: ITransactionProps) => {
 
                             const formattedDate = transaction.createdAt.split('T')[0]
 
@@ -105,7 +107,7 @@ const TransactionsKeyword = () => {
                     
                         transactionsKeyword.length > 0 ? (
                     
-                            transactionsKeyword.map((transaction: ITransactionProp) => {
+                            transactionsKeyword.map((transaction: ITransactionProps) => {
     
                                 const formattedDate = transaction.createdAt.split('T')[0]
     

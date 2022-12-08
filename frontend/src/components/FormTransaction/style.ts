@@ -60,6 +60,7 @@ const Container = styled.form`
                 }
 
                 input {
+                    
                     height: 100%;
                     width: 100%;
 

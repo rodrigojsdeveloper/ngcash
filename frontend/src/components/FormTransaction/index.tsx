@@ -1,5 +1,5 @@
+import { IFormTransactionProps } from '../../interfaces'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { IFormTransaction } from '../../interfaces'
 import { AiOutlineUser } from 'react-icons/ai'
 import { useForm } from 'react-hook-form'
 import { api } from '../../services/api'
@@ -11,7 +11,7 @@ import { useState } from 'react'
 import * as yup from 'yup'
 
 
-const FormTransaction = ({ addTransactions }: IFormTransaction) => {
+const FormTransaction = ({ addTransactions }: IFormTransactionProps) => {
 
     const [ load, setLoad ] = useState<boolean>(false)
 
@@ -74,6 +74,7 @@ const FormTransaction = ({ addTransactions }: IFormTransaction) => {
                         type="text"
                         { ...register("username") }
                         required={ true }
+                        autoComplete="off"
                         />
                     </div>
 

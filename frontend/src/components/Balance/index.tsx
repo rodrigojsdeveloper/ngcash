@@ -9,13 +9,15 @@ const Balance = () => {
 
     const [ balance, setBalance ] = useState<number>(0)
 
+    const token = localStorage.getItem('Project NG.CASH: token')
+
     useEffect(() => {
 
         api.get('/users/profile', {
 
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${ localStorage.getItem('Project NG.CASH: token') }`,
+                'Authorization': `Bearer ${ token }`,
             }
         })
         .then(res => {
@@ -26,7 +28,7 @@ const Balance = () => {
 
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${ localStorage.getItem('Project NG.CASH: token') }`,
+                    'Authorization': `Bearer ${ token }`,
                 }
             })
             .then(res => setBalance(res.data.balance))

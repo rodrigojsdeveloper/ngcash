@@ -1,4 +1,4 @@
-import { ITransactionProp, IUserProp } from '../../interfaces'
+import { ITransactionProps, IUserProps } from '../../interfaces'
 import { useEffect, useState } from 'react'
 import { api } from '../../services/api'
 import { Container } from './style'
@@ -6,7 +6,9 @@ import { Container } from './style'
 
 const Transaction = () => {
 
-    const [ user, setUser ] = useState<IUserProp>()
+    const [ user, setUser ] = useState<IUserProps>()
+
+    const token = localStorage.getItem('Project NG.CASH: token')
 
     useEffect(() => {
 
@@ -14,7 +16,7 @@ const Transaction = () => {
 
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${ localStorage.getItem('Project NG.CASH: token') }`,
+                'Authorization': `Bearer ${ token }`,
             }
         })
         .then(res => setUser(res.data))
@@ -24,7 +26,7 @@ const Transaction = () => {
     return (
         <>
             {
-                user?.accountId.debitedTransaction.map((debt: ITransactionProp) => {
+                user?.accountId.debitedTransaction.map((debt: ITransactionProps) => {
 
                     const newDate = debt.createdAt.split('T')[0]
                     
@@ -45,7 +47,7 @@ const Transaction = () => {
             
             }
             {
-                user?.accountId.creditedTransaction.map((credit: ITransactionProp) => {
+                user?.accountId.creditedTransaction.map((credit: ITransactionProps) => {
 
                     const newDate = credit.createdAt.split('T')[0]
 

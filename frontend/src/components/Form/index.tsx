@@ -1,6 +1,8 @@
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Link, useHistory } from 'react-router-dom'
+import { AiOutlineUser } from 'react-icons/ai'
 import { IFormProps } from '../../interfaces'
+import { BiLockAlt } from 'react-icons/bi'
 import { useForm } from 'react-hook-form'
 import { api } from '../../services/api'
 import { toast } from 'react-toastify'
@@ -8,15 +10,13 @@ import { Container } from './style'
 import { Button } from '../Button'
 import { useState } from 'react'
 import * as yup from 'yup'
-import { BiLockAlt } from 'react-icons/bi'
-import { AiOutlineUser } from 'react-icons/ai'
 
 
 const Form = ({ apiProp, historyProp, titleProp, textProp, linkProp }: IFormProps) => {
+    
+    const history = useHistory()
 
     const [ load, setLoad ] = useState<boolean>(false)
-
-    const history = useHistory()
 
     const schema = yup.object().shape({
         
@@ -78,6 +78,7 @@ const Form = ({ apiProp, historyProp, titleProp, textProp, linkProp }: IFormProp
                     type="text"
                     { ...register("username") }
                     required={ true }
+                    autoComplete="off"
                     />
                 </div>
 

@@ -2,25 +2,25 @@ import { UseFormRegister, FieldValues } from 'react-hook-form'
 import React, { MouseEventHandler } from 'react'
 
 
-export interface ITransactionProp {
+export interface ITransactionProps {
     id: string
     value: number
     createdAt: string
 }
 
-export interface IAccountProp {
+export interface IAccountProps {
     id: string
     value: number
     createdAt: string
-    creditedTransaction: ITransactionProp[]
-    debitedTransaction: ITransactionProp[]
+    creditedTransaction: ITransactionProps[]
+    debitedTransaction: ITransactionProps[]
 }
 
-export interface IUserProp {
+export interface IUserProps {
     id: string
     username: string
     password: string
-    accountId: IAccountProp
+    accountId: IAccountProps
 }
 
 export interface IFormProps {
@@ -54,10 +54,10 @@ export interface IStyledButtonProps {
     buttonStyle: 'register' | 'home'
 }
 
-export interface ITransactions {
-    transactions: ITransactionProp[]
+export interface ITransactionsProps {
+    transactions: ITransactionProps[]
 }
 
-export interface IFormTransaction {
-    addTransactions: (e: ITransactionProp) => void
+export interface IFormTransactionProps {
+    addTransactions: (e: ITransactionProps) => void
 }

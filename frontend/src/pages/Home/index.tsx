@@ -7,8 +7,8 @@ import iconBalance from '../../assets/account-balance.svg'
 import iconTransaction from '../../assets/transaction.svg'
 import iconKeyword from '../../assets/symbol-keyword.svg'
 import { Redirect, useHistory } from 'react-router-dom'
+import { ITransactionProps } from '../../interfaces'
 import logout from '../../assets/outline-logout.svg'
-import { ITransactionProp } from '../../interfaces'
 import { Balance } from '../../components/Balance'
 import { Container, Content } from './style'
 import { useEffect, useState } from 'react'
@@ -28,11 +28,11 @@ const Home = () => {
 
     const [ openTransaction, setOpenTransaction ] = useState<boolean>(false)
 
-    const [ transactions, setTransactions ] = useState<ITransactionProp[]>([])
+    const [ transactions, setTransactions ] = useState<ITransactionProps[]>([])
 
     const [ style, setStyle ] = useState<boolean>(false)
 
-    const addTransactions = (transaction: ITransactionProp) => setTransactions([ ...transactions!, transaction ])
+    const addTransactions = (transaction: ITransactionProps) => setTransactions([ ...transactions!, transaction ])
 
     useEffect(() => {
 
