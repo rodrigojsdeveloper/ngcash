@@ -1,5 +1,5 @@
-import { Link, Redirect, useHistory } from 'react-router-dom'
 import { yupResolver } from '@hookform/resolvers/yup'
+import { Link, useHistory } from 'react-router-dom'
 import { IFormProps } from '../../interfaces'
 import { useForm } from 'react-hook-form'
 import { api } from '../../services/api'
@@ -8,9 +8,11 @@ import { Container } from './style'
 import { Button } from '../Button'
 import { useState } from 'react'
 import * as yup from 'yup'
+import { BiLockAlt } from 'react-icons/bi'
+import { AiOutlineUser } from 'react-icons/ai'
 
 
-const Form = ({ apiProp, historyProp, titleProp, textProp, linkProp, setAuthentication, authentication }: IFormProps) => {
+const Form = ({ apiProp, historyProp, titleProp, textProp, linkProp }: IFormProps) => {
 
     const [ load, setLoad ] = useState<boolean>(false)
 
@@ -48,8 +50,6 @@ const Form = ({ apiProp, historyProp, titleProp, textProp, linkProp, setAuthenti
 
                 localStorage.setItem('Project NG.CASH: token', res.data.token)
 
-                setAuthentication(true)
-
                 toast.success('Login completed')
             }
 
@@ -64,11 +64,6 @@ const Form = ({ apiProp, historyProp, titleProp, textProp, linkProp, setAuthenti
         .finally(() => setLoad(false))
     }
 
-    if(authentication) {
-
-        return <Redirect to="/home" />
-    }
-
     return (
         <Container onSubmit={ handleSubmit(onSumbitFunction) }>
 
@@ -76,20 +71,26 @@ const Form = ({ apiProp, historyProp, titleProp, textProp, linkProp, setAuthenti
 
             <main>
                 <label>{ errors.username?.message as string }</label>
-                <input
-                placeholder="Username"
-                type="text"
-                { ...register("username") }
-                required={ true }
-                />
+                <div>
+                    <AiOutlineUser />
+                    <input
+                    placeholder="Username"
+                    type="text"
+                    { ...register("username") }
+                    required={ true }
+                    />
+                </div>
 
                 <label>{ errors.password?.message as string }</label>
-                <input
-                placeholder="Password"
-                type="password"
-                { ...register("password") }
-                required={ true }
-                />
+                <div>
+                    <BiLockAlt />
+                    <input
+                    placeholder="Password"
+                    type="password"
+                    { ...register("password") }
+                    required={ true }
+                    />
+                </div>
 
                 <Button buttonStyle="register" type="submit" disabled={ load }>{
                     load ? 'Sending...' : 'Submit'

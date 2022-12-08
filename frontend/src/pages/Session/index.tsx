@@ -1,22 +1,22 @@
 import session from '../../assets/Computer login-bro.svg'
+import ngcashLogo from '../../assets/NgCash.png'
 import { Container } from '../Register/style'
 import { Form } from '../../components/Form'
-import { ISession } from '../../interfaces'
 
 
-const Session = ({ authentication, setAuthentication }: ISession) => {
+const Session = () => {
     
     return (
         <Container>
             <div>
+                <img src={ ngcashLogo } />
+                
                 <Form 
                 apiProp="session" 
                 historyProp="home" 
                 titleProp="Login" 
                 textProp="Don't have an account yet? " 
-                linkProp="" 
-                authentication={ authentication } 
-                setAuthentication={ setAuthentication }
+                linkProp=""
                 />
             </div>
 

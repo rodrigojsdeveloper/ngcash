@@ -39,7 +39,7 @@ const Balance = () => {
         <Container>
             <h1>Hi { username }, your balance is</h1>
 
-            <p>R$ { balance.toFixed(2) }</p>
+            <p>US$ { balance.toFixed(2) }</p>
         </Container>
     )
 }

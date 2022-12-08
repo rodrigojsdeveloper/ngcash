@@ -26,7 +26,6 @@ const Container = styled.form`
             display: flex;
             flex-direction: column;
 
-
             label {
 
                 color: var(--red);
@@ -35,21 +34,14 @@ const Container = styled.form`
                 padding-top: 10px;
             }
 
-            input {
+            & > div {
+
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
 
                 transition: 0.4s;
-
-                &:focus::-webkit-input-placeholder {
-                    color: var(--transparent);
-                }
-
-                &:focus {
-                    border-color: var(--color);
-                }
-
-                &::placeholder {
-                    color: var(--gray);
-                }
 
                 width: 100%;
                 max-width: 250px;
@@ -62,6 +54,27 @@ const Container = styled.form`
 
                 align-items: center;
                 color: var(--color);
+                
+                &:hover {
+                    border-color: var(--color);
+                }
+
+                input {
+                    height: 100%;
+                    width: 100%;
+
+                    margin-left: 12.5px;
+                    
+                    border: none;
+                    
+                    &:focus::-webkit-input-placeholder {
+                        color: var(--transparent);
+                    }
+
+                    &::placeholder {
+                        color: var(--gray);
+                    }
+                }
             }
         }
     }

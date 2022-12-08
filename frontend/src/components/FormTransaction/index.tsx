@@ -1,7 +1,9 @@
 import { yupResolver } from '@hookform/resolvers/yup'
 import { IFormTransaction } from '../../interfaces'
+import { AiOutlineUser } from 'react-icons/ai'
 import { useForm } from 'react-hook-form'
 import { api } from '../../services/api'
+import { BsCash } from 'react-icons/bs'
 import { toast } from 'react-toastify'
 import { Container } from './style'
 import { Button } from '../Button'
@@ -54,20 +56,26 @@ const FormTransaction = ({ addTransactions }: IFormTransaction) => {
 
                 <main>
                     <label>{ errors.value?.message as string }</label>
-                    <input
-                    placeholder="Value"
-                    type="text"
-                    { ...register("value") }
-                    required={ true }
-                    />
+                    <div>
+                        <BsCash />
+                        <input
+                        placeholder="Value"
+                        type="text"
+                        { ...register("value") }
+                        required={ true }
+                        />
+                    </div>
 
                     <label>{ errors.username?.message as string }</label>
-                    <input
-                    placeholder="Username"
-                    type="text"
-                    { ...register("username") }
-                    required={ true }
-                    />
+                    <div>
+                        <AiOutlineUser />
+                        <input
+                        placeholder="Username"
+                        type="text"
+                        { ...register("username") }
+                        required={ true }
+                        />
+                    </div>
 
                     <Button buttonStyle="register" type="submit" disabled={ load }>{
                         load ? 'Sending...' : 'Submit'

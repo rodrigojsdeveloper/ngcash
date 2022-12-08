@@ -1,5 +1,5 @@
-import React, { Dispatch, MouseEventHandler, SetStateAction } from 'react'
 import { UseFormRegister, FieldValues } from 'react-hook-form'
+import React, { MouseEventHandler } from 'react'
 
 
 export interface ITransactionProp {
@@ -29,8 +29,6 @@ export interface IFormProps {
     titleProp: string
     textProp: string
     linkProp: string
-    authentication: boolean
-    setAuthentication: Dispatch<SetStateAction<boolean>>
 }
 
 export interface IButtonProps {
@@ -54,15 +52,6 @@ export interface InputProps {
 
 export interface IStyledButtonProps {
     buttonStyle: 'register' | 'home'
-}
-
-export interface ISession {
-    authentication: boolean
-    setAuthentication: Dispatch<SetStateAction<boolean>>
-}
-
-export interface IHome {
-    setAuthentication: Dispatch<SetStateAction<boolean>>
 }
 
 export interface ITransactions {

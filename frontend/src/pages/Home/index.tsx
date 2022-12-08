@@ -5,18 +5,18 @@ import iconTransactions from '../../assets/transactions.svg'
 import { Transactions } from '../../components/Transactions'
 import iconBalance from '../../assets/account-balance.svg'
 import iconTransaction from '../../assets/transaction.svg'
-import { IHome, ITransactionProp } from '../../interfaces'
 import iconKeyword from '../../assets/symbol-keyword.svg'
+import { Redirect, useHistory } from 'react-router-dom'
 import logout from '../../assets/outline-logout.svg'
+import { ITransactionProp } from '../../interfaces'
 import { Balance } from '../../components/Balance'
-import { useHistory } from 'react-router-dom'
 import { Container, Content } from './style'
 import { useEffect, useState } from 'react'
 import { api } from '../../services/api'
 import { toast } from 'react-toastify'
 
 
-const Home = ({ setAuthentication }: IHome) => {
+const Home = () => {
 
     const history = useHistory()
 
@@ -46,6 +46,11 @@ const Home = ({ setAuthentication }: IHome) => {
         .then(res => setTransactions(res.data))
         .catch(err => console.error(err))
     }, [])
+
+    if(!localStorage.getItem('Project NG.CASH: token')) {
+
+        return <Redirect to="/" />
+    }
     
     return (
         <Container>
@@ -118,8 +123,6 @@ const Home = ({ setAuthentication }: IHome) => {
                         history.push('/session')
 
                         localStorage.removeItem('Project NG.CASH: token')
-
-                        setAuthentication(false)
 
                     } }>
                         <p>Log out</p>

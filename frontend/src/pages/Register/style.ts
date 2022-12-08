@@ -6,7 +6,7 @@ const Container = styled.div`
 
     display: flex;
 
-    img {
+    & > img {
         width: 60%;
         height: 100vh;
         animation: ${ animacaoForm } 1s;
@@ -17,13 +17,18 @@ const Container = styled.div`
         width: 40%;
 
         display: flex;
-        justify-content: center;
+        flex-direction: column;
+        justify-content: space-evenly;
         align-items: center;
+
+        img {
+            animation: ${ animacaoForm }  1s;
+        }
     }
 
     @media (max-width: 1050px) {
         
-        img {
+        & > img {
             display: none;
         }
 
