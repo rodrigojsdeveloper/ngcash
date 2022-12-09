@@ -1,4 +1,3 @@
-import register from '../../assets/Mobile login-bro.svg'
 import ngcashLogo from '../../assets/NgCash.png'
 import { Form } from '../../components/Form'
 import { Container } from './style'
@@ -8,10 +7,11 @@ const Register = () => {
 
     return (
         <Container>
-            <img src={ register } alt="SVG - Register" title="Register" />
-
-            <div>
+            <div className="divBlack">
                 <img src={ ngcashLogo } />
+            </div>
+
+            <div className="divWhite">
 
                 <Form 
                 apiProp="users" 
@@ -20,6 +20,7 @@ const Register = () => {
                 textProp="Already have an account? " 
                 linkProp="session" 
                 />
+                
             </div>
         </Container>
     )

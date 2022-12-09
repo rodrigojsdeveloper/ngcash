@@ -1,4 +1,3 @@
-import session from '../../assets/Computer login-bro.svg'
 import ngcashLogo from '../../assets/NgCash.png'
 import { Container } from '../Register/style'
 import { Form } from '../../components/Form'
@@ -8,9 +7,11 @@ const Session = () => {
     
     return (
         <Container>
-            <div>
+            <div className="divBlack">
                 <img src={ ngcashLogo } />
-                
+            </div>
+
+            <div className="divWhite">                
                 <Form 
                 apiProp="session" 
                 historyProp="home" 
@@ -19,8 +20,6 @@ const Session = () => {
                 linkProp=""
                 />
             </div>
-
-            <img src={ session } alt="SVG - Login" title="Login" />
         </Container>
     )
 }

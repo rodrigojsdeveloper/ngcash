@@ -30,6 +30,7 @@ export default createGlobalStyle`
         --shadow-button-2: rgba(0, 0, 0, 0.65);
         --shadow-button-3: rgba(0, 0, 0, 0.06);
         --border-input: #dcdcdc;
+        --box-shadow-form: rgba(136, 165, 191, 0.48);
     }
 
     body {

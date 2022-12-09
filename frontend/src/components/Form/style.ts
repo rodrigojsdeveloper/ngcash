@@ -100,6 +100,16 @@ const Container = styled.form`
                     color: var(--gray);
                 }
             }
+
+            .biShow {
+
+                color: var(--gray);
+
+                &:hover {
+                    cursor: pointer;
+                    color: var(--color);
+                }
+            }
         }
     }
 `

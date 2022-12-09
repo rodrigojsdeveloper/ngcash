@@ -29,9 +29,10 @@ const Container = styled.button`
                     background: var(--color);
                     color: var(--background);
                     border-color: var(--color);
+                    box-shadow: var(--background) 0 1px 0 0 inset;
 
                     :hover {
-                        box-shadow: 0 0.5em 0.5em -0.4em var(--color);
+                        box-shadow: unset;
                     }
                 `
             case 'home':

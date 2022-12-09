@@ -4,39 +4,35 @@ import styled from 'styled-components'
 
 const Container = styled.div`
 
-    display: flex;
-
-    & > img {
-        width: 60%;
-        height: 100vh;
-        animation: ${ animacaoForm } 1s;
+    div {
+        padding: 20px 15px;
     }
 
-    div {
+    .divBlack {
+        height: 40vh;
         background: var(--color);
-        width: 40%;
 
         display: flex;
-        flex-direction: column;
-        justify-content: space-evenly;
-        align-items: center;
+        justify-content: center;
+        align-items: flex-start;
 
         img {
+            width: 150px;
+            object-fit: contain;
+            margin-top: 15px;
+
             animation: ${ animacaoForm }  1s;
         }
     }
 
-    @media (max-width: 1050px) {
-        
-        & > img {
-            display: none;
-        }
+    .divWhite {
 
-        div {
+        display: flex;
+        justify-content: center;
 
-            width: 100%;
-            height: 100vh;
-            padding: 15px;
+        form {
+            margin-top: -125px;
+            box-shadow: var(--box-shadow-form) 6px 2px 16px 0px;
         }
     }
 `

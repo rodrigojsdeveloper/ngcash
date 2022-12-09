@@ -2,7 +2,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { Link, useHistory } from 'react-router-dom'
 import { AiOutlineUser } from 'react-icons/ai'
 import { IFormProps } from '../../interfaces'
-import { BiLockAlt } from 'react-icons/bi'
+import { BiLockAlt, BiShow } from 'react-icons/bi'
 import { useForm } from 'react-hook-form'
 import { api } from '../../services/api'
 import { toast } from 'react-toastify'
@@ -17,6 +17,10 @@ const Form = ({ apiProp, historyProp, titleProp, textProp, linkProp }: IFormProp
     const history = useHistory()
 
     const [ load, setLoad ] = useState<boolean>(false)
+
+    const [ typeInput, setTypeInput ] = useState(false)
+
+    const [ showBiShow, setShowBiShow ] = useState(false)
 
     const schema = yup.object().shape({
         
@@ -87,10 +91,33 @@ const Form = ({ apiProp, historyProp, titleProp, textProp, linkProp }: IFormProp
                     <BiLockAlt />
                     <input
                     placeholder="Password"
-                    type="password"
+                    type={ typeInput ? "text" : "password" }
                     { ...register("password") }
                     required={ true }
+                    onChange={ (e: any) => {
+
+                        setShowBiShow(true)
+
+                        if(e.target.value == '') {
+
+                            setShowBiShow(false)
+                        }
+
+                    } }
                     />
+                    {
+                        showBiShow && 
+                        <BiShow className="biShow" onClick={ () => {
+    
+                            setTypeInput(true)
+    
+                            if(typeInput) {
+    
+                                setTypeInput(false)
+                            }
+    
+                        } } />
+                    }
                 </div>
 
                 <Button buttonStyle="register" type="submit" disabled={ load }>{
