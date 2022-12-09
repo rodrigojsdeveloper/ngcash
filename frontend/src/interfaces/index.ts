@@ -45,9 +45,8 @@ export interface InputProps {
     autoComplete?: string
     placeholder?: string
     register: UseFormRegister<FieldValues>
-    label?: string
-    error?: any
     required?: boolean | undefined
+    onChange?: any
 }
 
 export interface IStyledButtonProps {

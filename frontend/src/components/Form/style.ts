@@ -108,6 +108,7 @@ const Container = styled.form`
                 &:hover {
                     cursor: pointer;
                     color: var(--color);
+                    transition: 1s;
                 }
             }
         }
