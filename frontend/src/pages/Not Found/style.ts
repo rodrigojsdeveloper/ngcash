@@ -22,7 +22,7 @@ const Container = styled.div`
     flex-direction: column;
     justify-content: center;
 
-    a {
+    p {
         text-decoration: none;
         cursor: pointer;
         
@@ -37,7 +37,7 @@ const Container = styled.div`
         font-size: 2rem;
     }
 
-    a {
+    p {
         margin-top: 30px;
         height: 20px;
         line-height: 20px;

@@ -81,7 +81,7 @@ const NotFound = () => {
     return (
         <Container>
             <h2>{ title }</h2>
-            <a onClick={ () => history.push('/') }>{ link }</a>
+            <p onClick={ () => history.push('/') }>{ link }</p>
         </Container>
     )
 }

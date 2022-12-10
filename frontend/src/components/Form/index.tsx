@@ -12,7 +12,7 @@ import { useState } from 'react'
 import * as yup from 'yup'
 
 
-const Form = ({ apiProp, historyProp, titleProp, textProp, linkProp }: IFormProps) => {
+const Form = ({ apiProp, historyProp, titleProp, textProp, linkProp, textLinkProp }: IFormProps) => {
     
     const history = useHistory()
 
@@ -125,7 +125,7 @@ const Form = ({ apiProp, historyProp, titleProp, textProp, linkProp }: IFormProp
                 }</Button>
             </main>
 
-            <p>{ textProp }<Link to={ `/${ linkProp }` }>click here</Link>.</p>
+            <p>{ textProp }<Link to={ `/${ linkProp }` }>{ textLinkProp }</Link></p>
 
         </Container>
     )

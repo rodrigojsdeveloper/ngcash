@@ -8,7 +8,7 @@ const Register = () => {
     return (
         <Container>
             <div className="divBlack">
-                <img src={ ngcashLogo } />
+                <img src={ ngcashLogo } alt="logo ng.cash" />
             </div>
 
             <div className="divWhite">
@@ -18,7 +18,8 @@ const Register = () => {
                 historyProp="session" 
                 titleProp="Register" 
                 textProp="Already have an account? " 
-                linkProp="session" 
+                linkProp="session"
+                textLinkProp="go to login"
                 />
                 
             </div>

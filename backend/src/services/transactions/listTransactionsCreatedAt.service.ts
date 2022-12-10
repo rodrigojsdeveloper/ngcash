@@ -10,7 +10,7 @@ const listTransactionsCreatedAtService = async (id: string, date: string) => {
 
     const cashIn = account!.creditedTransaction.filter(transaction => {
 
-        const day = String(transaction.createdAt.getDate() - 1).padStart(2, '0')
+        const day = String(transaction.createdAt.getDate()).padStart(2, '0')
 
         const month = String(transaction.createdAt.getMonth() + 1).padStart(2, '0')
 
@@ -23,7 +23,7 @@ const listTransactionsCreatedAtService = async (id: string, date: string) => {
 
     const cashOut = account!.debitedTransaction.filter(transaction => {
 
-        const day = String(transaction.createdAt.getDate() - 1).padStart(2, '0')
+        const day = String(transaction.createdAt.getDate()).padStart(2, '0')
 
         const month = String(transaction.createdAt.getMonth() + 1).padStart(2, '0')
 

@@ -29,6 +29,7 @@ export interface IFormProps {
     titleProp: string
     textProp: string
     linkProp: string
+    textLinkProp: string
 }
 
 export interface IButtonProps {
@@ -59,4 +60,8 @@ export interface ITransactionsProps {
 
 export interface IFormTransactionProps {
     addTransactions: (e: ITransactionProps) => void
+}
+
+export interface ITransactionComponentProps {
+    transaction: ITransactionProps
 }

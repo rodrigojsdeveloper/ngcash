@@ -3,35 +3,38 @@ import styled from 'styled-components'
 
 const Container = styled.div`
 
-    background: var(--background-side-menu);
-    color: var(--background);
-    width: 100%;
-    max-width: 700px;
-
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
 
-    padding: 20px;
+    padding: 15px;
+    border-radius: 4px;
+    background: var(--dark-white-background);
+    border: 1px solid var(--border-color-button);
 
-    margin: 10px 0;
+    margin-bottom: 10px;
 
-    .divValue {
-        text-align: end;
+    & > div {
+
+        display: flex;
+        flex-direction: row;
+
+        p {
+            margin-left: 15px;
+        }
     }
 
-    & div {
-    
-        p {
-            padding: 10px 0;
-            font-weight: bold;
-        }
+    data {
+        font-weight: bold;
+    }
 
-        .credit {
-            color: var(--green);
-        }
+    @media (max-width: 320px) {
 
-        .debt {
-            color: var(--red);
+        flex-direction: column;
+        align-items: center;
+
+        data {
+            padding-top: 15px;
         }
     }
 `

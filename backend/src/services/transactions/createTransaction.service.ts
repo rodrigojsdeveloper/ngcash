@@ -25,6 +25,11 @@ const createTransactionService = async (debitedId: string, { value, username }: 
 
     const accountCredited = await accountRepository.findOneBy({ id: user.accountId.id })
 
+    if(accountDebited?.id == accountCredited?.id) {
+
+        throw new AppError('the user cannot make transactions for himself', 401)
+    }
+
     if(value > Number(accountDebited?.balance)) {
 
         throw new AppError('insufficient debt')

@@ -113,6 +113,19 @@ const Container = styled.form`
             }
         }
     }
+
+    @media (max-width: 320px) {
+
+        p {
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+
+            a {
+                margin-top: 3px;
+            }
+        }
+    }
 `
 
 export { Container, animacaoForm }

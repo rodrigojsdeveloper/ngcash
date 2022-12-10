@@ -8,7 +8,7 @@ const Session = () => {
     return (
         <Container>
             <div className="divBlack">
-                <img src={ ngcashLogo } />
+                <img src={ ngcashLogo } alt="logo ng.cash" />
             </div>
 
             <div className="divWhite">                
@@ -18,6 +18,7 @@ const Session = () => {
                 titleProp="Login" 
                 textProp="Don't have an account yet? " 
                 linkProp=""
+                textLinkProp="go to register"
                 />
             </div>
         </Container>
