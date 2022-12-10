@@ -5,9 +5,9 @@ import { Request, Response } from 'express'
 
 const createSessionController = async (req: Request, res: Response) => {
 
-    const user: ISessionRequest = req.body
+    const data: ISessionRequest = req.body
 
-    const session = await createSessionService(user)
+    const session = await createSessionService(data)
 
     return res.json(session)
 }

@@ -1,4 +1,5 @@
 import { createTransactionService } from '../../services/transactions/createTransaction.service'
+import { ITransactionRequest } from '../../interfaces/transactions'
 import { AppDataSource } from '../../data-source'
 import { Account } from '../../entities/accounts'
 import { Request, Response } from 'express'
@@ -9,7 +10,7 @@ const createTransactionController = async (req: Request, res: Response) => {
 
     const usernameDebt: string = req.username
 
-    const { value, username } = req.body
+    const data: ITransactionRequest = req.body
 
     const userRepository = AppDataSource.getRepository(User)
 
@@ -19,7 +20,7 @@ const createTransactionController = async (req: Request, res: Response) => {
 
     const debited_id = await accountRepository.findOneBy({ id: user_debited_id!.accountId.id })
 
-    const newTransaction = await createTransactionService(debited_id!.id, { value, username })
+    const newTransaction = await createTransactionService(debited_id!.id, data)
 
     return res.status(201).json(newTransaction)
 }
