@@ -1,0 +1,23 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.app = void 0;
+const handleError_middleware_1 = require("../../src/middlewares/handleError.middleware");
+const swagger_ui_express_1 = __importDefault(require("swagger-ui-express"));
+const swagger_json_1 = __importDefault(require("../../src/swagger.json"));
+const routes_1 = require("../../src/routes");
+const express_1 = __importDefault(require("express"));
+require("express-async-errors");
+const cors = require('cors');
+require("reflect-metadata");
+require("dotenv/config");
+const app = (0, express_1.default)();
+exports.app = app;
+app.use(express_1.default.json());
+app.use(cors());
+(0, routes_1.appRoutes)(app);
+app.use('/docs', swagger_ui_express_1.default.serve, swagger_ui_express_1.default.setup(swagger_json_1.default));
+app.get('/terms', (req, res) => res.json({ message: 'Terms and Services' }));
+app.use(handleError_middleware_1.handleErrorMiddleware);

@@ -16,7 +16,7 @@ const Register = () => {
                 <Form 
                 apiProp="users" 
                 historyProp="session" 
-                titleProp="Register" 
+                titleProp="Open your account" 
                 textProp="Already have an account? " 
                 linkProp="session"
                 textLinkProp="go to login"

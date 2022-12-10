@@ -10,7 +10,7 @@
     "typeorm": "typeorm-ts-node-commonjs",
     "test": "cross-env NODE_ENV=test SECRET_KEY=8efn0anfe jest",
     "build": "tsc",
-    "start": "node dist/server.ts",
+    "start": "node dist/src/server.js",
     "type": "module"
   },
   "devDependencies": {

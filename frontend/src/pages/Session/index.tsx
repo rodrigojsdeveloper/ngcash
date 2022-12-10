@@ -15,7 +15,7 @@ const Session = () => {
                 <Form 
                 apiProp="session" 
                 historyProp="home" 
-                titleProp="Login" 
+                titleProp="Log in" 
                 textProp="Don't have an account yet? " 
                 linkProp=""
                 textLinkProp="go to register"

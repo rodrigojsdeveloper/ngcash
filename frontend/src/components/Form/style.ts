@@ -33,6 +33,10 @@ const Container = styled.form`
     border-radius: 10px;
     padding: 20px;
 
+    h1 {
+        font-size: 25px;
+    }
+
     p {
         margin-top: 10px;
         font-size: 13.5px;

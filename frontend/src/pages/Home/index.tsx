@@ -1,154 +1,306 @@
-import { TransactionsKeyword } from '../../components/TransactionsKeyword'
-import { FormTransaction } from '../../components/FormTransaction'
-import iconMenu from '../../assets/close-to-menu-transition.svg'
-import iconTransactions from '../../assets/transactions.svg'
-import { Transactions } from '../../components/Transactions'
-import iconBalance from '../../assets/account-balance.svg'
-import iconTransaction from '../../assets/transaction.svg'
-import iconKeyword from '../../assets/symbol-keyword.svg'
+import { Transaction } from '../../components/Transaction'
 import { Redirect, useHistory } from 'react-router-dom'
+import { yupResolver } from '@hookform/resolvers/yup'
 import { ITransactionProps } from '../../interfaces'
 import logout from '../../assets/outline-logout.svg'
-import { Balance } from '../../components/Balance'
-import { Container, Content } from './style'
+import { Button } from '../../components/Button'
+import { AiOutlineUser } from 'react-icons/ai'
 import { useEffect, useState } from 'react'
+import { useForm } from 'react-hook-form'
 import { api } from '../../services/api'
+import { BsCash } from 'react-icons/bs'
 import { toast } from 'react-toastify'
+import { Container } from './style'
+import * as yup from 'yup'
 
 
 const Home = () => {
 
     const history = useHistory()
 
-    const [ openTransactions, setOpenTransactions ] = useState<boolean>(false)
+    const [ balance, setBalance ] = useState<number>(0)
 
-    const [ openTransactionsKeyword, setOpenTransactionsKeyword ] = useState<boolean>(false)
-
-    const [ openBalance, setOpenBalance ] = useState<boolean>(true)
-
-    const [ openTransaction, setOpenTransaction ] = useState<boolean>(false)
+    const [ load, setLoad ] = useState<boolean>(false)
 
     const [ transactions, setTransactions ] = useState<ITransactionProps[]>([])
 
-    const [ style, setStyle ] = useState<boolean>(false)
+    const [ transactionsBoolean, setTransactionsBoolean ] = useState<boolean>(true)
+
+    const [ transactionsCashIn, setTransactionsCashIn ] = useState<ITransactionProps[]>([])
+
+    const [ transactionsCashInBoolean, setTransactionsCashInBoolean ] = useState<boolean>(false)
+    
+    const [ transactionsCashOut, setTransactionsCashOut ] = useState<ITransactionProps[]>([])
+
+    const [ transactionsCashOutBoolean, setTransactionsCashOutBoolean ] = useState<boolean>(false)
+
+    const [ transactionsDate, setTransactionsDate ] = useState<ITransactionProps[]>([])
+
+    const [ transactionsDateBoolean, setTransactionsDateBoolean ] = useState<boolean>(false)
 
     const addTransactions = (transaction: ITransactionProps) => setTransactions([ ...transactions!, transaction ])
+
+
+    const token = localStorage.getItem('Project NG.CASH: token')
+
+    const schema = yup.object().shape({
+
+        username: yup
+            .string()
+            .min(3, 'Username must contain at least 3 characters'),
+
+        value: yup
+            .number()
+            .typeError('Amount must be a number'),
+    })
+
+    const { register, handleSubmit, formState: { errors } } = useForm({ resolver: yupResolver(schema) })
+
+    const onSumbitFunction = (data: object) => {
+
+        setLoad(true)
+
+        api.post('/transactions', data, {
+
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${ token }`,
+            }
+        })
+        .then(res => {
+        
+            addTransactions(res.data)
+
+            toast.success('Completed transaction')
+
+            api.get('/users/profile', {
+
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${ token }`,
+                }
+            })
+            .then(res => {
+    
+                api.get(`/accounts/${ res.data.accountId.id }`, {
+    
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${ token }`,
+                    }
+                })
+                .then(res => setBalance(res.data.balance))
+                .catch(err => console.error(err))
+            })
+            .catch(err => console.error(err))
+
+        })
+        .catch(_ => toast.error('Transaction error'))
+        .finally(() => setLoad(false))
+    }
 
     useEffect(() => {
 
         api.get('/transactions', {
-            
+                            
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${ localStorage.getItem('Project NG.CASH: token') }`,
+                'Authorization': `Bearer ${ token }`,
             }
         })
         .then(res => setTransactions(res.data))
         .catch(err => console.error(err))
+
+    }, [])
+
+    useEffect(() => {
+
+        api.get('/users/profile', {
+
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${ token }`,
+            }
+        })
+        .then(res => {
+
+            api.get(`/accounts/${ res.data.accountId.id }`, {
+
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${ token }`,
+                }
+            })
+            .then(res => setBalance(res.data.balance))
+            .catch(err => console.error(err))
+        })
+        .catch(err => console.error(err))
+
     }, [])
 
     if(!localStorage.getItem('Project NG.CASH: token')) {
 
         return <Redirect to="/" />
     }
-    
+
     return (
         <Container>
-            <header className="headerStyle">
-                <div>
-                    <button id="button" className="b-menu" onClick={ () => {
+            <div>
+                <img src={ logout } alt="log out" onClick={ () => {
 
-                        if(style) {
-                            setStyle(false)
-                        
-                        } else {
+                    toast.success('Check back often!')
 
-                            setStyle(true)
-                        }
-                    } }>
-                        <img src={ iconMenu } alt="Menu" />
-                    </button>
-                </div>
-            </header>
+                    history.push('/session')
 
-            <Content>
-                <nav className={ style ? "close" : "open" }>
+                    localStorage.removeItem('Project NG.CASH: token')
 
-                    <div className="divNav">
-                        <div onClick={ () => {
-                                setOpenTransaction(true)
-                                setOpenTransactions(false)
-                                setOpenTransactionsKeyword(false)
-                                setOpenBalance(false)
-                                } }>
-                            <img src={ iconTransaction } />
-                            <p>Transaction</p>
-                        </div>
+                } }/>
+                <h1>BALANCE</h1>
+                <p>US$ { balance.toFixed(2) }</p>
+                <h2>CASH OUT</h2>
 
-                        <div onClick={ () => {
-                                setOpenTransactions(true)
-                                setOpenTransaction(false)
-                                setOpenTransactionsKeyword(false)
-                                setOpenBalance(false)
-                            } }>
-                            <img src={ iconTransactions } />
-                            <p>Transactions</p>
-                        </div>
-
-                        <div onClick={ () => {
-                                setOpenTransactionsKeyword(true)
-                                setOpenTransaction(false)
-                                setOpenTransactions(false)
-                                setOpenBalance(false)
-                            } }>
-                            <img src={ iconKeyword } />
-                            <p>Transactions Keyword</p>
-                        </div>
-                        
-                        <div onClick={ () => {
-                                setOpenBalance(true)
-                                setOpenTransaction(false)
-                                setOpenTransactions(false)
-                                setOpenTransactionsKeyword(false)
-                                } }>
-                            <img src={ iconBalance } />
-                            <p>Balance</p>
-                        </div>
+                <form onSubmit={ handleSubmit(onSumbitFunction) }>
+                    <label>{ errors.value?.message as string }</label>
+                    <div>
+                        <BsCash />
+                        <input
+                        placeholder="Value"
+                        type="text"
+                        { ...register("value") }
+                        required={ true }
+                        autoComplete="off"
+                        />
                     </div>
 
-                    <div className="divLogOut" onClick={ () => {
-
-                        toast.success('Check back often!')
-
-                        history.push('/session')
-
-                        localStorage.removeItem('Project NG.CASH: token')
-
-                    } }>
-                        <p>Log out</p>
-                        <img src={ logout } />
+                    <label>{ errors.username?.message as string }</label>
+                    <div>
+                        <AiOutlineUser />
+                        <input
+                        placeholder="Username"
+                        type="text"
+                        { ...register("username") }
+                        required={ true }
+                        autoComplete="off"
+                        />
                     </div>
-                </nav>
+
+                    <Button buttonStyle="register" type="submit" disabled={ load }>{
+                        load ? 'Sending...' : 'Submit'
+                    }</Button>
+                </form>
+            </div>
+
+            <menu>
+                <h1>All transactions</h1>
+                <h2>Cash-in, cash-out and date transactions</h2>
+
+                <main>
+                    {
+                        transactionsBoolean &&
+                        transactions.map((transaction: ITransactionProps) => <Transaction key={ transaction.id } transaction={ transaction } />)
+                    }
+                    {
+                        transactionsCashInBoolean &&
+                        transactionsCashIn.map((transaction: ITransactionProps) => <Transaction key={ transaction.id } transaction={ transaction } />)
+                    }
+                    {
+                        transactionsCashOutBoolean &&
+                        transactionsCashOut.map((transaction: ITransactionProps) => <Transaction key={ transaction.id } transaction={ transaction } />)
+                    }
+                    {
+                        transactionsDateBoolean &&
+                        transactionsDate.map((transaction: ITransactionProps) => <Transaction key={ transaction.id } transaction={ transaction } />)
+                    }
+                </main>
 
                 <div>
-                    {
-                        openTransaction && 
-                        <FormTransaction addTransactions={ addTransactions } />
-                    }
-                    {
-                        openTransactions &&
-                        <Transactions transactions={ transactions } />
-                    }
-                    {
-                        openTransactionsKeyword &&
-                        <TransactionsKeyword />
-                    }
-                    {
-                        openBalance &&
-                        <Balance />
-                    }
+                    <Button
+                    buttonStyle="home"
+                    onClick={ ()  => {
+
+                        setTransactionsBoolean(true)
+                        setTransactionsCashInBoolean(false)
+                        setTransactionsCashOutBoolean(false)
+                        setTransactionsDateBoolean(false)
+
+                        api.get('/transactions', {
+                            
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Authorization': `Bearer ${ token }`,
+                            }
+                        })
+                        .then(res => setTransactions(res.data))
+                        .catch(err => console.error(err))
+
+                    }}>Todos</Button>
+
+                    <Button 
+                    buttonStyle="home"
+                    onClick={ () => {
+
+                        setTransactionsBoolean(false)
+                        setTransactionsCashInBoolean(true)
+                        setTransactionsCashOutBoolean(false)
+                        setTransactionsDateBoolean(false)
+
+                        api.get('/transactions/cash-in', {
+
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Authorization': `Bearer ${ token }`,
+                            }
+                        })
+                        .then(res => setTransactionsCashIn(res.data))
+                        .catch(_ => toast.error('transaction does not exist or not found'))
+                        
+                        } 
+                    }>Cash in</Button>
+
+                    <Button
+                    buttonStyle="home"
+                    onClick={ () => {
+
+                        setTransactionsBoolean(false)
+                        setTransactionsCashInBoolean(false)
+                        setTransactionsCashOutBoolean(true)
+                        setTransactionsDateBoolean(false)
+
+                        api.get('/transactions/cash-out', {
+
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Authorization': `Bearer ${ token }`,
+                            }
+                        })
+                        .then(res => setTransactionsCashOut(res.data))
+                        .catch(_ => toast.error('transaction does not exist or not found'))
+                        
+                        } 
+                    }>Cash out</Button>
+                    
+                    <input
+                    type="date"
+                    onChange={ (e: React.ChangeEvent<HTMLInputElement>) => {
+
+                        setTransactionsBoolean(false)
+                        setTransactionsCashInBoolean(false)
+                        setTransactionsCashOutBoolean(false)
+                        setTransactionsDateBoolean(true)
+                       
+                        api.get(`/transactions/${ e.target.value }`, {
+
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Authorization': `Bearer ${ token }`,
+                            }
+                        })
+                        .then(res => setTransactionsDate(res.data))
+                        .catch(_ => toast.error('transaction does not exist or not found'))
+                    } }
+                    />
                 </div>
-            </Content>
+            </menu>
         </Container>
     )
 }

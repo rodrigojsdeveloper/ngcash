@@ -2,7 +2,7 @@ import { Switch, Route } from 'react-router-dom'
 import { NotFound } from '../pages/Not Found'
 import { Register } from '../pages/Register'
 import { Session } from '../pages/Session'
-import { Home } from '../pages/a'
+import { Home } from '../pages/Home'
 
 
 const Routes = () => {
