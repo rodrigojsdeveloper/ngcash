@@ -31,17 +31,17 @@ O ojetivo desse desafio é possibilitar que usuários da NG consigam realizar tr
 
 ## Instalação do Projeto
 
-Projeto desenvolvido no back-end com Nodejs e no front-end com React.
+Projeto desenvolvido no backend com Nodejs e no frontend com React.
 
 ### 1. Instalação das dependencias
 
-Efetue a criação das dependências com `yarn` ou `npm install` nas pastas back-end e front-end.
+Efetue a criação das dependências com `yarn` ou `npm install` nas pastas backend e frontend.
 
 ### 2. Configuração do .env
 
-Crie o arquivo `.env` com base no arquivo `.env.example` na pasta back-end.
+Crie o arquivo `.env` com base no arquivo `.env.example` na pasta backend.
 
-#### Se estiver no Linux, rode esse comando na pasta back-end
+#### Se estiver no Linux, rode esse comando na pasta backend
 
 ```
 cp .env.example .env
@@ -51,7 +51,7 @@ cp .env.example .env
 
 #### Powershell ou Bash
 
-Acesse a pasta back-end e rode o comando:
+Acesse a pasta backend e rode o comando:
 
 ```
 yarn dev
@@ -74,7 +74,7 @@ e rode uma requisição no insomnia
 }
 ```
 
-Acesse a pasta front-end e rode o comando:
+Acesse a pasta frontend e rode o comando:
 
 ```
 yarn dev
@@ -110,7 +110,7 @@ docker-compose up -d
 sudo docker-compose up -d
 ```
 
-a flag `-d` é para rodar o projeto em 'background' deixando o terminal livre para usar
+a flag `-d` é para rodar o projeto em 'background' deixando o terminal livre para uso
 
 ### 4. Documentação
 
@@ -118,9 +118,6 @@ Com o projeto rodando acesse `http://localhost:3000/docs` para ver a documentaç
 
 ## Desenvolvedor
 
-<a href="https://github.com/Rodrigodeveloperjr">
-    <img src="frontend/src/assets/icons8-github-48.png" />
-</a>
 <a href="https://www.linkedin.com/in/rodrigo-de-jesus-silva">
     <img src="frontend/src/assets/icons8-linkedin-48.png" />
 </a>
