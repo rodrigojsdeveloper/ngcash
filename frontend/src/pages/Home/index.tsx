@@ -41,7 +41,7 @@ const Home = () => {
     const addTransactions = (transaction: ITransactionProps) => setTransactions([ ...transactions!, transaction ])
 
 
-    const token = localStorage.getItem('Project NG.CASH: token')
+    const token = sessionStorage.getItem('Project NG.CASH: token')
 
     const schema = yup.object().shape({
 
@@ -138,7 +138,7 @@ const Home = () => {
 
     }, [])
 
-    if(!localStorage.getItem('Project NG.CASH: token')) {
+    if(!token) {
 
         return <Redirect to="/" />
     }
@@ -152,11 +152,11 @@ const Home = () => {
 
                     history.push('/session')
 
-                    localStorage.removeItem('Project NG.CASH: token')
+                    sessionStorage.removeItem('Project NG.CASH: token')
 
                 } }/>
                 <h1>BALANCE</h1>
-                <p>US$ { balance.toFixed(2) }</p>
+                <p>$ { balance.toFixed(2) }</p>
                 <h2>CASH OUT</h2>
 
                 <form onSubmit={ handleSubmit(onSumbitFunction) }>

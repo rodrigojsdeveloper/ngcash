@@ -1,6 +1,6 @@
 <p align="center">
-<img src="https://img.shields.io/badge/nodejs-18.2.0-blue">
-<img src="https://img.shields.io/badge/react-18.0.0-blue">
+<img src="https://img.shields.io/badge/nodejs-18.11.9-blue">
+<img src="https://img.shields.io/badge/reactjs-18.2.0-blue">
 </p>
 
 # Processo Seletivo NG.CASH
@@ -27,7 +27,7 @@ O ojetivo desse desafio é possibilitar que usuários da NG consigam realizar tr
 
 ## Diagrama de Entidade Relacional
 
-<img src="./front-end/src/assets/digrama.png">
+<img src="./frontend/src/assets/digrama.png">
 
 ## Instalação do Projeto
 

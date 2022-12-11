@@ -52,7 +52,7 @@ const Form = ({ apiProp, historyProp, titleProp, textProp, linkProp, textLinkPro
 
             if(apiProp == 'session') {
 
-                localStorage.setItem('Project NG.CASH: token', res.data.token)
+                sessionStorage.setItem('Project NG.CASH: token', res.data.token)
 
                 toast.success('Login completed')
             }

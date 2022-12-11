@@ -11,7 +11,6 @@ const NotFound = () => {
 
     const [ link, setLink ] = useState('click here to go home')
 
-    
     useEffect(()=> {
 
         const setCharAt = (str: string, index: number, chr: string) => {

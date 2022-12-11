@@ -11,7 +11,7 @@ const Transaction = ({ transaction }: ITransactionComponentProps) => {
         <Container>
             <div>
                 <GrTransaction />
-                <p>US$ { transaction.value }</p>
+                <p>$ { transaction.value }</p>
             </div>
 
             <data>{ formattedDate }</data>

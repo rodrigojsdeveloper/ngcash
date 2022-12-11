@@ -15,6 +15,8 @@ const FormTransaction = ({ addTransactions }: IFormTransactionProps) => {
 
     const [ load, setLoad ] = useState<boolean>(false)
 
+    const token = sessionStorage.getItem('Project NG.CASH: token')
+
     const schema = yup.object().shape({
 
         username: yup
@@ -36,7 +38,7 @@ const FormTransaction = ({ addTransactions }: IFormTransactionProps) => {
 
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${ localStorage.getItem('Project NG.CASH: token') }`,
+                'Authorization': `Bearer ${ token }`,
             }
         })
         .then(res => {
