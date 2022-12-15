@@ -1,55 +1,55 @@
-import { ITransactionRequest } from '../../interfaces/transactions'
-import { Transaction } from '../../entities/transactions'
-import { AppDataSource } from '../../data-source'
-import { Account } from '../../entities/accounts'
-import { User } from '../../entities/users'
-import { AppError } from '../../errors'
+import { ITransactionRequest } from "../../interfaces/transactions";
+import { Transaction } from "../../entities/transactions";
+import { AppDataSource } from "../../data-source";
+import { Account } from "../../entities/accounts";
+import { User } from "../../entities/users";
+import { AppError } from "../../errors";
 
+const createTransactionService = async (
+  debitedId: string,
+  { value, username }: ITransactionRequest
+): Promise<Transaction> => {
+  const transactionsRepository = AppDataSource.getRepository(Transaction);
 
-const createTransactionService = async (debitedId: string, { value, username }: ITransactionRequest): Promise<Transaction> => {
+  const accountRepository = AppDataSource.getRepository(Account);
 
-    const transactionsRepository = AppDataSource.getRepository(Transaction)
+  const userRepository = AppDataSource.getRepository(User);
 
-    const accountRepository = AppDataSource.getRepository(Account)
+  const user = await userRepository.findOneBy({ username });
 
-    const userRepository = AppDataSource.getRepository(User)
+  if (!user) {
+    throw new AppError("User not found", 404);
+  }
 
-    const user = await userRepository.findOneBy({ username })
+  const accountDebited = await accountRepository.findOneBy({ id: debitedId });
 
-    if(!user) {
+  const accountCredited = await accountRepository.findOneBy({
+    id: user.accountId.id,
+  });
 
-        throw new AppError('User not found', 404)
-    }
+  if (accountDebited?.id == accountCredited?.id) {
+    throw new AppError("the user cannot make transactions for himself", 401);
+  }
 
-    const accountDebited = await accountRepository.findOneBy({ id: debitedId })
+  if (value > Number(accountDebited?.balance)) {
+    throw new AppError("insufficient debt");
+  }
 
-    const accountCredited = await accountRepository.findOneBy({ id: user.accountId.id })
+  accountCredited!.balance = accountCredited!.balance + value;
+  accountDebited!.balance = accountDebited!.balance - value;
 
-    if(accountDebited?.id == accountCredited?.id) {
+  await accountRepository.save(accountCredited!);
+  await accountRepository.save(accountDebited!);
 
-        throw new AppError('the user cannot make transactions for himself', 401)
-    }
+  const transaction = new Transaction();
+  transaction.creditedAccountId = accountCredited!.id;
+  transaction.debitedAccountId = debitedId;
+  transaction.value = value;
 
-    if(value > Number(accountDebited?.balance)) {
+  transactionsRepository.create(transaction);
+  await transactionsRepository.save(transaction);
 
-        throw new AppError('insufficient debt')
-    }
+  return transaction;
+};
 
-    accountCredited!.balance = accountCredited!.balance + value
-    accountDebited!.balance = accountDebited!.balance - value
-
-    await accountRepository.save(accountCredited!)
-    await accountRepository.save(accountDebited!)
-
-    const transaction = new Transaction()
-    transaction.creditedAccountId = accountCredited!.id
-    transaction.debitedAccountId = debitedId
-    transaction.value = value
-
-    transactionsRepository.create(transaction)
-    await transactionsRepository.save(transaction)
-
-    return transaction
-}
-
-export { createTransactionService }
+export { createTransactionService };

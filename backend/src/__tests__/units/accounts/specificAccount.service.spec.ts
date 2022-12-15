@@ -1,29 +1,27 @@
-import { specificAccountService } from '../../../services/accounts/specificAccount.service'
-import { createUserService } from '../../../services/users/createUser.service'
-import { AppDataSource } from '../../../data-source'
-import { DataSource } from 'typeorm'
-import { user } from '../../../mocks'
+import { specificAccountService } from "../../../services/accounts/specificAccount.service";
+import { createUserService } from "../../../services/users/createUser.service";
+import { AppDataSource } from "../../../data-source";
+import { DataSource } from "typeorm";
+import { user } from "../../../mocks";
 
+describe("Tests for account service", () => {
+  let connection: DataSource;
 
-describe('Tests for account service', () => {
+  beforeAll(async () => {
+    await AppDataSource.initialize()
+      .then((res) => (connection = res))
+      .catch((err) =>
+        console.error("Error during Data Source initialization", err)
+      );
+  });
 
-    let connection: DataSource
+  afterAll(async () => await connection.destroy());
 
-    beforeAll(async () => {
+  it("Must be able to view a account", async () => {
+    const newUser = await createUserService(user);
 
-        await AppDataSource.initialize()
-        .then(res => connection = res)
-        .catch(err => console.error('Error during Data Source initialization', err))
-    })
+    const result = await specificAccountService(newUser.accountId);
 
-    afterAll(async () => await connection.destroy())
-
-    it('Must be able to view a account', async () => {
-
-        const newUser = await createUserService(user)
-
-        const result = await specificAccountService(newUser.accountId)
-
-        expect(result).toHaveProperty('balance')
-    })
-})
+    expect(result).toHaveProperty("balance");
+  });
+});

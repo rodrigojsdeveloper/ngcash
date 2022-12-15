@@ -1,15 +1,13 @@
-import { createSessionService } from '../../services/session/createSession.service'
-import { ISessionRequest } from '../../interfaces/session'
-import { Request, Response } from 'express'
-
+import { createSessionService } from "../../services/session/createSession.service";
+import { ISessionRequest } from "../../interfaces/session";
+import { Request, Response } from "express";
 
 const createSessionController = async (req: Request, res: Response) => {
+  const data: ISessionRequest = req.body;
 
-    const data: ISessionRequest = req.body
+  const session = await createSessionService(data);
 
-    const session = await createSessionService(data)
+  return res.json(session);
+};
 
-    return res.json(session)
-}
-
-export { createSessionController }
+export { createSessionController };

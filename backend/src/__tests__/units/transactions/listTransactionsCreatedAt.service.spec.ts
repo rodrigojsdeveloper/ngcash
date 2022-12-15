@@ -1,40 +1,40 @@
-import { listTransactionsCreatedAtService } from '../../../services/transactions/listTransactionsCreatedAt.service'
-import { createUserService } from '../../../services/users/createUser.service'
-import { AppDataSource } from '../../../data-source'
-import { DataSource } from 'typeorm'
-import { user } from '../../../mocks'
+import { listTransactionsCreatedAtService } from "../../../services/transactions/listTransactionsCreatedAt.service";
+import { createUserService } from "../../../services/users/createUser.service";
+import { AppDataSource } from "../../../data-source";
+import { DataSource } from "typeorm";
+import { user } from "../../../mocks";
 
+describe("Tests for transaction service", () => {
+  let connection: DataSource;
 
-describe('Tests for transaction service', () => {
+  beforeAll(async () => {
+    await AppDataSource.initialize()
+      .then((res) => (connection = res))
+      .catch((err) =>
+        console.error("Error during Data Source initialization", err)
+      );
+  });
 
-    let connection: DataSource
+  afterAll(async () => await connection.destroy());
 
-    beforeAll(async () => {
+  it("Must be able to list transactions date", async () => {
+    const date = new Date();
 
-        await AppDataSource.initialize()
-        .then(res => connection = res)
-        .catch(err => console.error('Error during Data Source initialization', err))
-    })
+    const day = String(date.getDate() - 1).padStart(2, "0");
 
-    afterAll(async () => await connection.destroy())
+    const month = String(date.getMonth() + 1).padStart(2, "0");
 
-    it('Must be able to list transactions date', async () => {
+    const year = date.getFullYear();
 
-        const date = new Date()
+    const formattedDate = `${year}-${month}-${day}`;
 
-        const day = String(date.getDate() - 1).padStart(2, '0')
+    const newUser = await createUserService(user);
 
-        const month = String(date.getMonth() + 1).padStart(2, '0')
+    const result = await listTransactionsCreatedAtService(
+      newUser!.accountId,
+      formattedDate
+    );
 
-        const year = date.getFullYear()
-
-        const formattedDate = `${ year }-${ month }-${ day }`
-
-
-        const newUser = await createUserService(user)
-
-        const result = await listTransactionsCreatedAtService(newUser!.accountId, formattedDate)
-
-        expect(result).toHaveProperty('map')
-    })
-})
+    expect(result).toHaveProperty("map");
+  });
+});

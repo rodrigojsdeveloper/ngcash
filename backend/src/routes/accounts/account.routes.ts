@@ -1,18 +1,21 @@
-import { Router } from 'express'
+import { Router } from "express";
 
-import { specificAccountController } from '../../controllers/accounts/specificAccount.controller'
+import { specificAccountController } from "../../controllers/accounts/specificAccount.controller";
 
-import { itsYourOwnBalanceMiddleware } from '../../middlewares/itsYourOwnBalance.middleware'
-import { tokenMiddleware } from '../../middlewares/token.middleware'
+import { itsYourOwnBalanceMiddleware } from "../../middlewares/itsYourOwnBalance.middleware";
+import { tokenMiddleware } from "../../middlewares/token.middleware";
 
-
-const routes = Router()
+const routes = Router();
 
 const accountRoutes = () => {
+  routes.get(
+    "/:id",
+    tokenMiddleware,
+    itsYourOwnBalanceMiddleware,
+    specificAccountController
+  );
 
-    routes.get('/:id', tokenMiddleware, itsYourOwnBalanceMiddleware, specificAccountController)
+  return routes;
+};
 
-    return routes
-}
-
-export { accountRoutes }
+export { accountRoutes };

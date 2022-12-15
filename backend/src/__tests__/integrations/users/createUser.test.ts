@@ -1,71 +1,65 @@
-import { AppDataSource } from '../../../data-source'
-import { user } from '../../../mocks'
-import { DataSource } from 'typeorm'
-import { app } from '../../../app'
-import request from 'supertest'
+import { AppDataSource } from "../../../data-source";
+import { user } from "../../../mocks";
+import { DataSource } from "typeorm";
+import { app } from "../../../app";
+import request from "supertest";
 
+describe("Tests for user routes", () => {
+  let connection: DataSource;
 
-describe('Tests for user routes', () => {
+  beforeAll(async () => {
+    await AppDataSource.initialize()
+      .then((res) => (connection = res))
+      .catch((err) =>
+        console.error("Error during Data Source initialization", err)
+      );
+  });
 
-    let connection: DataSource
+  afterAll(async () => await connection.destroy());
 
-    beforeAll(async () => {
+  test("Must be able to create a user", async () => {
+    const response = await request(app).post("/users").send(user);
 
-        await AppDataSource.initialize()
-        .then(res => connection = res)
-        .catch(err => console.error('Error during Data Source initialization', err))
-    })
+    expect(response.status).toBe(201);
 
-    afterAll(async () => await connection.destroy())
+    expect(response.body).toHaveProperty("username");
+    expect(response.body).not.toHaveProperty("password");
+    expect(response.body).toHaveProperty("accountId");
+  });
 
-    test('Must be able to create a user', async () => {
+  test("Must be able to prevent user creation for having less than 3 characters in username", async () => {
+    user.username = "ex";
 
-        const response = await request(app).post('/users').send(user)
+    const response = await request(app).post("/users").send(user);
 
-        expect(response.status).toBe(201)
+    expect(response.status).toBe(400);
+    expect(response.body).toHaveProperty("message");
+  });
 
-        expect(response.body).toHaveProperty('username')
-        expect(response.body).toHaveProperty('password')
-        expect(response.body).toHaveProperty('accountId')
-    })
+  test("Must be able to prevent user creation for having less than 8 characters in the password", async () => {
+    user.password = "ex";
 
-    test('Must be able to prevent user creation for having less than 3 characters in username', async () => {
+    const response = await request(app).post("/users").send(user);
 
-        user.username = 'ex'
-        
-        const response = await request(app).post('/users').send(user)
+    expect(response.status).toBe(400);
+    expect(response.body).toHaveProperty("message");
+  });
 
-        expect(response.status).toBe(400)
-        expect(response.body).toHaveProperty('message')
-    })
+  test("Must be able to prevent user creation from not having capital letters in password", async () => {
+    user.password = "example123";
 
-    test('Must be able to prevent user creation for having less than 8 characters in the password', async () => {
-        
-        user.password = 'ex'
-        
-        const response = await request(app).post('/users').send(user)
+    const response = await request(app).post("/users").send(user);
 
-        expect(response.status).toBe(400)
-        expect(response.body).toHaveProperty('message')
-    })
+    expect(response.status).toBe(400);
+    expect(response.body).toHaveProperty("message");
+  });
 
-    test('Must be able to prevent user creation from not having capital letters in password', async () => {
-        
-        user.password = 'example123'
-        
-        const response = await request(app).post('/users').send(user)
+  test("Must be able to prevent user creation from not having numbers in password", async () => {
+    user.password = "EXAMPLEexample";
 
-        expect(response.status).toBe(400)
-        expect(response.body).toHaveProperty('message')
-    })
+    const response = await request(app).post("/users").send(user);
 
-    test('Must be able to prevent user creation from not having numbers in password', async () => {
-        
-        user.password = 'EXAMPLEexample'
-        
-        const response = await request(app).post('/users').send(user)
-
-        expect(response.status).toBe(400)
-        expect(response.body).toHaveProperty('message')
-    })
-})
+    expect(response.status).toBe(400);
+    expect(response.body).toHaveProperty("message");
+  });
+});

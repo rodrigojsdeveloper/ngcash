@@ -1,31 +1,36 @@
-import { Request, Response, NextFunction } from 'express'
-import { AppDataSource } from '../data-source'
-import { Account } from '../entities/accounts'
-import { User } from '../entities/users'
+import { Request, Response, NextFunction } from "express";
+import { AppDataSource } from "../data-source";
+import { Account } from "../entities/accounts";
+import { User } from "../entities/users";
 
+const itsYourOwnBalanceMiddleware = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const username: string = req.username;
 
-const itsYourOwnBalanceMiddleware = async (req: Request, res: Response, next: NextFunction) => {
+  const id: string = req.params.id;
 
-    const id: string = req.params.id
+  const userRepository = AppDataSource.getRepository(User);
 
-    const username: string = req.username
+  const accountRepository = AppDataSource.getRepository(Account);
 
-    const userRepository = AppDataSource.getRepository(User)
+  const user = await userRepository.findOneBy({ username });
 
-    const accountRepository = AppDataSource.getRepository(Account)
+  const account_token = await accountRepository.findOneBy({
+    id: user!.accountId.id,
+  });
 
-    const user = await userRepository.findOneBy({ username })
+  const account_id = await accountRepository.findOneBy({ id });
 
-    const account_token = await accountRepository.findOneBy({ id: user!.accountId.id })
+  if (account_token?.id != account_id?.id) {
+    return res
+      .status(403)
+      .json({ message: "Only the user can see the balance" });
+  }
 
-    const account_id = await accountRepository.findOneBy({ id })
+  next();
+};
 
-    if(account_token?.id != account_id?.id) {
-
-        return res.status(403).json({ message: 'Only the user can see the balance' })
-    }
-
-    next()
-}
-
-export { itsYourOwnBalanceMiddleware }
+export { itsYourOwnBalanceMiddleware };

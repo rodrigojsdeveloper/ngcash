@@ -1,6 +1,6 @@
 interface ITransactionRequest {
-    value: number
-    username: string
+  value: number;
+  username: string;
 }
 
-export { ITransactionRequest }
+export { ITransactionRequest };

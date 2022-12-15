@@ -1,46 +1,45 @@
-import { AppDataSource } from '../../../data-source'
-import { session, user } from '../../../mocks'
-import { DataSource } from 'typeorm'
-import { app } from '../../../app'
-import request from 'supertest'
+import { AppDataSource } from "../../../data-source";
+import { session, user } from "../../../mocks";
+import { DataSource } from "typeorm";
+import { app } from "../../../app";
+import request from "supertest";
 
+describe("Tests for account routes", () => {
+  let connection: DataSource;
 
-describe('Tests for account routes', () => {
+  beforeAll(async () => {
+    await AppDataSource.initialize()
+      .then((res) => (connection = res))
+      .catch((err) =>
+        console.error("Error during Data Source initialization", err)
+      );
 
-    let connection: DataSource
+    await request(app).post("/users").send(user);
+  });
 
-    beforeAll(async () => {
+  afterAll(async () => await connection.destroy());
 
-        await AppDataSource.initialize()
-        .then(res => connection = res)
-        .catch(err => console.error('Error during Data Source initialization', err))
+  test("Must be able to view a profile", async () => {
+    const login = await request(app).post("/session").send(session);
 
-        await request(app).post('/users').send(user)
-    })
+    const token: string = login.body.token;
 
-    afterAll(async () => await connection.destroy())
+    const response = await request(app)
+      .get("/users/profile")
+      .set("Authorization", `Bearer ${token}`);
 
-    test('Must be able to view a profile', async () => {
+    expect(response.status).toBe(200);
 
-        const login = await request(app).post('/session').send(session)
+    expect(response.body).toHaveProperty("id");
+    expect(response.body).toHaveProperty("username");
+    expect(response.body).not.toHaveProperty("password");
+    expect(response.body).toHaveProperty("accountId");
+  });
 
-        const token: string = login.body.token
+  test("Must be able to prevent viewing a profile without a token", async () => {
+    const response = await request(app).get("/users/profile");
 
-        const response = await request(app).get('/users/profile').set('Authorization', `Bearer ${ token }`)
-
-        expect(response.status).toBe(200)
-
-        expect(response.body).toHaveProperty('id')
-        expect(response.body).toHaveProperty('username')
-        expect(response.body).toHaveProperty('password')
-        expect(response.body).toHaveProperty('accountId')
-    })
-
-    test('Must be able to prevent viewing a profile without a token', async () => {
-
-        const response = await request(app).get('/users/profile')
-
-        expect(response.status).toBe(401)
-        expect(response.body).toHaveProperty('message')
-    })
-})
+    expect(response.status).toBe(401);
+    expect(response.body).toHaveProperty("message");
+  });
+});

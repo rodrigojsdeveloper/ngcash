@@ -1,14 +1,14 @@
-import { AppDataSource } from '../../data-source'
-import { User } from '../../entities/users'
-
+import { AppDataSource } from "../../data-source";
+import { User } from "../../entities/users";
 
 const viewProfileService = async (username: string): Promise<User> => {
+  const userRepository = AppDataSource.getRepository(User);
 
-    const userRepository = AppDataSource.getRepository(User)
+  const user = await userRepository.findOneBy({ username });
 
-    const user = await userRepository.findOneBy({ username })
+  Reflect.deleteProperty(user!, "password");
 
-    return user!
-}
+  return user!;
+};
 
-export { viewProfileService }
+export { viewProfileService };

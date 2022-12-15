@@ -1,45 +1,47 @@
-import { IUserRequest } from '../../interfaces/users'
-import { AppDataSource } from '../../data-source'
-import { Account } from '../../entities/accounts'
-import { User } from '../../entities/users'
-import { AppError } from '../../errors'
-import { hash } from 'bcrypt'
+import { IUserRequest } from "../../interfaces/users";
+import { AppDataSource } from "../../data-source";
+import { Account } from "../../entities/accounts";
+import { User } from "../../entities/users";
+import { AppError } from "../../errors";
+import { hash } from "bcrypt";
 
+const createUserService = async ({
+  username,
+  password,
+}: IUserRequest): Promise<{
+  username: string;
+  accountId: string;
+}> => {
+  const userRepository = AppDataSource.getRepository(User);
 
-const createUserService = async ({ username, password }: IUserRequest) => {
+  const accountRepository = AppDataSource.getRepository(Account);
 
-    const userRepository = AppDataSource.getRepository(User)
+  const account = new Account();
+  account.balance = 100;
 
-    const accountRepository = AppDataSource.getRepository(Account)
+  const newAccount = accountRepository.create(account);
+  await accountRepository.save(newAccount);
 
-    const account = new Account()
-    account.balance = 100
+  if (await userRepository.findOneBy({ username })) {
+    throw new AppError("Username already exists");
+  }
 
-    const newAccount = accountRepository.create(account)
-    await accountRepository.save(newAccount)
+  const passwordHashed = await hash(password, 10);
 
-    if(await userRepository.findOneBy({ username })) {
+  const user = new User();
+  user.username = username;
+  user.password = passwordHashed;
+  user.accountId = newAccount;
 
-        throw new AppError('Username already exists')
-    }
+  userRepository.create(user);
+  await userRepository.save(user);
 
-    const passwordHashed = await hash(password, 10)
+  const newUser = {
+    username: user.username,
+    accountId: newAccount.id,
+  };
 
-    const user = new User()
-    user.username = username
-    user.password = passwordHashed
-    user.accountId = newAccount
+  return newUser;
+};
 
-    userRepository.create(user)
-    await userRepository.save(user)
-
-    const newUser = {
-        username: user.username,
-        password: user.password,
-        accountId: newAccount.id
-    }
-
-    return newUser
-}
-
-export { createUserService }
+export { createUserService };

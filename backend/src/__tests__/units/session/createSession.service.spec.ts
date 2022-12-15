@@ -1,29 +1,27 @@
-import { createSessionService } from '../../../services/session/createSession.service'
-import { createUserService } from '../../../services/users/createUser.service'
-import { AppDataSource } from '../../../data-source'
-import { user, session } from '../../../mocks'
-import { DataSource } from 'typeorm'
+import { createSessionService } from "../../../services/session/createSession.service";
+import { createUserService } from "../../../services/users/createUser.service";
+import { AppDataSource } from "../../../data-source";
+import { user, session } from "../../../mocks";
+import { DataSource } from "typeorm";
 
+describe("Tests for session service", () => {
+  let connection: DataSource;
 
-describe('Tests for session service', () => {
+  beforeAll(async () => {
+    await AppDataSource.initialize()
+      .then((res) => (connection = res))
+      .catch((err) =>
+        console.error("Error during Data Source initialization", err)
+      );
+  });
 
-    let connection: DataSource
+  afterAll(async () => await connection.destroy());
 
-    beforeAll(async () => {
+  it("Must be able to create a session", async () => {
+    await createUserService(user);
 
-        await AppDataSource.initialize()
-        .then(res => connection = res)
-        .catch(err => console.error('Error during Data Source initialization', err))
-    })
+    const result = await createSessionService(session);
 
-    afterAll(async () => await connection.destroy())
-
-    it('Must be able to create a session', async () => {
-
-        await createUserService(user)
-
-        const result = await createSessionService(session)
-
-        expect(result).toHaveProperty('token')
-    })
-})
+    expect(result).toHaveProperty("token");
+  });
+});

@@ -1,40 +1,37 @@
-import { AppDataSource } from '../../../data-source'
-import { session, user } from '../../../mocks'
-import { DataSource } from 'typeorm'
-import { app } from '../../../app'
-import request from 'supertest'
+import { AppDataSource } from "../../../data-source";
+import { session, user } from "../../../mocks";
+import { DataSource } from "typeorm";
+import { app } from "../../../app";
+import request from "supertest";
 
+describe("Tests for session routes", () => {
+  let connection: DataSource;
 
-describe('Tests for session routes', () => {
+  beforeAll(async () => {
+    await AppDataSource.initialize()
+      .then((res) => (connection = res))
+      .catch((err) =>
+        console.error("Error during Data Source initialization", err)
+      );
 
-    let connection: DataSource
+    await request(app).post("/users").send(user);
+  });
 
-    beforeAll(async () => {
+  afterAll(async () => await connection.destroy());
 
-        await AppDataSource.initialize()
-        .then(res => connection = res)
-        .catch(err => console.error('Error during Data Source initialization', err))
+  test("Must be able to create a session", async () => {
+    const response = await request(app).post("/session").send(session);
 
-        await request(app).post('/users').send(user)
-    })
+    expect(response.status).toBe(200);
+    expect(response.body).toHaveProperty("token");
+  });
 
-    afterAll(async () => await connection.destroy())
+  test("Must be able to prevent the creation of a session with invalid credentials", async () => {
+    session.password = "username";
 
-    test('Must be able to create a session', async () => {
+    const response = await request(app).post("/session").send(session);
 
-        const response = await request(app).post('/session').send(session)
-
-        expect(response.status).toBe(200)
-        expect(response.body).toHaveProperty('token')
-    })
-
-    test('Must be able to prevent the creation of a session with invalid credentials', async () => {
-
-        session.password = 'username'
-
-        const response = await request(app).post('/session').send(session)
-
-        expect(response.status).toBe(401)
-        expect(response.body).toHaveProperty('message')
-    })
-})
+    expect(response.status).toBe(401);
+    expect(response.body).toHaveProperty("message");
+  });
+});

@@ -1,25 +1,28 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, ManyToOne } from 'typeorm'
-import { Account } from '../accounts'
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  CreateDateColumn,
+  ManyToOne,
+} from "typeorm";
+import { Account } from "../accounts";
 
-
-@Entity('transactions')
-
+@Entity("transactions")
 class Transaction {
+  @PrimaryGeneratedColumn("uuid")
+  id: string;
 
-    @PrimaryGeneratedColumn('uuid')
-    id: string
+  @ManyToOne(() => Account, (account) => account.creditedTransaction)
+  creditedAccountId: string;
 
-    @ManyToOne(() => Account, account => account.creditedTransaction)
-    creditedAccountId: string
+  @ManyToOne(() => Account, (account) => account.debitedTransaction)
+  debitedAccountId: string;
 
-    @ManyToOne(() => Account, account => account.debitedTransaction)
-    debitedAccountId: string
+  @Column()
+  value: number;
 
-    @Column()
-    value: number
-
-    @CreateDateColumn()
-    createdAt: Date
+  @CreateDateColumn()
+  createdAt: Date;
 }
 
-export { Transaction }
+export { Transaction };

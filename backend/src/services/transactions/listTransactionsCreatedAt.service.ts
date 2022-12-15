@@ -1,40 +1,40 @@
-import { AppDataSource } from '../../data-source'
-import { Account } from '../../entities/accounts'
+import { AppDataSource } from "../../data-source";
+import { Account } from "../../entities/accounts";
+import { Transaction } from "../../entities/transactions";
 
+const listTransactionsCreatedAtService = async (
+  id: string,
+  date: string
+): Promise<Array<Transaction>> => {
+  const accountRepository = AppDataSource.getRepository(Account);
 
-const listTransactionsCreatedAtService = async (id: string, date: string) => {
+  const account = await accountRepository.findOneBy({ id });
 
-    const accountRepository = AppDataSource.getRepository(Account)
+  const cashIn = account!.creditedTransaction.filter((transaction) => {
+    const day = String(transaction.createdAt.getDate()).padStart(2, "0");
 
-    const account = await accountRepository.findOneBy({ id })
+    const month = String(transaction.createdAt.getMonth() + 1).padStart(2, "0");
 
-    const cashIn = account!.creditedTransaction.filter(transaction => {
+    const year = transaction.createdAt.getFullYear();
 
-        const day = String(transaction.createdAt.getDate()).padStart(2, '0')
+    const formattedDate = `${year}-${month}-${day}`;
 
-        const month = String(transaction.createdAt.getMonth() + 1).padStart(2, '0')
+    return formattedDate == date;
+  });
 
-        const year = transaction.createdAt.getFullYear()
+  const cashOut = account!.debitedTransaction.filter((transaction) => {
+    const day = String(transaction.createdAt.getDate()).padStart(2, "0");
 
-        const formattedDate = `${ year }-${ month }-${ day }`
+    const month = String(transaction.createdAt.getMonth() + 1).padStart(2, "0");
 
-        return formattedDate == date
-    })
+    const year = transaction.createdAt.getFullYear();
 
-    const cashOut = account!.debitedTransaction.filter(transaction => {
+    const formattedDate = `${year}-${month}-${day}`;
 
-        const day = String(transaction.createdAt.getDate()).padStart(2, '0')
+    return formattedDate == date;
+  });
 
-        const month = String(transaction.createdAt.getMonth() + 1).padStart(2, '0')
+  return [...cashIn, ...cashOut];
+};
 
-        const year = transaction.createdAt.getFullYear()
-
-        const formattedDate = `${ year }-${ month }-${ day }`
-
-        return formattedDate == date
-    })
-
-    return [ ...cashIn, ...cashOut ]
-}
-
-export { listTransactionsCreatedAtService }
+export { listTransactionsCreatedAtService };

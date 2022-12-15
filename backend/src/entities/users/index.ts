@@ -1,24 +1,28 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn } from 'typeorm'
-import { Account } from '../accounts'
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  OneToOne,
+  JoinColumn,
+} from "typeorm";
+import { Account } from "../accounts";
 
-
-@Entity('users')
-
+@Entity("users")
 class User {
+  @PrimaryGeneratedColumn("uuid")
+  id: string;
 
-    @PrimaryGeneratedColumn('uuid')
-    id: string
+  @Column({ unique: true })
+  username: string;
 
-    @Column({ unique: true })
-    username: string
+  @Column()
+  password: string;
 
-    @Column()
-    password: string
-
-    @OneToOne(() => Account, {
-        eager: true
-    })@JoinColumn()
-    accountId: Account
+  @OneToOne(() => Account, {
+    eager: true,
+  })
+  @JoinColumn()
+  accountId: Account;
 }
 
-export { User }
+export { User };

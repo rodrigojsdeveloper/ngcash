@@ -1,20 +1,21 @@
-import { listTransactionsCashInService } from '../../services/transactions/listTransactionsCashIn.service'
-import { AppDataSource } from '../../data-source'
-import { Request, Response } from 'express'
-import { User } from '../../entities/users'
+import { listTransactionsCashInService } from "../../services/transactions/listTransactionsCashIn.service";
+import { AppDataSource } from "../../data-source";
+import { Request, Response } from "express";
+import { User } from "../../entities/users";
 
+const listTransactionsCashInController = async (
+  req: Request,
+  res: Response
+) => {
+  const username: string = req.username;
 
-const listTransactionsCashInController = async (req: Request, res: Response) => {
+  const userRepository = AppDataSource.getRepository(User);
 
-    const username: string = req.username
-    
-    const userRepository = AppDataSource.getRepository(User)
+  const user = await userRepository.findOneBy({ username });
 
-    const user = await userRepository.findOneBy({ username })
+  const listCashIn = await listTransactionsCashInService(user!.accountId.id);
 
-    const listCashIn = await listTransactionsCashInService(user!.accountId.id)
+  return res.json(listCashIn);
+};
 
-    return res.json(listCashIn)
-}
-
-export { listTransactionsCashInController }
+export { listTransactionsCashInController };

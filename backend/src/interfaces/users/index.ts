@@ -1,6 +1,6 @@
 interface IUserRequest {
-    username: string
-    password: string
+  username: string;
+  password: string;
 }
 
-export { IUserRequest }
+export { IUserRequest };

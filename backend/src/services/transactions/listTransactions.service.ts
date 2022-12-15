@@ -1,14 +1,15 @@
-import { AppDataSource } from '../../data-source'
-import { Account } from '../../entities/accounts'
+import { AppDataSource } from "../../data-source";
+import { Account } from "../../entities/accounts";
+import { Transaction } from "../../entities/transactions";
 
+const listTransactionsService = async (
+  id: string
+): Promise<Array<Transaction>> => {
+  const accountRepository = AppDataSource.getRepository(Account);
 
-const listTransactionsService = async (id: string) => {
+  const account = await accountRepository.findOneBy({ id });
 
-    const accountRepository = AppDataSource.getRepository(Account)
+  return [...account!.creditedTransaction, ...account!.debitedTransaction];
+};
 
-    const account = await accountRepository.findOneBy({ id })
-
-    return [ ...account!.creditedTransaction, ...account!.debitedTransaction ]
-}
-
-export { listTransactionsService }
+export { listTransactionsService };

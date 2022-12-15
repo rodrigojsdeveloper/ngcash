@@ -1,44 +1,45 @@
-import { AppDataSource } from '../../../data-source'
-import { session, user } from '../../../mocks'
-import { DataSource } from 'typeorm'
-import { app } from '../../../app'
-import request from 'supertest'
+import { AppDataSource } from "../../../data-source";
+import { session, user } from "../../../mocks";
+import { DataSource } from "typeorm";
+import { app } from "../../../app";
+import request from "supertest";
 
+describe("Tests for account routes", () => {
+  let connection: DataSource;
 
-describe('Tests for account routes', () => {
+  beforeAll(async () => {
+    await AppDataSource.initialize()
+      .then((res) => (connection = res))
+      .catch((err) =>
+        console.error("Error during Data Source initialization", err)
+      );
+  });
 
-    let connection: DataSource
+  afterAll(async () => await connection.destroy());
 
-    beforeAll(async () => {
+  test("Must be able to view a account", async () => {
+    const newUser = await request(app).post("/users").send(user);
 
-        await AppDataSource.initialize()
-        .then(res => connection = res)
-        .catch(err => console.error('Error during Data Source initialization', err))
-    })
+    const login = await request(app).post("/session").send(session);
 
-    afterAll(async () => await connection.destroy())
+    const token: string = login.body.token;
 
-    test('Must be able to view a account', async () => {
+    const response = await request(app)
+      .get(`/accounts/${newUser.body.accountId}`)
+      .set("Authorization", `Bearer ${token}`);
 
-        const newUser = await request(app).post('/users').send(user)
+    expect(response.status).toBe(200);
+    expect(response.body).toHaveProperty("balance");
+  });
 
-        const login = await request(app).post('/session').send(session)
+  test("Must be able to prevent create tokenless account", async () => {
+    const newUser = await request(app).post("/users").send(user);
 
-        const token: string = login.body.token
+    const response = await request(app).get(
+      `/accounts/${newUser.body.accountId}`
+    );
 
-        const response = await request(app).get(`/accounts/${ newUser.body.accountId }`).set('Authorization', `Bearer ${ token }`)
-
-        expect(response.status).toBe(200)
-        expect(response.body).toHaveProperty('balance')
-    })
-
-    test('Must be able to prevent create tokenless account', async () => {
-
-        const newUser = await request(app).post('/users').send(user)
-
-        const response = await request(app).get(`/accounts/${ newUser.body.accountId }`)
-
-        expect(response.status).toBe(401)
-        expect(response.body).toHaveProperty('message')
-    })
-})
+    expect(response.status).toBe(401);
+    expect(response.body).toHaveProperty("message");
+  });
+});

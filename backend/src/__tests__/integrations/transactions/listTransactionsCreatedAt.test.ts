@@ -1,64 +1,63 @@
-import { session, transaction, user } from '../../../mocks'
-import { AppDataSource } from '../../../data-source'
-import { DataSource } from 'typeorm'
-import { app } from '../../../app'
-import request from 'supertest'
+import { session, transaction, user } from "../../../mocks";
+import { AppDataSource } from "../../../data-source";
+import { DataSource } from "typeorm";
+import { app } from "../../../app";
+import request from "supertest";
 
+describe("Tests for transaction routes", () => {
+  let connection: DataSource;
 
-describe('Tests for transaction routes', () => {
+  beforeAll(async () => {
+    await AppDataSource.initialize()
+      .then((res) => (connection = res))
+      .catch((err) =>
+        console.error("Error during Data Source initialization", err)
+      );
 
-    let connection: DataSource
+    await request(app).post("/users").send(user);
+  });
 
-    beforeAll(async () => {
+  afterAll(async () => await connection.destroy());
 
-        await AppDataSource.initialize()
-        .then(res => connection = res)
-        .catch(err => console.error('Error during Data Source initialization', err))
+  test("Must be able to list transactions date", async () => {
+    const date = new Date();
 
-        await request(app).post('/users').send(user)
-    })
+    const day = String(date.getDate() - 1).padStart(2, "0");
 
-    afterAll(async () => await connection.destroy())
+    const month = String(date.getMonth() + 1).padStart(2, "0");
 
-    test('Must be able to list transactions date', async () => {
+    const year = date.getFullYear();
 
-        const date = new Date()
+    const formattedDate = `${year}-${month}-${day}`;
 
-        const day = String(date.getDate() - 1).padStart(2, '0')
+    const login = await request(app).post("/session").send(session);
 
-        const month = String(date.getMonth() + 1).padStart(2, '0')
+    const token: string = login.body.token;
 
-        const year = date.getFullYear()
+    const response = await request(app)
+      .get(`/transactions/${formattedDate}`)
+      .set("Authorization", `Bearer ${token}`);
 
-        const formattedDate = `${ year }-${ month }-${ day }`
+    expect(response.status).toBe(200);
+    expect(response.body).toHaveProperty("map");
+  });
 
+  test("Must be able to prevent listing transactions date without token", async () => {
+    const date = new Date();
 
-        const login = await request(app).post('/session').send(session)
+    const day = String(date.getDate() - 1).padStart(2, "0");
 
-        const token: string = login.body.token
+    const month = String(date.getMonth() + 1).padStart(2, "0");
 
-        const response = await request(app).get(`/transactions/${ formattedDate }`).set('Authorization', `Bearer ${ token }`)
+    const year = date.getFullYear();
 
-        expect(response.status).toBe(200)
-        expect(response.body).toHaveProperty('map')
-    })
+    const formattedDate = `${year}-${month}-${day}`;
 
-    test('Must be able to prevent listing transactions date without token', async () => {
+    const response = await request(app)
+      .get(`/transactions/${formattedDate}`)
+      .send(transaction);
 
-        const date = new Date()
-
-        const day = String(date.getDate() - 1).padStart(2, '0')
-
-        const month = String(date.getMonth() + 1).padStart(2, '0')
-
-        const year = date.getFullYear()
-
-        const formattedDate = `${ year }-${ month }-${ day }`
-
-
-        const response = await request(app).get(`/transactions/${ formattedDate }`).send(transaction)
-
-        expect(response.status).toBe(401)
-        expect(response.body).toHaveProperty('message')
-    })
-})
+    expect(response.status).toBe(401);
+    expect(response.body).toHaveProperty("message");
+  });
+});
