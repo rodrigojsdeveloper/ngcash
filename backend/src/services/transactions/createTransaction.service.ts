@@ -28,7 +28,7 @@ const createTransactionService = async (
   });
 
   if (accountDebited?.id == accountCredited?.id) {
-    throw new AppError("the user cannot make transactions for himself", 401);
+    throw new AppError("the user cannot make transactions for himself", 403);
   }
 
   if (value > Number(accountDebited?.balance)) {

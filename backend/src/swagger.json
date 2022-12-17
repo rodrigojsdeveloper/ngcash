@@ -30,8 +30,8 @@
                             "examples": {
                                 "users": {
                                     "value": {
-                                        "username": "example",
-                                        "password": "Example@123"
+                                        "username": "johndoe",
+                                        "password": "Johndoe@123"
                                     }
                                 }
                             }
@@ -133,18 +133,57 @@
                 }
             }
         },
-        "/transactions/{value}": {
+        "/transactions/cash-in": {
             "get": {
-                "summary": "list transactions by cash-in or cash-out",
-                "description": "This route will be responsible for list transactions by cash-in or cash-out",
+                "summary": "list transactions by cash-in",
+                "description": "This route will be responsible for list transactions by cash-in",
+                "tags": [ "Transactions" ],
+                "security": [
+                    { "bearerAuth": [] }
+                ],
+                "responses": {
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/transactions/cash-out": {
+            "get": {
+                "summary": "list transactions by cash-out",
+                "description": "This route will be responsible for list transactions by cash-out",
+                "tags": [ "Transactions" ],
+                "security": [
+                    { "bearerAuth": [] }
+                ],
+                "responses": {
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "200": {
+                        "description": "OK"
+                    }
+                }
+            }
+        },
+        "/transactions/{date}": {
+            "get": {
+                "summary": "list transactions by date",
+                "description": "This route will be responsible for list transactions by date",
                 "tags": [ "Transactions" ],
                 "security": [
                     { "bearerAuth": [] }
                 ],
                 "parameters": [{
-                    "name": "value",
-                    "in": "get",
-                    "description": "Transactions by cash-in or cash-out",
+                    "name": "Date",
+                    "in": "path",
+                    "schema": {
+                        "type": "string"
+                    },
+                    "description": "Transactions by date",
                     "required": true
                 }],
                 "responses": {
@@ -167,7 +206,7 @@
                 ],
                 "parameters": [{
                     "name": "ID",
-                    "in": "get",
+                    "in": "path",
                     "description": "View specific account",
                     "required": true
                 }],
@@ -204,8 +243,8 @@
                             "examples": {
                                 "user": {
                                     "value": {
-                                        "username": "example",
-                                        "password": "Example@123"
+                                        "username": "johndoe",
+                                        "password": "Johndoe@123"
                                     }
                                 }
                             }
