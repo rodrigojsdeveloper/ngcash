@@ -1,7 +1,6 @@
+import { accountRepository } from "../repositories/account.repository";
+import { userRepository } from "../repositories/user.repository";
 import { Request, Response, NextFunction } from "express";
-import { AppDataSource } from "../data-source";
-import { Account } from "../entities/accounts";
-import { User } from "../entities/users";
 
 const itsYourOwnBalanceMiddleware = async (
   req: Request,
@@ -12,19 +11,15 @@ const itsYourOwnBalanceMiddleware = async (
 
   const id: string = req.params.id;
 
-  const userRepository = AppDataSource.getRepository(User);
-
-  const accountRepository = AppDataSource.getRepository(Account);
-
   const user = await userRepository.findOneBy({ username });
 
-  const account_token = await accountRepository.findOneBy({
+  const accountToken = await accountRepository.findOneBy({
     id: user!.accountId.id,
   });
 
-  const account_id = await accountRepository.findOneBy({ id });
+  const accountId = await accountRepository.findOneBy({ id });
 
-  if (account_token?.id != account_id?.id) {
+  if (accountToken?.id != accountId?.id) {
     return res
       .status(403)
       .json({ message: "Only the user can see the balance" });

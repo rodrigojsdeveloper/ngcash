@@ -7,9 +7,9 @@ const schemaValidationMiddleware =
     try {
       const data = req.body;
 
-      const validated_data = await schema.validate(data);
+      const validatedData = await schema.validate(data);
 
-      req.body = validated_data;
+      req.body = validatedData;
 
       next();
     } catch (err: any) {

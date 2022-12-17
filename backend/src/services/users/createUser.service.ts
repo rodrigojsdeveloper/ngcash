@@ -6,40 +6,38 @@ import { User } from "../../entities/users";
 import { AppError } from "../../errors";
 import { hash } from "bcrypt";
 
-const createUserService = async ({
-  username,
-  password,
-}: IUserRequest): Promise<{
+const createUserService = async (
+  user: IUserRequest
+): Promise<{
   username: string;
   accountId: string;
 }> => {
-
   const account = new Account();
   account.balance = 100;
 
   const newAccount = accountRepository.create(account);
   await accountRepository.save(newAccount);
 
-  if (await userRepository.findOneBy({ username })) {
+  if (await userRepository.findOneBy({ username: user.username })) {
     throw new AppError("Username already exists");
   }
 
-  const passwordHashed = await hash(password, 10);
+  const passwordHashed = await hash(user.password, 10);
 
-  const user = new User();
-  user.username = username;
-  user.password = passwordHashed;
-  user.accountId = newAccount;
+  const newUser = new User();
+  newUser.username = user.username;
+  newUser.password = passwordHashed;
+  newUser.accountId = newAccount;
 
-  userRepository.create(user);
-  await userRepository.save(user);
+  userRepository.create(newUser);
+  await userRepository.save(newUser);
 
-  const newUser = {
+  const copyUser = {
     username: user.username,
     accountId: newAccount.id,
   };
 
-  return newUser;
+  return copyUser;
 };
 
 export { createUserService };

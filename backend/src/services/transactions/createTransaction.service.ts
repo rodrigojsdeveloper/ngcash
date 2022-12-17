@@ -7,9 +7,11 @@ import { AppError } from "../../errors";
 
 const createTransactionService = async (
   debitedId: string,
-  { value, username }: ITransactionRequest
+  transaction: ITransactionRequest
 ): Promise<Transaction> => {
-  const user = await userRepository.findOneBy({ username });
+  const user = await userRepository.findOneBy({
+    username: transaction.username,
+  });
 
   if (!user) {
     throw new AppError("User not found", 404);
@@ -25,25 +27,25 @@ const createTransactionService = async (
     throw new AppError("the user cannot make transactions for himself", 403);
   }
 
-  if (value > Number(accountDebited?.balance)) {
+  if (transaction.value > Number(accountDebited?.balance)) {
     throw new AppError("insufficient debt");
   }
 
-  accountCredited!.balance = accountCredited!.balance + value;
-  accountDebited!.balance = accountDebited!.balance - value;
+  accountCredited!.balance = accountCredited!.balance + transaction.value;
+  accountDebited!.balance = accountDebited!.balance - transaction.value;
 
   await accountRepository.save(accountCredited!);
   await accountRepository.save(accountDebited!);
 
-  const transaction = new Transaction();
-  transaction.creditedAccountId = accountCredited!.id;
-  transaction.debitedAccountId = debitedId;
-  transaction.value = value;
+  const newTransaction = new Transaction();
+  newTransaction.creditedAccountId = accountCredited!.id;
+  newTransaction.debitedAccountId = debitedId;
+  newTransaction.value = transaction.value;
 
-  transactionRepository.create(transaction);
-  await transactionRepository.save(transaction);
+  transactionRepository.create(newTransaction);
+  await transactionRepository.save(newTransaction);
 
-  return transaction;
+  return newTransaction;
 };
 
 export { createTransactionService };
