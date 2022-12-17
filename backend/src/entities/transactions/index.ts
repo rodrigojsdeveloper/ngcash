@@ -4,6 +4,7 @@ import {
   Column,
   CreateDateColumn,
   ManyToOne,
+  JoinColumn,
 } from "typeorm";
 import { Account } from "../accounts";
 
@@ -13,9 +14,11 @@ class Transaction {
   id: string;
 
   @ManyToOne(() => Account, (account) => account.creditedTransaction)
+  @JoinColumn({ name: "creditedAccount_id" })
   creditedAccountId: string;
 
   @ManyToOne(() => Account, (account) => account.debitedTransaction)
+  @JoinColumn({ name: "debitedAccount_id" })
   debitedAccountId: string;
 
   @Column()

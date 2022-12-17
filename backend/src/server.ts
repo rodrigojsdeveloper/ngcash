@@ -10,5 +10,5 @@ import { app } from "./app";
       console.error("Error during Data Source initialization", err)
     );
 
-  app.listen(process.env.PORT, () => console.log("Server running"));
+  app.listen(process.env.PORT || 3000, () => console.log("Server running"));
 })();

@@ -1,13 +1,10 @@
-import { AppDataSource } from "../../data-source";
-import { Account } from "../../entities/accounts";
+import { accountRepository } from "../../repositories/account.repository";
 import { Transaction } from "../../entities/transactions";
 
 const listTransactionsCreatedAtService = async (
   id: string,
   date: string
 ): Promise<Array<Transaction>> => {
-  const accountRepository = AppDataSource.getRepository(Account);
-
   const account = await accountRepository.findOneBy({ id });
 
   const cashIn = account!.creditedTransaction.filter((transaction) => {

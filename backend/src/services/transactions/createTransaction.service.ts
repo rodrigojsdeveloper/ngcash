@@ -1,20 +1,14 @@
+import { transactionRepository } from "../../repositories/transaction.repository";
+import { accountRepository } from "../../repositories/account.repository";
 import { ITransactionRequest } from "../../interfaces/transactions";
+import { userRepository } from "../../repositories/user.repository";
 import { Transaction } from "../../entities/transactions";
-import { AppDataSource } from "../../data-source";
-import { Account } from "../../entities/accounts";
-import { User } from "../../entities/users";
 import { AppError } from "../../errors";
 
 const createTransactionService = async (
   debitedId: string,
   { value, username }: ITransactionRequest
 ): Promise<Transaction> => {
-  const transactionsRepository = AppDataSource.getRepository(Transaction);
-
-  const accountRepository = AppDataSource.getRepository(Account);
-
-  const userRepository = AppDataSource.getRepository(User);
-
   const user = await userRepository.findOneBy({ username });
 
   if (!user) {
@@ -46,8 +40,8 @@ const createTransactionService = async (
   transaction.debitedAccountId = debitedId;
   transaction.value = value;
 
-  transactionsRepository.create(transaction);
-  await transactionsRepository.save(transaction);
+  transactionRepository.create(transaction);
+  await transactionRepository.save(transaction);
 
   return transaction;
 };

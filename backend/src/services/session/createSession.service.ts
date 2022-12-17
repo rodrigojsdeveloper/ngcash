@@ -1,6 +1,5 @@
+import { userRepository } from "../../repositories/user.repository";
 import { ISessionRequest } from "../../interfaces/session";
-import { AppDataSource } from "../../data-source";
-import { User } from "../../entities/users";
 import { AppError } from "../../errors";
 import { compare } from "bcrypt";
 import jwt from "jsonwebtoken";
@@ -9,8 +8,6 @@ const createSessionService = async ({
   username,
   password,
 }: ISessionRequest): Promise<object> => {
-  const userRepository = AppDataSource.getRepository(User);
-
   const user = await userRepository.findOneBy({ username });
 
   if (!user) {

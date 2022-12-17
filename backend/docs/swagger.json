@@ -178,7 +178,7 @@
                     { "bearerAuth": [] }
                 ],
                 "parameters": [{
-                    "name": "Date",
+                    "name": "date",
                     "in": "path",
                     "schema": {
                         "type": "string"
@@ -205,8 +205,11 @@
                     { "bearerAuth": [] }
                 ],
                 "parameters": [{
-                    "name": "ID",
+                    "name": "id",
                     "in": "path",
+                    "schema": {
+                        "type": "string"
+                    },
                     "description": "View specific account",
                     "required": true
                 }],

@@ -6,7 +6,6 @@ import { appRoutes } from "./routes";
 import express from "express";
 import "express-async-errors";
 const cors = require("cors");
-import "reflect-metadata";
 import "dotenv/config";
 
 const app = express();

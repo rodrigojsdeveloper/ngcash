@@ -21,7 +21,7 @@ class User {
   @OneToOne(() => Account, {
     eager: true,
   })
-  @JoinColumn()
+  @JoinColumn({ name: "account_id" })
   accountId: Account;
 }
 

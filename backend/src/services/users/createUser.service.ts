@@ -1,5 +1,6 @@
+import { accountRepository } from "../../repositories/account.repository";
+import { userRepository } from "../../repositories/user.repository";
 import { IUserRequest } from "../../interfaces/users";
-import { AppDataSource } from "../../data-source";
 import { Account } from "../../entities/accounts";
 import { User } from "../../entities/users";
 import { AppError } from "../../errors";
@@ -12,9 +13,6 @@ const createUserService = async ({
   username: string;
   accountId: string;
 }> => {
-  const userRepository = AppDataSource.getRepository(User);
-
-  const accountRepository = AppDataSource.getRepository(Account);
 
   const account = new Account();
   account.balance = 100;
