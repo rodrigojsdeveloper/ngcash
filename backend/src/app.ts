@@ -1,7 +1,7 @@
 import { handleErrorMiddleware } from "./middlewares/handleError.middleware";
+import SwaggerDocs from "../docs/swagger.json";
 import { Request, Response } from "express";
 import SwaggerUi from "swagger-ui-express";
-import SwaggerDocs from "./swagger.json";
 import { appRoutes } from "./routes";
 import express from "express";
 import "express-async-errors";
