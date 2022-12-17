@@ -1,40 +1,38 @@
-import { animacaoForm } from '../../components/Form/style'
-import styled from 'styled-components'
-
+import { animacaoForm } from "../../components/Form/style";
+import styled from "styled-components";
 
 const Container = styled.div`
 
-    div {
-        padding: 20px 15px;
+  div {
+    padding: 20px 15px;
+  }
+
+  .divBlack {
+    height: 40vh;
+    background: var(--color);
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+
+    img {
+      width: 150px;
+      object-fit: contain;
+      margin-top: 15px;
+
+      animation: ${animacaoForm} 1s;
     }
+  }
 
-    .divBlack {
-        height: 40vh;
-        background: var(--color);
+  .divWhite {
+    display: flex;
+    justify-content: center;
 
-        display: flex;
-        justify-content: center;
-        align-items: flex-start;
-
-        img {
-            width: 150px;
-            object-fit: contain;
-            margin-top: 15px;
-
-            animation: ${ animacaoForm }  1s;
-        }
+    form {
+      margin-top: -125px;
+      box-shadow: var(--box-shadow-form) 6px 2px 16px 0px;
     }
+  }
+`;
 
-    .divWhite {
-
-        display: flex;
-        justify-content: center;
-
-        form {
-            margin-top: -125px;
-            box-shadow: var(--box-shadow-form) 6px 2px 16px 0px;
-        }
-    }
-`
-
-export { Container }
+export { Container };

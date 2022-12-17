@@ -1,93 +1,88 @@
-import { IFormTransactionProps } from '../../interfaces'
-import { yupResolver } from '@hookform/resolvers/yup'
-import { AiOutlineUser } from 'react-icons/ai'
-import { useForm } from 'react-hook-form'
-import { api } from '../../services/api'
-import { BsCash } from 'react-icons/bs'
-import { toast } from 'react-toastify'
-import { Container } from './style'
-import { Button } from '../Button'
-import { useState } from 'react'
-import * as yup from 'yup'
-
+import { IFormTransactionProps } from "../../interfaces";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { AiOutlineUser } from "react-icons/ai";
+import { useForm } from "react-hook-form";
+import { api } from "../../services/api";
+import { BsCash } from "react-icons/bs";
+import { toast } from "react-toastify";
+import { Container } from "./style";
+import { Button } from "../Button";
+import { useState } from "react";
+import * as yup from "yup";
 
 const FormTransaction = ({ addTransactions }: IFormTransactionProps) => {
+  const [load, setLoad] = useState<boolean>(false);
 
-    const [ load, setLoad ] = useState<boolean>(false)
+  const token = sessionStorage.getItem("Project NG.CASH: token");
 
-    const token = sessionStorage.getItem('Project NG.CASH: token')
+  const schema = yup.object().shape({
+    username: yup
+      .string()
+      .min(3, "Username must contain at least 3 characters"),
 
-    const schema = yup.object().shape({
+    value: yup.number().typeError("Amount must be a number"),
+  });
 
-        username: yup
-            .string()
-            .min(3, 'Username must contain at least 3 characters'),
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({ resolver: yupResolver(schema) });
 
-        value: yup
-            .number()
-            .typeError('Amount must be a number'),
-    })
+  const onSumbitFunction = (data: object) => {
+    setLoad(true);
 
-    const { register, handleSubmit, formState: { errors } } = useForm({ resolver: yupResolver(schema) })
+    api
+      .post("/transactions", data, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((res) => {
+        addTransactions(res.data);
 
-    const onSumbitFunction = (data: object) => {
+        toast.success("Completed transaction");
+      })
+      .catch((_) => toast.error("Transaction error"))
+      .finally(() => setLoad(false));
+  };
 
-        setLoad(true)
+  return (
+    <Container onSubmit={handleSubmit(onSumbitFunction)}>
+      <div>
+        <h1>Transaction</h1>
 
-        api.post('/transactions', data, {
+        <main>
+          <label>{errors.value?.message as string}</label>
+          <div>
+            <BsCash />
+            <input
+              placeholder="Value"
+              type="text"
+              {...register("value")}
+              required={true}
+            />
+          </div>
 
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${ token }`,
-            }
-        })
-        .then(res => {
-            addTransactions(res.data)
+          <label>{errors.username?.message as string}</label>
+          <div>
+            <AiOutlineUser />
+            <input
+              placeholder="Username"
+              type="text"
+              {...register("username")}
+              required={true}
+              autoComplete="off"
+            />
+          </div>
 
-            toast.success('Completed transaction')
-        })
-        .catch(_ => toast.error('Transaction error'))
-        .finally(() => setLoad(false))
-    }
+          <Button buttonStyle="register" type="submit" disabled={load}>
+            {load ? "Sending..." : "Submit"}
+          </Button>
+        </main>
+      </div>
+    </Container>
+  );
+};
 
-    return (
-        <Container onSubmit={ handleSubmit(onSumbitFunction) }>
-
-            <div>
-                <h1>Transaction</h1>
-
-                <main>
-                    <label>{ errors.value?.message as string }</label>
-                    <div>
-                        <BsCash />
-                        <input
-                        placeholder="Value"
-                        type="text"
-                        { ...register("value") }
-                        required={ true }
-                        />
-                    </div>
-
-                    <label>{ errors.username?.message as string }</label>
-                    <div>
-                        <AiOutlineUser />
-                        <input
-                        placeholder="Username"
-                        type="text"
-                        { ...register("username") }
-                        required={ true }
-                        autoComplete="off"
-                        />
-                    </div>
-
-                    <Button buttonStyle="register" type="submit" disabled={ load }>{
-                        load ? 'Sending...' : 'Submit'
-                    }</Button>
-                </main>
-            </div>
-            
-        </Container>
-    )
-}
-
-export { FormTransaction }
+export { FormTransaction };
