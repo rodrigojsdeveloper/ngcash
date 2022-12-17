@@ -85,6 +85,10 @@ const Container = styled.form`
             
             &:hover {
                 border-color: var(--color);
+
+                .biShow {
+                    display: block;
+                }
             }
             
             input {
@@ -108,6 +112,7 @@ const Container = styled.form`
             .biShow {
 
                 color: var(--gray);
+                display: none;
 
                 &:hover {
                     cursor: pointer;

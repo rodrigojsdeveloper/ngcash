@@ -1,8 +1,8 @@
+import { AiOutlineUser, AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Link, useHistory } from 'react-router-dom'
-import { BiLockAlt, BiShow } from 'react-icons/bi'
-import { AiOutlineUser } from 'react-icons/ai'
 import { IFormProps } from '../../interfaces'
+import { BiLockAlt } from 'react-icons/bi'
 import { useForm } from 'react-hook-form'
 import { api } from '../../services/api'
 import { toast } from 'react-toastify'
@@ -18,9 +18,9 @@ const Form = ({ apiProp, historyProp, titleProp, textProp, linkProp, textLinkPro
 
     const [ load, setLoad ] = useState<boolean>(false)
 
-    const [ typeInput, setTypeInput ] = useState(false)
+    const [ typeInput, setTypeInput ] = useState<boolean>(false)
 
-    const [ showBiShow, setShowBiShow ] = useState(false)
+    const [ showOutlineShow, setShowOutlineShow ] = useState<boolean>(true)
 
     const schema = yup.object().shape({
         
@@ -96,27 +96,36 @@ const Form = ({ apiProp, historyProp, titleProp, textProp, linkProp, textLinkPro
                     required={ true }
                     onChange={ (e: any) => {
 
-                        setShowBiShow(true)
-
                         if(e.target.value == '') {
 
-                            setShowBiShow(false)
+                            setShowOutlineShow(false)
+
+                            setTypeInput(false)
                         }
 
                     } }
                     />
                     {
-                        showBiShow && 
-                        <BiShow className="biShow" onClick={ () => {
-    
-                            setTypeInput(true)
-    
-                            if(typeInput) {
-    
+                        showOutlineShow ? (
+                            
+                            <AiOutlineEyeInvisible className="biShow" onClick={ () => {
+                            
+                                setTypeInput(true)
+                                
+                                setShowOutlineShow(false)
+
+                            } } />
+                        
+                            ) : (
+                        
+                            <AiOutlineEye className="biShow" onClick={ () => {
+
                                 setTypeInput(false)
-                            }
-    
-                        } } />
+
+                                setShowOutlineShow(true)
+
+                            } } />
+                        )
                     }
                 </div>
 
