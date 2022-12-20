@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from "express";
-import { AppError } from "../errors";
+import { ApiError } from "../errors";
 
 const handleErrorMiddleware = async (
   error: Error,
@@ -7,7 +7,7 @@ const handleErrorMiddleware = async (
   res: Response,
   next: NextFunction
 ) => {
-  if (error instanceof AppError) {
+  if (error instanceof ApiError) {
     return res.status(error.statusCode).json({ message: error.message });
   }
 

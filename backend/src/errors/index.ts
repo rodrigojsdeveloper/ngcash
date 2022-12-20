@@ -32,4 +32,4 @@ const NotFoundError = class NotFoundError extends ApiError {
   }
 };
 
-export { BadRequestError, UnauthorizedError, ForbiddenError, NotFoundError };
+export { ApiError, BadRequestError, UnauthorizedError, ForbiddenError, NotFoundError };
