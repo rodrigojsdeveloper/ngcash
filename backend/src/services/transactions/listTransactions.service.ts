@@ -1,4 +1,4 @@
-import { accountRepository } from "../../repositories/account.repository";
+import { accountRepository } from "../../repositories/accountRepository";
 import { Transaction } from "../../entities/transactions";
 
 const listTransactionsService = async (

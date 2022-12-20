@@ -1,4 +1,4 @@
-import { accountRepository } from "../../repositories/account.repository";
+import { accountRepository } from "../../repositories/accountRepository";
 
 const specificAccountService = async (id: string): Promise<object> => {
   const account = await accountRepository.findOneBy({ id });

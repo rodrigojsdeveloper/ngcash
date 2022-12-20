@@ -1,5 +1,5 @@
 import { listTransactionsCashOutService } from "../../services/transactions/listTransactionsCashOut.service";
-import { userRepository } from "../../repositories/user.repository";
+import { userRepository } from "../../repositories/userRepository";
 import { Request, Response } from "express";
 
 const listTransactionsCashOutController = async (

@@ -1,5 +1,5 @@
-import { accountRepository } from "../repositories/account.repository";
-import { userRepository } from "../repositories/user.repository";
+import { accountRepository } from "../repositories/accountRepository";
+import { userRepository } from "../repositories/userRepository";
 import { Request, Response, NextFunction } from "express";
 
 const itsYourOwnBalanceMiddleware = async (

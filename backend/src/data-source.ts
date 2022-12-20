@@ -1,8 +1,24 @@
-import { DataSource } from "typeorm";
+import { DataSource, DataSourceOptions } from "typeorm";
+import { SeederOptions } from "typeorm-extension";
+import { MainSeeder } from "./seeds/main.seeder";
 
 require("dotenv").config();
 
-const port = process.env.POSTGRES_PORT as number | undefined
+const port = process.env.POSTGRES_PORT as number | undefined;
+
+const options: DataSourceOptions & SeederOptions = {
+  type: "postgres",
+  host: process.env.POSTGRES_HOST,
+  port: port,
+  username: process.env.POSTGRES_USER,
+  password: process.env.POSTGRES_PASSWORD,
+  database: process.env.POSTGRES_DB,
+  logging: true,
+  synchronize: true,
+  entities: [`${__dirname}/**/entities/**/*.{ts,js}`],
+  migrations: [`${__dirname}/**/migrations/*.{ts,js}`],
+  seeds: [MainSeeder],
+};
 
 const AppDataSource = new DataSource(
   process.env.NODE_ENV === "test"
@@ -12,18 +28,7 @@ const AppDataSource = new DataSource(
         synchronize: true,
         entities: ["src/entities/**/*.ts"],
       }
-    : {
-        type: "postgres",
-        host: process.env.POSTGRES_HOST,
-        port: port,
-        username: process.env.POSTGRES_USER,
-        password: process.env.POSTGRES_PASSWORD,
-        database: process.env.POSTGRES_DB,
-        logging: true,
-        synchronize: true,
-        entities: [`${__dirname}/**/entities/**/*.{ts,js}`],
-        migrations: [`${__dirname}/**/migrations/*.{ts,js}`],
-      }
+    : options
 );
 
 export { AppDataSource };

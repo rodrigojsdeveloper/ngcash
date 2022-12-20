@@ -1,6 +1,6 @@
 import { createTransactionService } from "../../../services/transactions/createTransaction.service";
 import { createUserService } from "../../../services/users/createUser.service";
-import { user, user2, transaction } from "../../../mocks";
+import { user, anotherUser, transaction } from "../../../mocks";
 import { AppDataSource } from "../../../data-source";
 import { DataSource } from "typeorm";
 
@@ -14,7 +14,7 @@ describe("Tests for transaction service", () => {
         console.error("Error during Data Source initialization", err)
       );
 
-    await createUserService(user2);
+    await createUserService(anotherUser);
   });
 
   afterAll(async () => await connection.destroy());

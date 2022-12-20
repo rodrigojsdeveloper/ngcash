@@ -1,9 +1,9 @@
-import { transactionRepository } from "../../repositories/transaction.repository";
-import { accountRepository } from "../../repositories/account.repository";
+import { transactionRepository } from "../../repositories/transactionRepository";
+import { BadRequestError, ForbiddenError, NotFoundError } from "../../errors";
+import { accountRepository } from "../../repositories/accountRepository";
 import { ITransactionRequest } from "../../interfaces/transactions";
-import { userRepository } from "../../repositories/user.repository";
+import { userRepository } from "../../repositories/userRepository";
 import { Transaction } from "../../entities/transactions";
-import { AppError } from "../../errors";
 
 const createTransactionService = async (
   debitedId: string,
@@ -14,7 +14,7 @@ const createTransactionService = async (
   });
 
   if (!user) {
-    throw new AppError("User not found", 404);
+    throw new NotFoundError("User not found");
   }
 
   const accountDebited = await accountRepository.findOneBy({ id: debitedId });
@@ -24,11 +24,11 @@ const createTransactionService = async (
   });
 
   if (accountDebited?.id == accountCredited?.id) {
-    throw new AppError("the user cannot make transactions for himself", 403);
+    throw new ForbiddenError("the user cannot make transactions for himself");
   }
 
   if (transaction.value > Number(accountDebited?.balance)) {
-    throw new AppError("insufficient debt");
+    throw new BadRequestError("insufficient debt");
   }
 
   accountCredited!.balance = accountCredited!.balance + transaction.value;

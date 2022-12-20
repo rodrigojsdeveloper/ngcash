@@ -1,4 +1,4 @@
-import { userRepository } from "../../repositories/user.repository";
+import { userRepository } from "../../repositories/userRepository";
 import { User } from "../../entities/users";
 
 const viewProfileService = async (username: string): Promise<User> => {

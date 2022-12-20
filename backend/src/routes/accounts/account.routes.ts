@@ -7,7 +7,7 @@ import { tokenMiddleware } from "../../middlewares/token.middleware";
 
 const routes = Router();
 
-const accountRoutes = () => {
+const accountsRoutes = () => {
   routes.get(
     "/:id",
     tokenMiddleware,
@@ -18,4 +18,4 @@ const accountRoutes = () => {
   return routes;
 };
 
-export { accountRoutes };
+export { accountsRoutes };

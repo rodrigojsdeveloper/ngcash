@@ -7,7 +7,7 @@ const user: IUserRequest = {
   password: "Example@123",
 };
 
-const user2: IUserRequest = {
+const anotherUser: IUserRequest = {
   username: "johndoe",
   password: "Johndoe@123",
 };
@@ -22,4 +22,4 @@ const transaction: ITransactionRequest = {
   username: "johndoe",
 };
 
-export { user, user2, session, transaction };
+export { user, anotherUser, session, transaction };

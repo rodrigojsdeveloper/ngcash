@@ -1,7 +1,7 @@
 import { createTransactionService } from "../../services/transactions/createTransaction.service";
-import { accountRepository } from "../../repositories/account.repository";
+import { accountRepository } from "../../repositories/accountRepository";
 import { ITransactionRequest } from "../../interfaces/transactions";
-import { userRepository } from "../../repositories/user.repository";
+import { userRepository } from "../../repositories/userRepository";
 import { Request, Response } from "express";
 
 const createTransactionController = async (req: Request, res: Response) => {

@@ -1,9 +1,9 @@
-import { accountRepository } from "../../repositories/account.repository";
-import { userRepository } from "../../repositories/user.repository";
+import { accountRepository } from "../../repositories/accountRepository";
+import { userRepository } from "../../repositories/userRepository";
 import { IUserRequest } from "../../interfaces/users";
 import { Account } from "../../entities/accounts";
+import { BadRequestError } from "../../errors";
 import { User } from "../../entities/users";
-import { AppError } from "../../errors";
 import { hash } from "bcrypt";
 
 const createUserService = async (
@@ -19,7 +19,7 @@ const createUserService = async (
   await accountRepository.save(newAccount);
 
   if (await userRepository.findOneBy({ username: user.username })) {
-    throw new AppError("Username already exists");
+    throw new BadRequestError("Username already exists");
   }
 
   const passwordHashed = await hash(user.password, 10);

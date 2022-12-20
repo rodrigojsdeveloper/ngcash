@@ -1,6 +1,6 @@
-import { userRepository } from "../../repositories/user.repository";
+import { userRepository } from "../../repositories/userRepository";
 import { ISessionRequest } from "../../interfaces/session";
-import { AppError } from "../../errors";
+import { UnauthorizedError } from "../../errors";
 import { compare } from "bcrypt";
 import jwt from "jsonwebtoken";
 
@@ -8,13 +8,13 @@ const createSessionService = async (user: ISessionRequest): Promise<object> => {
   const findUser = await userRepository.findOneBy({ username: user.username });
 
   if (!findUser) {
-    throw new AppError("Invalid credentials", 401);
+    throw new UnauthorizedError("Invalid credentials");
   }
 
   const passwordMatch = await compare(user.password, findUser.password);
 
   if (!passwordMatch) {
-    throw new AppError("Invalid credentials", 401);
+    throw new UnauthorizedError("Invalid credentials");
   }
 
   const token = jwt.sign(

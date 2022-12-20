@@ -1,4 +1,4 @@
-import { session, transaction, user, user2 } from "../../../mocks";
+import { session, transaction, user, anotherUser } from "../../../mocks";
 import { AppDataSource } from "../../../data-source";
 import { DataSource } from "typeorm";
 import { app } from "../../../app";
@@ -15,7 +15,7 @@ describe("Tests for transaction routes", () => {
       );
 
     await request(app).post("/users").send(user);
-    await request(app).post("/users").send(user2);
+    await request(app).post("/users").send(anotherUser);
   });
 
   afterAll(async () => await connection.destroy());
