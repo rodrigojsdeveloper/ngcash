@@ -61,6 +61,7 @@ const Container = styled.form`
           margin-left: 12.5px;
 
           border: none;
+          background-color: transparent;
 
           &:focus::-webkit-input-placeholder {
             color: var(--transparent);

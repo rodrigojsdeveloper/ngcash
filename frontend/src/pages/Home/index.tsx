@@ -46,7 +46,7 @@ const Home = () => {
     useState<boolean>(false);
 
   const addTransactions = (transaction: ITransactionProps) =>
-    setTransactions([...transactions!, transaction]);
+    setTransactions([transaction, ...transactions!]);
 
   const token = sessionStorage.getItem("Project NG.CASH: token");
 
