@@ -43,7 +43,7 @@
                         "description": "Bad Request"
                     },
                     "201": {
-                        "description": "Create",
+                        "description": "Created",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -89,7 +89,7 @@
                                 "$ref": "#/components/schemas/Transaction"
                             },
                             "examples": {
-                                "book": {
+                                "transaction": {
                                     "value": {
                                         "value": 50,
                                         "username": "example"
@@ -104,7 +104,7 @@
                         "description": "Bad Request"
                     },
                     "201": {
-                        "description": "Create",
+                        "description": "Created",
                         "content": {
                             "application/json": {
                                 "schema": {
