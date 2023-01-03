@@ -1,9 +1,9 @@
 import { Express } from "express";
 
 import { transactionsRoutes } from "./transactions.routes";
-import { termsRoutes } from "./terms/terms.routes";
 import { accountsRoutes } from "./account.routes";
 import { sessionRoutes } from "./login.routes";
+import { termsRoutes } from "./terms.routes";
 import { usersRoutes } from "./users.routes";
 
 import SwaggerDocs from "../../docs/swagger.json";

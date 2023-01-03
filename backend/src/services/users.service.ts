@@ -13,7 +13,7 @@ class UsersServices {
 
     const newAccount = accountRepository.create(account);
     await accountRepository.save(newAccount);
-
+    
     if (await userRepository.findOneBy({ username: user.username })) {
       throw new BadRequestError("Username already exists");
     }
