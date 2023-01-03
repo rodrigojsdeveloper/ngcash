@@ -1,11 +1,11 @@
 import { Router } from "express";
 
-import { createSessionController } from "../../controllers/session/createSession.controller";
+import { LoginControllers } from "../controllers/login.controller";
 
 const routes = Router();
 
 const sessionRoutes = () => {
-  routes.post("", createSessionController);
+  routes.post("", new LoginControllers().login);
 
   return routes;
 };
