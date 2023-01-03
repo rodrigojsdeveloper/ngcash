@@ -7,13 +7,13 @@ import { User } from "../entities/user.entity";
 import { hash } from "bcrypt";
 
 class UsersServices {
-  async create(user: IUser): Promise<User> {
+  async create(user: IUser): Promise<{ username: string; accountId: string }> {
     const account = new Account();
     account.balance = 100;
 
     const newAccount = accountRepository.create(account);
     await accountRepository.save(newAccount);
-    
+
     if (await userRepository.findOneBy({ username: user.username })) {
       throw new BadRequestError("Username already exists");
     }
@@ -30,7 +30,12 @@ class UsersServices {
 
     Reflect.deleteProperty(newUser, "password");
 
-    return newUser;
+    const copyUser = {
+      username: newUser.username,
+      accountId: newUser.accountId.id,
+    };
+
+    return copyUser;
   }
 
   async profile(username: string): Promise<User> {

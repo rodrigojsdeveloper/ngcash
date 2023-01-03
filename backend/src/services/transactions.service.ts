@@ -17,7 +17,7 @@ class TransactionsServices {
     });
 
     if (!user) {
-      throw new NotFoundError("User not found");
+      throw new NotFoundError("User");
     }
 
     const accountDebited = await accountRepository.findOneBy({ id: debitedId });
@@ -54,25 +54,41 @@ class TransactionsServices {
   async list(id: string): Promise<Array<Transaction>> {
     const account = await accountRepository.findOneBy({ id });
 
-    return [...account!.creditedTransaction, ...account!.debitedTransaction];
+    if (!account) {
+      throw new NotFoundError("Account");
+    }
+
+    return [...account.creditedTransaction, ...account.debitedTransaction];
   }
 
   async listCashIn(id: string): Promise<Transaction[]> {
     const account = await accountRepository.findOneBy({ id });
 
-    return account!.creditedTransaction;
+    if (!account) {
+      throw new NotFoundError("Account");
+    }
+
+    return account.creditedTransaction;
   }
 
   async listCashOut(id: string): Promise<Transaction[]> {
     const account = await accountRepository.findOneBy({ id });
 
-    return account!.debitedTransaction;
+    if (!account) {
+      throw new NotFoundError("Account");
+    }
+
+    return account.debitedTransaction;
   }
 
   async listOfCreatedAt(id: string, date: string): Promise<Array<Transaction>> {
     const account = await accountRepository.findOneBy({ id });
 
-    const cashIn = account!.creditedTransaction.filter((transaction) => {
+    if (!account) {
+      throw new NotFoundError("Account");
+    }
+
+    const cashIn = account.creditedTransaction.filter((transaction) => {
       const day = String(transaction.createdAt.getDate()).padStart(2, "0");
 
       const month = String(transaction.createdAt.getMonth() + 1).padStart(
@@ -87,7 +103,7 @@ class TransactionsServices {
       return formattedDate == date;
     });
 
-    const cashOut = account!.debitedTransaction.filter((transaction) => {
+    const cashOut = account.debitedTransaction.filter((transaction) => {
       const day = String(transaction.createdAt.getDate()).padStart(2, "0");
 
       const month = String(transaction.createdAt.getMonth() + 1).padStart(

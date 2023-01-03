@@ -1,5 +1,5 @@
 import { Seeder, SeederFactoryManager } from "typeorm-extension";
-import { IUserRequest } from "../interfaces/user.interface";
+import { IUser } from "../interfaces/user.interface";
 import { User } from "../entities/user.entity";
 import { DataSource } from "typeorm";
 import { hash } from "bcrypt";
@@ -11,12 +11,12 @@ const UserSeerder = class UserSeerder implements Seeder {
   ): Promise<void> {
     const userRepository = dataSource.getRepository(User);
 
-    const user: IUserRequest = {
+    const user: IUser = {
       username: "johndoe",
       password: await hash("Johndoe@123", 10),
     };
 
-    const anotherUser: IUserRequest = {
+    const anotherUser: IUser = {
       username: "example",
       password: await hash("Example@123", 10),
     };

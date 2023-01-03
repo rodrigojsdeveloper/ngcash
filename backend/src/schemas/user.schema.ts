@@ -1,8 +1,8 @@
-import { IUserRequest } from "../interfaces/user.interface";
+import { IUser } from "../interfaces/user.interface";
 import { SchemaOf } from "yup";
 import * as yup from "yup";
 
-const userSchema: SchemaOf<IUserRequest> = yup.object().shape({
+const userSchema: SchemaOf<IUser> = yup.object().shape({
   username: yup
     .string()
     .required("Username required")

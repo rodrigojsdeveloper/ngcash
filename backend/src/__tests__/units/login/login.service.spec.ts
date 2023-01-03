@@ -1,7 +1,7 @@
-import { createSessionService } from "../../../services/session/createSession.service";
-import { createUserService } from "../../../services/users/createUser.service";
+import { LoginServices } from "../../../services/login.service";
+import { UsersServices } from "../../../services/users.service";
 import { AppDataSource } from "../../../data-source";
-import { user, session } from "../../../mocks";
+import { user, login } from "../../../mocks";
 import { DataSource } from "typeorm";
 
 describe("Tests for session service", () => {
@@ -18,9 +18,9 @@ describe("Tests for session service", () => {
   afterAll(async () => await connection.destroy());
 
   it("Must be able to create a session", async () => {
-    await createUserService(user);
+    await new UsersServices().create(user);
 
-    const result = await createSessionService(session);
+    const result = await new LoginServices().login(login);
 
     expect(result).toHaveProperty("token");
   });

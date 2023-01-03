@@ -1,5 +1,5 @@
-import { listTransactionsService } from "../../../services/transactions/listTransactions.service";
-import { createUserService } from "../../../services/users/createUser.service";
+import { TransactionsServices } from "../../../services/transactions.service";
+import { UsersServices } from "../../../services/users.service";
 import { AppDataSource } from "../../../data-source";
 import { DataSource } from "typeorm";
 import { user } from "../../../mocks";
@@ -18,9 +18,11 @@ describe("Tests for transaction service", () => {
   afterAll(async () => await connection.destroy());
 
   it("Must be able to list transactions", async () => {
-    const newUser = await createUserService(user);
+    const newUser = await new UsersServices().create(user);
 
-    const result = await listTransactionsService(newUser!.accountId);
+    const result = await new TransactionsServices().list(
+      String(newUser.accountId)
+    );
 
     expect(result).toHaveProperty("map");
   });

@@ -1,5 +1,4 @@
-import { viewProfileService } from "../../../services/users/viewProfile.service";
-import { createUserService } from "../../../services/users/createUser.service";
+import { UsersServices } from "../../../services/users.service";
 import { AppDataSource } from "../../../data-source";
 import { user } from "../../../mocks";
 import { DataSource } from "typeorm";
@@ -18,9 +17,9 @@ describe("Tests for user service", () => {
   afterAll(async () => await connection.destroy());
 
   it("Must be able to view a profile", async () => {
-    await createUserService(user);
+    await new UsersServices().create(user);
 
-    const result = await viewProfileService(user.username);
+    const result = await new UsersServices().profile(user.username);
 
     expect(result).toHaveProperty("username");
     expect(result).not.toHaveProperty("password");

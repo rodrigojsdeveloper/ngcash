@@ -4,14 +4,14 @@ import { DataSource } from "typeorm";
 import { app } from "../../../app";
 import request from "supertest";
 
-describe("Tests for user routes", () => {
+describe("Tests for users routes", () => {
   let connection: DataSource;
 
   beforeAll(async () => {
     await AppDataSource.initialize()
       .then((res) => (connection = res))
       .catch((err) =>
-        console.error("Error during Data Source initialization", err)
+        console.error("Error during DataSource initialization", err)
       );
   });
 

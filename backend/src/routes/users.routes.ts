@@ -16,9 +16,13 @@ const usersRoutes = (): Router => {
     new UsersControllers().create
   );
 
-  routes.get("/profile", tokenMiddleware, new UsersControllers().profile);
+  return routes;
+};
+
+const profileRoutes = (): Router => {
+  routes.get("", tokenMiddleware, new UsersControllers().profile);
 
   return routes;
 };
 
-export { usersRoutes };
+export { usersRoutes, profileRoutes };

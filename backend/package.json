@@ -6,7 +6,7 @@
   "author": "Rodrigodeveloperjr <rodrigojsdeveloper@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "tsnd --transpile-only --respawn --ignore-watch node_modules src/server.ts",
+    "dev": "tsnd --transpile-only --respawn --ignore-watch node_modules ./src/server.ts",
     "typeorm": "typeorm-ts-node-commonjs",
     "migration:generate": "typeorm-ts-node-commonjs -d ./src/data-source.ts migration:generate ./src/migrations/default",
     "migration:run": "typeorm-ts-node-commonjs -d ./src/data-source.ts migration:run",

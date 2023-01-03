@@ -1,8 +1,8 @@
-import { ITransactionRequest } from "../interfaces/transaction.interface";
+import { ITransaction } from "../interfaces/transaction.interface";
 import { SchemaOf } from "yup";
 import * as yup from "yup";
 
-const transactionSchema: SchemaOf<ITransactionRequest> = yup.object().shape({
+const transactionSchema: SchemaOf<ITransaction> = yup.object().shape({
   username: yup
     .string()
     .required("Username required")

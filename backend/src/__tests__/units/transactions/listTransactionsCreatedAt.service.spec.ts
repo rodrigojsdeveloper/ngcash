@@ -1,5 +1,5 @@
-import { listTransactionsCreatedAtService } from "../../../services/transactions/listTransactionsCreatedAt.service";
-import { createUserService } from "../../../services/users/createUser.service";
+import { TransactionsServices } from "../../../services/transactions.service";
+import { UsersServices } from "../../../services/users.service";
 import { AppDataSource } from "../../../data-source";
 import { DataSource } from "typeorm";
 import { user } from "../../../mocks";
@@ -28,10 +28,10 @@ describe("Tests for transaction service", () => {
 
     const formattedDate = `${year}-${month}-${day}`;
 
-    const newUser = await createUserService(user);
+    const newUser = await new UsersServices().create(user);
 
-    const result = await listTransactionsCreatedAtService(
-      newUser!.accountId,
+    const result = await new TransactionsServices().listOfCreatedAt(
+      String(newUser.accountId),
       formattedDate
     );
 

@@ -1,17 +1,17 @@
-import { session, transaction, user } from "../../../mocks";
+import { login, transaction, user } from "../../../mocks";
 import { AppDataSource } from "../../../data-source";
 import { DataSource } from "typeorm";
 import { app } from "../../../app";
 import request from "supertest";
 
-describe("Tests for transaction routes", () => {
+describe("Tests for transactions routes", () => {
   let connection: DataSource;
 
   beforeAll(async () => {
     await AppDataSource.initialize()
       .then((res) => (connection = res))
       .catch((err) =>
-        console.error("Error during Data Source initialization", err)
+        console.error("Error during DataSource initialization", err)
       );
 
     await request(app).post("/users").send(user);
@@ -30,9 +30,9 @@ describe("Tests for transaction routes", () => {
 
     const formattedDate = `${year}-${month}-${day}`;
 
-    const login = await request(app).post("/session").send(session);
+    const session = await request(app).post("/signin").send(login);
 
-    const token: string = login.body.token;
+    const token: string = session.body.token;
 
     const response = await request(app)
       .get(`/transactions/${formattedDate}`)

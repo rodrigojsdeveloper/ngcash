@@ -1,10 +1,16 @@
-import { session, transaction, user, anotherUser } from "../../../mocks";
+import {
+  login,
+  transaction,
+  user,
+  anotherUser,
+  invalidTransaction,
+} from "../../../mocks";
 import { AppDataSource } from "../../../data-source";
 import { DataSource } from "typeorm";
 import { app } from "../../../app";
 import request from "supertest";
 
-describe("Tests for transaction routes", () => {
+describe("Tests for transactions routes", () => {
   let connection: DataSource;
 
   beforeAll(async () => {
@@ -21,9 +27,9 @@ describe("Tests for transaction routes", () => {
   afterAll(async () => await connection.destroy());
 
   test("Must be able to create a transaction", async () => {
-    const login = await request(app).post("/session").send(session);
+    const session = await request(app).post("/signin").send(login);
 
-    const token: string = login.body.token;
+    const token: string = session.body.token;
 
     const response = await request(app)
       .post("/transactions")
@@ -40,9 +46,9 @@ describe("Tests for transaction routes", () => {
   });
 
   test("Must be able to prevent the creation of underbalanced transactions", async () => {
-    const login = await request(app).post("/session").send(session);
+    const session = await request(app).post("/signin").send(login);
 
-    const token: string = login.body.token;
+    const token: string = session.body.token;
 
     await request(app)
       .post("/transactions")
@@ -66,15 +72,13 @@ describe("Tests for transaction routes", () => {
   });
 
   test("Must be able to prevent creation of transactions with non-existent user", async () => {
-    transaction.username = "username";
+    const session = await request(app).post("/signin").send(login);
 
-    const login = await request(app).post("/session").send(session);
-
-    const token: string = login.body.token;
+    const token: string = session.body.token;
 
     const response = await request(app)
       .post("/transactions")
-      .send(transaction)
+      .send(invalidTransaction)
       .set("Authorization", `Bearer ${token}`);
 
     expect(response.status).toBe(404);

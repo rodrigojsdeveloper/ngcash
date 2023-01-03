@@ -1,25 +1,42 @@
-import { ITransactionRequest } from "../interfaces/transaction.interface";
-import { ISessionRequest } from "../interfaces/login.interface";
-import { IUserRequest } from "../interfaces/user.interface";
+import { ITransaction } from "../interfaces/transaction.interface";
+import { ILogin } from "../interfaces/login.interface";
+import { IUser } from "../interfaces/user.interface";
 
-const user: IUserRequest = {
+const user: IUser = {
   username: "example",
   password: "Example@123",
 };
 
-const anotherUser: IUserRequest = {
+const anotherUser: IUser = {
   username: "johndoe",
   password: "Johndoe@123",
 };
 
-const session: ISessionRequest = {
+const login: ILogin = {
   username: "example",
   password: "Example@123",
 };
 
-const transaction: ITransactionRequest = {
+const invalidLogin: ILogin = {
+  username: "example",
+  password: "Johndoe@123",
+};
+
+const transaction: ITransaction = {
   value: 50,
   username: "johndoe",
 };
 
-export { user, anotherUser, session, transaction };
+const invalidTransaction: ITransaction = {
+  value: 20,
+  username: "exx",
+};
+
+export {
+  user,
+  anotherUser,
+  login,
+  invalidLogin,
+  transaction,
+  invalidTransaction,
+};
