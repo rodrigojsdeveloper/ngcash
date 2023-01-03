@@ -1,5 +1,5 @@
 import { accountRepository } from "../../repositories/accountRepository";
-import { Transaction } from "../../entities/transactions";
+import { Transaction } from "../../entities/transactions.entity";
 
 const listTransactionsCashInService = async (
   id: string

@@ -3,7 +3,7 @@ import { BadRequestError, ForbiddenError, NotFoundError } from "../../errors";
 import { accountRepository } from "../../repositories/accountRepository";
 import { ITransactionRequest } from "../../interfaces/transactions";
 import { userRepository } from "../../repositories/userRepository";
-import { Transaction } from "../../entities/transactions";
+import { Transaction } from "../../entities/transactions.entity";
 
 const createTransactionService = async (
   debitedId: string,

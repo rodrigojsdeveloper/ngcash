@@ -1,9 +1,9 @@
 import { accountRepository } from "../../repositories/accountRepository";
 import { userRepository } from "../../repositories/userRepository";
 import { IUserRequest } from "../../interfaces/users";
-import { Account } from "../../entities/accounts";
+import { Account } from "../../entities/accounts.entity";
 import { BadRequestError } from "../../errors";
-import { User } from "../../entities/users";
+import { User } from "../../entities/user.entity";
 import { hash } from "bcrypt";
 
 const createUserService = async (

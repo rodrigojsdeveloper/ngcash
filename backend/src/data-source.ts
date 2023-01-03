@@ -13,9 +13,8 @@ const options: DataSourceOptions & SeederOptions = {
   username: process.env.POSTGRES_USER,
   password: process.env.POSTGRES_PASSWORD,
   database: process.env.POSTGRES_DB,
-  logging: true,
-  synchronize: true,
-  entities: [`${__dirname}/**/entities/**/*.{ts,js}`],
+  synchronize: false,
+  entities: [`${__dirname}/**/entities/*.{ts,js}`],
   migrations: [`${__dirname}/**/migrations/*.{ts,js}`],
   seeds: [MainSeeder],
 };
@@ -26,7 +25,7 @@ const AppDataSource = new DataSource(
         type: "sqlite",
         database: ":memory:",
         synchronize: true,
-        entities: ["src/entities/**/*.ts"],
+        entities: [`${__dirname}/**/entities/*.{ts,js}`],
       }
     : options
 );

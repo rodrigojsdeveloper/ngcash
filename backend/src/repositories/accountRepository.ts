@@ -1,5 +1,5 @@
 import { AppDataSource } from "../data-source";
-import { Account } from "../entities/accounts";
+import { Account } from "../entities/accounts.entity";
 
 const accountRepository = AppDataSource.getRepository(Account);
 

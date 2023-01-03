@@ -1,3 +1,4 @@
+import { Account } from "./accounts.entity";
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -6,7 +7,6 @@ import {
   ManyToOne,
   JoinColumn,
 } from "typeorm";
-import { Account } from "../accounts";
 
 @Entity("transactions")
 class Transaction {

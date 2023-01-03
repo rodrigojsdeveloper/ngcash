@@ -1,3 +1,4 @@
+import { Account } from "./accounts.entity";
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -5,7 +6,6 @@ import {
   OneToOne,
   JoinColumn,
 } from "typeorm";
-import { Account } from "../accounts";
 
 @Entity("users")
 class User {

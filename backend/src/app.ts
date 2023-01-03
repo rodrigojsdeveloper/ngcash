@@ -2,7 +2,7 @@ import { handleErrorMiddleware } from "./middlewares/handleError.middleware";
 import { appRoutes } from "./routes";
 import express from "express";
 import "express-async-errors";
-const cors = require("cors");
+import cors from "cors";
 import "dotenv/config";
 
 const app = express();
