@@ -7,10 +7,7 @@ import { BadRequestError } from "../errors";
 import { hash } from "bcrypt";
 
 class UsersServices {
-  async create(user: IUserRequest): Promise<{
-    username: string;
-    accountId: string;
-  }> {
+  async create(user: IUserRequest): Promise<User> {
     const account = new Account();
     account.balance = 100;
 
@@ -21,22 +18,19 @@ class UsersServices {
       throw new BadRequestError("Username already exists");
     }
 
-    const passwordHashed = await hash(user.password, 10);
+    const hashedPassword = await hash(user.password, 10);
 
     const newUser = new User();
     newUser.username = user.username;
-    newUser.password = passwordHashed;
+    newUser.password = hashedPassword;
     newUser.accountId = newAccount;
 
     userRepository.create(newUser);
     await userRepository.save(newUser);
 
-    const copyUser = {
-      username: user.username,
-      accountId: newAccount.id,
-    };
+    Reflect.deleteProperty(newUser, "password");
 
-    return copyUser;
+    return newUser;
   }
 
   async profile(username: string): Promise<User> {

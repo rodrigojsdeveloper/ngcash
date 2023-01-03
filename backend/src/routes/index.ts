@@ -1,6 +1,6 @@
 import { Express } from "express";
 
-import { transactionsRoutes } from "./transactions/transactions.routes";
+import { transactionsRoutes } from "./transactions.routes";
 import { accountsRoutes } from "./accounts/account.routes";
 import { sessionRoutes } from "./session/session.routes";
 import { termsRoutes } from "./terms/terms.routes";
