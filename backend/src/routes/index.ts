@@ -3,8 +3,8 @@ import { Express } from "express";
 import { transactionsRoutes } from "./transactions/transactions.routes";
 import { accountsRoutes } from "./accounts/account.routes";
 import { sessionRoutes } from "./session/session.routes";
-import { usersRoutes } from "./users/users.routes";
 import { termsRoutes } from "./terms/terms.routes";
+import { usersRoutes } from "./users.routes";
 
 import SwaggerDocs from "../../docs/swagger.json";
 import SwaggerUi from "swagger-ui-express";
