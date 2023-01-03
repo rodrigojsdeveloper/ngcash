@@ -1,14 +1,14 @@
 import { TransactionsServices } from "../services/transactions.service";
-import { accountRepository } from "../repositories/accountRepository";
-import { ITransactionRequest } from "../interfaces/transactions";
-import { userRepository } from "../repositories/userRepository";
+import { accountRepository } from "../repositories/account.repository";
+import { ITransaction } from "../interfaces/transaction.interface";
+import { userRepository } from "../repositories/user.repository";
 import { Request, Response } from "express";
 
 class TransactionsControllers {
   async create(req: Request, res: Response) {
     const usernameDebt: string = req.username;
 
-    const data: ITransactionRequest = req.body;
+    const data: ITransaction = req.body;
 
     const userDebitedId = await userRepository.findOneBy({
       username: usernameDebt,

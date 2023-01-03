@@ -1,10 +1,10 @@
 import { UsersServices } from "../services/users.service";
-import { IUserRequest } from "../interfaces/users";
+import { IUser } from "../interfaces/user.interface";
 import { Request, Response } from "express";
 
 class UsersControllers {
   async create(req: Request, res: Response) {
-    const data: IUserRequest = req.body;
+    const data: IUser = req.body;
 
     const newUser = await new UsersServices().create(data);
 

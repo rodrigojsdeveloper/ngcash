@@ -1,4 +1,4 @@
-import { accountRepository } from "../repositories/accountRepository";
+import { accountRepository } from "../repositories/account.repository";
 
 class AccountsServices {
   async specific(id: string): Promise<{ balance: number }> {

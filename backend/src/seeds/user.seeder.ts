@@ -1,5 +1,5 @@
 import { Seeder, SeederFactoryManager } from "typeorm-extension";
-import { IUserRequest } from "../interfaces/users";
+import { IUserRequest } from "../interfaces/user.interface";
 import { User } from "../entities/user.entity";
 import { DataSource } from "typeorm";
 import { hash } from "bcrypt";

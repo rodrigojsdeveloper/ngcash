@@ -1,4 +1,4 @@
-import { IUserRequest } from "../interfaces/users";
+import { IUserRequest } from "../interfaces/user.interface";
 import { SchemaOf } from "yup";
 import * as yup from "yup";
 

@@ -1,4 +1,4 @@
-import { ITransactionRequest } from "../interfaces/transactions";
+import { ITransactionRequest } from "../interfaces/transaction.interface";
 import { SchemaOf } from "yup";
 import * as yup from "yup";
 

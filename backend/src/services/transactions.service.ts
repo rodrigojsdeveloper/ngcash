@@ -1,14 +1,16 @@
-import { transactionRepository } from "../repositories/transactionRepository";
-import { BadRequestError, ForbiddenError, NotFoundError } from "../errors";
-import { accountRepository } from "../repositories/accountRepository";
-import { ITransactionRequest } from "../interfaces/transactions";
-import { userRepository } from "../repositories/userRepository";
+import { transactionRepository } from "../repositories/transaction.repository";
+import { accountRepository } from "../repositories/account.repository";
+import { ITransaction } from "../interfaces/transaction.interface";
+import { userRepository } from "../repositories/user.repository";
 import { Transaction } from "../entities/transactions.entity";
+import { BadRequestError } from "../errors/badRequest.error";
+import { ForbiddenError } from "../errors/forbidden.error";
+import { NotFoundError } from "../errors/notFound.error";
 
 class TransactionsServices {
   async create(
     debitedId: string,
-    transaction: ITransactionRequest
+    transaction: ITransaction
   ): Promise<Transaction> {
     const user = await userRepository.findOneBy({
       username: transaction.username,

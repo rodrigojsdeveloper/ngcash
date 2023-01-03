@@ -1,6 +1,6 @@
-import { ITransactionRequest } from "../interfaces/transactions";
-import { ISessionRequest } from "../interfaces/session";
-import { IUserRequest } from "../interfaces/users";
+import { ITransactionRequest } from "../interfaces/transaction.interface";
+import { ISessionRequest } from "../interfaces/login.interface";
+import { IUserRequest } from "../interfaces/user.interface";
 
 const user: IUserRequest = {
   username: "example",
