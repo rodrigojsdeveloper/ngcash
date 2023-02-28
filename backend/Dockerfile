@@ -2,8 +2,12 @@ FROM node
 
 WORKDIR /app
 
-COPY package.json /app
+COPY package.json ./
 
 RUN yarn
 
-COPY . /app
+COPY ./ ./
+
+EXPOSE 3000
+
+CMD ["yarn", "dev"]

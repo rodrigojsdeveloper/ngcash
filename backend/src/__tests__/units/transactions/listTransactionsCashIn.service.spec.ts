@@ -1,5 +1,5 @@
-import { TransactionsServices } from "../../../services/transactions.service";
-import { UsersServices } from "../../../services/users.service";
+import { TransactionsService } from "../../../services/transactions.service";
+import { UsersService } from "../../../services/users.service";
 import { AppDataSource } from "../../../data-source";
 import { DataSource } from "typeorm";
 import { user } from "../../../mocks";
@@ -18,9 +18,9 @@ describe("Tests for transaction service", () => {
   afterAll(async () => await connection.destroy());
 
   it("Must be able to list transactions cash-in", async () => {
-    const newUser = await new UsersServices().create(user);
+    const newUser = await new UsersService().create(user);
 
-    const result = await new TransactionsServices().listCashIn(
+    const result = await new TransactionsService().listCashIn(
       String(newUser.accountId)
     );
 

@@ -7,7 +7,7 @@ import { BadRequestError } from "../errors/badRequest.error";
 import { ForbiddenError } from "../errors/forbidden.error";
 import { NotFoundError } from "../errors/notFound.error";
 
-class TransactionsServices {
+class TransactionsService {
   public async create(
     debitedId: string,
     transaction: ITransaction
@@ -127,4 +127,4 @@ class TransactionsServices {
   }
 }
 
-export { TransactionsServices };
+export { TransactionsService };

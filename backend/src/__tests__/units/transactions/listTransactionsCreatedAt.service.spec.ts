@@ -1,8 +1,8 @@
-import { TransactionsServices } from "../../../services/transactions.service";
-import { UsersServices } from "../../../services/users.service";
+import { TransactionsService } from "../../../services/transactions.service";
+import { UsersService } from "../../../services/users.service";
 import { AppDataSource } from "../../../data-source";
-import { DataSource } from "typeorm";
 import { user } from "../../../mocks";
+import { DataSource } from "typeorm";
 
 describe("Tests for transaction service", () => {
   let connection: DataSource;
@@ -28,9 +28,9 @@ describe("Tests for transaction service", () => {
 
     const formattedDate = `${year}-${month}-${day}`;
 
-    const newUser = await new UsersServices().create(user);
+    const newUser = await new UsersService().create(user);
 
-    const result = await new TransactionsServices().listOfCreatedAt(
+    const result = await new TransactionsService().listOfCreatedAt(
       String(newUser.accountId),
       formattedDate
     );
