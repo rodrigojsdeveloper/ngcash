@@ -11,7 +11,7 @@ const Session = () => {
 
       <div className="divWhite">
         <Form
-          apiProp="session"
+          apiProp="signin"
           historyProp="home"
           titleProp="Log in"
           textProp="Don't have an account yet? "

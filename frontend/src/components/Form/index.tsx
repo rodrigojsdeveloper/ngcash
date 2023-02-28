@@ -56,7 +56,7 @@ const Form = ({
     api
       .post(`/${apiProp}`, data)
       .then((res) => {
-        if (apiProp == "session") {
+        if (apiProp == "signin") {
           sessionStorage.setItem("Project NG.CASH: token", res.data.token);
 
           toast.success("Login completed");

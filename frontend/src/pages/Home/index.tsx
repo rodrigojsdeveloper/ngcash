@@ -79,7 +79,7 @@ const Home = () => {
         toast.success("Completed transaction");
 
         api
-          .get("/users/profile", {
+          .get("/profile", {
             headers: {
               Authorization: `Bearer ${token}`,
             },
@@ -113,7 +113,7 @@ const Home = () => {
 
   useEffect(() => {
     api
-      .get("/users/profile", {
+      .get("/profile", {
         headers: {
           Authorization: `Bearer ${token}`,
         },

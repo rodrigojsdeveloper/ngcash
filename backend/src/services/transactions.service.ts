@@ -8,7 +8,7 @@ import { ForbiddenError } from "../errors/forbidden.error";
 import { NotFoundError } from "../errors/notFound.error";
 
 class TransactionsServices {
-  async create(
+  public async create(
     debitedId: string,
     transaction: ITransaction
   ): Promise<Transaction> {
@@ -20,28 +20,36 @@ class TransactionsServices {
       throw new NotFoundError("User");
     }
 
-    const accountDebited = await accountRepository.findOneBy({ id: debitedId });
+    const debitedAccount = await accountRepository.findOneBy({ id: debitedId });
 
-    const accountCredited = await accountRepository.findOneBy({
+    const creditedAccount = await accountRepository.findOneBy({
       id: user.accountId.id,
     });
 
-    if (accountDebited?.id == accountCredited?.id) {
+    if (!creditedAccount) {
+      throw new NotFoundError("Credited Account");
+    }
+
+    if (!debitedAccount) {
+      throw new NotFoundError("Debited Account");
+    }
+
+    if (debitedAccount.id === creditedAccount.id) {
       throw new ForbiddenError("The user cannot make transactions for himself");
     }
 
-    if (transaction.value > Number(accountDebited?.balance)) {
+    if (transaction.value > Number(debitedAccount.balance) ?? 0) {
       throw new BadRequestError("Insufficient debt");
     }
 
-    accountCredited!.balance = accountCredited!.balance + transaction.value;
-    accountDebited!.balance = accountDebited!.balance - transaction.value;
+    creditedAccount.balance += transaction.value;
+    debitedAccount.balance -= transaction.value;
 
-    await accountRepository.save(accountCredited!);
-    await accountRepository.save(accountDebited!);
+    await accountRepository.save(creditedAccount);
+    await accountRepository.save(debitedAccount);
 
     const newTransaction = new Transaction();
-    newTransaction.creditedAccountId = accountCredited!.id;
+    newTransaction.creditedAccountId = creditedAccount.id;
     newTransaction.debitedAccountId = debitedId;
     newTransaction.value = transaction.value;
 
@@ -51,7 +59,7 @@ class TransactionsServices {
     return newTransaction;
   }
 
-  async list(id: string): Promise<Array<Transaction>> {
+  public async list(id: string): Promise<Array<Transaction>> {
     const account = await accountRepository.findOneBy({ id });
 
     if (!account) {
@@ -61,7 +69,7 @@ class TransactionsServices {
     return [...account.creditedTransaction, ...account.debitedTransaction];
   }
 
-  async listCashIn(id: string): Promise<Transaction[]> {
+  public async listCashIn(id: string): Promise<Transaction[]> {
     const account = await accountRepository.findOneBy({ id });
 
     if (!account) {
@@ -71,7 +79,7 @@ class TransactionsServices {
     return account.creditedTransaction;
   }
 
-  async listCashOut(id: string): Promise<Transaction[]> {
+  public async listCashOut(id: string): Promise<Transaction[]> {
     const account = await accountRepository.findOneBy({ id });
 
     if (!account) {
@@ -81,44 +89,41 @@ class TransactionsServices {
     return account.debitedTransaction;
   }
 
-  async listOfCreatedAt(id: string, date: string): Promise<Array<Transaction>> {
+  public async listOfCreatedAt(
+    id: string,
+    date: string
+  ): Promise<Array<Transaction>> {
     const account = await accountRepository.findOneBy({ id });
 
     if (!account) {
       throw new NotFoundError("Account");
     }
 
-    const cashIn = account.creditedTransaction.filter((transaction) => {
-      const day = String(transaction.createdAt.getDate()).padStart(2, "0");
+    const formatDate = (date: Date): string => {
+      const day = String(date.getDate()).padStart(2, "0");
+      const month = String(date.getMonth() + 1).padStart(2, "0");
+      const year = date.getFullYear();
+      return `${year}-${month}-${day}`;
+    };
 
-      const month = String(transaction.createdAt.getMonth() + 1).padStart(
-        2,
-        "0"
+    const filterTransactionsOnDate = async (
+      transactions: Transaction[],
+      date: string
+    ): Promise<Transaction[]> =>
+      transactions.filter(
+        (transaction) => formatDate(transaction.createdAt) === date
       );
 
-      const year = transaction.createdAt.getFullYear();
+    const creditTransactionsOnDate = await filterTransactionsOnDate(
+      account.creditedTransaction,
+      date
+    );
+    const debitTransactionsOnDate = await filterTransactionsOnDate(
+      account.debitedTransaction,
+      date
+    );
 
-      const formattedDate = `${year}-${month}-${day}`;
-
-      return formattedDate == date;
-    });
-
-    const cashOut = account.debitedTransaction.filter((transaction) => {
-      const day = String(transaction.createdAt.getDate()).padStart(2, "0");
-
-      const month = String(transaction.createdAt.getMonth() + 1).padStart(
-        2,
-        "0"
-      );
-
-      const year = transaction.createdAt.getFullYear();
-
-      const formattedDate = `${year}-${month}-${day}`;
-
-      return formattedDate == date;
-    });
-
-    return [...cashIn, ...cashOut];
+    return [...creditTransactionsOnDate, ...debitTransactionsOnDate];
   }
 }
 
