@@ -10,7 +10,7 @@ import { hash } from "bcrypt";
 class UsersService {
   public async create(
     user: IUser
-  ): Promise<{ username: string; accountId: string }> {
+  ): Promise<{ id: string; username: string; accountId: string }> {
     const existingUser = await userRepository.findOneBy({
       username: user.username,
     });
@@ -36,6 +36,7 @@ class UsersService {
     await userRepository.save(newUser);
 
     const copyUser = {
+      id: newUser.id,
       username: newUser.username,
       accountId: newUser.accountId.id,
     };
@@ -44,10 +45,7 @@ class UsersService {
   }
 
   public async profile(username: string): Promise<User> {
-    const user = await userRepository.findOne({
-      where: { username },
-      relations: ["account"],
-    });
+    const user = await userRepository.findOneBy({ username });
 
     if (!user) {
       throw new NotFoundError("User");

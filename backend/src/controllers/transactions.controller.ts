@@ -5,7 +5,7 @@ import { userRepository } from "../repositories/user.repository";
 import { Request, Response } from "express";
 
 class TransactionsController {
-  async create(req: Request, res: Response) {
+  public async create(req: Request, res: Response) {
     const usernameDebt: string = req.username;
 
     const data: ITransaction = req.body;
@@ -26,7 +26,7 @@ class TransactionsController {
     return res.status(201).json(newTransaction);
   }
 
-  async list(req: Request, res: Response) {
+  public async list(req: Request, res: Response) {
     const username: string = req.username;
 
     const user = await userRepository.findOneBy({ username });
@@ -38,7 +38,7 @@ class TransactionsController {
     return res.json(listTransactions);
   }
 
-  async listCashIn(req: Request, res: Response) {
+  public async listCashIn(req: Request, res: Response) {
     const username: string = req.username;
 
     const user = await userRepository.findOneBy({ username });
@@ -50,7 +50,7 @@ class TransactionsController {
     return res.json(listCashIn);
   }
 
-  async listCashOut(req: Request, res: Response) {
+  public async listCashOut(req: Request, res: Response) {
     const username: string = req.username;
 
     const user = await userRepository.findOneBy({ username });
@@ -62,7 +62,7 @@ class TransactionsController {
     return res.json(listCashOut);
   }
 
-  async listOfCreatedAt(req: Request, res: Response) {
+  public async listOfCreatedAt(req: Request, res: Response) {
     const username: string = req.username;
 
     const date: string = req.params.date;
