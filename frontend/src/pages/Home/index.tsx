@@ -1,10 +1,10 @@
 import { Transaction } from "../../components/Transaction";
-import { Redirect, useHistory } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { ITransactionProps } from "../../interfaces";
 import logout from "../../assets/outline-logout.svg";
 import { Button } from "../../components/Button";
 import { AiOutlineUser } from "react-icons/ai";
+import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { api } from "../../services/api";
@@ -14,7 +14,7 @@ import { Container } from "./style";
 import * as yup from "yup";
 
 const Home = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const [balance, setBalance] = useState<number>(0);
 
@@ -132,7 +132,7 @@ const Home = () => {
   }, []);
 
   if (!token) {
-    return <Redirect to="/" />;
+    return navigate("/");
   }
 
   return (
@@ -144,7 +144,7 @@ const Home = () => {
           onClick={() => {
             toast.success("Check back often!");
 
-            history.push("/session");
+            navigate("/session");
 
             sessionStorage.removeItem("Project NG.CASH: token");
           }}

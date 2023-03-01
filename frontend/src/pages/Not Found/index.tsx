@@ -1,9 +1,9 @@
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Container } from "./style";
 
 const NotFound = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const [title, setTitle] = useState<string>("404 page not found");
 
@@ -74,7 +74,7 @@ const NotFound = () => {
   return (
     <Container>
       <h2>{title}</h2>
-      <p onClick={() => history.push("/")}>{link}</p>
+      <p onClick={() => navigate("/")}>{link}</p>
     </Container>
   );
 };

@@ -4,7 +4,7 @@ import {
   AiOutlineEyeInvisible,
 } from "react-icons/ai";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { IFormProps } from "../../interfaces";
 import { BiLockAlt } from "react-icons/bi";
 import { useForm } from "react-hook-form";
@@ -23,7 +23,7 @@ const Form = ({
   linkProp,
   textLinkProp,
 }: IFormProps) => {
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const [load, setLoad] = useState<boolean>(false);
 
@@ -66,7 +66,7 @@ const Form = ({
           toast.success("Register completed");
         }
 
-        history.push(`/${historyProp}`);
+        navigate(`/${historyProp}`);
       })
       .catch((_) => toast.error("Oops! An error occured"))
       .finally(() => setLoad(false));

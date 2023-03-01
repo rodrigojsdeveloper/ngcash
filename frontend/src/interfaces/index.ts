@@ -46,7 +46,7 @@ export interface InputProps {
   placeholder?: string;
   register: UseFormRegister<FieldValues>;
   required?: boolean | undefined;
-  onChange?: any;
+  onChange?: React.FormEventHandler<HTMLImageElement>;
 }
 
 export interface IStyledButtonProps {
