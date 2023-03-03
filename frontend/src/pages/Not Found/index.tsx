@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { Helmet, HelmetProvider } from "react-helmet-async";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Container } from "./style";
 
@@ -72,10 +73,15 @@ const NotFound = () => {
   }, []);
 
   return (
-    <Container>
-      <h2>{title}</h2>
-      <Link to={token ? "/dashboard" : "/"}>{link}</Link>
-    </Container>
+    <React.Fragment>
+      <HelmetProvider>
+        <Helmet title="Not Found | NG.CASH" />
+      </HelmetProvider>
+      <Container>
+        <h2>{title}</h2>
+        <Link to={token ? "/dashboard" : "/"}>{link}</Link>
+      </Container>
+    </React.Fragment>
   );
 };
 

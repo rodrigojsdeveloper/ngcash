@@ -1,15 +1,15 @@
 import { Routes, Route } from "react-router-dom";
 import { Dashboard } from "../pages/Dashboard";
 import { NotFound } from "../pages/Not Found";
-import { Register } from "../pages/Register";
-import { Session } from "../pages/Session";
+import { SignIn } from "../pages/SignIn";
+import { SignUp } from "../pages/SignUp";
 
 const AllRoutes = () => {
   return (
     <Routes>
-      <Route path="/signin" element={<Session />} />
+      <Route path="/signin" element={<SignIn />} />
       <Route path="/dashboard" element={<Dashboard />} />
-      <Route path="/" index element={<Register />} />
+      <Route path="/" index element={<SignUp />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
