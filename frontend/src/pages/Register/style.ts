@@ -3,10 +3,6 @@ import styled from "styled-components";
 
 const Container = styled.div`
 
-  div {
-    padding: 20px 15px;
-  }
-
   .divBlack {
     height: 40vh;
     background: var(--color);
@@ -18,7 +14,7 @@ const Container = styled.div`
     img {
       width: 150px;
       object-fit: contain;
-      margin-top: 15px;
+      margin-top: 40px;
 
       animation: ${animacaoForm} 1s;
     }

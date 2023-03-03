@@ -18,9 +18,8 @@ const Container = styled.button`
     switch (buttonStyle) {
       case "register":
         return css`
-          margin-top: 20px;
+          margin-top: 10px;
           width: 100%;
-          max-width: 250px;
           height: 50px;
           background: var(--color);
           color: var(--background);
@@ -30,7 +29,7 @@ const Container = styled.button`
           :hover {
             box-shadow: unset;
           }
-        `;
+        `
       case "home":
         return css`
           width: 100%;

@@ -14,6 +14,7 @@ import { Container } from "./style";
 import { Button } from "../Button";
 import { useState } from "react";
 import * as yup from "yup";
+import { CustomInput } from "../CustomInput";
 
 const Form = ({
   apiProp,
@@ -77,54 +78,18 @@ const Form = ({
       <h1>{titleProp}</h1>
 
       <main>
-        <label>{errors.username?.message as string}</label>
-        <div>
-          <AiOutlineUser />
-          <input
-            placeholder="Username"
-            type="text"
-            {...register("username")}
-            required={true}
-            autoComplete="off"
-          />
-        </div>
-
-        <label>{errors.password?.message as string}</label>
-        <div>
-          <BiLockAlt />
-          <input
-            placeholder="Password"
-            type={typeInput ? "text" : "password"}
-            {...register("password")}
-            required={true}
-            onChange={(e: any) => {
-              if (e.target.value == "") {
-                setShowOutlineShow(false);
-
-                setTypeInput(false);
-              }
-            }}
-          />
-          {showOutlineShow ? (
-            <AiOutlineEyeInvisible
-              className="biShow"
-              onClick={() => {
-                setTypeInput(true);
-
-                setShowOutlineShow(false);
-              }}
-            />
-          ) : (
-            <AiOutlineEye
-              className="biShow"
-              onClick={() => {
-                setTypeInput(false);
-
-                setShowOutlineShow(true);
-              }}
-            />
-          )}
-        </div>
+        <CustomInput
+          type="text"
+          label="Name"
+          name="username"
+          register={register}
+        />
+        <CustomInput
+          type="text"
+          label="Password"
+          name="password"
+          register={register}
+        />
 
         <Button buttonStyle="register" type="submit" disabled={load}>
           {load ? "Sending..." : "Submit"}

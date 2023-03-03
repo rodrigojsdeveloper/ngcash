@@ -16,6 +16,8 @@ import * as yup from "yup";
 const Home = () => {
   const navigate = useNavigate();
 
+  const token = sessionStorage.getItem("Project NG.CASH: token");
+
   const [balance, setBalance] = useState<number>(0);
 
   const [load, setLoad] = useState<boolean>(false);
@@ -48,8 +50,6 @@ const Home = () => {
   const addTransactions = (transaction: ITransactionProps) =>
     setTransactions([transaction, ...transactions!]);
 
-  const token = sessionStorage.getItem("Project NG.CASH: token");
-
   const schema = yup.object().shape({
     username: yup
       .string()
@@ -64,7 +64,7 @@ const Home = () => {
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
 
-  const onSumbitFunction = (data: object) => {
+  const onSubmitFunction = (data: object) => {
     setLoad(true);
 
     api
@@ -153,7 +153,7 @@ const Home = () => {
         <p>$ {balance.toFixed(2)}</p>
         <h2>CASH OUT</h2>
 
-        <form onSubmit={handleSubmit(onSumbitFunction)}>
+        <form onSubmit={handleSubmit(onSubmitFunction)}>
           <label>{errors.value?.message as string}</label>
           <div>
             <BsCash />

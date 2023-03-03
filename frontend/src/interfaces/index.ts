@@ -40,13 +40,10 @@ export interface IButtonProps {
 }
 
 export interface InputProps {
-  type?: string;
+  type: string;
   name: string;
-  autoComplete?: string;
-  placeholder?: string;
   register: UseFormRegister<FieldValues>;
-  required?: boolean | undefined;
-  onChange?: React.FormEventHandler<HTMLImageElement>;
+  label: string;
 }
 
 export interface IStyledButtonProps {

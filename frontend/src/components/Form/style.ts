@@ -14,7 +14,6 @@ const animacaoForm = keyframes`
 `;
 
 const Container = styled.form`
-
   background: var(--background);
   animation: ${animacaoForm} 1s;
 
@@ -22,7 +21,8 @@ const Container = styled.form`
   width: 100%;
   height: 400px;
 
-  padding: 20px;
+  padding: 10px 30px;
+  margin: 10px;
 
   display: flex;
   flex-direction: column;
@@ -30,92 +30,31 @@ const Container = styled.form`
   justify-content: center;
 
   border-radius: 10px;
-  padding: 20px;
 
   h1 {
     font-size: 25px;
   }
 
   p {
-    margin-top: 10px;
+    margin-top: 15px;
     font-size: 13.5px;
 
     a {
       color: var(--shadow-button-2);
+
+      :hover {
+        text-decoration: underline;
+      }
     }
   }
 
   & > main {
     width: 100%;
-    max-width: 250px;
     padding-top: 40px;
 
-    label {
-      color: var(--red);
-      font-size: 12px;
-
-      padding-top: 10px;
-    }
-
-    & > div {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: space-between;
-
-      transition: 0.4s;
-
-      width: 100%;
-      max-width: 250px;
-      height: 48px;
-      padding: 10px 1rem;
-      border-radius: 4px;
-      border: 1.5px solid var(--border-input);
-
-      background: var(--background);
-
-      margin: 10px 0;
-
-      align-items: center;
-      color: var(--color);
-
-      &:hover {
-        border-color: var(--color);
-
-        .biShow {
-          display: block;
-        }
-      }
-
-      input {
-        height: 100%;
-        width: 100%;
-
-        margin-left: 12.5px;
-
-        border: none;
-        background-color: transparent;
-
-        &:focus::-webkit-input-placeholder {
-          color: var(--transparent);
-        }
-
-        &::placeholder {
-          color: var(--gray);
-        }
-      }
-
-      .biShow {
-        color: var(--gray);
-        display: none;
-
-        &:hover {
-          cursor: pointer;
-          color: var(--color);
-          transition: 1s;
-        }
-      }
-    }
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   @media (max-width: 320px) {
