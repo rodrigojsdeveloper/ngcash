@@ -8,11 +8,11 @@ const Container = styled.div`
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    color: #fff;
+    color: var(--color-white);
   }
 
   font-size: 62.5%;
-  background-color: #000;
+  background-color: var(--color-black);
   font-family: "Hack", monospace;
   text-align: center;
   height: 100vh;

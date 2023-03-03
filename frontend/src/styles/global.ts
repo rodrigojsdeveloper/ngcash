@@ -10,29 +10,29 @@ export default createGlobalStyle`
 	}
 
 	:root {
-		--background: #fff;
-		--background-form: rgb(38, 50, 56);
-		--background-modal: rgba(0, 0, 0, 0.5);
-		--color: #000;
-		--color-box-shadow-header: rgba(0, 0, 0, 0.25);
-		--red: #c53030;
-		--green: green;
-		--dark-white-background: #F8F8FF;
-		--transparent: transparent;
-		--gray: gray;
-		--background-side-menu: #0d0d0d;
-		--border-color-button: rgba(0, 0, 0, 0.15);
-		--background-button-home: #F0F0F1;
-		--shadow-button: rgba(0, 0, 0, 0.1);
-		--shadow-button-2: rgba(0, 0, 0, 0.65);
-		--shadow-button-3: rgba(0, 0, 0, 0.06);
-		--border-input: #dcdcdc;
-		--box-shadow-form: rgba(136, 165, 191, 0.48);
+		// Color white
+		--color-white: #FFFFFF;
+		--color-white-2: #F8F8FF;
+		--color-white-3: #F0F0F1;
+
+		// Color black
+		--color-black: #000000;
+
+		// Color gray
+		--color-gray: #808080;
+		
+		// Color shadow
+		--shadow: rgba(0, 0, 0, 0.06);
+		--shadow-2: rgba(0, 0, 0, 0.1);
+		--shadow-3: rgba(0, 0, 0, 0.15);
+		--shadow-4: rgba(0, 0, 0, 0.65);
+		
+		--shadow-blue: rgba(136, 165, 191, 0.48);
 	}
 
 	body {
-		background: var(--background);
-		color: var(--color);
+		background: var(--color-white);
+		color: var(--color-black);
 	}
 
 	button, a {

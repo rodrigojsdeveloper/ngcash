@@ -14,11 +14,11 @@ const Container = styled.div`
   align-items: center;
 
   border-radius: 4px;
-  background-color: var(--background);
+  background-color: var(--color-white);
 
   & > h2 {
     text-align: center;
-    color: #000;
+    color: var(--color-black);
   }
 
   & > form {

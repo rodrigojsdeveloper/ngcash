@@ -21,10 +21,10 @@ const Container = styled.button`
           margin-top: 10px;
           width: 100%;
           height: 50px;
-          background: var(--color);
-          color: var(--background);
-          border-color: var(--color);
-          box-shadow: var(--background) 0 1px 0 0 inset;
+          background-color: var(--color-black);
+          color: var(--color-white);
+          border-color: var(--color-black);
+          box-shadow: var(--color-white) 0 1px 0 0 inset;
 
           :hover {
             box-shadow: unset;
@@ -35,15 +35,15 @@ const Container = styled.button`
           width: 100%;
           max-width: 125px;
           height: 48px;
-          background: var(--dark-white-background);
-          color: var(--color);
-          border-color: var(--border-color-button);
+          background-color: var(--color-white-2);
+          color: var(--color-black);
+          border-color: var(--shadow-3);
 
           :hover,
           :focus {
-            border-color: var(--border-color-button);
-            box-shadow: var(--shadow-button) 0 4px 12px;
-            color: var(--shadow-button-2);
+            border-color: var(--shadow-3);
+            box-shadow: var(--shadow-2) 0 4px 12px;
+            color: var(--shadow-4);
           }
 
           :hover {
@@ -51,10 +51,10 @@ const Container = styled.button`
           }
 
           :active {
-            background-color: var(--background-button-home);
-            border-color: var(--border-color-button);
-            box-shadow: var(--shadow-button-3) 0 2px 4px;
-            color: var(--shadow-button-2);
+            background-color: var(--color-white-3);
+            border-color: var(--shadow-3);
+            box-shadow: var(--shadow) 0 2px 4px;
+            color: var(--shadow-4);
             transform: translateY(0);
           }
         `;

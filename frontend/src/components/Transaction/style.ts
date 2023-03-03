@@ -8,8 +8,8 @@ const Container = styled.div`
 
   padding: 15px;
   border-radius: 4px;
-  background: var(--dark-white-background);
-  border: 1px solid var(--border-color-button);
+  background-color: var(--color-white-2);
+  border: 1px solid var(--shadow-3);
 
   margin-bottom: 10px;
 

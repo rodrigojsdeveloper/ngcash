@@ -10,7 +10,7 @@ const InputContainer = styled.div`
 
   input:focus + label {
     transform: translate(-0.5rem, -1.6rem) scale(0.8);
-    color: var(--color);
+    color: var(--color-black);
   }
 `;
 
@@ -22,7 +22,7 @@ const Input = styled.input`
   font-size: 15px;
 
   padding: 18px;
-  border: 1px solid var(--gray);
+  border: 1px solid var(--color-gray);
   outline: none;
 
   border-radius: 4px;
@@ -30,12 +30,12 @@ const Input = styled.input`
 
   &:focus {
     border-width: 2px;
-    border-color: var(--color);
+    border-color: var(--color-black);
   }
 
   &:placeholder-shown + label {
     transform: translate(0, 0) scale(1);
-    color: var(--gray);
+    color: var(--color-gray);
   }
 `;
 
@@ -45,8 +45,8 @@ const Label = styled.label`
   left: 10px;
 
   font-size: 16px;
-  color: var(--gray);
-  background-color: var(--background);
+  color: var(--color-gray);
+  background-color: var(--color-white);
 
   padding: 0 5px;
   pointer-events: none;
@@ -55,7 +55,7 @@ const Label = styled.label`
 
   &.has-value {
     transform: translate(-0.5rem, -1.6rem) scale(0.8);
-    color: var(--gray);
+    color: var(--color-gray);
   }
 `;
 

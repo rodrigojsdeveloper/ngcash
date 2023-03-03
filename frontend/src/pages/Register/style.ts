@@ -5,7 +5,7 @@ const Container = styled.div`
 
   .divBlack {
     height: 40vh;
-    background: var(--color);
+    background: var(--color-black);
 
     display: flex;
     justify-content: center;

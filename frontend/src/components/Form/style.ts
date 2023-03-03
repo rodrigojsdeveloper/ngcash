@@ -26,8 +26,8 @@ const Container = styled.div`
   align-items: center;
 
   border-radius: 4px;
-  background: var(--background);
-  box-shadow: var(--box-shadow-form) 6px 2px 16px 0px;
+  background: var(--color-white);
+  box-shadow: var(--shadow-blue) 6px 2px 16px 0px;
 
   padding: 10px 30px;
   margin: -125px 10px 0 10px;
@@ -41,7 +41,7 @@ const Container = styled.div`
     font-size: 13.5px;
 
     & > a {
-      color: var(--shadow-button-2);
+      color: var(--shadow-4);
 
       &:hover {
         text-decoration: underline;

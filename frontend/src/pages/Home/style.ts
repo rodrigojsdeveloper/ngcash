@@ -72,7 +72,7 @@ const Container = styled.div`
       margin-bottom: 25px;
 
       padding: 10px;
-      border: 1px solid var(--border-color-button);
+      border: 1px solid var(--shadow-3);
 
       overflow: auto;
       ::-webkit-scrollbar {
@@ -88,12 +88,12 @@ const Container = styled.div`
 
       input {
         border-radius: 4px;
-        border: 1px solid var(--border-color-button);
+        border: 1px solid var(--shadow-3);
         width: 100%;
         max-width: 125px;
         padding: 0 8px;
         height: 48px;
-        background: var(--dark-white-background);
+        background-color: var(--color-white-2);
       }
     }
   }
