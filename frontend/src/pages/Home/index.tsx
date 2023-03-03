@@ -1,18 +1,13 @@
+import { FormTransaction } from "../../components/FormTransaction";
 import { Transaction } from "../../components/Transaction";
-import { yupResolver } from "@hookform/resolvers/yup";
 import { ITransactionProps } from "../../interfaces";
 import logout from "../../assets/outline-logout.svg";
 import { Button } from "../../components/Button";
-import { AiOutlineUser } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
 import { api } from "../../services/api";
-import { BsCash } from "react-icons/bs";
 import { toast } from "react-toastify";
 import { Container } from "./style";
-import * as yup from "yup";
-import { FormTransaction } from "../../components/FormTransaction";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -20,8 +15,6 @@ const Home = () => {
   const token = sessionStorage.getItem("Project NG.CASH: token");
 
   const [balance, setBalance] = useState<number>(0);
-
-  const [load, setLoad] = useState<boolean>(false);
 
   const [transactions, setTransactions] = useState<ITransactionProps[]>([]);
 
@@ -50,56 +43,6 @@ const Home = () => {
 
   const addTransactions = (transaction: ITransactionProps) =>
     setTransactions([transaction, ...transactions!]);
-
-  const schema = yup.object().shape({
-    username: yup
-      .string()
-      .min(3, "Username must contain at least 3 characters"),
-
-    value: yup.number().typeError("Amount must be a number"),
-  });
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({ resolver: yupResolver(schema) });
-
-  const onSubmitFunction = (data: object) => {
-    setLoad(true);
-
-    api
-      .post("/transactions", data, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((res) => {
-        addTransactions(res.data);
-
-        toast.success("Completed transaction");
-
-        api
-          .get("/profile", {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          })
-          .then((res) => {
-            api
-              .get(`/accounts/${res.data.accountId.id}`, {
-                headers: {
-                  Authorization: `Bearer ${token}`,
-                },
-              })
-              .then((res) => setBalance(res.data.balance))
-              .catch((err) => console.error(err));
-          })
-          .catch((err) => console.error(err));
-      })
-      .catch((_) => toast.error("Transaction error"))
-      .finally(() => setLoad(false));
-  };
 
   useEffect(() => {
     api
@@ -132,9 +75,11 @@ const Home = () => {
       .catch((err) => console.error(err));
   }, []);
 
-  if (!token) {
-    return navigate("/");
-  }
+  useEffect(() => {
+    if (!token) {
+      return navigate("/");
+    }
+  }, [token]);
 
   return (
     <Container>
@@ -153,15 +98,15 @@ const Home = () => {
         <h1>BALANCE</h1>
         <p>$ {balance.toFixed(2)}</p>
         <h2>CASH OUT</h2>
-        
-        <FormTransaction />
+
+        <FormTransaction addTransactions={addTransactions} />
       </div>
 
-      <menu>
-        <h1>All transactions</h1>
-        <h2>Cash-in, cash-out and date transactions</h2>
+      <main>
+        <h2>All transactions</h2>
+        <h3>Cash-in, cash-out and date transactions</h3>
 
-        <main>
+        <menu>
           {transactionsBoolean &&
             transactions.map((transaction: ITransactionProps) => (
               <Transaction key={transaction.id} transaction={transaction} />
@@ -178,7 +123,7 @@ const Home = () => {
             transactionsDate.map((transaction: ITransactionProps) => (
               <Transaction key={transaction.id} transaction={transaction} />
             ))}
-        </main>
+        </menu>
 
         <div>
           <Button
@@ -269,7 +214,7 @@ const Home = () => {
             }}
           />
         </div>
-      </menu>
+      </main>
     </Container>
   );
 };

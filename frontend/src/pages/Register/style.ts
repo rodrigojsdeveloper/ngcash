@@ -1,27 +1,29 @@
-import { animacaoForm } from "../../components/Form/style";
+import { animationForm } from "../../animations";
 import styled from "styled-components";
 
 const Container = styled.div`
-
-  .divBlack {
+  & > div:nth-child(1) {
     height: 40vh;
-    background: var(--color-black);
 
     display: flex;
+    flex-direction: row;
     justify-content: center;
     align-items: flex-start;
 
-    img {
+    background: var(--color-black);
+
+    & > img {
       width: 150px;
       object-fit: contain;
       margin-top: 40px;
 
-      animation: ${animacaoForm} 1s;
+      animation: ${animationForm} 1s;
     }
   }
 
-  .divWhite {
+  & > div:nth-child(2) {
     display: flex;
+    flex-direction: row;
     justify-content: center;
   }
 `;

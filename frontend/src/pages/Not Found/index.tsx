@@ -1,9 +1,9 @@
-import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { Container } from "./style";
 
 const NotFound = () => {
-  const navigate = useNavigate();
+  const token = sessionStorage.getItem("Project NG.CASH: token");
 
   const [title, setTitle] = useState<string>("404 page not found");
 
@@ -74,7 +74,7 @@ const NotFound = () => {
   return (
     <Container>
       <h2>{title}</h2>
-      <p onClick={() => navigate("/")}>{link}</p>
+      <Link to={token ? "/home" : "/"}>{link}</Link>
     </Container>
   );
 };

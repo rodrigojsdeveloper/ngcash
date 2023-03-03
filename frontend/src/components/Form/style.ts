@@ -1,24 +1,10 @@
-import styled, { keyframes } from "styled-components";
-
-const animacaoForm = keyframes`
-    
-  from {
-    opacity: 0;
-    transform: translatey(-50px);
-  }
-    
-  to {
-    opacity: 1;
-    transform: translateX(0px);
-}
-`;
+import { animationForm } from "../../animations";
+import styled from "styled-components";
 
 const Container = styled.div`
   width: 100%;
   max-width: 400px;
   height: 400px;
-
-  animation: ${animacaoForm} 1s;
 
   display: flex;
   flex-direction: column;
@@ -31,6 +17,8 @@ const Container = styled.div`
 
   padding: 10px 30px;
   margin: -125px 10px 0 10px;
+
+  animation: ${animationForm} 1s;
 
   & > h2 {
     font-size: 25px;
@@ -58,6 +46,10 @@ const Container = styled.div`
     align-items: center;
   }
 
+  @media (max-width: 375px) {
+    padding: 15px;
+  }
+
   @media (max-width: 320px) {
     & > p {
       display: flex;
@@ -71,4 +63,4 @@ const Container = styled.div`
   }
 `;
 
-export { Container, animacaoForm };
+export { Container };

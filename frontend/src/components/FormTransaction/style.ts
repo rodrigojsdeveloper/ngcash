@@ -31,6 +31,10 @@ const Container = styled.div`
 
     padding-top: 30px;
   }
+
+  @media (max-width: 375px) {
+    padding: 15px;
+  }
 `;
 
 export { Container };

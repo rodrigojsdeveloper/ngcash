@@ -5,11 +5,11 @@ import { Container } from "./style";
 const Register = () => {
   return (
     <Container>
-      <div className="divBlack">
+      <div>
         <img src={ngcashLogo} alt="logo ng.cash" />
       </div>
 
-      <div className="divWhite">
+      <div>
         <Form
           apiProp="users"
           historyProp="session"
