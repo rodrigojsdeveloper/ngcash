@@ -36,7 +36,7 @@ export interface IButtonProps {
   onClick?: MouseEventHandler;
   disabled?: boolean | undefined;
   type?: "button" | "submit" | "reset" | undefined;
-  buttonStyle: "register" | "home";
+  buttonStyle: "register" | "dashboard";
 }
 
 export interface InputProps {
@@ -47,7 +47,7 @@ export interface InputProps {
 }
 
 export interface IStyledButtonProps {
-  buttonStyle: "register" | "home";
+  buttonStyle: "register" | "dashboard";
 }
 
 export interface ITransactionsProps {

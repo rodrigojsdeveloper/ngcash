@@ -12,7 +12,7 @@ const Session = () => {
       <div className="divWhite">
         <Form
           apiProp="signin"
-          historyProp="home"
+          historyProp="dashboard"
           titleProp="Log in"
           textProp="Don't have an account yet? "
           linkProp=""

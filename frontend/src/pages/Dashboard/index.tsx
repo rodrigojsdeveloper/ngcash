@@ -9,7 +9,7 @@ import { api } from "../../services/api";
 import { toast } from "react-toastify";
 import { Container } from "./style";
 
-const Home = () => {
+const Dashboard = () => {
   const navigate = useNavigate();
 
   const token = sessionStorage.getItem("Project NG.CASH: token");
@@ -90,7 +90,7 @@ const Home = () => {
           onClick={() => {
             toast.success("Check back often!");
 
-            navigate("/session");
+            navigate("/signin");
 
             sessionStorage.removeItem("Project NG.CASH: token");
           }}
@@ -127,7 +127,7 @@ const Home = () => {
 
         <div>
           <Button
-            buttonStyle="home"
+            buttonStyle="dashboard"
             onClick={() => {
               setTransactionsBoolean(true);
               setTransactionsCashInBoolean(false);
@@ -148,7 +148,7 @@ const Home = () => {
           </Button>
 
           <Button
-            buttonStyle="home"
+            buttonStyle="dashboard"
             onClick={() => {
               setTransactionsBoolean(false);
               setTransactionsCashInBoolean(true);
@@ -171,7 +171,7 @@ const Home = () => {
           </Button>
 
           <Button
-            buttonStyle="home"
+            buttonStyle="dashboard"
             onClick={() => {
               setTransactionsBoolean(false);
               setTransactionsCashInBoolean(false);
@@ -219,4 +219,4 @@ const Home = () => {
   );
 };
 
-export { Home };
+export { Dashboard };

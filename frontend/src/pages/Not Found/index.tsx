@@ -74,7 +74,7 @@ const NotFound = () => {
   return (
     <Container>
       <h2>{title}</h2>
-      <Link to={token ? "/home" : "/"}>{link}</Link>
+      <Link to={token ? "/dashboard" : "/"}>{link}</Link>
     </Container>
   );
 };

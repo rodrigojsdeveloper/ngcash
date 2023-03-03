@@ -12,7 +12,7 @@ const Transaction = ({ transaction }: ITransactionComponentProps) => {
         <p>$ {transaction.value}</p>
       </div>
 
-      <data>{formattedDate}</data>
+      <b>{formattedDate}</b>
     </Container>
   );
 };

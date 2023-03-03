@@ -32,7 +32,7 @@ const Form = ({
 
   const { register, handleSubmit } = useForm({ resolver: yupResolver(schema) });
 
-  const onSumbitFunction = (data: object) => {
+  const onSumbitFunction = (data: any) => {
     setLoad(true);
 
     api
@@ -50,7 +50,11 @@ const Form = ({
 
         navigate(`/${historyProp}`);
       })
-      .catch(() => toast.error("Oops! An error occured"))
+      .catch((error) => {
+        toast.error("Oops! An error occured");
+
+        console.error(error);
+      })
       .finally(() => setLoad(false));
   };
 

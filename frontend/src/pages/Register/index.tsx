@@ -15,7 +15,7 @@ const Register = () => {
           historyProp="session"
           titleProp="Open your account"
           textProp="Already have an account? "
-          linkProp="session"
+          linkProp="signin"
           textLinkProp="go to login"
         />
       </div>

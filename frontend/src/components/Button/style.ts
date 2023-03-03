@@ -2,12 +2,15 @@ import { IStyledButtonProps } from "../../interfaces";
 import styled, { css } from "styled-components";
 
 const Container = styled.button`
-
-  border-radius: 4px;
-  transition: 0.5s;
-  border: 1.2182px solid;
+  width: 100%;
 
   font-weight: 600;
+  font-size: 16px;
+
+  border-radius: 4px;
+  border: 1.2182px solid;
+
+  transition: 0.5s;
 
   :disabled {
     opacity: 0.5;
@@ -19,45 +22,48 @@ const Container = styled.button`
       case "register":
         return css`
           margin-top: 10px;
-          width: 100%;
           height: 50px;
-          background-color: var(--color-black);
+
           color: var(--color-white);
           border-color: var(--color-black);
+          background-color: var(--color-black);
           box-shadow: var(--color-white) 0 1px 0 0 inset;
 
-          :hover {
+          &:hover {
             box-shadow: unset;
           }
-        `
-      case "home":
+        `;
+
+      case "dashboard":
         return css`
-          width: 100%;
-          max-width: 125px;
           height: 48px;
-          background-color: var(--color-white-2);
+          max-width: 125px;
+
           color: var(--color-black);
           border-color: var(--shadow-3);
+          background-color: var(--color-white-2);
 
-          :hover,
-          :focus {
+          &:hover,
+          &:focus {
+            color: var(--shadow-4);
             border-color: var(--shadow-3);
             box-shadow: var(--shadow-2) 0 4px 12px;
-            color: var(--shadow-4);
           }
 
-          :hover {
+          &:hover {
             transform: translateY(-1px);
           }
 
-          :active {
-            background-color: var(--color-white-3);
+          &:active {
+            color: var(--shadow-4);
             border-color: var(--shadow-3);
             box-shadow: var(--shadow) 0 2px 4px;
-            color: var(--shadow-4);
+            background-color: var(--color-white-3);
+
             transform: translateY(0);
           }
         `;
+
       default:
         return false;
     }

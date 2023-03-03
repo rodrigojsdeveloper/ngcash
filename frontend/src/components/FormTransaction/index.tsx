@@ -10,9 +10,9 @@ import { useState } from "react";
 import * as yup from "yup";
 
 const FormTransaction = ({ addTransactions }: IFormTransactionProps) => {
-  const [load, setLoad] = useState<boolean>(false);
-
   const token = sessionStorage.getItem("Project NG.CASH: token");
+  
+  const [load, setLoad] = useState<boolean>(false);
 
   const schema = yup.object().shape({
     username: yup.string().min(3, ""),
@@ -21,7 +21,7 @@ const FormTransaction = ({ addTransactions }: IFormTransactionProps) => {
 
   const { register, handleSubmit } = useForm({ resolver: yupResolver(schema) });
 
-  const onSumbitFunction = (data: object) => {
+  const onSumbitFunction = (data: any) => {
     setLoad(true);
 
     api
@@ -35,7 +35,11 @@ const FormTransaction = ({ addTransactions }: IFormTransactionProps) => {
 
         toast.success("Completed transaction");
       })
-      .catch(() => toast.error("Transaction error"))
+      .catch((error) => {
+        toast.error("Transaction error");
+
+        console.error(error);
+      })
       .finally(() => setLoad(false));
   };
 
@@ -50,7 +54,12 @@ const FormTransaction = ({ addTransactions }: IFormTransactionProps) => {
           name="value"
           register={register}
         />
-        <CustomInput type="text" label="Name" name="name" register={register} />
+        <CustomInput
+          type="text"
+          label="Name"
+          name="username"
+          register={register}
+        />
 
         <Button buttonStyle="register" type="submit" disabled={load}>
           {load ? "Sending..." : "Submit"}
