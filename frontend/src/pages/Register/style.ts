@@ -23,11 +23,6 @@ const Container = styled.div`
   .divWhite {
     display: flex;
     justify-content: center;
-
-    form {
-      margin-top: -125px;
-      box-shadow: var(--box-shadow-form) 6px 2px 16px 0px;
-    }
   }
 `;
 

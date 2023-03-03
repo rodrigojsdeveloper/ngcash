@@ -2,53 +2,54 @@ import styled, { keyframes } from "styled-components";
 
 const animacaoForm = keyframes`
     
-    from {
-        opacity: 0;
-        transform: translatey(-50px);
-    }
+  from {
+    opacity: 0;
+    transform: translatey(-50px);
+  }
     
-    to {
-        opacity: 1;
-        transform: translateX(0px);
+  to {
+    opacity: 1;
+    transform: translateX(0px);
 }
 `;
 
-const Container = styled.form`
-  background: var(--background);
-  animation: ${animacaoForm} 1s;
-
-  max-width: 400px;
+const Container = styled.div`
   width: 100%;
+  max-width: 400px;
   height: 400px;
 
-  padding: 10px 30px;
-  margin: 10px;
+  animation: ${animacaoForm} 1s;
 
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
+  align-items: center;
 
-  border-radius: 10px;
+  border-radius: 4px;
+  background: var(--background);
+  box-shadow: var(--box-shadow-form) 6px 2px 16px 0px;
 
-  h1 {
+  padding: 10px 30px;
+  margin: -125px 10px 0 10px;
+
+  & > h2 {
     font-size: 25px;
   }
 
-  p {
+  & > p {
     margin-top: 15px;
     font-size: 13.5px;
 
-    a {
+    & > a {
       color: var(--shadow-button-2);
 
-      :hover {
+      &:hover {
         text-decoration: underline;
       }
     }
   }
 
-  & > main {
+  & > form {
     width: 100%;
     padding-top: 40px;
 
@@ -58,12 +59,12 @@ const Container = styled.form`
   }
 
   @media (max-width: 320px) {
-    p {
+    & > p {
       display: flex;
       flex-direction: column;
       text-align: center;
 
-      a {
+      & > a {
         margin-top: 3px;
       }
     }

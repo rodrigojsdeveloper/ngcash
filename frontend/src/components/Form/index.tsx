@@ -1,12 +1,7 @@
-import {
-  AiOutlineUser,
-  AiOutlineEye,
-  AiOutlineEyeInvisible,
-} from "react-icons/ai";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Link, useNavigate } from "react-router-dom";
 import { IFormProps } from "../../interfaces";
-import { BiLockAlt } from "react-icons/bi";
+import { CustomInput } from "../CustomInput";
 import { useForm } from "react-hook-form";
 import { api } from "../../services/api";
 import { toast } from "react-toastify";
@@ -14,7 +9,6 @@ import { Container } from "./style";
 import { Button } from "../Button";
 import { useState } from "react";
 import * as yup from "yup";
-import { CustomInput } from "../CustomInput";
 
 const Form = ({
   apiProp,
@@ -28,28 +22,15 @@ const Form = ({
 
   const [load, setLoad] = useState<boolean>(false);
 
-  const [typeInput, setTypeInput] = useState<boolean>(false);
-
-  const [showOutlineShow, setShowOutlineShow] = useState<boolean>(true);
-
   const schema = yup.object().shape({
-    username: yup
-      .string()
-      .min(3, "Username must contain at least 3 characters"),
+    username: yup.string().min(3, ""),
     password: yup
       .string()
-      .min(8, "Password must contain at least 8 characters")
-      .matches(
-        /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$/,
-        "The password must contain capital letters and numbers!"
-      ),
+      .min(8, "")
+      .matches(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$/, ""),
   });
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({ resolver: yupResolver(schema) });
+  const { register, handleSubmit } = useForm({ resolver: yupResolver(schema) });
 
   const onSumbitFunction = (data: object) => {
     setLoad(true);
@@ -69,15 +50,15 @@ const Form = ({
 
         navigate(`/${historyProp}`);
       })
-      .catch((_) => toast.error("Oops! An error occured"))
+      .catch(() => toast.error("Oops! An error occured"))
       .finally(() => setLoad(false));
   };
 
   return (
-    <Container onSubmit={handleSubmit(onSumbitFunction)}>
-      <h1>{titleProp}</h1>
+    <Container>
+      <h2>{titleProp}</h2>
 
-      <main>
+      <form onSubmit={handleSubmit(onSumbitFunction)}>
         <CustomInput
           type="text"
           label="Name"
@@ -85,7 +66,7 @@ const Form = ({
           register={register}
         />
         <CustomInput
-          type="text"
+          type="password"
           label="Password"
           name="password"
           register={register}
@@ -94,7 +75,7 @@ const Form = ({
         <Button buttonStyle="register" type="submit" disabled={load}>
           {load ? "Sending..." : "Submit"}
         </Button>
-      </main>
+      </form>
 
       <p>
         {textProp}

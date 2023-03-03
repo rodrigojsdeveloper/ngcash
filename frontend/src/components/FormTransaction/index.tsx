@@ -1,9 +1,8 @@
 import { IFormTransactionProps } from "../../interfaces";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { AiOutlineUser } from "react-icons/ai";
+import { CustomInput } from "../CustomInput";
 import { useForm } from "react-hook-form";
 import { api } from "../../services/api";
-import { BsCash } from "react-icons/bs";
 import { toast } from "react-toastify";
 import { Container } from "./style";
 import { Button } from "../Button";
@@ -16,18 +15,11 @@ const FormTransaction = ({ addTransactions }: IFormTransactionProps) => {
   const token = sessionStorage.getItem("Project NG.CASH: token");
 
   const schema = yup.object().shape({
-    username: yup
-      .string()
-      .min(3, "Username must contain at least 3 characters"),
-
-    value: yup.number().typeError("Amount must be a number"),
+    username: yup.string().min(3, ""),
+    value: yup.number().typeError(""),
   });
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({ resolver: yupResolver(schema) });
+  const { register, handleSubmit } = useForm({ resolver: yupResolver(schema) });
 
   const onSumbitFunction = (data: object) => {
     setLoad(true);
@@ -43,44 +35,27 @@ const FormTransaction = ({ addTransactions }: IFormTransactionProps) => {
 
         toast.success("Completed transaction");
       })
-      .catch((_) => toast.error("Transaction error"))
+      .catch(() => toast.error("Transaction error"))
       .finally(() => setLoad(false));
   };
 
   return (
-    <Container onSubmit={handleSubmit(onSumbitFunction)}>
-      <div>
-        <h1>Transaction</h1>
+    <Container>
+      <h2>Transaction</h2>
 
-        <main>
-          <label>{errors.value?.message as string}</label>
-          <div>
-            <BsCash />
-            <input
-              placeholder="Value"
-              type="text"
-              {...register("value")}
-              required={true}
-            />
-          </div>
+      <form onSubmit={handleSubmit(onSumbitFunction)}>
+        <CustomInput
+          type="text"
+          label="Value"
+          name="value"
+          register={register}
+        />
+        <CustomInput type="text" label="Name" name="name" register={register} />
 
-          <label>{errors.username?.message as string}</label>
-          <div>
-            <AiOutlineUser />
-            <input
-              placeholder="Username"
-              type="text"
-              {...register("username")}
-              required={true}
-              autoComplete="off"
-            />
-          </div>
-
-          <Button buttonStyle="register" type="submit" disabled={load}>
-            {load ? "Sending..." : "Submit"}
-          </Button>
-        </main>
-      </div>
+        <Button buttonStyle="register" type="submit" disabled={load}>
+          {load ? "Sending..." : "Submit"}
+        </Button>
+      </form>
     </Container>
   );
 };

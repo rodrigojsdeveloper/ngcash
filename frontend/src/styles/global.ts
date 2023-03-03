@@ -35,7 +35,7 @@ export default createGlobalStyle`
 		color: var(--color);
 	}
 
-	button {
+	button, a {
 		cursor: pointer;
 	}
 

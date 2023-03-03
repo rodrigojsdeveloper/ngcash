@@ -12,6 +12,7 @@ import { BsCash } from "react-icons/bs";
 import { toast } from "react-toastify";
 import { Container } from "./style";
 import * as yup from "yup";
+import { FormTransaction } from "../../components/FormTransaction";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -152,36 +153,8 @@ const Home = () => {
         <h1>BALANCE</h1>
         <p>$ {balance.toFixed(2)}</p>
         <h2>CASH OUT</h2>
-
-        <form onSubmit={handleSubmit(onSubmitFunction)}>
-          <label>{errors.value?.message as string}</label>
-          <div>
-            <BsCash />
-            <input
-              placeholder="Value"
-              type="text"
-              {...register("value")}
-              required={true}
-              autoComplete="off"
-            />
-          </div>
-
-          <label>{errors.username?.message as string}</label>
-          <div>
-            <AiOutlineUser />
-            <input
-              placeholder="Username"
-              type="text"
-              {...register("username")}
-              required={true}
-              autoComplete="off"
-            />
-          </div>
-
-          <Button buttonStyle="register" type="submit" disabled={load}>
-            {load ? "Sending..." : "Submit"}
-          </Button>
-        </form>
+        
+        <FormTransaction />
       </div>
 
       <menu>

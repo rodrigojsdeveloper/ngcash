@@ -1,78 +1,35 @@
 import styled from "styled-components";
 
-const Container = styled.form`
+const Container = styled.div`
+  width: 100%;
+  max-width: 400px;
+  height: 350px;
 
-  height: 100%;
-  padding: 20px;
+  margin: 0 auto;
+  padding: 10px 30px;
 
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 
-  & > div {
+  border-radius: 4px;
+  background-color: var(--background);
+
+  & > h2 {
+    text-align: center;
+    color: #000;
+  }
+
+  & > form {
     width: 100%;
-    max-width: 250px;
 
-    h1 {
-      text-align: center;
-    }
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
 
-    main {
-      padding-top: 30px;
-
-      display: flex;
-      flex-direction: column;
-
-      label {
-        color: var(--red);
-        font-size: 12px;
-
-        padding-top: 10px;
-      }
-
-      & > div {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-
-        transition: 0.4s;
-
-        width: 100%;
-        max-width: 250px;
-        height: 48px;
-        padding: 10px 1rem;
-        border-radius: 4px;
-        border: 1.5px solid var(--border-input);
-
-        margin: 10px 0;
-
-        align-items: center;
-        color: var(--color);
-
-        &:hover {
-          border-color: var(--color);
-        }
-
-        input {
-          height: 100%;
-          width: 100%;
-
-          margin-left: 12.5px;
-
-          border: none;
-          background-color: transparent;
-
-          &:focus::-webkit-input-placeholder {
-            color: var(--transparent);
-          }
-
-          &::placeholder {
-            color: var(--gray);
-          }
-        }
-      }
-    }
+    padding-top: 30px;
   }
 `;
 
