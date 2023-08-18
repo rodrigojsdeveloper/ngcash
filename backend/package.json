@@ -10,7 +10,6 @@
     "typeorm": "typeorm-ts-node-commonjs",
     "migration:generate": "typeorm-ts-node-commonjs -d ./src/data-source.ts migration:generate ./src/migrations/default",
     "migration:run": "typeorm-ts-node-commonjs -d ./src/data-source.ts migration:run",
-    "seed": "ts-node ./node_modules/typeorm-extension/dist/cli/index.js seed -d ./src/data-source.ts",
     "test": "cross-env NODE_ENV=test SECRET_KEY=secret_key jest",
     "type": "module",
     "build": "rm -rf ./dist && tsc",
@@ -43,7 +42,7 @@
     "pg": "^8.8.0",
     "reflect-metadata": "^0.1.13",
     "swagger-ui-express": "^4.6.0",
-    "typeorm": "^0.3.10",
+    "typeorm": "0.3.15",
     "typeorm-extension": "^2.4.0",
     "yup": "^0.32.11"
   }

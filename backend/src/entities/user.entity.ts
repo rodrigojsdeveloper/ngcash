@@ -5,6 +5,7 @@ import {
   Column,
   OneToOne,
   JoinColumn,
+  CreateDateColumn,
 } from "typeorm";
 
 @Entity("users")
