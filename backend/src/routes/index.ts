@@ -1,22 +1,22 @@
 import { Express } from "express";
 
-import { profileRoute, usersRoute } from "./users.routes";
-import { transactionsRoute } from "./transactions.routes";
-import { accountsRoute } from "./account.routes";
-import { sessionRoute } from "./login.routes";
-import { termsRoute } from "./terms.routes";
+import { profileRoutes, userRoutes } from "./user.routes";
+import { transactionRoutes } from "./transaction.routes";
+import { accountRoutes } from "./account.routes";
+import { loginRoutes } from "./login.routes";
+import { termsRoutes } from "./terms.routes";
 
 import SwaggerDocs from "../../docs/swagger.json";
 import SwaggerUi from "swagger-ui-express";
 
-const appRoutes = (app: Express) => {
-  app.use("/users", usersRoute());
-  app.use("/profile", profileRoute());
-  app.use("/signin", sessionRoute());
-  app.use("/accounts", accountsRoute());
-  app.use("/transactions", transactionsRoute());
-  app.use("/docs", SwaggerUi.serve, SwaggerUi.setup(SwaggerDocs));
-  app.use("/terms", termsRoute());
+const appRoutes = (app: Express, endPoint: string) => {
+  app.use(`/${endPoint}/users`, userRoutes());
+  app.use(`/${endPoint}/profile`, profileRoutes());
+  app.use(`/${endPoint}/signin`, loginRoutes());
+  app.use(`/${endPoint}/accounts`, accountRoutes());
+  app.use(`/${endPoint}/transactions`, transactionRoutes());
+  app.use(`/${endPoint}/docs`, SwaggerUi.serve, SwaggerUi.setup(SwaggerDocs));
+  app.use(`/${endPoint}/terms`, termsRoutes());
 };
 
 export { appRoutes };

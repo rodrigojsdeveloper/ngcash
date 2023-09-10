@@ -1,5 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
-import { Transaction } from "./transactions.entity";
+import { Transaction } from "./transaction.entity";
 
 @Entity("accounts")
 class Account {
@@ -9,9 +9,13 @@ class Account {
   @Column()
   balance: number;
 
-  @OneToMany(() => Transaction, (transaction) => transaction.creditedAccountId, {
+  @OneToMany(
+    () => Transaction,
+    (transaction) => transaction.creditedAccountId,
+    {
       eager: true,
-    })
+    }
+  )
   creditedTransaction: Transaction[];
 
   @OneToMany(() => Transaction, (transaction) => transaction.debitedAccountId, {

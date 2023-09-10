@@ -1,4 +1,4 @@
-import { Account } from "../entities/accounts.entity";
+import { Account } from "../entities/account.entity";
 import { AppDataSource } from "../data-source";
 import { Repository } from "typeorm";
 

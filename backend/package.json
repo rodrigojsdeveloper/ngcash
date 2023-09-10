@@ -1,8 +1,8 @@
 {
-  "name": "project_NG.CASH",
+  "name": "NG.CASH",
   "version": "1.0.0",
   "main": "index.js",
-  "repository": "git@github.com:Rodrigodeveloperjr/project_NG.CASH.git",
+  "repository": "git@github.com:Rodrigodeveloperjr/ngcash.git",
   "author": "Rodrigodeveloperjr <rodrigojsdeveloper@gmail.com>",
   "license": "MIT",
   "scripts": {

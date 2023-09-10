@@ -1,10 +1,10 @@
-import { TransactionsService } from "../services/transactions.service";
+import { TransactionService } from "../services/transactions.service";
 import { accountRepository } from "../repositories/account.repository";
 import { ITransaction } from "../interfaces/transaction.interface";
 import { userRepository } from "../repositories/user.repository";
 import { Request, Response } from "express";
 
-class TransactionsController {
+class TransactionController {
   public async create(req: Request, res: Response) {
     const usernameDebt: string = req.username;
 
@@ -18,7 +18,7 @@ class TransactionsController {
       id: userDebitedId!.accountId.id,
     });
 
-    const newTransaction = await new TransactionsService().create(
+    const newTransaction = await new TransactionService().create(
       debitedId!.id,
       data
     );
@@ -31,7 +31,7 @@ class TransactionsController {
 
     const user = await userRepository.findOneBy({ username });
 
-    const listTransactions = await new TransactionsService().list(
+    const listTransactions = await new TransactionService().list(
       user!.accountId.id
     );
 
@@ -43,7 +43,7 @@ class TransactionsController {
 
     const user = await userRepository.findOneBy({ username });
 
-    const listCashIn = await new TransactionsService().listCashIn(
+    const listCashIn = await new TransactionService().listCashIn(
       user!.accountId.id
     );
 
@@ -55,7 +55,7 @@ class TransactionsController {
 
     const user = await userRepository.findOneBy({ username });
 
-    const listCashOut = await new TransactionsService().listCashOut(
+    const listCashOut = await new TransactionService().listCashOut(
       user!.accountId.id
     );
 
@@ -69,7 +69,7 @@ class TransactionsController {
 
     const user = await userRepository.findOneBy({ username });
 
-    const listCashOut = await new TransactionsService().listOfCreatedAt(
+    const listCashOut = await new TransactionService().listOfCreatedAt(
       user!.accountId.id,
       date
     );
@@ -78,4 +78,4 @@ class TransactionsController {
   }
 }
 
-export { TransactionsController };
+export { TransactionController };

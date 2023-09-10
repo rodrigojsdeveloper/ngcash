@@ -1,11 +1,10 @@
-import { Account } from "./accounts.entity";
+import { Account } from "./account.entity";
 import {
   Entity,
   PrimaryGeneratedColumn,
   Column,
   OneToOne,
   JoinColumn,
-  CreateDateColumn,
 } from "typeorm";
 
 @Entity("users")

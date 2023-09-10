@@ -4,10 +4,10 @@ import { LoginController } from "../controllers/login.controller";
 
 const routes = Router();
 
-const sessionRoute = () => {
+const loginRoutes = () => {
   routes.post("", new LoginController().login);
 
   return routes;
 };
 
-export { sessionRoute };
+export { loginRoutes };

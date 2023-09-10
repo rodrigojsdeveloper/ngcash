@@ -1,13 +1,8 @@
-<p align="center">
-<img src="https://img.shields.io/badge/nodejs-18.11.9-blue">
-<img src="https://img.shields.io/badge/reactjs-18.2.0-blue">
-</p>
-
-# Processo Seletivo NG.CASH
+# NG.CASH
 
 Desafio:
 
-O ojetivo desse desafio é possibilitar que usuários da NG consigam realizar transferências internas entre si.
+O objetivo desse projeto é possibilitar que usuários da NG consigam realizar transferências internas entre si.
 
 ## Features:
 
@@ -33,11 +28,11 @@ O ojetivo desse desafio é possibilitar que usuários da NG consigam realizar tr
 
 Projeto desenvolvido no backend com Nodejs e no frontend com React.
 
-### 1. Instalação das dependencias
+## 1. Instalação das dependencias
 
 Efetue a criação das dependências com `yarn` ou `npm install` nas pastas backend e frontend.
 
-### 2. Configuração do .env
+## 2. Configuração do .env
 
 Crie o arquivo `.env` com base no arquivo `.env.example` na pasta backend.
 
@@ -47,7 +42,7 @@ Crie o arquivo `.env` com base no arquivo `.env.example` na pasta backend.
 cp .env.example .env
 ```
 
-### 3. Iniciando apenas frontend ou backend do projeto no navegador ou insomnia
+## 3. Iniciando apenas frontend ou backend do projeto no navegador ou insomnia
 
 #### Powershell ou Bash
 
@@ -94,17 +89,17 @@ e abra o projeto no seu navegador
 http://localhost:5173
 ```
 
-### 3. Iniciando todo o projeto no docker-compose
+## 3. Iniciando todo o projeto no docker-compose
 
 Na raiz do projeto rode o comando:
 
-## Windows
+### Windows
 
 ```
 docker-compose up -d
 ```
 
-## Linux
+### Linux
 
 ```
 sudo docker-compose up -d
@@ -112,7 +107,7 @@ sudo docker-compose up -d
 
 a flag `-d` é para rodar o projeto em 'background' deixando o terminal livre para uso
 
-### 4. Documentação
+## 4. Documentação
 
 Com o projeto rodando acesse `http://localhost:3000/docs` para ver a documentação do projeto no swagger
 

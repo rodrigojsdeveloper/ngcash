@@ -1,4 +1,4 @@
-import { Transaction } from "../entities/transactions.entity";
+import { Transaction } from "../entities/transaction.entity";
 import { AppDataSource } from "../data-source";
 import { Repository } from "typeorm";
 

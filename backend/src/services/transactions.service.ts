@@ -2,12 +2,12 @@ import { transactionRepository } from "../repositories/transaction.repository";
 import { accountRepository } from "../repositories/account.repository";
 import { ITransaction } from "../interfaces/transaction.interface";
 import { userRepository } from "../repositories/user.repository";
-import { Transaction } from "../entities/transactions.entity";
+import { Transaction } from "../entities/transaction.entity";
 import { BadRequestError } from "../errors/badRequest.error";
 import { ForbiddenError } from "../errors/forbidden.error";
 import { NotFoundError } from "../errors/notFound.error";
 
-class TransactionsService {
+class TransactionService {
   public async create(
     debitedId: string,
     transaction: ITransaction
@@ -127,4 +127,4 @@ class TransactionsService {
   }
 }
 
-export { TransactionsService };
+export { TransactionService };

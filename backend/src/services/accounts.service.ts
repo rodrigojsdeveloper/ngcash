@@ -1,7 +1,7 @@
 import { accountRepository } from "../repositories/account.repository";
 import { NotFoundError } from "../errors/notFound.error";
 
-class AccountsService {
+class AccountService {
   public async specific(id: string): Promise<{ balance: number }> {
     const account = await accountRepository.findOneBy({ id });
 
@@ -13,4 +13,4 @@ class AccountsService {
   }
 }
 
-export { AccountsService };
+export { AccountService };

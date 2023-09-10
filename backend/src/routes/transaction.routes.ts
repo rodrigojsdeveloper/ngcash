@@ -1,6 +1,6 @@
 import { Router } from "express";
 
-import { TransactionsController } from "../controllers/transactions.controller";
+import { TransactionController } from "../controllers/transactions.controller";
 
 import { schemaValidationMiddleware } from "../middlewares/schemaValidation.middleware";
 import { tokenMiddleware } from "../middlewares/token.middleware";
@@ -9,35 +9,35 @@ import { transactionSchema } from "../schemas/transaction.schema";
 
 const routes = Router();
 
-const transactionsRoute = () => {
+const transactionRoutes = () => {
   routes.post(
     "",
     schemaValidationMiddleware(transactionSchema),
     tokenMiddleware,
-    new TransactionsController().create
+    new TransactionController().create
   );
 
-  routes.get("", tokenMiddleware, new TransactionsController().list);
+  routes.get("", tokenMiddleware, new TransactionController().list);
 
   routes.get(
     "/cash-in",
     tokenMiddleware,
-    new TransactionsController().listCashIn
+    new TransactionController().listCashIn
   );
 
   routes.get(
     "/cash-out",
     tokenMiddleware,
-    new TransactionsController().listCashOut
+    new TransactionController().listCashOut
   );
 
   routes.get(
     "/:date",
     tokenMiddleware,
-    new TransactionsController().listOfCreatedAt
+    new TransactionController().listOfCreatedAt
   );
 
   return routes;
 };
 
-export { transactionsRoute };
+export { transactionRoutes };

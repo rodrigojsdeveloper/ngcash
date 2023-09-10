@@ -2,12 +2,12 @@ import { accountRepository } from "../repositories/account.repository";
 import { userRepository } from "../repositories/user.repository";
 import { BadRequestError } from "../errors/badRequest.error";
 import { NotFoundError } from "../errors/notFound.error";
-import { Account } from "../entities/accounts.entity";
+import { Account } from "../entities/account.entity";
 import { IUser } from "../interfaces/user.interface";
 import { User } from "../entities/user.entity";
 import { hash } from "bcrypt";
 
-class UsersService {
+class UserService {
   public async create(
     user: IUser
   ): Promise<{ id: string; username: string; accountId: string }> {
@@ -57,4 +57,4 @@ class UsersService {
   }
 }
 
-export { UsersService };
+export { UserService };
