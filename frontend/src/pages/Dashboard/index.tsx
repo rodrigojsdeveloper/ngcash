@@ -1,9 +1,10 @@
+import { TransactionContext } from "../../contexts/transaction.context";
 import { FormTransaction } from "../../components/FormTransaction";
+import React, { useContext, useEffect, useState } from "react";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { Transaction } from "../../components/Transaction";
 import { ITransactionProps } from "../../interfaces";
 import logout from "../../assets/outline-logout.svg";
-import React, { useEffect, useState } from "react";
 import { Button } from "../../components/Button";
 import { useNavigate } from "react-router-dom";
 import { api } from "../../services/api";
@@ -11,50 +12,29 @@ import { toast } from "react-toastify";
 import { Container } from "./style";
 
 const Dashboard = () => {
+  const {
+    token,
+    transactions,
+    setTransactions,
+    transactionsCashIn,
+    setTransactionsCashIn,
+    transactionsCashOut,
+    setTransactionsCashOut,
+    transactionsDate,
+    setTransactionsDate,
+    transactionsBoolean,
+    setTransactionsBoolean,
+    transactionsCashInBoolean,
+    setTransactionsCashInBoolean,
+    transactionsCashOutBoolean,
+    setTransactionsCashOutBoolean,
+    transactionsDateBoolean,
+    setTransactionsDateBoolean,
+  } = useContext(TransactionContext);
+
   const navigate = useNavigate();
 
-  const token = sessionStorage.getItem("Project NG.CASH: token");
-
   const [balance, setBalance] = useState<number>(0);
-
-  const [transactions, setTransactions] = useState<ITransactionProps[]>([]);
-
-  const [transactionsBoolean, setTransactionsBoolean] = useState<boolean>(true);
-
-  const [transactionsCashIn, setTransactionsCashIn] = useState<
-    ITransactionProps[]
-  >([]);
-
-  const [transactionsCashInBoolean, setTransactionsCashInBoolean] =
-    useState<boolean>(false);
-
-  const [transactionsCashOut, setTransactionsCashOut] = useState<
-    ITransactionProps[]
-  >([]);
-
-  const [transactionsCashOutBoolean, setTransactionsCashOutBoolean] =
-    useState<boolean>(false);
-
-  const [transactionsDate, setTransactionsDate] = useState<ITransactionProps[]>(
-    []
-  );
-
-  const [transactionsDateBoolean, setTransactionsDateBoolean] =
-    useState<boolean>(false);
-
-  const addTransactions = (transaction: ITransactionProps) =>
-    setTransactions([transaction, ...transactions!]);
-
-  useEffect(() => {
-    api
-      .get("/transactions", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((res) => setTransactions(res.data))
-      .catch((err) => console.error(err));
-  }, []);
 
   useEffect(() => {
     api
@@ -104,7 +84,7 @@ const Dashboard = () => {
           <p>$ {balance.toFixed(2)}</p>
           <h2>CASH OUT</h2>
 
-          <FormTransaction addTransactions={addTransactions} />
+          <FormTransaction />
         </div>
 
         <main>

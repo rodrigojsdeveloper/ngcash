@@ -1,17 +1,17 @@
-import { IFormTransactionProps } from "../../interfaces";
+import { TransactionContext } from "../../contexts/transaction.context";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useContext, useState } from "react";
 import { CustomInput } from "../CustomInput";
 import { useForm } from "react-hook-form";
 import { api } from "../../services/api";
 import { toast } from "react-toastify";
 import { Container } from "./style";
 import { Button } from "../Button";
-import { useState } from "react";
 import * as yup from "yup";
 
-const FormTransaction = ({ addTransactions }: IFormTransactionProps) => {
-  const token = sessionStorage.getItem("Project NG.CASH: token");
-  
+const FormTransaction = () => {
+  const { token, addTransactions } = useContext(TransactionContext);
+
   const [load, setLoad] = useState<boolean>(false);
 
   const schema = yup.object().shape({

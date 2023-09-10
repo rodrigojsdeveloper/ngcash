@@ -113,6 +113,11 @@ Com o projeto rodando acesse `http://localhost:3000/docs` para ver a documentaç
 
 ## Desenvolvedor
 
-<a href="https://www.linkedin.com/in/rodrigo-de-jesus-silva">
-    <img src="frontend/src/assets/icons8-linkedin-48.png" />
-</a>
+<div>
+  <a href="https://www.linkedin.com/in/rodrigo-de-jesus-silva" target="_blank">
+		<img src="https://img.shields.io/badge/-LinkedIn-%230077B5?style=for-the-badge&logo=linkedin&logoColor=white">
+	</a>
+	<a href="mailto:rodrigojsdeveloper@gmail.com" rel="noreferrer" target="_blank">
+	  <img src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white">
+	</a>
+</div>
