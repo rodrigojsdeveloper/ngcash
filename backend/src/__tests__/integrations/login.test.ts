@@ -1,10 +1,10 @@
-import { invalidLogin, login, user } from "../../../mocks";
-import { AppDataSource } from "../../../data-source";
+import { invalidLogin, login, user } from "../../mocks";
+import { AppDataSource } from "../../data-source";
 import { DataSource } from "typeorm";
-import { app } from "../../../app";
+import { app } from "../../app";
 import request from "supertest";
 
-describe("Tests for login routes", () => {
+describe("Testing all login routes", () => {
   let connection: DataSource;
 
   beforeAll(async () => {
@@ -14,20 +14,20 @@ describe("Tests for login routes", () => {
         console.error("Error during DataSource initialization", err)
       );
 
-    await request(app).post("/users").send(user);
+    await request(app).post("/api/users/signup").send(user);
   });
 
   afterAll(async () => await connection.destroy());
 
   test("Must be able to create a login", async () => {
-    const response = await request(app).post("/signin").send(login);
+    const response = await request(app).post("/api/signin").send(login);
 
     expect(response.status).toBe(200);
     expect(response.body).toHaveProperty("token");
   });
 
   test("Must be able to prevent the creation of a login with invalid credentials", async () => {
-    const response = await request(app).post("/signin").send(invalidLogin);
+    const response = await request(app).post("/api/signin").send(invalidLogin);
 
     expect(response.status).toBe(401);
     expect(response.body).toHaveProperty("message");
