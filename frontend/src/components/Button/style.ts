@@ -7,7 +7,7 @@ const Container = styled.button`
   font-weight: 600;
   font-size: 16px;
 
-  border-radius: 4px;
+  border-radius: var(--border-radius);
   border: 1.2182px solid;
 
   transition: 0.5s;
@@ -43,14 +43,11 @@ const Container = styled.button`
           border-color: var(--shadow-3);
           background-color: var(--color-white-2);
 
-          &:hover,
-          &:focus {
+          &:hover {
             color: var(--shadow-4);
             border-color: var(--shadow-3);
             box-shadow: var(--shadow-2) 0 4px 12px;
-          }
 
-          &:hover {
             transform: translateY(-1px);
           }
 

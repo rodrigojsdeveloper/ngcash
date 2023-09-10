@@ -27,8 +27,10 @@ export default createGlobalStyle`
 		--shadow-2: rgba(0, 0, 0, 0.1);
 		--shadow-3: rgba(0, 0, 0, 0.15);
 		--shadow-4: rgba(0, 0, 0, 0.65);
-		
 		--shadow-blue: rgba(136, 165, 191, 0.48);
+
+		// border-radius
+		--border-radius: 0px;
 	}
 
 	body {

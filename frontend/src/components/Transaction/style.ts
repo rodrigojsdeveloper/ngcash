@@ -6,7 +6,7 @@ const Container = styled.div`
   justify-content: space-between;
   align-items: center;
 
-  border-radius: 4px;
+  border-radius: var(--border-radius);
   background-color: var(--color-white-2);
   border: 1px solid var(--shadow-3);
   

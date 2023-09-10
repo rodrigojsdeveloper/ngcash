@@ -11,7 +11,7 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
 
-  border-radius: 4px;
+  border-radius: var(--border-radius);
   background: var(--color-white);
   box-shadow: var(--shadow-blue) 6px 2px 16px 0px;
 

@@ -64,27 +64,17 @@ export interface IChildren {
 
 export interface ITransactionContextData {
   transactions: Array<ITransactionProps>;
-  setTransactions: React.Dispatch<React.SetStateAction<ITransactionProps[]>>;
   transactionsCashIn: Array<ITransactionProps>;
-  setTransactionsCashIn: React.Dispatch<
-    React.SetStateAction<ITransactionProps[]>
-  >;
   transactionsCashOut: Array<ITransactionProps>;
-  setTransactionsCashOut: React.Dispatch<
-    React.SetStateAction<ITransactionProps[]>
-  >;
   transactionsDate: Array<ITransactionProps>;
-  setTransactionsDate: React.Dispatch<
-    React.SetStateAction<ITransactionProps[]>
-  >;
   transactionsBoolean: boolean;
-  setTransactionsBoolean: React.Dispatch<React.SetStateAction<boolean>>;
   transactionsCashInBoolean: boolean;
-  setTransactionsCashInBoolean: React.Dispatch<React.SetStateAction<boolean>>;
   transactionsCashOutBoolean: boolean;
-  setTransactionsCashOutBoolean: React.Dispatch<React.SetStateAction<boolean>>;
   transactionsDateBoolean: boolean;
-  setTransactionsDateBoolean: React.Dispatch<React.SetStateAction<boolean>>;
+  handleTransactions: () => void;
+  handleTransactionsCashIn: () => void;
+  handleTransactionsCashOut: () => void;
+  handleTransactionsDate: (e: React.ChangeEvent<HTMLInputElement>) => void;
   addTransactions: (transaction: ITransactionProps) => void;
-  token: string | null;
+  balance: number;
 }

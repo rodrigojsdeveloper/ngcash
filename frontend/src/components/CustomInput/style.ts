@@ -8,7 +8,7 @@ const InputContainer = styled.div`
   position: relative;
   margin-bottom: 15px;
 
-  border-radius: 4px;
+  border-radius: var(--border-radius);
   border: 1px solid var(--color-gray);
 
   input:focus + label {
@@ -24,7 +24,7 @@ const InputContainer = styled.div`
 
 const Input = styled.input`
   width: 100%;
-  height: 40px;
+  height: 38px;
 
   font-weight: 500;
   font-size: 16px;

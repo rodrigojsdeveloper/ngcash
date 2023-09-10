@@ -13,7 +13,7 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
 
-  border-radius: 4px;
+  border-radius: var(--border-radius);
   background-color: var(--color-white);
 
   & > h2 {

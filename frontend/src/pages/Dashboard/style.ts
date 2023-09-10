@@ -12,7 +12,7 @@ const Container = styled.div`
     height: 850px;
 
     padding: 20px;
-    border-radius: 4px;
+    border-radius: var(--border-radius);
 
     color: var(--color-white);
     background-color: var(--color-black);
@@ -78,6 +78,7 @@ const Container = styled.div`
 
       overflow: auto;
       border: 1px solid var(--shadow-3);
+      border-radius: var(--border-radius);
 
       &::-webkit-scrollbar {
         display: none;
@@ -95,7 +96,7 @@ const Container = styled.div`
         max-width: 125px;
         height: 48px;
 
-        border-radius: 4px;
+        border-radius: var(--border-radius);
         border: 1px solid var(--shadow-3);
         background-color: var(--color-white-2);
 

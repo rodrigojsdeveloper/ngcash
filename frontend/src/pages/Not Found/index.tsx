@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { Container } from "./style";
 
 const NotFound = () => {
-  const token = sessionStorage.getItem("Project NG.CASH: token");
+  const token = sessionStorage.getItem("NG.CASH: token");
 
   const [title, setTitle] = useState<string>("404 page not found");
 

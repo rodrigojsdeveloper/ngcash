@@ -10,7 +10,9 @@ import { Button } from "../Button";
 import * as yup from "yup";
 
 const FormTransaction = () => {
-  const { token, addTransactions } = useContext(TransactionContext);
+  const { addTransactions } = useContext(TransactionContext);
+
+  const token = sessionStorage.getItem("NG.CASH: token");
 
   const [load, setLoad] = useState<boolean>(false);
 

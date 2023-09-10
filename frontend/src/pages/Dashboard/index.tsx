@@ -1,60 +1,35 @@
 import { TransactionContext } from "../../contexts/transaction.context";
 import { FormTransaction } from "../../components/FormTransaction";
-import React, { useContext, useEffect, useState } from "react";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import { Transaction } from "../../components/Transaction";
+import React, { useContext, useEffect } from "react";
 import { ITransactionProps } from "../../interfaces";
 import logout from "../../assets/outline-logout.svg";
 import { Button } from "../../components/Button";
 import { useNavigate } from "react-router-dom";
-import { api } from "../../services/api";
 import { toast } from "react-toastify";
 import { Container } from "./style";
 
 const Dashboard = () => {
+  const token = sessionStorage.getItem("NG.CASH: token");
+
   const {
-    token,
     transactions,
-    setTransactions,
     transactionsCashIn,
-    setTransactionsCashIn,
     transactionsCashOut,
-    setTransactionsCashOut,
     transactionsDate,
-    setTransactionsDate,
     transactionsBoolean,
-    setTransactionsBoolean,
     transactionsCashInBoolean,
-    setTransactionsCashInBoolean,
     transactionsCashOutBoolean,
-    setTransactionsCashOutBoolean,
     transactionsDateBoolean,
-    setTransactionsDateBoolean,
+    handleTransactions,
+    handleTransactionsCashIn,
+    handleTransactionsCashOut,
+    handleTransactionsDate,
+    balance,
   } = useContext(TransactionContext);
 
   const navigate = useNavigate();
-
-  const [balance, setBalance] = useState<number>(0);
-
-  useEffect(() => {
-    api
-      .get("/profile", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((res) => {
-        api
-          .get(`/accounts/${res.data.accountId.id}`, {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          })
-          .then((res) => setBalance(res.data.balance))
-          .catch((err) => console.error(err));
-      })
-      .catch((err) => console.error(err));
-  }, []);
 
   useEffect(() => {
     if (!token) {
@@ -77,7 +52,7 @@ const Dashboard = () => {
 
               navigate("/signin");
 
-              sessionStorage.removeItem("Project NG.CASH: token");
+              sessionStorage.removeItem("NG.CASH: token");
             }}
           />
           <h1>BALANCE</h1>
@@ -113,90 +88,30 @@ const Dashboard = () => {
           <div>
             <Button
               buttonStyle="dashboard"
-              onClick={() => {
-                setTransactionsBoolean(true);
-                setTransactionsCashInBoolean(false);
-                setTransactionsCashOutBoolean(false);
-                setTransactionsDateBoolean(false);
-
-                api
-                  .get("/transactions", {
-                    headers: {
-                      Authorization: `Bearer ${token}`,
-                    },
-                  })
-                  .then((res) => setTransactions(res.data))
-                  .catch((err) => console.error(err));
-              }}
+              onClick={() => handleTransactions()}
             >
               Todos
             </Button>
 
             <Button
               buttonStyle="dashboard"
-              onClick={() => {
-                setTransactionsBoolean(false);
-                setTransactionsCashInBoolean(true);
-                setTransactionsCashOutBoolean(false);
-                setTransactionsDateBoolean(false);
-
-                api
-                  .get("/transactions/cash-in", {
-                    headers: {
-                      Authorization: `Bearer ${token}`,
-                    },
-                  })
-                  .then((res) => setTransactionsCashIn(res.data))
-                  .catch((_) =>
-                    toast.error("transaction does not exist or not found")
-                  );
-              }}
+              onClick={() => handleTransactionsCashIn()}
             >
               Cash in
             </Button>
 
             <Button
               buttonStyle="dashboard"
-              onClick={() => {
-                setTransactionsBoolean(false);
-                setTransactionsCashInBoolean(false);
-                setTransactionsCashOutBoolean(true);
-                setTransactionsDateBoolean(false);
-
-                api
-                  .get("/transactions/cash-out", {
-                    headers: {
-                      Authorization: `Bearer ${token}`,
-                    },
-                  })
-                  .then((res) => setTransactionsCashOut(res.data))
-                  .catch((_) =>
-                    toast.error("transaction does not exist or not found")
-                  );
-              }}
+              onClick={() => handleTransactionsCashOut()}
             >
               Cash out
             </Button>
 
             <input
               type="date"
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                setTransactionsBoolean(false);
-                setTransactionsCashInBoolean(false);
-                setTransactionsCashOutBoolean(false);
-                setTransactionsDateBoolean(true);
-
-                api
-                  .get(`/transactions/${e.target.value}`, {
-                    headers: {
-                      Authorization: `Bearer ${token}`,
-                    },
-                  })
-                  .then((res) => setTransactionsDate(res.data))
-                  .catch((_) =>
-                    toast.error("transaction does not exist or not found")
-                  );
-              }}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                handleTransactionsDate(e)
+              }
             />
           </div>
         </main>
