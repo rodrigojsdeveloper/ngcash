@@ -1,6 +1,6 @@
 import { Router } from "express";
 
-import { UserController } from "../controllers/users.controller";
+import { UserController } from "../controllers/user.controller";
 
 import { schemaValidationMiddleware } from "../middlewares/schemaValidation.middleware";
 import { tokenMiddleware } from "../middlewares/token.middleware";

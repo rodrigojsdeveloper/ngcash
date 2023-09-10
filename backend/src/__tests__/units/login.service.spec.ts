@@ -1,10 +1,10 @@
-import { LoginService } from "../../../services/login.service";
-import { UsersService } from "../../../services/users.service";
-import { AppDataSource } from "../../../data-source";
-import { user, login } from "../../../mocks";
+import { LoginService } from "../../services/login.service";
+import { UserService } from "../../services/users.service";
+import { AppDataSource } from "../../data-source";
+import { user, login } from "../../mocks";
 import { DataSource } from "typeorm";
 
-describe("Tests for session service", () => {
+describe("Testing all login services", () => {
   let connection: DataSource;
 
   beforeAll(async () => {
@@ -17,8 +17,8 @@ describe("Tests for session service", () => {
 
   afterAll(async () => await connection.destroy());
 
-  it("Must be able to create a session", async () => {
-    await new UsersService().create(user);
+  it("Must be able to login", async () => {
+    await new UserService().create(user);
 
     const result = await new LoginService().login(login);
 

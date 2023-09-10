@@ -223,9 +223,9 @@
     },
     "/api/signin": {
       "post": {
-        "summary": "Created session",
-        "description": "This route will be responsible for created session",
-        "tags": ["Session"],
+        "summary": "Created login",
+        "description": "This route will be responsible for created login",
+        "tags": ["Login"],
 
         "requestBody": {
           "content": {
@@ -254,7 +254,7 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "$ref": "#/components/schemas/Session"
+                  "$ref": "#/components/schemas/Login"
                 }
               }
             }
@@ -310,7 +310,7 @@
           }
         }
       },
-      "Session": {
+      "Login": {
         "type": "object",
         "properties": {
           "token": {

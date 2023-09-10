@@ -1,10 +1,10 @@
-import { AccountsService } from "../../../services/accounts.service";
-import { UsersService } from "../../../services/users.service";
-import { AppDataSource } from "../../../data-source";
-import { user } from "../../../mocks";
+import { AccountService } from "../../services/accounts.service";
+import { UserService } from "../../services/users.service";
+import { AppDataSource } from "../../data-source";
 import { DataSource } from "typeorm";
+import { user } from "../../mocks";
 
-describe("Tests for account service", () => {
+describe("Testing all login services", () => {
   let connection: DataSource;
 
   beforeAll(async () => {
@@ -18,9 +18,9 @@ describe("Tests for account service", () => {
   afterAll(async () => await connection.destroy());
 
   it("Must be able to view a account", async () => {
-    const newUser = await new UsersService().create(user);
+    const newUser = await new UserService().create(user);
 
-    const result = await new AccountsService().specific(
+    const result = await new AccountService().specific(
       String(newUser.accountId)
     );
 
