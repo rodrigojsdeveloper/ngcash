@@ -1,66 +1,67 @@
-# NG.CASH
+<div align="center">
+	<h1>NG.CASH</h1>
 
-Desafio:
+The goal of this project is to enable NG users to perform internal transfers between each other.
 
-O objetivo desse projeto é possibilitar que usuários da NG consigam realizar transferências internas entre si.
+</div>
 
 ## Features:
 
-- Cadastro de usuário
+- User registration
 
-- Interação de conta com usuário na hora da criação
+- Account interaction with the user at the time of creation
 
-- Autenticação
+- Authentication
 
-- Transações entre usuários
+- Transactions between users
 
-- Filtro de todas as transações do própio usuário
+- Filter for all transactions of the user
 
-- Filtros de cash-in, cash-out ou pela data da transação
+- Filters for cash-in, cash-out, or by transaction date
 
 ---
 
-## Diagrama de Entidade Relacional
+## Entity Relationship Diagram
 
 <img src="./frontend/src/assets/digrama.png">
 
-## Instalação do Projeto
+## Project Installation
 
-Projeto desenvolvido no backend com Nodejs e no frontend com React.
+The project is developed in the backend with Node.js and in the frontend with React.
 
-## 1. Instalação das dependencias
+## 1. Installing Dependencies
 
-Efetue a criação das dependências com `yarn` ou `npm install` nas pastas backend e frontend.
+Create the dependencies by running yarn or npm install in both the backend and frontend folders.
 
-## 2. Configuração do .env
+## 2. Configuration of .env
 
-Crie o arquivo `.env` com base no arquivo `.env.example` na pasta backend.
+Create the .env file based on the .env.example file in the backend folder.
 
-#### Se estiver no Linux, rode esse comando na pasta backend
+#### If you are on Linux, run this command in the backend folder
 
 ```
 cp .env.example .env
 ```
 
-## 3. Iniciando apenas frontend ou backend do projeto no navegador ou insomnia
+## 3. Starting Only Frontend or Backend in the Browser or Insomnia
 
 #### Powershell ou Bash
 
-Acesse a pasta backend e rode o comando:
+Access the backend folder and run the command:
 
 ```
 yarn dev
 ```
 
-ou
+or
 
 ```
 npm run dev
 ```
 
-e rode uma requisição no insomnia
+and make a request in Insomnia.
 
-#### Exemplo de requisição - POST
+#### Request Example - POST
 
 ```
 {
@@ -69,29 +70,29 @@ e rode uma requisição no insomnia
 }
 ```
 
-Acesse a pasta frontend e rode o comando:
+Access the frontend folder and run the command:
 
 ```
 yarn dev
 ```
 
-ou
+or
 
 ```
 npm run dev
 ```
 
-e abra o projeto no seu navegador
+and open the project in your browser.
 
-#### Link do projeto
+#### Project Link
 
 ```
 http://localhost:5173
 ```
 
-## 3. Iniciando todo o projeto no docker-compose
+## 3. Starting the Entire Project with docker-compose
 
-Na raiz do projeto rode o comando:
+At the root of the project, run the command:
 
 ### Windows
 
@@ -105,13 +106,13 @@ docker-compose up -d
 sudo docker-compose up -d
 ```
 
-a flag `-d` é para rodar o projeto em 'background' deixando o terminal livre para uso
+The -d flag is used to run the project in the background, leaving the terminal free for use.
 
-## 4. Documentação
+## 4. Documentation
 
-Com o projeto rodando acesse `http://localhost:3000/docs` para ver a documentação do projeto no swagger
+With the project running, access http://localhost:3000/api/docs to view the project documentation in Swagger.
 
-## Desenvolvedor
+## Developer
 
 <div>
   <a href="https://www.linkedin.com/in/rodrigo-de-jesus-silva" target="_blank">
