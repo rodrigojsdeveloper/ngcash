@@ -1,7 +1,7 @@
 <div align="center">
 	<h1>NG.CASH</h1>
 
-The goal of this project is to enable NG users to perform internal transfers between each other.
+The objective of this project is to allow NG.CASH users to carry out internal transfers between themselves.
 
 </div>
 
