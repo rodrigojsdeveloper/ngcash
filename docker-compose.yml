@@ -2,8 +2,8 @@ version: "3.9"
 
 services:
   backend:
-    container_name: ngcash_back
-    build: 
+    container_name: backend_ngcash
+    build:
       dockerfile: Dockerfile
       context: "./backend"
     ports:
@@ -17,7 +17,7 @@ services:
 
   frontend:
     stdin_open: true
-    container_name: ngcash_front
+    container_name: frontend_ngcash
     build:
       dockerfile: Dockerfile
       context: "./frontend"
@@ -28,7 +28,7 @@ services:
       - 5173:5173
 
   postgres:
-    container_name: db_project_ngcash
+    container_name: db_ngcash
     image: postgres:latest
     ports:
       - 5434:5432

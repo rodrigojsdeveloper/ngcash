@@ -1,9 +1,9 @@
 {
-  "name": "NG.CASH",
+  "name": "backend",
   "version": "1.0.0",
   "main": "index.js",
-  "repository": "git@github.com:Rodrigodeveloperjr/ngcash.git",
-  "author": "Rodrigodeveloperjr <rodrigojsdeveloper@gmail.com>",
+  "repository": "git@github.com:rodrigojsdeveloper/ngcash.git",
+  "author": "rodrigojsdeveloper <rodrigojsdeveloper@gmail.com>",
   "license": "MIT",
   "scripts": {
     "dev": "tsnd --transpile-only --respawn --ignore-watch node_modules ./src/server.ts",
