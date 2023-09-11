@@ -27,7 +27,7 @@ const FormTransaction = () => {
     setLoad(true);
 
     api
-      .post("/transactions", data, {
+      .post("transactions", data, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

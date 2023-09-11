@@ -2,11 +2,13 @@ import { createGlobalStyle } from "styled-components";
 
 export default createGlobalStyle`
 	* {
+		border: 0;
 		margin: 0;
 		padding: 0;
 		outline: 0;
-		border: 0;
+		resize: none;
 		box-sizing: border-box;
+		scroll-behavior: smooth;
 		font-family: 'Inter', sans-serif;
 	}
 
@@ -34,8 +36,8 @@ export default createGlobalStyle`
 	}
 
 	body {
-		background: var(--color-white);
 		color: var(--color-black);
+		background-color: var(--color-white);
 	}
 
 	button, a {

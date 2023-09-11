@@ -11,11 +11,11 @@ const SignUp = () => {
         <Helmet title="Sign Up | NG.CASH" />
       </HelmetProvider>
       <Container>
-        <div>
+        <div className="divLogo">
           <img src={ngcashLogo} alt="logo ng.cash" />
         </div>
 
-        <div>
+        <div className="divForm">
           <Form
             apiProp="users"
             historyProp="session"

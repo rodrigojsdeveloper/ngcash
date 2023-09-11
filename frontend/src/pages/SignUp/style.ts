@@ -2,7 +2,7 @@ import { animationForm } from "../../animations";
 import styled from "styled-components";
 
 const Container = styled.div`
-  & > div:nth-child(1) {
+  & > .divLogo {
     height: 40vh;
 
     display: flex;
@@ -10,7 +10,7 @@ const Container = styled.div`
     justify-content: center;
     align-items: flex-start;
 
-    background: var(--color-black);
+    background-color: var(--color-black);
 
     & > img {
       width: 150px;
@@ -21,7 +21,7 @@ const Container = styled.div`
     }
   }
 
-  & > div:nth-child(2) {
+  & > .divForm {
     display: flex;
     flex-direction: row;
     justify-content: center;

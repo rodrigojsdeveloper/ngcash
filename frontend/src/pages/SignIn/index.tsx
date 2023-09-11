@@ -1,7 +1,7 @@
 import { Helmet, HelmetProvider } from "react-helmet-async";
 import ngcashLogo from "../../assets/NgCash.png";
-import { Container } from "../SignUp/style";
 import { Form } from "../../components/Form";
+import { Container } from "../SignUp/style";
 import React from "react";
 
 const SignIn = () => {
@@ -11,11 +11,11 @@ const SignIn = () => {
         <Helmet title="Sign In | NG.CASH" />
       </HelmetProvider>
       <Container>
-        <div className="divBlack">
+        <div className="divLogo">
           <img src={ngcashLogo} alt="logo ng.cash" />
         </div>
 
-        <div className="divWhite">
+        <div className="divForm">
           <Form
             apiProp="signin"
             historyProp="dashboard"

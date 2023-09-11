@@ -41,7 +41,7 @@ export const TransactionContextProvider = ({ children }: IChildren) => {
 
   useEffect(() => {
     api
-      .get("/transactions", {
+      .get("transactions", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -52,7 +52,7 @@ export const TransactionContextProvider = ({ children }: IChildren) => {
 
   const getBalance = () => {
     api
-      .get("/profile", {
+      .get("profile", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -82,7 +82,7 @@ export const TransactionContextProvider = ({ children }: IChildren) => {
     setTransactionsDateBoolean(false);
 
     api
-      .get("/transactions", {
+      .get("transactions", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -98,7 +98,7 @@ export const TransactionContextProvider = ({ children }: IChildren) => {
     setTransactionsDateBoolean(false);
 
     api
-      .get("/transactions/cash-in", {
+      .get("transactions/cash-in", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -114,7 +114,7 @@ export const TransactionContextProvider = ({ children }: IChildren) => {
     setTransactionsDateBoolean(false);
 
     api
-      .get("/transactions/cash-out", {
+      .get("transactions/cash-out", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
