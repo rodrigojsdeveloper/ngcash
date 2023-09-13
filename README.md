@@ -31,7 +31,7 @@ The project is developed in the backend with Node.js and in the frontend with Re
 
 ## 1. Installing Dependencies
 
-Create the dependencies by running yarn or npm install in both the backend and frontend folders.
+Create the dependencies by running yarn in both the backend and frontend folders.
 
 ## 2. Configuration of .env
 
@@ -53,12 +53,6 @@ Access the backend folder and run the command:
 yarn dev
 ```
 
-or
-
-```
-npm run dev
-```
-
 and make a request in Insomnia.
 
 #### Request Example - POST
@@ -74,12 +68,6 @@ Access the frontend folder and run the command:
 
 ```
 yarn dev
-```
-
-or
-
-```
-npm run dev
 ```
 
 and open the project in your browser.

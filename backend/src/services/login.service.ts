@@ -1,11 +1,11 @@
 import { userRepository } from "../repositories/user.repository";
 import { UnauthorizedError } from "../errors/unauthorized.error";
-import { ILogin } from "../interfaces/login.interface";
+import { IUser } from "../interfaces/user.interface";
 import { sign } from "jsonwebtoken";
 import { compare } from "bcrypt";
 
 class LoginService {
-  public async login(user: ILogin): Promise<{ token: string }> {
+  public async login(user: IUser): Promise<{ token: string }> {
     const findUser = await userRepository.findOneBy({
       username: user.username,
     });

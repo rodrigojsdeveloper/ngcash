@@ -1,5 +1,4 @@
 import { ITransaction } from "../interfaces/transaction.interface";
-import { ILogin } from "../interfaces/login.interface";
 import { IUser } from "../interfaces/user.interface";
 
 const user: IUser = {
@@ -12,12 +11,12 @@ const anotherUser: IUser = {
   password: "Johndoe@123",
 };
 
-const login: ILogin = {
+const login: IUser = {
   username: "example",
   password: "Example@123",
 };
 
-const invalidLogin: ILogin = {
+const invalidLogin: IUser = {
   username: "example",
   password: "Johndoe@123",
 };
