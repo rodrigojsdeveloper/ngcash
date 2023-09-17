@@ -57,4 +57,17 @@ export default createGlobalStyle`
 	input[type=number] {
 		-moz-appearance:textfield;
 	}
+
+	::-webkit-scrollbar {
+  	width: 6px;
+	}
+
+	::-webkit-scrollbar-track {
+		background-color: var(--color-white);
+	}
+
+	::-webkit-scrollbar-thumb {
+		border-radius: 0.5px;
+		background-color: var(--color-black);
+	}
 `;

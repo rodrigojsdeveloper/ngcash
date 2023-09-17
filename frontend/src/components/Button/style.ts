@@ -42,23 +42,6 @@ const Container = styled.button`
           color: var(--color-black);
           border-color: var(--shadow-3);
           background-color: var(--color-white-2);
-
-          &:hover {
-            color: var(--shadow-4);
-            border-color: var(--shadow-3);
-            box-shadow: var(--shadow-2) 0 4px 12px;
-
-            transform: translateY(-1px);
-          }
-
-          &:active {
-            color: var(--shadow-4);
-            border-color: var(--shadow-3);
-            box-shadow: var(--shadow) 0 2px 4px;
-            background-color: var(--color-white-3);
-
-            transform: translateY(0);
-          }
         `;
 
       default:

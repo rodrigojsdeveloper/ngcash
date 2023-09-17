@@ -45,9 +45,9 @@ const Dashboard = () => {
         <div>
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            width="1em"
-            height="1em"
-            viewBox="0 0 24 24"
+            width="1.5em"
+            height="1.5em"
+            viewBox="0 0 21 21"
             onClick={() => {
               toast.success("Check back often!");
 

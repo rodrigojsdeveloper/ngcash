@@ -100,13 +100,6 @@ The -d flag is used to run the project in the background, leaving the terminal f
 
 With the project running, access http://localhost:3000/api/docs to view the project documentation in Swagger.
 
-## Developer
-
-<div>
-  <a href="https://www.linkedin.com/in/rodrigo-de-jesus-silva" target="_blank">
-		<img src="https://img.shields.io/badge/-LinkedIn-%230077B5?style=for-the-badge&logo=linkedin&logoColor=white">
-	</a>
-	<a href="mailto:rodrigojsdeveloper@gmail.com" rel="noreferrer" target="_blank">
-	  <img src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white">
-	</a>
-</div>
+<br/>
+<p align="center">Made by <a href="https://www.linkedin.com/in/rodrigo-de-jesus-silva/">Rodrigo Silva</a>
+</p>

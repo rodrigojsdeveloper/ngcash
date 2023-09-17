@@ -17,8 +17,7 @@ const Container = styled.div`
     color: var(--color-white);
     background-color: var(--color-black);
 
-    & > img {
-      width: 30px;
+    & > svg {
       float: right;
       cursor: pointer;
     }
@@ -101,6 +100,7 @@ const Container = styled.div`
         background-color: var(--color-white-2);
 
         padding: 0 8px;
+        cursor: pointer;
       }
     }
   }
